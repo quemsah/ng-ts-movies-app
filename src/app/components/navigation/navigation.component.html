@@ -1,0 +1,95 @@
+<header>
+  <div id="slide-out" class="side-nav sn-bg-4 fixed">
+    <ul class="custom-scrollbar">
+      <li class="logo-sn waves-effect py-3 blue-gradient">
+        <div class="text-center">
+          <a href="main.html" class="pl-0"><img src="../../../assets/img/logo/logo150.png" alt="logo"></a>
+        </div>
+      </li>
+      <!-- Search Form 
+      <li>
+        <form [formGroup]="form" class="search-form" role="search">
+          <div class="md-form mt-0 waves-light">
+            <input type="text" class="form-control py-2" placeholder="Find movies...">
+          </div>
+        </form>
+      </li> -->
+      <li>
+        <ul class="collapsible collapsible-accordion">
+          <li>
+            <a href="main.html" class="collapsible-header waves-effect">
+              <i class="fas fa-film"></i>Movies
+            </a>
+          </li>
+          <li>
+            <a href="main.html" class="collapsible-header waves-effect">
+              <i class="far fa-eye"></i>Watch Later
+            </a>
+          </li>
+          <li>
+            <a href="main.html" class="collapsible-header waves-effect">
+              <i class="far fa-heart"></i>Favourites
+            </a>
+          </li>
+          <li>
+            <a class="collapsible-header waves-effect arrow-r">
+              <i class="fas fa-tasks"></i>Manage
+              <i class="fas fa-angle-down rotate-icon"></i>
+            </a>
+            <div class="collapsible-body">
+              <ul>
+                <li>
+                  <a href="addMovie.html" class="waves-effect">Add movie</a>
+                </li>
+                <li>
+                  <a class="waves-effect">Users</a>
+                </li>
+              </ul>
+            </div>
+          </li>
+          <li>
+            <a href="about.html" class="collapsible-header waves-effect">
+              <i class="fas fa-info-circle"></i>About the project
+            </a>
+          </li>
+          <li>
+            <a href="404.html" class="collapsible-header waves-effect">
+              <i class="fas fa-exclamation-triangle"></i>404
+            </a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <div class="sidenav-bg mask-strong"></div>
+  </div>
+  <nav class="navbar fixed-top navbar-expand-lg scrolling-navbar double-nav">
+    <div class="float-left">
+      <a href="#" data-activates="slide-out" class="button-collapse"><i class="fas fa-bars"></i></a>
+    </div>
+    <div class="breadcrumb-dn mr-auto ml-3">
+      <p>Angular Movies App</p>
+    </div>
+    <div class="d-flex">
+      <!--"change-mode-->
+      <div class="ml-auto mb-0 mr-3 change-mode-wrapper">
+        <button class="btn btn-outline-black btn-sm" id="dark-mode">Change theme</button>
+      </div>
+      <ul class="nav navbar-nav nav-flex-icons ml-auto">
+        <li class="nav-item">
+          <a class="nav-link waves-effect" href="mailto:quemsaurose@gmail.com">
+            <i class="fas fa-envelope"></i>
+            <span class="clearfix d-none d-sm-inline-block">Mail us</span></a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle waves-effect" href="#" id="userDropdown" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-user"></i> <span class="clearfix d-none d-sm-inline-block">Profile</span>
+          </a>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+            <a class="dropdown-item" href="login.html">Log in</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</header>

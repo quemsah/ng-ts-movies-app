@@ -1,0 +1,21 @@
+<div class="container-fluid">
+  <section class="mb-5 mt-5">
+    <div class="row">
+      <div class="col-xl-5 col-lg-6 col-md-8 col-sm-8 mx-auto mt-5">
+        <div class="card-body">
+          <div class="text-center" *ngIf="authService.userData as user">
+            <h3>Thank you for registering!</h3>
+            <h5>We have sent a confirmation email to
+              <strong>{{user.email}}</strong>
+              to verify that the address is correct</h5>
+            <h5>Please check your email and click on the link.</h5>
+            <button type="button" class="btn blue-gradient" (click)="authService.SendVerificationMail()">
+              <i class="fas fa-redo-alt"></i> Resend verification email</button>
+            <hr class="mt-4">
+            <h5>Go back to <a routerLink="/login">Log in</a></h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

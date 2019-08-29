@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ang8": {
+    "ng-ts-movies-app": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/ang8",
+            "outputPath": "dist/ng-ts-movies-app",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -24,9 +24,17 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              //"./src/styles.css",
+              "./src/assets/css/main.css",
+              "./src/assets/css/custom-styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.min.js",
+              "./src/assets/js/mdb.min.js",
+              "./src/assets/js/darkmode.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -63,18 +71,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "ang8:build"
+            "browserTarget": "ng-ts-movies-app:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "ang8:build:production"
+              "browserTarget": "ng-ts-movies-app:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ang8:build"
+            "browserTarget": "ng-ts-movies-app:build"
           }
         },
         "test": {
@@ -111,15 +119,15 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "ang8:serve"
+            "devServerTarget": "ng-ts-movies-app:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "ang8:serve:production"
+              "devServerTarget": "ng-ts-movies-app:serve:production"
             }
           }
         }
       }
     }},
-  "defaultProject": "ang8"
+  "defaultProject": "ng-ts-movies-app"
 }

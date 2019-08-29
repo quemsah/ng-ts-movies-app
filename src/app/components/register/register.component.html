@@ -1,0 +1,30 @@
+<div class="container-fluid">
+  <section class="mb-5 mt-5">
+    <div class="row">
+      <div class="col-xl-5 col-lg-6 col-md-8 col-sm-8 mx-auto mt-5">
+        <div class="card-body">
+          <div class="form-header blue-gradient">
+            <h3 class="font-weight-500 my-2 py-1"><i class="fas fa-user"></i> Create an account</h3>
+          </div>
+          <div class="md-form">
+            <i class="fas fa-envelope prefix blue-text"></i>
+            <input type="email" class="formControl" placeholder="Email Address" #userEmail required>
+          </div>
+          <div class="md-form">
+            <i class="fas fa-lock prefix blue-text"></i>
+            <input type="password" class="formControl" placeholder="Password" #userPwd required>
+          </div>
+          <div class="text-center">
+            <button class="btn blue-gradient btn-lg" (click)="authService.SignUp(userEmail.value, userPwd.value)"><a
+                class="text-white">Register</a></button>
+            <button class="btn blue-gradient btn-lg" (click)="authService.GoogleAuth()"><a class="text-white"> <i
+                  class="fab fa-google-plus-g"></i>
+                Continue with Google</a></button>
+            <hr class="mt-4">
+            <h5>Already have an account? <a routerLink="/login">Log in</a></h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
