@@ -1,5 +1,5 @@
 <header>
-  <div id="slide-out" class="side-nav sn-bg-4 fixed">
+  <div role="navigation" id="slide-out" class="side-nav sn-bg-4 fixed">
     <ul class="custom-scrollbar">
       <li class="logo-sn waves-effect py-3 blue-gradient">
         <div class="text-center">
@@ -48,12 +48,12 @@
             </div>
           </li>
           <li>
-            <a href="about.html" class="collapsible-header waves-effect">
+            <a routerLink="/about" (click)="sidenavClose()" class="collapsible-header waves-effect">
               <i class="fas fa-info-circle"></i>About the project
             </a>
           </li>
           <li>
-            <a href="404.html" class="collapsible-header waves-effect">
+            <a routerLink="/not-found" (click)="sidenavClose()" class="collapsible-header waves-effect">
               <i class="fas fa-exclamation-triangle"></i>404
             </a>
           </li>
@@ -62,7 +62,7 @@
     </ul>
     <div class="sidenav-bg mask-strong"></div>
   </div>
-  <nav class="navbar fixed-top navbar-expand-lg scrolling-navbar double-nav">
+  <nav role="navigation" class="navbar fixed-top navbar-expand-lg scrolling-navbar double-nav">
     <div class="float-left">
       <a href="#" data-activates="slide-out" class="button-collapse"><i class="fas fa-bars"></i></a>
     </div>

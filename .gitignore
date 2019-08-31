@@ -1,5 +1,15 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
+# MDB Scss
+/src/assets/scss/addons/
+/src/assets/scss/addons-pro/
+/src/assets/scss/admin
+/src/assets/scss/core
+/src/assets/scss/free
+/src/assets/scss/pro
+/src/assets/scss/_admin-style.scss
+/src/assets/scss/_custom-skin.scss
+/src/assets/scss/main.scss
 # compiled output
 /dist
 /tmp
