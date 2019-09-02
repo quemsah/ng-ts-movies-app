@@ -18,10 +18,11 @@ import { RegisterComponent } from "./components/register/register.component";
 import { ProfileComponent } from "./components/profile/profile.component";
 import { ForgotPasswordComponent } from "./components/forgot-password/forgot-password.component";
 import { VerifyEmailComponent } from "./components/verify-email/verify-email.component";
-import { NavigationComponent } from "./components/navigation/navigation.component";
 import { FooterComponent } from "./components/footer/footer.component";
 import { AboutComponent } from "./components/about/about.component";
 import { NotFoundComponent } from "./components/not-found/not-found.component";
+import { SidenavComponent } from './components/sidenav/sidenav.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -31,10 +32,11 @@ import { NotFoundComponent } from "./components/not-found/not-found.component";
     ProfileComponent,
     ForgotPasswordComponent,
     VerifyEmailComponent,
-    NavigationComponent,
     FooterComponent,
     AboutComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    SidenavComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,

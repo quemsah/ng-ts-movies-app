@@ -1,0 +1,63 @@
+<div role="navigation" id="slide-out" class="side-nav sn-bg-4 fixed">
+  <ul class="custom-scrollbar">
+    <li class="logo-sn waves-effect py-3 blue-gradient">
+      <div class="text-center">
+        <a href="main.html" class="pl-0"><img src="../../../assets/img/logo/logo150.png" alt="logo"></a>
+      </div>
+    </li>
+    <!-- Search Form 
+      <li>
+        <form [formGroup]="form" class="search-form" role="search">
+          <div class="md-form mt-0 waves-light">
+            <input type="text" class="form-control py-2" placeholder="Find movies...">
+          </div>
+        </form>
+      </li> -->
+    <li>
+      <ul class="collapsible collapsible-accordion">
+        <li>
+          <a href="main.html" class="collapsible-header waves-effect">
+            <i class="fas fa-film"></i>Movies
+          </a>
+        </li>
+        <li>
+          <a href="main.html" class="collapsible-header waves-effect">
+            <i class="far fa-eye"></i>Watch Later
+          </a>
+        </li>
+        <li>
+          <a href="main.html" class="collapsible-header waves-effect">
+            <i class="far fa-heart"></i>Favourites
+          </a>
+        </li>
+        <li>
+          <a class="collapsible-header waves-effect arrow-r">
+            <i class="fas fa-tasks"></i>Manage
+            <i class="fas fa-angle-down rotate-icon"></i>
+          </a>
+          <div class="collapsible-body">
+            <ul>
+              <li>
+                <a href="addMovie.html" class="waves-effect">Add movie</a>
+              </li>
+              <li>
+                <a class="waves-effect">Users</a>
+              </li>
+            </ul>
+          </div>
+        </li>
+        <li>
+          <a routerLink="/about" (click)="sidenavClose()" class="collapsible-header waves-effect">
+            <i class="fas fa-info-circle"></i>About the project
+          </a>
+        </li>
+        <li>
+          <a routerLink="/not-found" (click)="sidenavClose()" class="collapsible-header waves-effect">
+            <i class="fas fa-exclamation-triangle"></i>404
+          </a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+  <div class="sidenav-bg mask-strong"></div>
+</div>

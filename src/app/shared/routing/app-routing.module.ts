@@ -17,32 +17,43 @@ const routes: Routes = [
   {
     path: "login",
     component: LoginComponent,
+    data: { title: "Login" },
     canActivate: [SecureInnerPagesGuard]
   },
   {
     path: "register",
     component: RegisterComponent,
+    data: { title: "Register" },
     canActivate: [SecureInnerPagesGuard]
   },
-  { path: "profile", component: ProfileComponent, canActivate: [AuthGuard] },
+  {
+    path: "profile",
+    component: ProfileComponent,
+    data: { title: "Profile" },
+    canActivate: [AuthGuard]
+  },
   {
     path: "forgot-password",
     component: ForgotPasswordComponent,
+    data: { title: "Forgot password" },
     canActivate: [SecureInnerPagesGuard]
   },
   {
     path: "verify-email-address",
     component: VerifyEmailComponent,
+    data: { title: "Verify E-mail address" },
     canActivate: [SecureInnerPagesGuard]
   },
   {
     path: "about",
     component: AboutComponent,
+    data: { title: "About" },
     canActivate: [SecureInnerPagesGuard]
   },
   {
     path: "**",
     component: NotFoundComponent,
+    data: { title: "Page not found" },
     canActivate: [SecureInnerPagesGuard]
   }
 ];
