@@ -41,7 +41,7 @@ export class AuthService {
         this.ngZone.run(() => {
           this.router.navigate(["profile"]);
         });
-        this.SetUserData(result.user);
+        this.SetUserAuthData(result.user);
       })
       .catch(error => {
         window.alert(error.message);
@@ -53,7 +53,7 @@ export class AuthService {
       .createUserWithEmailAndPassword(email, password)
       .then(result => {
         this.SendVerificationMail();
-        this.SetUserData(result.user);
+        this.SetUserAuthData(result.user);
       })
       .catch(error => {
         window.alert(error.message);
@@ -97,6 +97,10 @@ export class AuthService {
     return user !== null && user.emailVerified !== false ? true : false;
   }
 
+  get getCurrentUser() {
+    return this.afAuth.auth.currentUser;
+  }
+
   GoogleAuth() {
     return this.AuthLogin(new auth.GoogleAuthProvider());
   }
@@ -109,7 +113,7 @@ export class AuthService {
         this.ngZone.run(() => {
           this.router.navigate(["profile"]);
         });
-        this.SetUserData(result.user);
+        this.SetUserAuthData(result.user);
       })
       .catch(error => {
         window.alert(error);
@@ -117,7 +121,7 @@ export class AuthService {
   }
 
   // Записываем данные пользователя
-  SetUserData(user) {
+  SetUserAuthData(user, data = null) {
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(
       `users/${user.uid}`
     );
@@ -126,13 +130,41 @@ export class AuthService {
       email: user.email,
       displayName: user.displayName,
       photoURL: user.photoURL,
-      emailVerified: user.emailVerified
+      emailVerified: user.emailVerified,
+      aboutMe: data.aboutMe
     };
     return userRef.set(userData, {
       merge: true
     });
   }
 
+  UpdateUserAboutMe(user, data) {
+    this.SetUserAuthData(user, { aboutMe: data });
+  }
+
+  UpdateUserName(newName) {
+    return this.afAuth.auth.currentUser
+      .updateProfile({
+        displayName: newName
+      })
+      .then(result => {
+        this.ngZone.run(() => {
+          this.router.navigate(["profile"]);
+        });
+        this.SetUserAuthData(this.afAuth.auth.currentUser);
+        window.alert("Name successfully changed!");
+      })
+      .catch(error => {
+        //window.alert(error.message);
+      });
+  }
+
+  getAllUserData(id) {
+    return this.afs.collection('users', ref => ref
+      .where('uid', '==', id)
+    ).valueChanges();
+  }
+  
   // Sign out
   SignOut() {
     return this.afAuth.auth.signOut().then(() => {
