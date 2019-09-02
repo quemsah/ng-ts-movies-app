@@ -60,6 +60,20 @@ export class AuthService {
       });
   }
 
+  UpdateUserPassword(password) {
+    return this.afAuth.auth.currentUser
+      .updatePassword(password)
+      .then(result => {
+        this.ngZone.run(() => {
+          this.router.navigate(["login"]);
+        });
+        window.alert("Password successfully changed!");
+      })
+      .catch(error => {
+        window.alert(error.message);
+      });
+  }
+
   SendVerificationMail() {
     return this.afAuth.auth.currentUser.sendEmailVerification().then(() => {
       this.router.navigate(["verify-email-address"]);

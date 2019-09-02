@@ -1,6 +1,6 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
-import { ReactiveFormsModule } from "@angular/forms";
+import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 // Роуты
 import { AppRoutingModule } from "./shared/routing/app-routing.module";
 // Firebase
@@ -44,6 +44,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
     AngularFirestoreModule,
+    FormsModule,
     ReactiveFormsModule
   ],
   providers: [AuthService],
