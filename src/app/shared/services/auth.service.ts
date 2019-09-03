@@ -95,6 +95,10 @@ export class AuthService {
         this.ngZone.run(() => {
           this.router.navigate(["profile"]);
         });
+        //обновляем в AngularFirestore
+        this.afs
+          .doc(`users/${this.afAuth.auth.currentUser.uid}`)
+          .set({ displayName: newName }, { merge: true });
         window.alert("Name successfully changed!");
       })
       .catch(error => {

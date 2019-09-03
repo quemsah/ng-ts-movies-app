@@ -10,11 +10,14 @@ import { NgForm } from "@angular/forms";
   styleUrls: ["./profile.component.css"]
 })
 export class ProfileComponent implements OnInit {
+  data: any;
   constructor(
     public authService: AuthService,
     public router: Router,
     public ngZone: NgZone
-  ) {}
+  ) {
+    this.data = {};
+  }
 
   ngOnInit() {}
 
@@ -27,12 +30,27 @@ export class ProfileComponent implements OnInit {
     return true;
   }
 
-  onSubmit(form: NgForm) {
+  onNameSubmit(form: NgForm) {
+    console.log(form.value);
+    this.authService.UpdateUserName(form.value.userName);
+  }
+
+  onProfileSubmit(form: NgForm) {
     console.log(form.value);
     this.authService.UpdateUserPassword(
       form.value.password,
       form.value.oldPassword
     );
-    this.authService.UpdateUserName(form.value.userName);
+    //this.authService.UpdateUserName(form.value.userName);
   }
+
+  // saveNewImage() {
+  //   if (this.data && this.data.image) {
+  //     this.uploadService.uploadProfileImage(
+  //       this.user,
+  //       this.data.image.split(/,(.+)/)[1]
+  //     );
+  //   }
+  //   this.changingImage = false;
+  // }
 }
