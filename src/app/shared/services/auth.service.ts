@@ -1,6 +1,7 @@
 import { Injectable, NgZone } from "@angular/core";
 import { User } from "../services/user";
 import { auth } from "firebase/app";
+import * as firebase from "firebase";
 import { AngularFireAuth } from "@angular/fire/auth";
 import {
   AngularFirestore,
@@ -41,7 +42,7 @@ export class AuthService {
         this.ngZone.run(() => {
           this.router.navigate(["profile"]);
         });
-        this.SetUserAuthData(result.user);
+        this.SetUserData(result.user);
       })
       .catch(error => {
         window.alert(error.message);
@@ -53,21 +54,48 @@ export class AuthService {
       .createUserWithEmailAndPassword(email, password)
       .then(result => {
         this.SendVerificationMail();
-        this.SetUserAuthData(result.user);
+        this.SetUserData(result.user);
       })
       .catch(error => {
         window.alert(error.message);
       });
   }
 
-  UpdateUserPassword(password) {
+  UpdateUserPassword(password, oldPassword) {
+    const credentials = firebase.auth.EmailAuthProvider.credential(
+      this.afAuth.auth.currentUser.email,
+      oldPassword
+    );
     return this.afAuth.auth.currentUser
-      .updatePassword(password)
+      .reauthenticateAndRetrieveDataWithCredential(credentials)
+      .then(() => {
+        this.afAuth.auth.currentUser
+          .updatePassword(password)
+          .then(result => {
+            this.ngZone.run(() => {
+              this.router.navigate(["login"]);
+            });
+            window.alert("Password successfully changed!");
+          })
+          .catch(error => {
+            window.alert(error.message);
+          });
+      })
+      .catch(error => {
+        window.alert(error.message);
+      });
+  }
+
+  UpdateUserName(newName) {
+    return this.afAuth.auth.currentUser
+      .updateProfile({
+        displayName: newName
+      })
       .then(result => {
         this.ngZone.run(() => {
-          this.router.navigate(["login"]);
+          this.router.navigate(["profile"]);
         });
-        window.alert("Password successfully changed!");
+        window.alert("Name successfully changed!");
       })
       .catch(error => {
         window.alert(error.message);
@@ -97,10 +125,6 @@ export class AuthService {
     return user !== null && user.emailVerified !== false ? true : false;
   }
 
-  get getCurrentUser() {
-    return this.afAuth.auth.currentUser;
-  }
-
   GoogleAuth() {
     return this.AuthLogin(new auth.GoogleAuthProvider());
   }
@@ -113,7 +137,7 @@ export class AuthService {
         this.ngZone.run(() => {
           this.router.navigate(["profile"]);
         });
-        this.SetUserAuthData(result.user);
+        this.SetUserData(result.user);
       })
       .catch(error => {
         window.alert(error);
@@ -121,7 +145,7 @@ export class AuthService {
   }
 
   // Записываем данные пользователя
-  SetUserAuthData(user, data = null) {
+  SetUserData(user) {
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(
       `users/${user.uid}`
     );
@@ -130,41 +154,13 @@ export class AuthService {
       email: user.email,
       displayName: user.displayName,
       photoURL: user.photoURL,
-      emailVerified: user.emailVerified,
-      aboutMe: data.aboutMe
+      emailVerified: user.emailVerified
     };
     return userRef.set(userData, {
       merge: true
     });
   }
 
-  UpdateUserAboutMe(user, data) {
-    this.SetUserAuthData(user, { aboutMe: data });
-  }
-
-  UpdateUserName(newName) {
-    return this.afAuth.auth.currentUser
-      .updateProfile({
-        displayName: newName
-      })
-      .then(result => {
-        this.ngZone.run(() => {
-          this.router.navigate(["profile"]);
-        });
-        this.SetUserAuthData(this.afAuth.auth.currentUser);
-        window.alert("Name successfully changed!");
-      })
-      .catch(error => {
-        //window.alert(error.message);
-      });
-  }
-
-  getAllUserData(id) {
-    return this.afs.collection('users', ref => ref
-      .where('uid', '==', id)
-    ).valueChanges();
-  }
-  
   // Sign out
   SignOut() {
     return this.afAuth.auth.signOut().then(() => {
