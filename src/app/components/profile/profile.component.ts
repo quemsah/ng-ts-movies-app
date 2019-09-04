@@ -11,6 +11,7 @@ import { NgForm } from "@angular/forms";
 })
 export class ProfileComponent implements OnInit {
   data: any;
+  productPhotoPaths: string[] = [];
   constructor(
     public authService: AuthService,
     public router: Router,
@@ -41,7 +42,6 @@ export class ProfileComponent implements OnInit {
       form.value.password,
       form.value.oldPassword
     );
-    //this.authService.UpdateUserName(form.value.userName);
   }
 
   // saveNewImage() {
@@ -53,4 +53,8 @@ export class ProfileComponent implements OnInit {
   //   }
   //   this.changingImage = false;
   // }
+
+  onClickPhoto(file: File) {
+    this.authService.UploadNewAvatar(file);
+  }
 }

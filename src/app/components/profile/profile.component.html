@@ -1,22 +1,5 @@
-<div class="container-fluid">
-  <section class="mb-4 mt-4">
-    <div class="row" *ngIf="authService.userData as user">
-      <!-- Если залогинился -->
-      <!-- <img class="align-self-start mr-5 img-thumbnail rounded-circle"
-            src="{{(user.photoURL) ? user.photoURL : '/src/assets/img/avatars/user.png'}}" alt="{{user.displayName}}">  -->
-      <h1>Hello: <strong>{{(user.displayName) ? user.displayName : 'User'}}</strong></h1>
-      <p>User ID: <strong>{{user.uid}}</strong></p>
-      <p>Email: <strong>{{user.email}}</strong></p>
-      <p>Email Verified: <strong>{{user.emailVerified}}</strong></p>
-      <a class="nav-link active">
-        <i class="fas fa-user"></i>User Profile
-      </a>
-      <a class="nav-link" (click)="authService.SignOut()">
-        <i class="fas fa-sign-out-alt"></i>Log out
-      </a>
-    </div>
-  </section>
-</div>
+<!-- <img class="align-self-start mr-5 img-thumbnail rounded-circle"
+src="{{(user.photoURL) ? user.photoURL : '/src/assets/img/avatars/user.png'}}" alt="{{user.displayName}}">  -->
 <div class="container-fluid">
   <div class="row" *ngIf="authService.userData as user">
     <div class="col-lg-3 mb-4 mt-4">
@@ -28,9 +11,12 @@
           <img class="z-depth-1 mb-3 mx-auto"
             src="{{(user.photoURL) ? user.photoURL : '../../../assets/img/avatars/user.png'}}" alt="User Photo">
           <p class="text-muted"><small>Avatar should be a square and .jpg</small></p>
-          <div class="row flex-center">
+          <div class="row flex-center file-field">
             <button class="btn btn-info btn-rounded btn-sm waves-effect waves-light blue-gradient">Upload New
-              Photo</button><br>
+              Photo
+            </button>
+          <input type="file"
+          (change)="onClickPhoto($event)"><br>
             <button class="btn btn-danger btn-rounded btn-sm waves-effect waves-light">Delete</button>
           </div>
         </div>
@@ -39,15 +25,15 @@
     <div class="col-lg-3 mb-4 mt-4">
       <div class="card card-cascade narrower">
         <div class="view view-cascade gradient-card-header blue-gradient">
-          <h5 class="mb-0 font-weight-bold">Edit Account</h5>
+          <h5 class="mb-0 font-weight-bold">Change Name</h5>
         </div>
         <div class="card-body card-body-cascade text-center update-profile-form">
           <form #f2="ngForm" (ngSubmit)="onNameSubmit(f2)">
             <div class="row">
               <div class="col-md-12">
                 <div class="md-form mb-0">
-                  <input class="form-control" type="text" ngModel [ngModel]="user.displayName" name="userName"
-                    required minlength="5" #userNameInput="ngModel">
+                  <input class="form-control" type="text" ngModel [ngModel]="user.displayName" name="userName" required
+                    minlength="5" #userNameInput="ngModel">
                   <span class="valid-error" *ngIf="userNameInput.hasError('required')">Field must not be empty</span>
                   <span class="valid-error" *ngIf="userNameInput.hasError('minlength')">The name must be of minimum
                     length 4 characters</span>

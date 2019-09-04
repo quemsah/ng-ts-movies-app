@@ -7,7 +7,10 @@ import {
   AngularFirestore,
   AngularFirestoreDocument
 } from "@angular/fire/firestore";
+import { AngularFireStorage } from "@angular/fire/storage";
 import { Router } from "@angular/router";
+import { finalize } from "rxjs/operators";
+import { Observable } from "rxjs";
 
 @Injectable({
   providedIn: "root"
@@ -16,6 +19,7 @@ export class AuthService {
   userData: any; // Данные пользователя
 
   constructor(
+    public storage: AngularFireStorage,
     public afs: AngularFirestore,
     public afAuth: AngularFireAuth,
     public router: Router,
@@ -33,6 +37,16 @@ export class AuthService {
         JSON.parse(localStorage.getItem("user"));
       }
     });
+  }
+
+  // Залогинен ли юзер?
+  get isLoggedIn(): boolean {
+    const user = JSON.parse(localStorage.getItem("user"));
+    return user !== null && user.emailVerified !== false ? true : false;
+  }
+  // Текущий пользователь
+  get currentUser() {
+    return this.afAuth.auth.currentUser;
   }
 
   SignIn(email, password) {
@@ -63,13 +77,14 @@ export class AuthService {
 
   UpdateUserPassword(password, oldPassword) {
     const credentials = firebase.auth.EmailAuthProvider.credential(
-      this.afAuth.auth.currentUser.email,
+      this.currentUser.email,
       oldPassword
     );
-    return this.afAuth.auth.currentUser
+    // для обновления пароля нужен ре-логин
+    return this.currentUser
       .reauthenticateAndRetrieveDataWithCredential(credentials)
       .then(() => {
-        this.afAuth.auth.currentUser
+        this.currentUser
           .updatePassword(password)
           .then(result => {
             this.ngZone.run(() => {
@@ -87,7 +102,7 @@ export class AuthService {
   }
 
   UpdateUserName(newName) {
-    return this.afAuth.auth.currentUser
+    return this.currentUser
       .updateProfile({
         displayName: newName
       })
@@ -95,10 +110,15 @@ export class AuthService {
         this.ngZone.run(() => {
           this.router.navigate(["profile"]);
         });
-        //обновляем в AngularFirestore
-        this.afs
-          .doc(`users/${this.afAuth.auth.currentUser.uid}`)
-          .set({ displayName: newName }, { merge: true });
+        // обновляем в AngularFirestore
+        this.afs.doc(`users/${this.currentUser.uid}`).set(
+          {
+            displayName: newName
+          },
+          {
+            merge: true
+          }
+        );
         window.alert("Name successfully changed!");
       })
       .catch(error => {
@@ -107,7 +127,7 @@ export class AuthService {
   }
 
   SendVerificationMail() {
-    return this.afAuth.auth.currentUser.sendEmailVerification().then(() => {
+    return this.currentUser.sendEmailVerification().then(() => {
       this.router.navigate(["verify-email-address"]);
     });
   }
@@ -121,12 +141,6 @@ export class AuthService {
       .catch(error => {
         window.alert(error);
       });
-  }
-
-  // Залогинен ли юзер?
-  get isLoggedIn(): boolean {
-    const user = JSON.parse(localStorage.getItem("user"));
-    return user !== null && user.emailVerified !== false ? true : false;
   }
 
   GoogleAuth() {
@@ -172,4 +186,65 @@ export class AuthService {
       this.router.navigate(["login"]);
     });
   }
+
+  UploadNewAvatar(event: any) {
+    const file = event.target.files[0];
+    const profileRef = this.afs.doc(
+      `users/${this.currentUser.uid}`
+    );
+    return new Promise((resolve, reject) => {
+      const path =
+        "users/" + this.currentUser.uid + "/" + file.name;
+      const ref = this.storage.ref(path);
+      const upload = ref.put(file);
+      const sub = upload
+        .snapshotChanges()
+        .pipe(
+          finalize(async () => {
+            try {
+              const photoURL = await ref.getDownloadURL().toPromise();
+              const afAuthUpdated = await this.currentUser.updateProfile(
+                {
+                  photoURL: photoURL
+                }
+              );
+              const afsUpdated = await profileRef.update({
+                photoURL
+              });
+              resolve({
+                photoURL
+              });
+            } catch (err) {
+              reject(err);
+            }
+            sub.unsubscribe();
+          })
+        )
+        .subscribe(data => {
+          console.log("storage: ", data);
+        });
+    });
+  }
+
+  // UploadPhoto2(event: any) {
+  //   const file = event.target.files[0];
+  //   console.log(file);
+  //   const filePath =
+  //     "users/" + this.currentUser.uid + "/" + file.name;
+  //   console.log(filePath);
+  //   const fileRef = this.storage.ref(filePath);
+  //   console.log(fileRef);
+  //   const task = this.storage.upload(filePath, file);
+  //   console.log(task);
+
+  //   // get notified when the download URL is available
+  //   task.snapshotChanges().pipe(
+  //     finalize(() => {
+  //       this.downloadURL = fileRef.getDownloadURL();
+  //       this.downloadURL.subscribe(url => {
+  //         console.log(url);
+  //       });
+  //     })
+  //   );
+  // }
 }

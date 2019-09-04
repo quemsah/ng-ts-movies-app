@@ -7,6 +7,7 @@ import { AppRoutingModule } from "./shared/routing/app-routing.module";
 import { AngularFireModule } from "@angular/fire";
 import { AngularFireAuthModule } from "@angular/fire/auth";
 import { AngularFirestoreModule } from "@angular/fire/firestore";
+import { AngularFireStorage } from '@angular/fire/storage';
 // firebaseConfig
 import { environment } from "../environments/environment";
 // Сервисы
@@ -23,6 +24,7 @@ import { AboutComponent } from "./components/about/about.component";
 import { NotFoundComponent } from "./components/not-found/not-found.component";
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+
 
 @NgModule({
   declarations: [
@@ -47,7 +49,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [AuthService],
+  providers: [AuthService,AngularFireStorage],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

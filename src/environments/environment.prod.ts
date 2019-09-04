@@ -5,7 +5,7 @@ export const environment = {
     authDomain: "ng-auth-dc645.firebaseapp.com",
     databaseURL: "https://ng-auth-dc645.firebaseio.com",
     projectId: "ng-auth-dc645",
-    storageBucket: "",
+    storageBucket: "ng-auth-dc645.appspot.com",
     messagingSenderId: "700267720699",
     appId: "1:700267720699:web:6cf104d068567cb8"
   }
