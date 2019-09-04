@@ -30,7 +30,7 @@ const routes: Routes = [
     path: "profile",
     component: ProfileComponent,
     data: { title: "Profile" },
-    canActivate: [AuthGuard]
+    canActivate: [SecureInnerPagesGuard]
   },
   {
     path: "forgot-password",
