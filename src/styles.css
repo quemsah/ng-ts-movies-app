@@ -1,1 +1,35 @@
-/* You can add global styles to this file, and also import other style files */
+/* MatSnackBar Override */
+.cdk-live-announcer-element{
+  display: none !important;
+}
+.mat-snack-bar-containter {
+  opacity: 0.85;
+}
+
+.mat-snack-bar-container {
+  align-items: center !important;
+  justify-content: center !important;
+  max-width: 90% !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  margin-bottom: 1rem !important;
+  padding: 10px !important;
+  position: absolute !important;
+  top: 50px !important;
+  right: 8px !important;
+  display: inline-flex !important;
+  color: #fff !important;
+  opacity: 0.85 !important;
+}
+
+.info-alert-snackbar {
+    background-color: #4285f4!important;
+}
+
+.warning-alert-snackbar {
+    background-color: #ff3547!important
+}
+
+.success-alert-snackbar {
+    background-color: #00c851!important;
+}

@@ -41,6 +41,8 @@ export class AuthService {
     });
   }
 
+  errCatching = error => this.alertService.openWarningAlert(error.message, 2);
+
   // Залогинен ли юзер?
   get isLoggedIn(): boolean {
     const user = JSON.parse(localStorage.getItem("user"));
@@ -65,9 +67,7 @@ export class AuthService {
         });
         this.SetUserData(result.user);
       })
-      .catch(error => {
-        window.alert(error.message);
-      });
+      .catch(this.errCatching);
   }
 
   SignUp(email, password) {
@@ -77,9 +77,7 @@ export class AuthService {
         this.SendVerificationMail();
         this.SetUserData(result.user);
       })
-      .catch(error => {
-        window.alert(error.message);
-      });
+      .catch(this.errCatching);
   }
 
   UpdateUserPassword(password, oldPassword) {
@@ -98,15 +96,14 @@ export class AuthService {
             this.ngZone.run(() => {
               this.router.navigate(["login"]);
             });
-            window.alert("Password successfully changed!");
+            this.alertService.openSuccessAlert(
+              "Password successfully changed!",
+              1
+            );
           })
-          .catch(error => {
-            window.alert(error.message);
-          });
+          .catch(this.errCatching);
       })
-      .catch(error => {
-        window.alert(error.message);
-      });
+      .catch(this.errCatching);
   }
 
   UpdateUserName(newName) {
@@ -115,17 +112,15 @@ export class AuthService {
         // обновляем встроенный методом AngularFireAuth.auth
         .updateProfile({ displayName: newName })
         .then(result => {
-          this.ngZone.run(() => {
-            this.router.navigate(["profile"]);
-          });
+          // юзер и так в профиле
+          // this.ngZone.run(() => {
+          //   this.router.navigate(["profile"]);
+          // });
           // и обновляем в AngularFirestore
           this.profileRef.set({ displayName: newName }, { merge: true });
-          window.alert("Name successfully changed!");
-          this.alertService.openAlert("Name successfully changed!",2);
+          this.alertService.openSuccessAlert("Name successfully changed!", 1);
         })
-        .catch(error => {
-          window.alert(error.message);
-        })
+        .catch(this.errCatching)
     );
   }
 
@@ -139,7 +134,10 @@ export class AuthService {
     return this.afAuth.auth
       .sendPasswordResetEmail(passwordResetEmail)
       .then(() => {
-        window.alert("Password reset email sent, check your inbox.");
+        this.alertService.openInfoAlert(
+          "Password reset email sent, check your inbox.",
+          2
+        );
       })
       .catch(error => {
         window.alert(error);
@@ -168,9 +166,7 @@ export class AuthService {
         });
         this.SetUserData(result.user);
       })
-      .catch(error => {
-        window.alert(error);
-      });
+      .catch(this.errCatching);
   }
 
   // Записываем данные пользователя в собсвенную таблицу
@@ -212,6 +208,10 @@ export class AuthService {
           await this.currentUser.updateProfile({ photoURL: photoURL });
           // обновляем в FireStore
           await this.profileRef.update({ photoURL });
+          await this.alertService.openSuccessAlert(
+            "You have successfully changed your profile picture",
+            2
+          );
           sub.unsubscribe();
         })
       )
