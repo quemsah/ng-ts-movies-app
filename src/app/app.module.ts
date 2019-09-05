@@ -1,13 +1,16 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
+// MatSnackBar (замена window.alert)
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { MatSnackBarModule } from "@angular/material/snack-bar";
 // Роуты
 import { AppRoutingModule } from "./shared/routing/app-routing.module";
 // Firebase
 import { AngularFireModule } from "@angular/fire";
 import { AngularFireAuthModule } from "@angular/fire/auth";
 import { AngularFirestoreModule } from "@angular/fire/firestore";
-import { AngularFireStorage } from '@angular/fire/storage';
+import { AngularFireStorage } from "@angular/fire/storage";
 // firebaseConfig
 import { environment } from "../environments/environment";
 // Сервисы
@@ -22,9 +25,8 @@ import { VerifyEmailComponent } from "./components/verify-email/verify-email.com
 import { FooterComponent } from "./components/footer/footer.component";
 import { AboutComponent } from "./components/about/about.component";
 import { NotFoundComponent } from "./components/not-found/not-found.component";
-import { SidenavComponent } from './components/sidenav/sidenav.component';
-import { NavbarComponent } from './components/navbar/navbar.component';
-
+import { SidenavComponent } from "./components/sidenav/sidenav.component";
+import { NavbarComponent } from "./components/navbar/navbar.component";
 
 @NgModule({
   declarations: [
@@ -42,14 +44,16 @@ import { NavbarComponent } from './components/navbar/navbar.component';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
     AngularFirestoreModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatSnackBarModule
   ],
-  providers: [AuthService,AngularFireStorage],
+  providers: [AuthService, AngularFireStorage],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

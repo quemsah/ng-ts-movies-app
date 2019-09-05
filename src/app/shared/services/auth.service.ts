@@ -10,7 +10,7 @@ import {
 import { AngularFireStorage } from "@angular/fire/storage";
 import { Router } from "@angular/router";
 import { finalize } from "rxjs/operators";
-import { Observable } from "rxjs";
+import { AlertService } from "./alert.service";
 
 @Injectable({
   providedIn: "root"
@@ -19,6 +19,7 @@ export class AuthService {
   userData: any; // Данные пользователя
 
   constructor(
+    private alertService: AlertService,
     public storage: AngularFireStorage,
     public afs: AngularFirestore,
     public afAuth: AngularFireAuth,
@@ -120,6 +121,7 @@ export class AuthService {
           // и обновляем в AngularFirestore
           this.profileRef.set({ displayName: newName }, { merge: true });
           window.alert("Name successfully changed!");
+          this.alertService.openAlert("Name successfully changed!",2);
         })
         .catch(error => {
           window.alert(error.message);
@@ -148,7 +150,15 @@ export class AuthService {
     return this.AuthLogin(new auth.GoogleAuthProvider());
   }
 
-  // Google Authentication
+  GithubAuth() {
+    return this.AuthLogin(new auth.GithubAuthProvider());
+  }
+
+  TwitterAuth() {
+    // waitng for twitter dev account
+    // return this.AuthLogin(new auth.TwitterAuthProvider());
+  }
+
   AuthLogin(provider) {
     return this.afAuth.auth
       .signInWithPopup(provider)
