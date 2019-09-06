@@ -13,12 +13,10 @@ import { AboutComponent } from "../../components/about/about.component";
 import { NotFoundComponent } from "../../components/not-found/not-found.component";
 
 const routes: Routes = [
-  { path: "", redirectTo: "/login", pathMatch: "full" },
   {
     path: "login",
     component: LoginComponent,
-    data: { title: "Login" },
-    canActivate: [SecureInnerPagesGuard]
+    data: { title: "Login" }
   },
   {
     path: "register",
@@ -30,7 +28,7 @@ const routes: Routes = [
     path: "profile",
     component: ProfileComponent,
     data: { title: "Profile" },
-    canActivate: [SecureInnerPagesGuard]
+    canActivate: [AuthGuard]
   },
   {
     path: "forgot-password",
@@ -50,6 +48,7 @@ const routes: Routes = [
     data: { title: "About" },
     canActivate: [SecureInnerPagesGuard]
   },
+  { path: "", redirectTo: "/login", pathMatch: "full" },
   {
     path: "**",
     component: NotFoundComponent,

@@ -152,11 +152,6 @@ export class AuthService {
     return this.AuthLogin(new auth.GithubAuthProvider());
   }
 
-  TwitterAuth() {
-    // waitng for twitter dev account
-    // return this.AuthLogin(new auth.TwitterAuthProvider());
-  }
-
   AuthLogin(provider) {
     return this.afAuth.auth
       .signInWithPopup(provider)
