@@ -24,9 +24,12 @@ import { ForgotPasswordComponent } from "./components/forgot-password/forgot-pas
 import { VerifyEmailComponent } from "./components/verify-email/verify-email.component";
 import { FooterComponent } from "./components/footer/footer.component";
 import { AboutComponent } from "./components/about/about.component";
+import { AddMovieComponent } from "./components/add-movie/add-movie.component";
 import { NotFoundComponent } from "./components/not-found/not-found.component";
 import { SidenavComponent } from "./components/sidenav/sidenav.component";
 import { NavbarComponent } from "./components/navbar/navbar.component";
+import { TMDBService } from "./shared/services/TMDB.service";
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -40,9 +43,11 @@ import { NavbarComponent } from "./components/navbar/navbar.component";
     AboutComponent,
     NotFoundComponent,
     SidenavComponent,
-    NavbarComponent
+    NavbarComponent,
+    AddMovieComponent
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
@@ -53,7 +58,7 @@ import { NavbarComponent } from "./components/navbar/navbar.component";
     ReactiveFormsModule,
     MatSnackBarModule
   ],
-  providers: [AuthService, AngularFireStorage],
+  providers: [AuthService, AngularFireStorage, TMDBService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

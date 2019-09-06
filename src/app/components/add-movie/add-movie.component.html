@@ -1,0 +1,154 @@
+<div class="container-fluid">
+  <div class="row">
+
+    <div class="col-lg-4 mb-4">
+      <div class="card card-cascade narrower">
+        <div class="view view-cascade gradient-card-header blue-gradient">
+          <h5 class="mb-0 font-weight-bold">Get info via TMDB</h5>
+        </div>
+        <div class="card-body card-body-cascade text-center">
+          <p class="text-muted"><small>Search for movies in external TMDB database by an IMDB ID.</small></p>
+          <form #fGetTmdbID="ngForm" (ngSubmit)="onImdbIDSubmit(fGetTmdbID)">
+          <div class="md-form mb-0">
+            <input class="form-control" type="text" ngModel name="ImdbId">
+            <label >IMDB ID</label>
+            <button class="btn btn-info btn-rounded btn-sm waves-effect waves-light blue-gradient">Submit</button><br>
+          </div>
+          </form>
+        </div>
+      </div>
+    </div>
+ <span>{{this.foundMovieData | json}}</span>
+    <div class="col-lg-8 mb-4">
+      <div class="card card-cascade narrower">
+        <div class="view view-cascade gradient-card-header blue-gradient">
+          <h5 class="mb-0 font-weight-bold">Add Movie</h5>
+        </div>
+        <div class="card-body card-body-cascade text-center">
+          <form>
+            <div class="row">
+              <div class="col-md-4 ">
+                <div class="md-form form-sm mb-0">
+                  <input type="text" id="form13" class="form-control form-control-sm">
+                  <label for="form13" class="">IMDB ID</label>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="md-form form-sm mb-0">
+                  <input type="text" id="form3" class="form-control form-control-sm">
+                  <label for="form3" class="">TMDB ID</label>
+                </div>
+              </div>
+              <div class="col-md-4">
+
+                <div class="md-form form-sm mb-0">
+                  <input type="text" id="form41" class="form-control form-control-sm">
+                  <label for="form41" class="">Name</label>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4 ">
+                <div class="md-form form-sm mb-0">
+                  <input type="text" id="form15" class="form-control form-control-sm">
+                  <label for="form15" class="">Date</label>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="md-form form-sm mb-0">
+                  <input type="text" id="form23" class="form-control form-control-sm">
+                  <label for="form23" class="">Country</label>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="md-form form-sm mb-0">
+                  <input type="text" id="form4" class="form-control form-control-sm">
+                  <label for="form4" class="">Rating</label>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="md-form form-sm mb-0">
+                  <input type="text" id="form63" class="form-control form-control-sm">
+                  <label for="form63" class="">Genre</label>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="file-field md-form form-sm mb-0">
+                  <div class="btn btn-primary btn-sm float-left">
+                    <span>Choose image</span>
+                    <input type="file">
+                  </div>
+                  <div class="file-path-wrapper">
+                    <input class="file-path" type="text" placeholder="Upload poster">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                <div class="md-form form-sm mb-0">
+                  <input type="text" id="form17" class="form-control form-control-sm">
+                  <label for="form17" class="">Runtime</label>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="md-form form-sm mb-0">
+                  <input type="text" id="form18" class="form-control form-control-sm">
+                  <label for="form18" class="">Budget</label>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="md-form form-sm mb-0">
+                  <input type="text" id="form33" class="form-control form-control-sm">
+                  <label for="form33" class="">Revenue</label>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                <div class="md-form form-sm mb-0">
+                  <select class="browser-default custom-select select-rating">
+                    <option class="select-option" selected>Your Rating</option>
+                    <option class="select-option" value="1">1</option>
+                    <option class="select-option" value="2">2</option>
+                    <option class="select-option" value="3">3</option>
+                    <option class="select-option" value="4">4</option>
+                    <option class="select-option" value="5">5</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="md-form form-sm mb-0 d-flex">
+                  <input type="checkbox" class="form-check-input" id="Favourite" checked="checked">
+                  <label class="form-check-label" for="Favourite">Favourite</label>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="md-form form-sm mb-0 d-flex">
+                  <input type="checkbox" class="form-check-input" id="wl">
+                  <label class="form-check-label" for="wl">Watch later</label>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="md-form mb-0 text-dark">
+                  <textarea id="form78" class="md-textarea form-control" rows="3"></textarea>
+                  <label for="form78" class="">Overview</label>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 text-center my-4">
+                <span class="waves-input-wrapper waves-effect waves-light"><input type="submit" value="Add Movie"
+                    class="btn btn-info btn-rounded blue-gradient"></span>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

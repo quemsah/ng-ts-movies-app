@@ -30,7 +30,7 @@
             <i class="far fa-heart"></i>Favourites
           </a>
         </li>
-        <li>
+        <!-- <li>
           <a class="collapsible-header waves-effect arrow-r">
             <i class="fas fa-tasks"></i>Manage
             <i class="fas fa-angle-down rotate-icon"></i>
@@ -38,13 +38,18 @@
           <div class="collapsible-body">
             <ul>
               <li>
-                <a href="addMovie.html" class="waves-effect">Add movie</a>
+                <a routerLink="/add-movie"  class="waves-effect">Add movie</a>
               </li>
               <li>
                 <a class="waves-effect">Users</a>
               </li>
             </ul>
           </div>
+        </li> -->
+        <li>
+          <a routerLink="/add-movie" (click)="sidenavClose()" class="collapsible-header waves-effect">
+            <i class="fas fa-plus"></i>Add movie
+          </a>
         </li>
         <li>
           <a routerLink="/about" (click)="sidenavClose()" class="collapsible-header waves-effect">

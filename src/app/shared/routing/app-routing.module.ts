@@ -11,6 +11,7 @@ import { ForgotPasswordComponent } from "../../components/forgot-password/forgot
 import { VerifyEmailComponent } from "../../components/verify-email/verify-email.component";
 import { AboutComponent } from "../../components/about/about.component";
 import { NotFoundComponent } from "../../components/not-found/not-found.component";
+import { AddMovieComponent } from '../../components/add-movie/add-movie.component';
 
 const routes: Routes = [
   {
@@ -46,6 +47,12 @@ const routes: Routes = [
     path: "about",
     component: AboutComponent,
     data: { title: "About" }
+  },
+  {
+    path: "add-movie",
+    component: AddMovieComponent,
+    data: { title: "New movie" },
+    canActivate: [AuthGuard]
   },
   { path: "", redirectTo: "/login", pathMatch: "full" },
   {

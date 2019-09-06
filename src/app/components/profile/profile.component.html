@@ -16,7 +16,7 @@ src="{{(user.photoURL) ? user.photoURL : '/src/assets/img/avatars/user.png'}}" a
                     pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" required #emailInput="ngModel" disabled>
                   <span class="valid-error" *ngIf="emailInput.hasError('required')">Field must not be empty</span>
                   <span class="valid-error" *ngIf="emailInput.hasError('pattern')">E-Mail is invalid</span>
-                  <label data-error="wrong" data-success="right">E-mail</label>
+                  <label>E-mail</label>
                 </div>
               </div>
               <div class="col-md-6">
@@ -42,7 +42,7 @@ src="{{(user.photoURL) ? user.photoURL : '/src/assets/img/avatars/user.png'}}" a
                     </div> -->
                 <div class="md-form mb-0">
                   <input class="form-control" type="text" ngModel [(ngModel)]="user.uid" name="uid" disabled>
-                  <label for="form77" data-error="wrong" data-success="right">User ID</label>
+                  <label>User ID</label>
                 </div>
               </div>
               <div class="col-md-6">
