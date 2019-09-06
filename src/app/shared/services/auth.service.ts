@@ -46,13 +46,12 @@ export class AuthService {
   // Залогинен ли юзер?
   get isLoggedIn(): boolean {
     const user = JSON.parse(localStorage.getItem("user"));
-    return user !== null && user.emailVerified !== false ? true : false;
+    return user !== null ? true : false;
   }
   // Текущий пользователь
   get currentUser() {
     return this.afAuth.auth.currentUser;
   }
-
   // Ссылка на коллекцию
   get profileRef() {
     return this.afs.doc(`users/${this.currentUser.uid}`);
@@ -65,6 +64,7 @@ export class AuthService {
         this.ngZone.run(() => {
           this.router.navigate(["profile"]);
         });
+        console.log(result.user);
         this.SetUserData(result.user);
       })
       .catch(this.errCatching);
@@ -152,6 +152,10 @@ export class AuthService {
     return this.AuthLogin(new auth.GithubAuthProvider());
   }
 
+  MicrosoftAuth() {
+    return this.AuthLogin(new auth.OAuthProvider('microsoft.com'));
+  }
+
   AuthLogin(provider) {
     return this.afAuth.auth
       .signInWithPopup(provider)
@@ -159,6 +163,7 @@ export class AuthService {
         this.ngZone.run(() => {
           this.router.navigate(["profile"]);
         });
+        console.log(result.user);
         this.SetUserData(result.user);
       })
       .catch(this.errCatching);

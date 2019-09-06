@@ -45,15 +45,13 @@ const routes: Routes = [
   {
     path: "about",
     component: AboutComponent,
-    data: { title: "About" },
-    canActivate: [SecureInnerPagesGuard]
+    data: { title: "About" }
   },
   { path: "", redirectTo: "/login", pathMatch: "full" },
   {
     path: "**",
     component: NotFoundComponent,
-    data: { title: "Page not found" },
-    canActivate: [SecureInnerPagesGuard]
+    data: { title: "Page not found" }
   }
 ];
 
