@@ -2,6 +2,7 @@ import { Movie } from "./movie";
 import { Injectable } from "@angular/core";
 import { AngularFirestore } from "@angular/fire/firestore";
 import { AlertService } from "./alert.service";
+import { Observable } from "rxjs";
 
 @Injectable({
   providedIn: "root"
@@ -33,5 +34,9 @@ export class MovieService {
         this.alertService.openSuccessAlert("Movie successfully added", 1)
       )
       .catch(error => this.alertService.openWarningAlert(error.message, 2));
+  }
+
+  getMovie(id: string): Observable<any> {
+    return this.afs.doc(`movies/${id}`).valueChanges();
   }
 }

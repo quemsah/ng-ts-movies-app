@@ -30,6 +30,7 @@ import { SidenavComponent } from "./components/sidenav/sidenav.component";
 import { NavbarComponent } from "./components/navbar/navbar.component";
 import { TMDBService } from "./shared/services/TMDB.service";
 import { HttpClientModule } from '@angular/common/http';
+import { MovieComponent } from './components/movie/movie.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { HttpClientModule } from '@angular/common/http';
     NotFoundComponent,
     SidenavComponent,
     NavbarComponent,
-    AddMovieComponent
+    AddMovieComponent,
+    MovieComponent
   ],
   imports: [
     HttpClientModule,
