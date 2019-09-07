@@ -1,11 +1,3 @@
-.valid-error {
-    color: red;
-    text-align: left;
-    display: block;
-    font-weight: 300;
-    font-size: small;
-}
-
 .md-form label {
     transform: translateY(-14px) scale(0.8);
 }

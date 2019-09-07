@@ -1,3 +1,11 @@
+/* Span подсказки */
+.valid-error {
+  color: red;
+  text-align: left;
+  display: block;
+  font-weight: 300;
+  font-size: small;
+}
 /* MatSnackBar Override */
 .cdk-live-announcer-element{
   display: none !important;

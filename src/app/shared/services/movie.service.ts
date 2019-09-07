@@ -1,28 +1,19 @@
-import { Movie } from './movie';
+import { Movie } from "./movie";
 import { Injectable } from "@angular/core";
 import { AngularFirestore } from "@angular/fire/firestore";
+import { AlertService } from "./alert.service";
 
 @Injectable({
   providedIn: "root"
 })
 export class MovieService {
-  constructor(public afs: AngularFirestore) {}
+  constructor(
+    public afs: AngularFirestore,
+    private alertService: AlertService
+  ) {}
 
-  // addMovie() {
-  //   db.collection("cities")
-  //   .add(form.value)
-  //   .then(function(docRef) {
-  //     console.log("Document written with ID: ", docRef.id);
-  //   })
-  //   .catch(function(error) {
-  //     console.error("Error adding document: ", error);
-  //   });
-
-
-
-  //   this.alertService.openSuccessAlert("Name successfully changed!", 1);
   addMovie(formData) {
-    const movieData:Movie = {
+    const movieData: Movie = {
       title: formData.MovieName,
       releaseDate: formData.Date,
       country: formData.Country,
@@ -33,8 +24,14 @@ export class MovieService {
       runtime: formData.Runtime,
       budget: formData.Budget,
       revenue: formData.Revenue,
-      overview: formData.Overview,
+      overview: formData.Overview
     };
-    this.afs.collection(`movies/`).add(movieData);
+    this.afs
+      .collection(`movies/`)
+      .add(movieData)
+      .then(() =>
+        this.alertService.openSuccessAlert("Movie successfully added", 1)
+      )
+      .catch(error => this.alertService.openWarningAlert(error.message, 2));
   }
 }

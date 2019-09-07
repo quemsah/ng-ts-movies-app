@@ -40,7 +40,8 @@
               </div>
               <div class="col-md-4">
                 <div class="md-form form-sm mb-0">
-                  <input type="text" class="form-control form-control-sm" ngModel name="MovieName" required>
+                  <input type="text" class="form-control form-control-sm" ngModel name="MovieName" required #movieNameInput="ngModel">
+                  <span class="valid-error" *ngIf="movieNameInput.hasError('required')">Field must not be empty</span>
                   <label class="">Name</label>
                 </div>
               </div>
@@ -48,7 +49,8 @@
             <div class="row">
               <div class="col-md-4 ">
                 <div class="md-form form-sm mb-0">
-                  <input type="text" class="form-control form-control-sm" ngModel name="Date" required>
+                  <input type="text" class="form-control form-control-sm" ngModel name="Date" required #dateInput="ngModel">
+                  <span class="valid-error" *ngIf="dateInput.hasError('required')">Field must not be empty</span>
                   <label class="">Date</label>
                 </div>
               </div>
@@ -134,7 +136,8 @@
             <div class="row">
               <div class="col-md-12">
                 <div class="md-form mb-0 text-dark">
-                  <textarea class="md-textarea form-control" rows="3" ngModel name="Overview" required></textarea>
+                  <textarea class="md-textarea form-control" rows="3" ngModel name="Overview" required #overviewInput="ngModel"></textarea>
+                  <span class="valid-error" *ngIf="overviewInput.hasError('required')">Field must not be empty</span>
                   <label class="">Overview</label>
                 </div>
               </div>
