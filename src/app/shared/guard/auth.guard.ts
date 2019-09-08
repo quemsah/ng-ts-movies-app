@@ -23,7 +23,7 @@ export class AuthGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean> | Promise<boolean> | boolean {
-    this.themeService.checkTheme();
+    this.themeService.forceDisableDarkModeBeforeRoute();
     if (this.authService.isLoggedIn !== true) {
       console.log("Auth guard!");
       console.log("authService = " + this.authService);

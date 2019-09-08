@@ -23,10 +23,9 @@ export class SecureInnerPagesGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean> | Promise<boolean> | boolean {
-    this.themeService.checkTheme();
+    this.themeService.forceDisableDarkModeBeforeRoute();
     if (this.authService.isLoggedIn) {
       //window.alert("You are not allowed to access this URL!");
-      console.log("Secure!");
       this.router.navigate(["profile"]);
     }
     return true;
