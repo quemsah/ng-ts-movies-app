@@ -40,7 +40,8 @@
               </div>
               <div class="col-md-4">
                 <div class="md-form form-sm mb-0">
-                  <input type="text" class="form-control form-control-sm" ngModel name="MovieName" required #movieNameInput="ngModel">
+                  <input type="text" class="form-control form-control-sm" ngModel name="MovieName" required
+                    #movieNameInput="ngModel">
                   <span class="valid-error" *ngIf="movieNameInput.hasError('required')">Field must not be empty</span>
                   <label class="">Name</label>
                 </div>
@@ -49,21 +50,24 @@
             <div class="row">
               <div class="col-md-4 ">
                 <div class="md-form form-sm mb-0">
-                  <input type="text" class="form-control form-control-sm" ngModel name="Date" required #dateInput="ngModel">
+                  <input type="text" class="form-control form-control-sm" ngModel name="Date" required
+                    #dateInput="ngModel">
                   <span class="valid-error" *ngIf="dateInput.hasError('required')">Field must not be empty</span>
                   <label class="">Date</label>
                 </div>
               </div>
               <div class="col-md-4">
                 <div class="md-form form-sm mb-0">
-                  <input type="text" class="form-control form-control-sm" ngModel name="Country">
+                  <input type="text" class="form-control form-control-sm" ngModel name="Country" required
+                    #countryInput="ngModel">
+                  <span class="valid-error" *ngIf="countryInput.hasError('required')">Field must not be empty</span>
                   <label class="">Country</label>
                 </div>
               </div>
               <div class="col-md-4">
                 <div class="md-form form-sm mb-0">
                   <input type="text" class="form-control form-control-sm" ngModel name="IMDBRating">
-                  <label class="">Rating</label>
+                  <label class="">IMDB Rating</label>
                 </div>
               </div>
             </div>
@@ -76,7 +80,9 @@
               </div>
               <div class="col-md-4">
                 <div class="md-form form-sm mb-0">
-                  <input type="text" class="form-control form-control-sm" ngModel name="Director">
+                  <input type="text" class="form-control form-control-sm" ngModel name="Director" required
+                    #directorInput="ngModel">
+                  <span class="valid-error" *ngIf="directorInput.hasError('required')">Field must not be empty</span>
                   <label class="">Director</label>
                 </div>
               </div>
@@ -136,7 +142,8 @@
             <div class="row">
               <div class="col-md-12">
                 <div class="md-form mb-0 text-dark">
-                  <textarea class="md-textarea form-control" rows="3" ngModel name="Overview" required #overviewInput="ngModel"></textarea>
+                  <textarea class="md-textarea form-control" rows="3" ngModel name="Overview" required
+                    #overviewInput="ngModel"></textarea>
                   <span class="valid-error" *ngIf="overviewInput.hasError('required')">Field must not be empty</span>
                   <label class="">Overview</label>
                 </div>

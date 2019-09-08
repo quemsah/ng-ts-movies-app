@@ -1,4 +1,4 @@
-import { BrowserModule } from "@angular/platform-browser";
+import { BrowserModule, Title } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 // MatSnackBar (замена window.alert)
@@ -29,8 +29,9 @@ import { NotFoundComponent } from "./components/not-found/not-found.component";
 import { SidenavComponent } from "./components/sidenav/sidenav.component";
 import { NavbarComponent } from "./components/navbar/navbar.component";
 import { TMDBService } from "./shared/services/TMDB.service";
-import { HttpClientModule } from '@angular/common/http';
-import { MovieComponent } from './components/movie/movie.component';
+import { HttpClientModule } from "@angular/common/http";
+import { MovieComponent } from "./components/movie/movie.component";
+import { MoviesListComponent } from "./components/movies-list/movies-list.component";
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { MovieComponent } from './components/movie/movie.component';
     SidenavComponent,
     NavbarComponent,
     AddMovieComponent,
-    MovieComponent
+    MovieComponent,
+    MoviesListComponent
   ],
   imports: [
     HttpClientModule,
@@ -60,7 +62,7 @@ import { MovieComponent } from './components/movie/movie.component';
     ReactiveFormsModule,
     MatSnackBarModule
   ],
-  providers: [AuthService, AngularFireStorage, TMDBService],
+  providers: [AuthService, AngularFireStorage, TMDBService, Title],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

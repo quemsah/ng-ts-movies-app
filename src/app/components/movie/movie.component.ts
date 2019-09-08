@@ -2,7 +2,7 @@ import { Movie } from "./../../shared/services/movie";
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { MovieService } from "../../shared/services/movie.service";
-import { Observable } from "rxjs";
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: "app-movie",
@@ -10,19 +10,25 @@ import { Observable } from "rxjs";
   styleUrls: ["./movie.component.css"]
 })
 export class MovieComponent implements OnInit {
-  movie: Movie;
+  movieData: Movie;
 
   constructor(
     private route: ActivatedRoute,
-    private movieService: MovieService
+    private movieService: MovieService,
+    private titleService: Title
   ) {}
 
   ngOnInit(): void {
     this.getMovie();
+    console.log(this.movieData.title)
+    this.titleService.setTitle(this.movieData.title);
   }
 
   getMovie(): void {
     const id = this.route.snapshot.paramMap.get("id");
-    this.movieService.getMovie(id).subscribe(movie => (this.movie = movie));
+    this.movieService.fetchMovie(id).subscribe(movie => {
+      this.movieData = movie;
+      this.titleService.setTitle(this.movieData.title);
+    });
   }
 }

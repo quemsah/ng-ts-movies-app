@@ -1,1 +1,542 @@
-<h2>{{movie | json}}</h2>
+<div class="container-fluid">
+  <!-- Movie card -->
+  <section class="mb-4 mt-4" *ngIf="movieData as movie">
+      <!-- <p>{{movie | json}}</p> -->
+      <span>{{movie.posterLink | json}}</span>
+    <div class="row movie-row">
+      <!-- <img class="hipstah-fix" src="https://image.tmdb.org/t/p/w1400_and_h450_face/4cDFJr4HnXN5AdPw4AKrmLlMWdO.jpg"> -->
+      <!-- Jumbotron -->
+      <div class="movie-bg card card-image">
+        <div class="text-white stylish-card p-4 d-flex justify-content-between">
+          <div class="col-xl-8">
+            <h2 class="card-title h2 my-3">{{movie.title}}</h2>
+            <h5 class="h5 light-blue-text my-2"> {{movie.releaseDate}}, {{movie.country}}</h5>
+            <h5 class="h5 my-3 p-0">{{movie.director}}</h5>
+            <p *ngIf="movie.runtime" class=" my-2 p-0">Runtime: {{movie.runtime}}</p>
+            <ul *ngIf="movie.genre" class="list-unstyled d-flex justify-content-start my-2 p-0">
+              <li class="">
+                <div class="chip waves-effect waves-effect my-1">{{movie.genre}}</div>
+              </li>
+            </ul>
+            <h6 *ngIf="movie.IMDBRating" class="h6 yellow-text my-2 p-0"><i class="far fa-star"> </i> {{movie.IMDBRating}} IMDB</h6>
+            <!-- <ul class="rating my-3">
+              <li>
+                <i class="fas fa-star blue-text"></i>
+              </li>
+              <li>
+                <i class="fas fa-star blue-text"></i>
+              </li>
+              <li>
+                <i class="fas fa-star blue-text"></i>
+              </li>
+              <li>
+                <i class="fas fa-star blue-text"></i>
+              </li>
+              <li>
+                <i class="fas fa-star grey-text"></i>
+              </li>
+            </ul> -->
+            <h4 class="h4 my-3 p-0">Overview</h4>
+            <p class="my-3">{{movie.overview}}</p>
+            <p *ngIf="movie.budget" class="m-0 p-0">Budget: {{movie.budget}}</p>
+            <p *ngIf="movie.revenue" class="mb-2 p-0">Revenue: {{movie.revenue}}</p>
+            <button type="button" class="btn btn-md blue-gradient ml-0">
+              <i class="far fa-clock pr-1"></i> Watch later
+            </button>
+            <button type="button" class="btn btn-md blue-gradient ml-0">
+              <i class="far fa-heart pr-1"></i> Favourite
+            </button>
+            <button type="button" class="btn btn-md blue-gradient ml-0">
+              <i class="fas fa-share-alt pr-1"></i> Share
+            </button>
+            <a href="editMovie.html" target="_blank" class="btn btn-md btn-blue-grey ml-0">
+              <i class="far fa-edit pr-1"></i>
+              Edit
+            </a>
+            <a href="" target="_blank" class="btn btn-md btn-danger ml-0">
+              <i class=" far fa-trash-alt pr-1"></i> Delete
+            </a>
+          </div>
+          <div class="">
+            <img
+              src="{{(movie.posterLink) ? movie.posterLink : '../../../assets/img/no_poster_available.jpg'}}"
+              class="movie-card-img" alt="Movie Poster">
+          </div>
+        </div>
+      </div>
+      <!-- Jumbotron -->
+    </div>
+  </section>
+  <!-- Actors & Trailers -->
+  <!-- <section class="mb-4 mt-4">
+    <div class="row">
+      <div class="movie-tabs">
+        <ul class="nav nav-tabs nav-justified md-tabs blue-gradient" id="myTabJust" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" id="home-tab-just" data-toggle="tab" href="#home-just" role="tab"
+              aria-controls="home-just" aria-selected="true">Cast</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="profile-tab-just" data-toggle="tab" href="#profile-just" role="tab"
+              aria-controls="profile-just" aria-selected="false">Trailers</a>
+          </li>
+        </ul>
+        <div class="tab-content card pt-5" id="myTabContentJust">
+          <div class="tab-pane fade show active" id="home-just" role="tabpanel" aria-labelledby="home-tab-just">
+            <div class="row">
+              <div class="col-xl-2 col-lg-3 col-md- col-sm-4 col-6 mb-4 ">
+                <div class="actor-card card align-items-center">
+                  <div class="view overlay">
+                    <img src="https://image.tmdb.org/t/p/w138_and_h175_face/sHjkE7GZbKAa9aZeiKrEBhMDT14.jpg"
+                      class="card-img-top" alt="">
+                  </div>
+                  <div class="card-body text-center">
+                    <a href="" class="grey-text">
+                      <p class="h6">Vincent Vega</p>
+                    </a>
+                    <p class="h6"><a href=""><strong>John Travolta</strong></a></p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-2 col-lg-3 col-md- col-sm-4 col-6 mb-4 ">
+                <div class="actor-card card align-items-center">
+                  <div class="view overlay">
+                    <img src="https://image.tmdb.org/t/p/w138_and_h175_face/qjYcO8jKNlb7lnJ05vh2U7lNt8r.jpg"
+                      class="card-img-top" alt="">
+                  </div>
+                  <div class="card-body text-center">
+                    <a href="" class="grey-text">
+                      <p class="h6">Jules Winfield</p>
+                    </a>
+                    <p class="h6"><a href=""><strong>Samuel L. Jackson</strong></a></p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-2 col-lg-3 col-md- col-sm-4 col-6 mb-4 ">
+                <div class="actor-card card align-items-center">
+                  <div class="view overlay">
+                    <img src="https://image.tmdb.org/t/p/w138_and_h175_face/xuxgPXyv6KjUHIM8cZaxx4ry25L.jpg"
+                      class="card-img-top" alt="">
+                  </div>
+                  <div class="card-body text-center">
+                    <a href="" class="grey-text">
+                      <p class="h6">Mia Wallace</p>
+                    </a>
+                    <p class="h6"><a href=""><strong>Uma Thurman</strong></a></p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-2 col-lg-3 col-md- col-sm-4 col-6 mb-4 ">
+                <div class="actor-card card align-items-center">
+                  <div class="view overlay">
+                    <img src="https://image.tmdb.org/t/p/w138_and_h175_face/zoTPQXh3qLd0Nj8JCVZqdWowQw7.jpg"
+                      class="card-img-top" alt="">
+                  </div>
+                  <div class="card-body text-center">
+                    <a href="" class="grey-text">
+                      <p class="h6">Butch Coolidge</p>
+                    </a>
+                    <p class="h6"><a href=""><strong>Bruce Willis</strong></a></p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-2 col-lg-3 col-md- col-sm-4 col-6 mb-4 ">
+                <div class="actor-card card align-items-center">
+                  <div class="view overlay">
+                    <img src="https://image.tmdb.org/t/p/w138_and_h175_face/8nS83GOu0iqxjL2Oj2DgwkAceFQ.jpg"
+                      class="card-img-top" alt="">
+                  </div>
+                  <div class="card-body text-center">
+                    <a href="" class="grey-text">
+                      <p class="h6">Marsellus Wallace</p>
+                    </a>
+                    <p class="h6"><a href="">
+                        <strong>Ving Rhames</strong></a></p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-2 col-lg-3 col-md- col-sm-4 col-6 mb-4 ">
+                <div class="actor-card card align-items-center">
+                  <div class="view overlay">
+                    <img src="https://image.tmdb.org/t/p/w138_and_h175_face/c1KlwOAlnFhBWfcPIvA6hmrElb6.jpg"
+                      class="card-img-top" alt="">
+                  </div>
+                  <div class="card-body text-center">
+                    <a href="" class="grey-text">
+                      <p class="h6">Wolf</p>
+                    </a>
+                    <p class="h6"><a href=""><strong>Harvey Keitel</strong></a></p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-2 col-lg-3 col-md- col-sm-4 col-6 mb-4 ">
+                <div class="actor-card card align-items-center">
+                  <div class="view overlay">
+                    <img src="https://image.tmdb.org/t/p/w138_and_h175_face/fXaULtqnMDKsqT1to8vnLjSXe0w.jpg"
+                      class="card-img-top" alt="">
+                  </div>
+                  <div class="card-body text-center">
+                    <a href="" class="grey-text">
+                      <p class="h6">Lance</p>
+                    </a>
+                    <p class="h6"><a href=""><strong>Eric Stoltz</strong></a></p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-2 col-lg-3 col-md- col-sm-4 col-6 mb-4 ">
+                <div class="actor-card card align-items-center">
+                  <div class="view overlay">
+                    <img src="https://image.tmdb.org/t/p/w138_and_h175_face/r4jtlboNqWPz2dOHafrPJE4Yd94.jpg"
+                      class="card-img-top" alt="">
+                  </div>
+                  <div class="card-body text-center">
+                    <a href="" class="grey-text">
+                      <p class="h6">Pumpkin</p>
+                    </a>
+                    <p class="h6"><a href=""><strong>Tim Roth</strong></a></p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-2 col-lg-3 col-md- col-sm-4 col-6 mb-4 ">
+                <div class="actor-card card align-items-center">
+                  <div class="view overlay">
+                    <img src="https://image.tmdb.org/t/p/w138_and_h175_face/uICpVUj29yBcwCEGVZzE77FL98W.jpg"
+                      class="card-img-top" alt="">
+                  </div>
+                  <div class="card-body text-center">
+                    <a href="" class="grey-text">
+                      <p class="h6">Honey Bunny</p>
+                    </a>
+                    <p class="h6"><a href=""><strong>Amanda Plummer</strong></a></p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-2 col-lg-3 col-md- col-sm-4 col-6 mb-4 ">
+                <div class="actor-card card align-items-center">
+                  <div class="view overlay">
+                    <img src="https://image.tmdb.org/t/p/w138_and_h175_face/waZ8GlQJ1K9NQGr6lIipSZONNPb.jpg"
+                      class="card-img-top" alt="">
+                  </div>
+                  <div class="card-body text-center">
+                    <a href="" class="grey-text">
+                      <p class="h6">Fabienne</p>
+                    </a>
+                    <p class="h6"><a href=""><strong>Maria de Medeiros</strong></a></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="profile-just" role="tabpanel" aria-labelledby="profile-tab-just">
+            <div class="row">
+              <div class="col-xl-4 col-sm-6 col-xs-12 mb-4">
+                <div class="embed-responsive embed-responsive-16by9">
+                  <iframe class="embed-responsive-item" src="//www.youtube.com/embed/tGpTpVyI_OQ?rel=0"></iframe>
+                </div>
+              </div>
+              <div class="col-xl-4 col-sm-6 col-xs-12 mb-4">
+                <div class="embed-responsive embed-responsive-16by9">
+                  <iframe class="embed-responsive-item" src="//www.youtube.com/embed/tGpTpVyI_OQ?rel=0"></iframe>
+                </div>
+              </div>
+              <div class="col-xl-4 col-sm-6 col-xs-12 mb-4">
+                <div class="embed-responsive embed-responsive-16by9">
+                  <iframe class="embed-responsive-item" src="//www.youtube.com/embed/tGpTpVyI_OQ?rel=0"></iframe>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section> -->
+  <!-- Similar movies -->
+  <!-- <section class="mb-4 mt-4">
+    <div class="row">
+      <h2 class="profile-title col-lg-12 font-weight-bold mb-3"><strong>Similar movies
+        </strong></h2>
+      <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+        <div class="card movie-card h-100">
+          <div class="card-rating">
+            <a class="">7.3 <i class="far fa-star"> </i></a>
+          </div>
+          <div class="card-favourite">
+            <a class=""><i class="far fa-heart"></i></a>
+          </div>
+          <div class="card-watch-later">
+            <a class=""><i class="far fa-clock"></i></a>
+          </div>
+          <div class="view overlay">
+            <img
+              src="https://m.media-amazon.com/images/M/MV5BMjIyOTkyMDE5N15BMl5BanBnXkFtZTcwNjIwNzQwMw@@._V1_SX300.jpg"
+              class="card-img-top" alt="sample">
+            <a>
+              <div class="mask rgba-white-slight"></div>
+            </a>
+          </div>
+          <div class="card-body">
+            <a>
+              <h4 class="card-title">Dogtooth</h4>
+            </a>
+            <p></p>
+            <hr>
+            <p class="card-text mb-0">Yorgos Lanthimos</p>
+            <p class="card-text mb-0">11 Nov 2009, Greece</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+        <div class="card movie-card h-100">
+          <div class="card-rating">
+            <a class="">6.9 <i class="far fa-star"> </i></a>
+          </div>
+          <div class="card-favourite">
+            <a class=""><i class="far fa-heart"></i></a>
+          </div>
+          <div class="card-watch-later">
+            <a class=""><i class="far fa-clock"></i></a>
+          </div>
+          <div class="view overlay">
+            <img
+              src="https://m.media-amazon.com/images/M/MV5BY2VlODI5ZmMtZDExYS00OWI4LWJiMWItZWZkZWRkNzlmZWI2XkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg"
+              class="card-img-top" alt="sample">
+            <a>
+              <div class="mask rgba-white-slight"></div>
+            </a>
+          </div>
+          <div class="card-body">
+            <a>
+              <h4 class="card-title">Triangle</h4>
+            </a>
+            <p></p>
+            <hr>
+            <p class="card-text mb-0">Christopher Smith</p>
+            <p class="card-text mb-0">16 Oct 2009, UK, Australia</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+        <div class="card movie-card h-100">
+          <div class="card-rating">
+            <a class="">7.3 <i class="far fa-star"> </i></a>
+          </div>
+          <div class="card-favourite">
+            <a class=""><i class="far fa-heart"></i></a>
+          </div>
+          <div class="card-watch-later">
+            <a class=""><i class="far fa-clock"></i></a>
+          </div>
+          <div class="view overlay">
+            <img src="https://m.media-amazon.com/images/M/MV5BMjE2NzgyNDYzNl5BMl5BanBnXkFtZTYwODM2Nzc2._V1_SX300.jpg"
+              class="card-img-top" alt="sample">
+            <a>
+              <div class="mask rgba-white-slight"></div>
+            </a>
+          </div>
+          <div class="card-body">
+            <a>
+              <h4 class="card-title">Identity</h4>
+            </a>
+            <p></p>
+            <hr>
+            <p class="card-text mb-0">James Mangold</p>
+            <p class="card-text mb-0">25 Apr 2003, USA</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+        <div class="card movie-card h-100">
+          <div class="card-rating">
+            <a class="">8.8 <i class="far fa-star"> </i></a>
+          </div>
+          <div class="card-favourite">
+            <a class=""><i class="far fa-heart"></i></a>
+          </div>
+          <div class="card-watch-later">
+            <a class=""><i class="far fa-clock"></i></a>
+          </div>
+          <div class="view overlay">
+            <img
+              src="https://m.media-amazon.com/images/M/MV5BNThjM2Y3MDUtYTIyNC00ZDliLWJlMmItNWY1N2E5NjhmMGM4XkEyXkFqcGdeQXVyNjU2ODM5MjU@._V1_SX300.jpg"
+              class="card-img-top" alt="sample">
+            <a>
+              <div class="mask rgba-white-slight"></div>
+            </a>
+          </div>
+          <div class="card-body">
+            <a>
+              <h4 class="card-title">Westworld</h4>
+            </a>
+            <p></p>
+            <hr>
+            <p class="card-text mb-0">N/A</p>
+            <p class="card-text mb-0">02 Oct 2016, USA</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+        <div class="card movie-card h-100">
+          <div class="card-rating">
+            <a class="">6.6 <i class="far fa-star"> </i></a>
+          </div>
+          <div class="card-favourite">
+            <a class=""><i class="far fa-heart"></i></a>
+          </div>
+          <div class="card-watch-later">
+            <a class=""><i class="far fa-clock"></i></a>
+          </div>
+          <div class="view overlay">
+            <img
+              src="https://m.media-amazon.com/images/M/MV5BMjE3MjQ2ODc1N15BMl5BanBnXkFtZTcwNjYyMzI5Mg@@._V1_SX300.jpg"
+              class="card-img-top" alt="sample">
+            <a>
+              <div class="mask rgba-white-slight"></div>
+            </a>
+          </div>
+          <div class="card-body">
+            <a>
+              <h4 class="card-title">Antichrist</h4>
+            </a>
+            <p></p>
+            <hr>
+            <p class="card-text mb-0">Lars von Trier</p>
+            <p class="card-text mb-0">20 May 2009, Denmark</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+        <div class="card movie-card movie-card h-100">
+          <div class="card-rating">
+            <a class="">8.3 <i class="far fa-star"> </i></a>
+          </div>
+          <div class="card-favourite">
+            <a class=""><i class="far fa-heart"></i></a>
+          </div>
+          <div class="card-watch-later">
+            <a class=""><i class="far fa-clock"></i></a>
+          </div>
+          <div class="view overlay">
+            <img
+              src="https://m.media-amazon.com/images/M/MV5BZmExNmEwYWItYmQzOS00YjA5LTk2MjktZjEyZDE1Y2QxNjA1XkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg"
+              class="card-img-top" alt="sample">
+            <a>
+              <div class="mask rgba-white-slight"></div>
+            </a>
+          </div>
+          <div class="card-body">
+            <a>
+              <h4 class="card-title">Reservoir Dogs</h4>
+            </a>
+            <p></p>
+            <hr>
+            <p class="card-text mb-0">Quentin Tarantino</p>
+            <p class="card-text mb-0">02 Sep 1992, USA</p>
+            <div class="card-footer">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section> -->
+  <!-- Comments -->
+  <!-- <section class="mb-4 mt-4">
+    <div class="row">
+      <h2 class="profile-title col-lg-12 font-weight-bold mb-3">
+        <strong>Comments</strong>
+      </h2>
+      <div class="col-xl-6 col-xs-12 mb-4">
+        <div class="question-card card mb-4">
+          <div class="card-header blue-gradient d-flex justify-content-between">
+            <p class="pt-2 mb-0 text-white">
+              <strong><a class="h5 text-white" href="profile.html" target="_blank">Verbal-15 </a></strong>
+              <i class="fas fa-angle-double-left"></i> 16-08-2019
+            </p>
+            <div class="comment-btns d-flex flex-row-reverse flex-wrap">
+              <a href="#" type="button" class="btn btn-outline-danger btn-sm px-2 waves-effect">
+                <span class="value">-2</span>
+                <i class="far fa-thumbs-down ml-1"></i>
+              </a>
+              <a href="#" type="button" class="btn btn-outline-light-green btn-sm px-2 waves-effect">
+                <span class="value">5</span>
+                <i class="far fa-thumbs-up ml-1"></i>
+              </a>
+              <a href="#" type="button" class="btn btn-outline-danger btn-sm px-2 waves-effect">
+                <i class="far fa-trash-alt ml-1"></i>
+              </a>
+              <a href="#" type="button" class="btn btn-outline-dark btn-sm px-2 waves-effect">
+                <i class="far fa-edit ml-1"></i>
+              </a>
+            </div>
+          </div>
+          <div class="card-body">
+            Только сейчас посмотрел один из самых известных фильмов современного кинематографа. Он буквально меняет
+            мир, в котором мы живем. Ирония и шутки пронизывают весь фильм, но наравне с ними присутствует и едкая
+            философия, так роднящая Квентина Тарантино и Гая Ричи.
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-6 col-xs-12 mb-4">
+        <div class="question-card card mb-4">
+          <div class="card-header blue-gradient d-flex justify-content-between">
+            <p class="pt-2 mb-0 text-white">
+              <strong><a class="h5 text-white" href="profile.html" target="_blank">zuma777 </a></strong>
+              <i class="fas fa-angle-double-left"></i> 27-07-2019</p>
+            <div class="comment-btns d-flex flex-row-reverse flex-wrap">
+              <a href="#" type="button" class="btn btn-outline-danger btn-sm px-2 waves-effect">
+                <span class="value">-3</span>
+                <i class="far fa-thumbs-down ml-1"></i>
+              </a>
+              <a href="#" type="button" class="btn btn-outline-light-green btn-sm px-2 waves-effect">
+                <span class="value">2</span>
+                <i class="far fa-thumbs-up ml-1"></i>
+              </a>
+              <a href="#" type="button" class="btn btn-outline-danger btn-sm px-2 waves-effect">
+                <i class="far fa-trash-alt ml-1"></i>
+              </a>
+              <a href="#" type="button" class="btn btn-outline-dark btn-sm px-2 waves-effect">
+                <i class="far fa-edit ml-1"></i>
+              </a>
+            </div>
+          </div>
+          <div class="card-body">
+            Пожалуй, отличное кино. Хочу сразу оговорится - я никогда не фанател от Тарантино и я никогда не считал
+            'Криминальное чтиво' главным шедевром 90х. Хотя признаю - отличный фильм. Ибо в нем просто есть на что
+            посмотреть - как минимум на интересную новаторскую постановку Квентина Тарантино и на отличную игру
+            актеров
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-6 col-xs-12 mb-4">
+        <div class="question-card card mb-4">
+          <div class="card-header blue-gradient d-flex justify-content-between">
+            <p class="pt-2 mb-0 text-white">
+              <strong><a class="h5 text-white" href="profile.html" target="_blank">Outoftouch69 </a></strong>
+              <i class="fas fa-angle-double-left"></i> 13-08-2019</p>
+            <div class="comment-btns d-flex flex-row-reverse flex-wrap">
+              <a href="#" type="button" class="btn btn-outline-danger btn-sm px-2 waves-effect">
+                <span class="value">0</span>
+                <i class="far fa-thumbs-down ml-1"></i>
+              </a>
+              <a href="#" type="button" class="btn btn-outline-light-green btn-sm px-2 waves-effect">
+                <span class="value">4</span>
+                <i class="far fa-thumbs-up ml-1"></i>
+              </a>
+              <a href="#" type="button" class="btn btn-outline-danger btn-sm px-2 waves-effect">
+                <i class="far fa-trash-alt ml-1"></i>
+              </a>
+              <a href="#" type="button" class="btn btn-outline-dark btn-sm px-2 waves-effect">
+                <i class="far fa-edit ml-1"></i>
+              </a>
+            </div>
+          </div>
+          <div class="card-body">
+            Если бы меня попросили охарактеризовать этот фильм одним словом, пожалуй, наиболее подходящее здесь
+            слово 'незабываемый'. Для меня он идеален, и забыть его не возможно. Особое внимание, как и во многих
+            фильмах 'мастера' было уделено сценарию. С интересными, живыми, лёгкими диалогами не заскучает никто, а
+            разделение фильма на три истории заставят досмотреть до конца каждого.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section> -->
+</div>

@@ -1,10 +1,11 @@
 export interface Movie {
+   mid: string;
    title: string;
    releaseDate: string;
-   country?: string;
+   country: string;
    IMDBRating?: string;
    genre?: string;
-   director?: string;
+   director: string;
    posterLink?: string;
    runtime?: string;
    budget?: string;

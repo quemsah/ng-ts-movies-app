@@ -13,6 +13,7 @@ import { AboutComponent } from "../../components/about/about.component";
 import { NotFoundComponent } from "../../components/not-found/not-found.component";
 import { AddMovieComponent } from "../../components/add-movie/add-movie.component";
 import { MovieComponent } from "../../components/movie/movie.component";
+import { MoviesListComponent } from '../../components/movies-list/movies-list.component';
 
 const routes: Routes = [
   {
@@ -58,7 +59,12 @@ const routes: Routes = [
   {
     path: "movie/:id",
     component: MovieComponent,
-    data: { title: "~~~~~~" },
+    canActivate: [AuthGuard]
+  },
+  {
+    path: "movies",
+    component: MoviesListComponent,
+    data: { title: "Movies" },
     canActivate: [AuthGuard]
   },
   { path: "", redirectTo: "/login", pathMatch: "full" },
