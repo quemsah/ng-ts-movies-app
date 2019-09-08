@@ -2,15 +2,9 @@ import { Component, OnInit } from "@angular/core";
 import { Title } from "@angular/platform-browser";
 import { Router, NavigationEnd, ActivatedRoute } from "@angular/router";
 import { filter, map } from "rxjs/operators";
-// import * as $ from "jquery";
-// import "../assets/js/mdb.min.js";
-
-// import * from "../../node_modules/bootstrap/dist/js/bootstrap.min.js"
-import { ThemeService } from './shared/theme/theme.service';
+import { ThemeService } from "./shared/theme/theme.service";
 
 declare var $: any;
-declare const enableDarkMode: any;
-declare const disableDarkMode: any;
 
 @Component({
   selector: "app-root",
@@ -49,9 +43,5 @@ export class AppComponent implements OnInit {
         })
       )
       .subscribe((ttl: string) => this.titleService.setTitle(ttl));
-  }
-
-  checkTheme() {
-    console.log('Checked!');
   }
 }

@@ -1,7 +1,6 @@
 import { Injectable } from "@angular/core";
 
 declare const enableDarkMode: any;
-declare const disableDarkMode: any;
 
 @Injectable({
   providedIn: "root"
@@ -14,9 +13,8 @@ export class ThemeService {
   checkTheme() {
     console.log("Checking! Dark Mode " + this.isDarkMode);
     if (this.isDarkMode === true) {
-      console.log('подправляем');
+      console.log("Подправляем?");
     } else {
-      
     }
   }
 
