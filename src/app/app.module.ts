@@ -32,6 +32,7 @@ import { SidenavComponent } from "./components/sidenav/sidenav.component";
 import { NavbarComponent } from "./components/navbar/navbar.component";
 import { MovieComponent } from "./components/movies/movie/movie.component";
 import { MoviesListComponent } from "./components/movies/movies-list/movies-list.component";
+import { ThemeService } from './shared/theme/theme.service';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,7 @@ import { MoviesListComponent } from "./components/movies/movies-list/movies-list
     ReactiveFormsModule,
     MatSnackBarModule
   ],
-  providers: [AuthService, AngularFireStorage, TMDBService, Title],
+  providers: [AuthService, AngularFireStorage, TMDBService, Title, ThemeService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

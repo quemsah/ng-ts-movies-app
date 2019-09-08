@@ -48,7 +48,8 @@ const routes: Routes = [
   {
     path: "about",
     component: AboutComponent,
-    data: { title: "About" }
+    data: { title: "About" },
+    canActivate: [AuthGuard]
   },
   {
     path: "add-movie",
@@ -71,7 +72,8 @@ const routes: Routes = [
   {
     path: "**",
     component: NotFoundComponent,
-    data: { title: "Page not found" }
+    data: { title: "Page not found" },
+    canActivate: [AuthGuard]
   }
 ];
 
