@@ -1,5 +1,5 @@
 import { Component, OnInit, AfterViewInit, NgZone } from "@angular/core";
-import { ThemeService } from "../../../shared/theme/theme.service";
+import { ThemeService } from "../../../shared/services/theme/theme.service";
 import { AuthService } from "../../../shared/services/auth/auth.service";
 import { Router } from "@angular/router";
 import { NgForm } from "@angular/forms";

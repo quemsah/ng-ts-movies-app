@@ -1,8 +1,8 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, AfterViewInit, ElementRef } from "@angular/core";
 import { Title } from "@angular/platform-browser";
 import { Router, NavigationEnd, ActivatedRoute } from "@angular/router";
 import { filter, map } from "rxjs/operators";
-import { ThemeService } from "./shared/theme/theme.service";
+import { ThemeService } from './shared/services/theme/theme.service';
 
 declare var $: any;
 
@@ -11,27 +11,18 @@ declare var $: any;
   templateUrl: "./app.component.html",
   styleUrls: ["./app.component.css"]
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterViewInit {
   constructor(
     private titleService: Title,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private themeService: ThemeService
+    private themeService: ThemeService,
+    private elRef:ElementRef
   ) {}
 
   ngOnInit() {
-    // иначе даркмод начнется до прорисовки всего
-    // и будет половина даркмод, половина нет
-    $(document).ready(() => {
-      // включен по умолчанию
-      // enableDarkMode();
-      $("#dark-mode").click(() => this.themeService.toggleDarkMode());
-      // боковое меню
-      $(".button-collapse").sideNav();
-    });
     // Смена заголовка в зависимости от роута
     // https://blog.bitsrc.io/dynamic-page-titles-in-angular-98ce20b5c334
-    const appTitle = this.titleService.getTitle();
     this.router.events
       .pipe(
         filter(event => event instanceof NavigationEnd),
@@ -39,9 +30,19 @@ export class AppComponent implements OnInit {
           const child = this.activatedRoute.firstChild;
           return child.snapshot.data.title
             ? child.snapshot.data.title
-            : appTitle;
+            : this.titleService.getTitle();
         })
       )
       .subscribe((ttl: string) => this.titleService.setTitle(ttl));
+  }
+  ngAfterViewInit() {
+    // Dark mode включен по умолчанию
+    this.themeService.toggleDarkMode();
+    // $("#dark-mode").click(() => this.themeService.toggleDarkMode());
+    document.getElementById("dark-mode").addEventListener("click", () => {
+      this.themeService.toggleDarkMode();
+    });
+    // инициализация боковое меню
+    $(".button-collapse").sideNav({'closeOnClick': true});
   }
 }

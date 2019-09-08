@@ -3,7 +3,7 @@ import { NgForm } from "@angular/forms";
 import { TMDBService } from "../../../shared/services/tmdb/TMDB.service";
 import { AlertService } from "../../../shared/services/alert/alert.service";
 import { MovieService } from "../../../shared/services/movie/movie.service";
-import { ThemeService } from "../../../shared/theme/theme.service";
+import { ThemeService } from "../../../shared/services/theme/theme.service";
 
 @Component({
   selector: "app-add-movie",
@@ -32,7 +32,7 @@ export class AddMovieComponent implements OnInit, AfterViewInit {
       data.movie_results.length > 0
         ? this.tmdbService
             .getMovieDetailsbyTMDBID(data.movie_results[0].id)
-            .subscribe(data => {
+            .subscribe((data) => {
               this.foundMovieData = data;
               console.log(data);
             })

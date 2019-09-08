@@ -17,6 +17,7 @@ import { environment } from "../environments/environment";
 // Сервисы
 import { AuthService } from "./shared/services/auth/auth.service";
 import { TMDBService } from "./shared/services/tmdb/TMDB.service";
+import { ThemeService } from './shared/services/theme/theme.service';
 // Компоненты
 import { AppComponent } from "./app.component";
 import { LoginComponent } from "./components/users/login/login.component";
@@ -32,7 +33,6 @@ import { SidenavComponent } from "./components/sidenav/sidenav.component";
 import { NavbarComponent } from "./components/navbar/navbar.component";
 import { MovieComponent } from "./components/movies/movie/movie.component";
 import { MoviesListComponent } from "./components/movies/movies-list/movies-list.component";
-import { ThemeService } from './shared/theme/theme.service';
 
 @NgModule({
   declarations: [

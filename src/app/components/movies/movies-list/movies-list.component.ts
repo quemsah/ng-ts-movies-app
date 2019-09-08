@@ -1,6 +1,6 @@
 import { Movie } from "../../../shared/models/movie";
 import { Component, OnInit, AfterViewInit } from "@angular/core";
-import { ThemeService } from "../../../shared/theme/theme.service";
+import { ThemeService } from "../../../shared/services/theme/theme.service";
 import { MovieService } from "../../../shared/services/movie/movie.service";
 
 @Component({
@@ -8,7 +8,7 @@ import { MovieService } from "../../../shared/services/movie/movie.service";
   templateUrl: "./movies-list.component.html",
   styleUrls: ["./movies-list.component.css"]
 })
-export class MoviesListComponent implements OnInit,AfterViewInit {
+export class MoviesListComponent implements OnInit, AfterViewInit {
   movies: Movie[];
   constructor(
     private movieService: MovieService,

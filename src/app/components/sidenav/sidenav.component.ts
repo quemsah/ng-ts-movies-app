@@ -10,14 +10,13 @@ declare var $: any;
 export class SidenavComponent implements OnInit {
   constructor() {}
 
-  ngOnInit() {$("div[id^=drag-target]").remove();}
-
+  ngOnInit() {
+  }
+  // https://github.com/Dogfalo/materialize/issues/1676
+  // https://stackoverflow.com/questions/32591402/materialize-sidenav-produces-multiple-sidenav-overlay
   sidenavClose() {
     $(".button-collapse").sideNav("hide");
-    // https://github.com/Dogfalo/materialize/issues/1676
-    $(".button-collapse").off('click').sideNav();
-    // https://stackoverflow.com/questions/32591402/materialize-sidenav-produces-multiple-sidenav-overlay
+    $(".button-collapse").off("click").sideNav();
     $("div[id^=sidenav-overlay]").remove();
-    $("div[id^=drag-target]").remove();
   }
 }

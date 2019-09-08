@@ -1,6 +1,6 @@
 import { Movie } from "../../../shared/models/movie";
 import { Component, OnInit, AfterViewInit } from "@angular/core";
-import { ThemeService } from "../../../shared/theme/theme.service";
+import { ThemeService } from "../../../shared/services/theme/theme.service";
 import { ActivatedRoute } from "@angular/router";
 import { MovieService } from "../../../shared/services/movie/movie.service";
 import { Title } from "@angular/platform-browser";
@@ -10,7 +10,7 @@ import { Title } from "@angular/platform-browser";
   templateUrl: "./movie.component.html",
   styleUrls: ["./movie.component.css"]
 })
-export class MovieComponent implements OnInit,AfterViewInit {
+export class MovieComponent implements OnInit, AfterViewInit {
   movieData: Movie;
 
   constructor(

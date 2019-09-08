@@ -7,12 +7,12 @@ import {
 } from "@angular/router";
 import { AuthService } from "../services/auth/auth.service";
 import { Observable } from "rxjs";
-import { ThemeService } from '../theme/theme.service';
+import { ThemeService } from "../services/theme/theme.service";
 
 @Injectable({
   providedIn: "root"
 })
-export class SecureInnerPagesGuard implements CanActivate {
+export class InnerPagesGuard implements CanActivate {
   constructor(
     public themeService: ThemeService,
     public authService: AuthService,
@@ -25,7 +25,7 @@ export class SecureInnerPagesGuard implements CanActivate {
   ): Observable<boolean> | Promise<boolean> | boolean {
     this.themeService.forceDisableDarkModeBeforeRoute();
     if (this.authService.isLoggedIn) {
-      //window.alert("You are not allowed to access this URL!");
+      // window.alert("You are not allowed to access this URL!");
       this.router.navigate(["profile"]);
     }
     return true;

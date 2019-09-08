@@ -17,19 +17,19 @@ export class ThemeService {
     if (this.isDarkMode === true) {
       this.toggleDarkMode();
       this.wasRouted = true;
-      console.log("Dark Mode forced to" + this.isDarkMode);
-      console.log("wasRouted = " + this.wasRouted);
+      // console.log("Dark Mode forced to " + this.isDarkMode);
+      // console.log("wasRouted = " + this.wasRouted);
     }
   }
   // если был переход (wasRouted = true), то включаем даркмод обратно
   // и не забываем обнулить wasRouted
   checkDarkMode() {
-      if (this.wasRouted === true) {
-        this.toggleDarkMode();
-        console.log("Dark Mode " + this.isDarkMode);
-        this.wasRouted = false;
-        console.log("wasRouted = " + this.wasRouted);
-      }
+    if (this.wasRouted === true) {
+      this.toggleDarkMode();
+      this.wasRouted = false;
+      // console.log("Dark Mode = " + this.isDarkMode);
+      // console.log("wasRouted = " + this.wasRouted);
+    }
   }
   // вкл/выкл
   toggleDarkMode() {
@@ -40,6 +40,6 @@ export class ThemeService {
       this.isDarkMode = false;
       enableDarkMode();
     }
-    console.log("Dark Mode " + this.isDarkMode);
+    // console.log("Dark Mode = " + this.isDarkMode);
   }
 }
