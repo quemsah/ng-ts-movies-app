@@ -4,16 +4,16 @@ import { Routes, RouterModule } from "@angular/router";
 import { AuthGuard } from "../../shared/guard/auth.guard";
 import { SecureInnerPagesGuard } from "../../shared/guard/secure-inner-pages.guard";
 // Компоненты
-import { LoginComponent } from "../../components/login/login.component";
-import { RegisterComponent } from "../../components/register/register.component";
-import { ProfileComponent } from "../../components/profile/profile.component";
-import { ForgotPasswordComponent } from "../../components/forgot-password/forgot-password.component";
-import { VerifyEmailComponent } from "../../components/verify-email/verify-email.component";
+import { LoginComponent } from "../../components/users/login/login.component";
+import { RegisterComponent } from "../../components/users/register/register.component";
+import { ProfileComponent } from "../../components/users/profile/profile.component";
+import { ForgotPasswordComponent } from "../../components/users/forgot-password/forgot-password.component";
+import { VerifyEmailComponent } from "../../components/users/verify-email/verify-email.component";
 import { AboutComponent } from "../../components/about/about.component";
 import { NotFoundComponent } from "../../components/not-found/not-found.component";
-import { AddMovieComponent } from "../../components/add-movie/add-movie.component";
-import { MovieComponent } from "../../components/movie/movie.component";
-import { MoviesListComponent } from '../../components/movies-list/movies-list.component';
+import { AddMovieComponent } from "../../components/movies/add-movie/add-movie.component";
+import { MovieComponent } from "../../components/movies/movie/movie.component";
+import { MoviesListComponent } from '../../components/movies/movies-list/movies-list.component';
 
 const routes: Routes = [
   {

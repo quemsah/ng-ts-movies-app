@@ -1,7 +1,7 @@
-import { Movie } from "./movie";
+import { Movie } from "../../models/movie";
 import { Injectable } from "@angular/core";
 import { AngularFirestore } from "@angular/fire/firestore";
-import { AlertService } from "./alert.service";
+import { AlertService } from "../alert/alert.service";
 import { Observable } from "rxjs";
 
 @Injectable({

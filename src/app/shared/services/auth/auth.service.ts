@@ -1,5 +1,5 @@
 import { Injectable, NgZone } from "@angular/core";
-import { User } from "../services/user";
+import { User } from "../../models/user";
 import { auth } from "firebase/app";
 import * as firebase from "firebase";
 import { AngularFireAuth } from "@angular/fire/auth";
@@ -10,7 +10,7 @@ import {
 import { AngularFireStorage } from "@angular/fire/storage";
 import { Router } from "@angular/router";
 import { finalize } from "rxjs/operators";
-import { AlertService } from "./alert.service";
+import { AlertService } from "../alert/alert.service";
 
 @Injectable({
   providedIn: "root"

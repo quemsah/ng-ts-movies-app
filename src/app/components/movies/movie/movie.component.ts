@@ -1,7 +1,7 @@
-import { Movie } from "./../../shared/services/movie";
+import { Movie } from "../../../shared/models/movie";
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
-import { MovieService } from "../../shared/services/movie.service";
+import { MovieService } from "../../../shared/services/movie/movie.service";
 import { Title } from '@angular/platform-browser';
 
 @Component({
@@ -20,8 +20,6 @@ export class MovieComponent implements OnInit {
 
   ngOnInit(): void {
     this.getMovie();
-    console.log(this.movieData.title)
-    this.titleService.setTitle(this.movieData.title);
   }
 
   getMovie(): void {

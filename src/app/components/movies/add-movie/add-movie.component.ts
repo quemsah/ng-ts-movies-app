@@ -1,8 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { NgForm } from "@angular/forms";
-import { TMDBService } from "../../shared/services/TMDB.service";
-import { AlertService } from "src/app/shared/services/alert.service";
-import { MovieService } from "../../shared/services/movie.service";
+import { TMDBService } from "../../../shared/services/tmdb/TMDB.service";
+import { AlertService } from "../../../shared/services/alert/alert.service";
+import { MovieService } from "../../../shared/services/movie/movie.service";
 
 @Component({
   selector: "app-add-movie",

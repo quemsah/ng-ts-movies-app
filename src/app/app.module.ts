@@ -1,5 +1,6 @@
 import { BrowserModule, Title } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
+import { HttpClientModule } from "@angular/common/http";
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 // MatSnackBar (замена window.alert)
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
@@ -14,24 +15,23 @@ import { AngularFireStorage } from "@angular/fire/storage";
 // firebaseConfig
 import { environment } from "../environments/environment";
 // Сервисы
-import { AuthService } from "./shared/services/auth.service";
+import { AuthService } from "./shared/services/auth/auth.service";
+import { TMDBService } from "./shared/services/tmdb/TMDB.service";
 // Компоненты
 import { AppComponent } from "./app.component";
-import { LoginComponent } from "./components/login/login.component";
-import { RegisterComponent } from "./components/register/register.component";
-import { ProfileComponent } from "./components/profile/profile.component";
-import { ForgotPasswordComponent } from "./components/forgot-password/forgot-password.component";
-import { VerifyEmailComponent } from "./components/verify-email/verify-email.component";
+import { LoginComponent } from "./components/users/login/login.component";
+import { RegisterComponent } from "./components/users/register/register.component";
+import { ProfileComponent } from "./components/users/profile/profile.component";
+import { ForgotPasswordComponent } from "./components/users/forgot-password/forgot-password.component";
+import { VerifyEmailComponent } from "./components/users/verify-email/verify-email.component";
 import { FooterComponent } from "./components/footer/footer.component";
 import { AboutComponent } from "./components/about/about.component";
-import { AddMovieComponent } from "./components/add-movie/add-movie.component";
+import { AddMovieComponent } from "./components/movies/add-movie/add-movie.component";
 import { NotFoundComponent } from "./components/not-found/not-found.component";
 import { SidenavComponent } from "./components/sidenav/sidenav.component";
 import { NavbarComponent } from "./components/navbar/navbar.component";
-import { TMDBService } from "./shared/services/TMDB.service";
-import { HttpClientModule } from "@angular/common/http";
-import { MovieComponent } from "./components/movie/movie.component";
-import { MoviesListComponent } from "./components/movies-list/movies-list.component";
+import { MovieComponent } from "./components/movies/movie/movie.component";
+import { MoviesListComponent } from "./components/movies/movies-list/movies-list.component";
 
 @NgModule({
   declarations: [
