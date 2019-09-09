@@ -1,3 +1,4 @@
+import { Movie } from "./../../../shared/models/movie";
 import { Component, OnInit, AfterViewInit } from "@angular/core";
 import { NgForm } from "@angular/forms";
 import { TMDBService } from "../../../shared/services/tmdb/TMDB.service";
@@ -12,6 +13,15 @@ import { ThemeService } from "../../../shared/services/theme/theme.service";
 })
 export class AddMovieComponent implements OnInit, AfterViewInit {
   foundMovieData: any;
+  genres = [
+    { name: "Drama", prefix: "g", selected: false, id: 1 },
+    { name: "Sci-fi", prefix: "g", selected: true, id: 2 },
+    { name: "Comedy", prefix: "g", selected: true, id: 3 }
+  ];
+  generateMovieID = (date, moviename) =>
+    date.substr(date.length - 4) +
+    "-" +
+    moviename.replace(/\s+/g, "-").toLowerCase();
   constructor(
     public tmdbService: TMDBService,
     public alertService: AlertService,
@@ -32,7 +42,7 @@ export class AddMovieComponent implements OnInit, AfterViewInit {
       data.movie_results.length > 0
         ? this.tmdbService
             .getMovieDetailsbyTMDBID(data.movie_results[0].id)
-            .subscribe((data) => {
+            .subscribe(data => {
               this.foundMovieData = data;
               console.log(data);
             })
@@ -40,8 +50,60 @@ export class AddMovieComponent implements OnInit, AfterViewInit {
     });
   }
 
+  filterItems(arr, query) {
+    return arr.filter(function(el) {
+      return el.toLowerCase().indexOf(query.toLowerCase()) > -1;
+    });
+  }
+
   onAddMovieSubmit(form: NgForm) {
-    console.log(form.value);
-    this.movieService.addMovie(form.value);
+    let obj = form.value;
+    let arr = [];
+
+    for (var propt in obj) {
+      if (propt.startsWith("g") == true) {
+        if (obj[propt] == true) {
+          arr.push(propt.substring(1));
+        }
+      }
+    }
+    const movieID = this.generateMovieID(obj.Date, obj.MovieName);
+    const movieData: Movie = {
+      mid: movieID,
+      title: obj.MovieName,
+      releaseDate: obj.Date,
+      country: obj.Country,
+      IMDBRating: obj.IMDBRating,
+      genre: obj.Genre,
+      genres: arr,
+      director: obj.Director,
+      posterLink: obj.Poster,
+      runtime: obj.Runtime,
+      budget: obj.Budget,
+      revenue: obj.Revenue,
+      overview: obj.Overview
+    };
+
+    console.log(arr);
+    console.log(movieData);
+
+    // form.value.forEach(el => {
+    //   const firstLetter = el.length ? el[0] : '';
+    //   console.log(firstLetter);
+
+    // letters = letters.map(letter => {
+    //   letter.disabled = letter.text.toLowerCase() !== firstLetter.toLowerCase();
+
+    //   return letter;
+    // });
+    // });
+
+    //let arr = this.filterItems(Array.from(form.value),'');
+
+    //console.log(arr);
+    // const checkedOptions = this.options.filter(x => x.checked);
+    // this.selectedValues = checkedOptions.map(x => x.value);
+    // this.toggle.emit(checkedOptions.map(x => x.value));
+    this.movieService.addMovie(movieData);
   }
 }

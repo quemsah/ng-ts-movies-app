@@ -5,6 +5,7 @@ export interface Movie {
    country: string;
    IMDBRating?: string;
    genre?: string;
+   genres?: string[];
    director: string;
    posterLink?: string;
    runtime?: string;

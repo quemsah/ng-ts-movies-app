@@ -1,3 +1,7 @@
 .valid-error {
   position: absolute;
 }
+
+.genres {
+  text-align: left !important;
+}

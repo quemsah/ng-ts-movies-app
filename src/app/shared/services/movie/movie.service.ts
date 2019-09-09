@@ -17,25 +17,26 @@ export class MovieService {
     private alertService: AlertService
   ) {}
 
-  addMovie(formData) {
-    const movieID = this.generateMovieID(formData.Date, formData.MovieName);
-    const movieData: Movie = {
-      mid: movieID,
-      title: formData.MovieName,
-      releaseDate: formData.Date,
-      country: formData.Country,
-      IMDBRating: formData.IMDBRating,
-      genre: formData.Genre,
-      director: formData.Director,
-      posterLink: formData.Poster,
-      runtime: formData.Runtime,
-      budget: formData.Budget,
-      revenue: formData.Revenue,
-      overview: formData.Overview
-    };
+  addMovie(movieData) {
+    // const movieID = this.generateMovieID(formData.Date, formData.MovieName);
+    // const movieData: Movie = {
+    //   mid: movieID,
+    //   title: formData.MovieName,
+    //   releaseDate: formData.Date,
+    //   country: formData.Country,
+    //   IMDBRating: formData.IMDBRating,
+    //   genre: formData.Genre,
+    //   director: formData.Director,
+    //   posterLink: formData.Poster,
+    //   runtime: formData.Runtime,
+    //   budget: formData.Budget,
+    //   revenue: formData.Revenue,
+    //   overview: formData.Overview
+    // };
+    console.log(movieData)
     this.afs
       .collection(`movies/`)
-      .doc(movieID)
+      .doc(movieData.mid)
       .set(movieData)
       .then(smth =>
         this.alertService.openSuccessAlert("Movie successfully added", 1)

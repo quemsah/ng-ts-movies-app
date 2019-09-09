@@ -139,6 +139,70 @@
                 </div>
               </div>
             </div> -->
+
+            <!-- <div *ngFor='let g of genres; let i=index'>
+              <input type=”checkbox” [formControl]='skill' /> {{user.skills[i].name}}
+            </div> -->
+            <!-- <input type="text" class="form-control form-control-sm" ngModel name="Budget"> -->
+            <div class="row">
+              <div class="col-md-12">
+                <div class="genres md-form form-sm mb-0">
+                  <div class="form-check form-check-inline" *ngFor='let g of genres; let i=index'>
+                    <input type="checkbox" class="form-check-input" id={{g.id}} [(ngModel)]=g.selected
+                      name={{g.prefix+g.name}}>
+                    <label class="form-check-label" for={{g.id}}>{{g.name}}</label>
+                  </div>
+                  <!-- <div class="form-check form-check-inline">
+                    <input type="checkbox" class="form-check-input" id="2">
+                    <label class="form-check-label" for="2">Animation</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input type="checkbox" class="form-check-input" id="3">
+                    <label class="form-check-label" for="3">Comedy</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input type="checkbox" class="form-check-input" id="4">
+                    <label class="form-check-label" for="4">Crime</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input type="checkbox" class="form-check-input" id="5">
+                    <label class="form-check-label" for="5">Documentary</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input type="checkbox" class="form-check-input" id="6">
+                    <label class="form-check-label" for="6">Drama</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input type="checkbox" class="form-check-input" id="7">
+                    <label class="form-check-label" for="7">Fantasy</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input type="checkbox" class="form-check-input" id="8">
+                    <label class="form-check-label" for="8">History</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input type="checkbox" class="form-check-input" id="9">
+                    <label class="form-check-label" for="9">Horror</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input type="checkbox" class="form-check-input" id="10">
+                    <label class="form-check-label" for="10">Music</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input type="checkbox" class="form-check-input" id="11">
+                    <label class="form-check-label" for="11">Romance</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input type="checkbox" class="form-check-input" id="12">
+                    <label class="form-check-label" for="12">Sci-Fi</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input type="checkbox" class="form-check-input" id="13">
+                    <label class="form-check-label" for="13">Thriller</label>
+                  </div> -->
+                </div>
+              </div>
+            </div>
             <div class="row">
               <div class="col-md-12">
                 <div class="md-form mb-0 text-dark">
