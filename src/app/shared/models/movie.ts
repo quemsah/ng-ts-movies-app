@@ -1,10 +1,10 @@
 export interface Movie {
    mid: string;
+   dateAdded: number;
    title: string;
    releaseDate: string;
    country: string;
    IMDBRating?: string;
-   genre?: string;
    genres?: string[];
    director: string;
    posterLink?: string;

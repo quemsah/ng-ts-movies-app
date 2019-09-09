@@ -74,19 +74,13 @@
             <div class="row">
               <div class="col-md-4">
                 <div class="md-form form-sm mb-0">
-                  <input type="text" class="form-control form-control-sm" ngModel name="Genre">
-                  <label class="">Genre</label>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="md-form form-sm mb-0">
                   <input type="text" class="form-control form-control-sm" ngModel name="Director" required
                     #directorInput="ngModel">
                   <span class="valid-error" *ngIf="directorInput.hasError('required')">Field must not be empty</span>
                   <label class="">Director</label>
                 </div>
               </div>
-              <div class="col-md-4">
+              <div class="col-md-8">
                 <div class="md-form form-sm mb-0">
                   <input type="text" class="form-control form-control-sm" ngModel name="Poster">
                   <label class="">Link to a poster</label>
@@ -113,37 +107,6 @@
                 </div>
               </div>
             </div>
-            <!-- <div class="row">
-              <div class="col-md-4">
-                <div class="md-form form-sm mb-0">
-                  <select class="browser-default custom-select select-rating">
-                    <option class="select-option" selected>Your Rating</option>
-                    <option class="select-option" value="1">1</option>
-                    <option class="select-option" value="2">2</option>
-                    <option class="select-option" value="3">3</option>
-                    <option class="select-option" value="4">4</option>
-                    <option class="select-option" value="5">5</option>
-                  </select>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="md-form form-sm mb-0 d-flex">
-                  <input type="checkbox" class="form-check-input" id="Favourite" checked="checked">
-                  <label class="form-check-label" for="Favourite">Favourite</label>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="md-form form-sm mb-0 d-flex">
-                  <input type="checkbox" class="form-check-input" id="wl">
-                  <label class="form-check-label" for="wl">Watch later</label>
-                </div>
-              </div>
-            </div> -->
-
-            <!-- <div *ngFor='let g of genres; let i=index'>
-              <input type=”checkbox” [formControl]='skill' /> {{user.skills[i].name}}
-            </div> -->
-            <!-- <input type="text" class="form-control form-control-sm" ngModel name="Budget"> -->
             <div class="row">
               <div class="col-md-12">
                 <div class="genres md-form form-sm mb-0">
@@ -152,54 +115,6 @@
                       name={{g.prefix+g.name}}>
                     <label class="form-check-label" for={{g.id}}>{{g.name}}</label>
                   </div>
-                  <!-- <div class="form-check form-check-inline">
-                    <input type="checkbox" class="form-check-input" id="2">
-                    <label class="form-check-label" for="2">Animation</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input type="checkbox" class="form-check-input" id="3">
-                    <label class="form-check-label" for="3">Comedy</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input type="checkbox" class="form-check-input" id="4">
-                    <label class="form-check-label" for="4">Crime</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input type="checkbox" class="form-check-input" id="5">
-                    <label class="form-check-label" for="5">Documentary</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input type="checkbox" class="form-check-input" id="6">
-                    <label class="form-check-label" for="6">Drama</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input type="checkbox" class="form-check-input" id="7">
-                    <label class="form-check-label" for="7">Fantasy</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input type="checkbox" class="form-check-input" id="8">
-                    <label class="form-check-label" for="8">History</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input type="checkbox" class="form-check-input" id="9">
-                    <label class="form-check-label" for="9">Horror</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input type="checkbox" class="form-check-input" id="10">
-                    <label class="form-check-label" for="10">Music</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input type="checkbox" class="form-check-input" id="11">
-                    <label class="form-check-label" for="11">Romance</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input type="checkbox" class="form-check-input" id="12">
-                    <label class="form-check-label" for="12">Sci-Fi</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input type="checkbox" class="form-check-input" id="13">
-                    <label class="form-check-label" for="13">Thriller</label>
-                  </div> -->
                 </div>
               </div>
             </div>
@@ -217,7 +132,6 @@
               <div class="col-md-12 text-center my-4">
                 <span class="waves-input-wrapper waves-effect waves-light"><input type="submit" value="Add Movie"
                     class="btn btn-info btn-rounded blue-gradient" [disabled]="addNewMovie.invalid"></span>
-                <!-- [disabled]="f.invalid" -->
               </div>
             </div>
           </form>

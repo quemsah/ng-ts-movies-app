@@ -14,9 +14,19 @@ import { ThemeService } from "../../../shared/services/theme/theme.service";
 export class AddMovieComponent implements OnInit, AfterViewInit {
   foundMovieData: any;
   genres = [
-    { name: "Drama", prefix: "g", selected: false, id: 1 },
-    { name: "Sci-fi", prefix: "g", selected: true, id: 2 },
-    { name: "Comedy", prefix: "g", selected: true, id: 3 }
+    { name: "Adventure", prefix: "g", selected: false, id: 1 },
+    { name: "Animation", prefix: "g", selected: false, id: 2 },
+    { name: "Comedy", prefix: "g", selected: false, id: 3 },
+    { name: "Crime", prefix: "g", selected: false, id: 4 },
+    { name: "Documentary", prefix: "g", selected: false, id: 5 },
+    { name: "Drama", prefix: "g", selected: false, id: 6 },
+    { name: "Fantasy", prefix: "g", selected: false, id: 7 },
+    { name: "History", prefix: "g", selected: false, id: 8 },
+    { name: "Horror", prefix: "g", selected: false, id: 9 },
+    { name: "Music", prefix: "g", selected: false, id: 10 },
+    { name: "Romance", prefix: "g", selected: false, id: 11 },
+    { name: "Sci-Fi", prefix: "g", selected: false, id: 12 },
+    { name: "Thriller", prefix: "g", selected: false, id: 13 }
   ];
   generateMovieID = (date, moviename) =>
     date.substr(date.length - 4) +
@@ -30,6 +40,7 @@ export class AddMovieComponent implements OnInit, AfterViewInit {
   ) {}
 
   ngOnInit() {}
+
   ngAfterViewInit() {
     this.themeService.checkDarkMode();
   }
@@ -50,60 +61,30 @@ export class AddMovieComponent implements OnInit, AfterViewInit {
     });
   }
 
-  filterItems(arr, query) {
-    return arr.filter(function(el) {
-      return el.toLowerCase().indexOf(query.toLowerCase()) > -1;
-    });
-  }
-
   onAddMovieSubmit(form: NgForm) {
-    let obj = form.value;
-    let arr = [];
-
-    for (var propt in obj) {
-      if (propt.startsWith("g") == true) {
-        if (obj[propt] == true) {
-          arr.push(propt.substring(1));
-        }
-      }
+    const genresArray = [];
+    // жанры в массив
+    // tslint:disable-next-line: forin
+    for (let propt in form.value) {
+      form.value[propt] === true && propt.startsWith("g") === true
+        ? genresArray.push(propt.substring(1))
+        : null;
     }
-    const movieID = this.generateMovieID(obj.Date, obj.MovieName);
     const movieData: Movie = {
-      mid: movieID,
-      title: obj.MovieName,
-      releaseDate: obj.Date,
-      country: obj.Country,
-      IMDBRating: obj.IMDBRating,
-      genre: obj.Genre,
-      genres: arr,
-      director: obj.Director,
-      posterLink: obj.Poster,
-      runtime: obj.Runtime,
-      budget: obj.Budget,
-      revenue: obj.Revenue,
-      overview: obj.Overview
+      mid: this.generateMovieID(form.value.Date, form.value.MovieName),
+      dateAdded: Math.round(+new Date()/1000),
+      title: form.value.MovieName,
+      releaseDate: form.value.Date,
+      country: form.value.Country,
+      IMDBRating: form.value.IMDBRating,
+      genres: genresArray,
+      director: form.value.Director,
+      posterLink: form.value.Poster,
+      runtime: form.value.Runtime,
+      budget: form.value.Budget,
+      revenue: form.value.Revenue,
+      overview: form.value.Overview,
     };
-
-    console.log(arr);
-    console.log(movieData);
-
-    // form.value.forEach(el => {
-    //   const firstLetter = el.length ? el[0] : '';
-    //   console.log(firstLetter);
-
-    // letters = letters.map(letter => {
-    //   letter.disabled = letter.text.toLowerCase() !== firstLetter.toLowerCase();
-
-    //   return letter;
-    // });
-    // });
-
-    //let arr = this.filterItems(Array.from(form.value),'');
-
-    //console.log(arr);
-    // const checkedOptions = this.options.filter(x => x.checked);
-    // this.selectedValues = checkedOptions.map(x => x.value);
-    // this.toggle.emit(checkedOptions.map(x => x.value));
     this.movieService.addMovie(movieData);
   }
 }

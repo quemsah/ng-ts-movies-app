@@ -8,32 +8,13 @@ import { Observable } from "rxjs";
   providedIn: "root"
 })
 export class MovieService {
-  generateMovieID = (date, moviename) =>
-    date.substr(date.length - 4) +
-    "-" +
-    moviename.replace(/\s+/g, "-").toLowerCase();
   constructor(
     public afs: AngularFirestore,
     private alertService: AlertService
   ) {}
 
-  addMovie(movieData) {
-    // const movieID = this.generateMovieID(formData.Date, formData.MovieName);
-    // const movieData: Movie = {
-    //   mid: movieID,
-    //   title: formData.MovieName,
-    //   releaseDate: formData.Date,
-    //   country: formData.Country,
-    //   IMDBRating: formData.IMDBRating,
-    //   genre: formData.Genre,
-    //   director: formData.Director,
-    //   posterLink: formData.Poster,
-    //   runtime: formData.Runtime,
-    //   budget: formData.Budget,
-    //   revenue: formData.Revenue,
-    //   overview: formData.Overview
-    // };
-    console.log(movieData)
+  addMovie(movieData: Movie) {
+    console.log(movieData);
     this.afs
       .collection(`movies/`)
       .doc(movieData.mid)
@@ -49,6 +30,8 @@ export class MovieService {
   }
 
   fetchMovies(): Observable<any> {
-    return this.afs.collection("movies").valueChanges();
+    return this.afs
+      .collection("movies", ref => ref.orderBy("dateAdded"))
+      .valueChanges();
   }
 }

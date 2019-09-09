@@ -11,9 +11,9 @@
             <h5 class="h5 light-blue-text my-2"> {{movie.releaseDate}}, {{movie.country}}</h5>
             <h5 class="h5 my-3 p-0">{{movie.director}}</h5>
             <p *ngIf="movie.runtime" class=" my-2 p-0">Runtime: {{movie.runtime}}</p>
-            <ul *ngIf="movie.genre" class="list-unstyled d-flex justify-content-start my-2 p-0">
-              <li class="">
-                <div class="chip waves-effect waves-effect my-1">{{movie.genre}}</div>
+            <ul *ngIf="movie.genres" class="list-unstyled d-flex justify-content-start my-2 p-0">
+              <li *ngFor="let genre of movie.genres" class="">
+                <div class="chip waves-effect waves-effect my-1">{{genre}}</div>
               </li>
             </ul>
             <h6 *ngIf="movie.IMDBRating" class="h6 yellow-text my-2 p-0"><i class="far fa-star"> </i> {{movie.IMDBRating}} IMDB</h6>
