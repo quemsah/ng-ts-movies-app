@@ -18,7 +18,7 @@
       </div>
     </div>
     <!-- <span>{{this.foundMovieData | json}}</span>
-    <span>{{this.foundMovieCrew | json}}</span> -->
+      <span>{{this.foundMovieCrew | json}}</span> -->
     <div class="col-lg-8 mb-4">
       <div class="card card-cascade narrower">
         <div class="view view-cascade gradient-card-header blue-gradient">
@@ -29,14 +29,14 @@
             <div class="row">
               <div class="col-md-4 ">
                 <div class="md-form form-sm mb-0">
-                  <input type="text" class="form-control form-control-sm" [(ngModel)]=foundMovieData.imdb_id name="ImdbId"
+                  <input type="text" class="form-control form-control-sm" [(ngModel)]=foundMovieData.id name="ImdbId"
                     disabled>
                   <label class="">IMDB ID</label>
                 </div>
               </div>
               <div class="col-md-4">
                 <div class="md-form form-sm mb-0">
-                  <input type="text" class="form-control form-control-sm" [(ngModel)]=foundMovieData.id
+                  <input type="text" class="form-control form-control-sm" [(ngModel)]=foundMovieData.imdb_id
                     name="TmdbId" disabled>
                   <label class="">TMDB ID</label>
                 </div>
@@ -53,15 +53,16 @@
             <div class="row">
               <div class="col-md-4 ">
                 <div class="md-form form-sm mb-0">
-                  <input type="text" class="form-control form-control-sm" [(ngModel)]=foundMovieData.release_date name="Date" required
-                    #dateInput="ngModel">
+                  <input type="text" class="form-control form-control-sm" [(ngModel)]=foundMovieData.release_date
+                    name="Date" required #dateInput="ngModel">
                   <span class="valid-error" *ngIf="dateInput.hasError('required')">Field must not be empty</span>
                   <label class="">Date</label>
                 </div>
               </div>
               <div class="col-md-4">
                 <div class="md-form form-sm mb-0">
-                  <input type="text" class="form-control form-control-sm" [(ngModel)]=foundMovieData.production_countries[0].name  name="Country" required
+                  <input type="text" class="form-control form-control-sm"
+                    [(ngModel)]=foundMovieData.production_countries[0].name name="Country" required
                     #countryInput="ngModel">
                   <span class="valid-error" *ngIf="countryInput.hasError('required')">Field must not be empty</span>
                   <label class="">Country</label>
@@ -69,7 +70,8 @@
               </div>
               <div class="col-md-4">
                 <div class="md-form form-sm mb-0">
-                  <input type="text" class="form-control form-control-sm" [(ngModel)]=foundMovieData.vote_average name="IMDBRating">
+                  <input type="text" class="form-control form-control-sm" [(ngModel)]=foundMovieData.vote_average
+                    name="IMDBRating">
                   <label class="">IMDB Rating</label>
                 </div>
               </div>
@@ -77,8 +79,8 @@
             <div class="row">
               <div class="col-md-4">
                 <div class="md-form form-sm mb-0">
-                  <input type="text" class="form-control form-control-sm" [(ngModel)]=foundMovieCrew.crew[0].name name="Director" required
-                    #directorInput="ngModel">
+                  <input type="text" class="form-control form-control-sm" [(ngModel)]=foundMovieCrew.crew[0].name
+                    name="Director" required #directorInput="ngModel">
                   <span class="valid-error" *ngIf="directorInput.hasError('required')">Field must not be empty</span>
                   <label class="">Director</label>
                 </div>
@@ -93,19 +95,22 @@
             <div class="row">
               <div class="col-md-4">
                 <div class="md-form form-sm mb-0">
-                  <input type="text" class="form-control form-control-sm" [(ngModel)]=foundMovieData.runtime name="Runtime">
+                  <input type="text" class="form-control form-control-sm" [(ngModel)]=foundMovieData.runtime
+                    name="Runtime">
                   <label class="">Runtime</label>
                 </div>
               </div>
               <div class="col-md-4">
                 <div class="md-form form-sm mb-0">
-                  <input type="text" class="form-control form-control-sm" [(ngModel)]=foundMovieData.budget name="Budget">
+                  <input type="text" class="form-control form-control-sm" [(ngModel)]=foundMovieData.budget
+                    name="Budget">
                   <label class="">Budget</label>
                 </div>
               </div>
               <div class="col-md-4">
                 <div class="md-form form-sm mb-0">
-                  <input type="text" class="form-control form-control-sm" [(ngModel)]=foundMovieData.revenue name="Revenue">
+                  <input type="text" class="form-control form-control-sm" [(ngModel)]=foundMovieData.revenue
+                    name="Revenue">
                   <label class="">Revenue</label>
                 </div>
               </div>
@@ -124,8 +129,8 @@
             <div class="row">
               <div class="col-md-12">
                 <div class="md-form mb-0 text-dark">
-                  <textarea class="md-textarea form-control" rows="3" [(ngModel)]=foundMovieData.overview name="Overview" required
-                    #overviewInput="ngModel"></textarea>
+                  <textarea class="md-textarea form-control" rows="3" [(ngModel)]=foundMovieData.overview
+                    name="Overview" required #overviewInput="ngModel"></textarea>
                   <span class="valid-error" *ngIf="overviewInput.hasError('required')">Field must not be empty</span>
                   <label class="">Overview</label>
                 </div>

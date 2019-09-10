@@ -12,8 +12,14 @@ import { ThemeService } from "../../../shared/services/theme/theme.service";
   styleUrls: ["./add-movie.component.css"]
 })
 export class AddMovieComponent implements OnInit, AfterViewInit {
-  foundMovieData: any;
-  foundMovieCrew: any;
+  foundMovieData = {
+    id : "",
+    poster_path : "",
+    production_countries : [{name:''}]
+  };
+  foundMovieCrew = {
+    crew : [{name:''}]
+  };
   foundPosterPath: string;
   genres = [
     { name: "Adventure", prefix: "g", selected: false, id: 1 },
@@ -53,14 +59,16 @@ export class AddMovieComponent implements OnInit, AfterViewInit {
     console.log(form.value);
     this.tmdbService.getMovieByIMDBID(form.value.ImdbId).subscribe(data => {
       if (data.movie_results.length > 0) {
-          this.tmdbService
+        this.tmdbService
           .getMovieDetailsbyTMDBID(data.movie_results[0].id)
           .subscribe(data => {
             this.foundMovieData = data;
-            this.foundPosterPath = "https://image.tmdb.org/t/p/w300_and_h450_bestv2"+this.foundMovieData.poster_path;
+            this.foundPosterPath =
+              "https://image.tmdb.org/t/p/w300_and_h450_bestv2" +
+              this.foundMovieData.poster_path;
             console.log(data);
           });
-          this.tmdbService
+        this.tmdbService
           .getMovieCrewbyTMDBID(data.movie_results[0].id)
           .subscribe(data => {
             this.foundMovieCrew = data;
