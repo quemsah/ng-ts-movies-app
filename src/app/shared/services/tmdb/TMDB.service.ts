@@ -15,6 +15,8 @@ export class TMDBService {
   private URL_FIND = "https://api.themoviedb.org/3/find";
   private URL_MOVIE = "https://api.themoviedb.org/3/movie";
 
+ // https://api.themoviedb.org/3/movie/329865/credits?api_key=546bffd504ec7e8b262023ec0ec6f0e3
+
   constructor(private http: HttpClient) {}
 
   // getDetailsMovie(
@@ -34,6 +36,12 @@ export class TMDBService {
   getMovieDetailsbyTMDBID(movieId: number): Observable<any> {
     return this.http.get<any>(
       `${this.URL_MOVIE}/${movieId}?api_key=${this.API_KEY}&language=en-US}`
+    );
+  }
+
+  getMovieCrewbyTMDBID(movieId: number): Observable<any> {
+    return this.http.get<any>(
+      `${this.URL_MOVIE}/${movieId}/credits?api_key=${this.API_KEY}&language=en-US}`
     );
   }
 }

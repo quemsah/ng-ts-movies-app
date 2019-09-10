@@ -5,3 +5,7 @@
 .genres {
   text-align: left !important;
 }
+
+.md-form label {
+  transform: translateY(-14px) scale(0.8);
+}

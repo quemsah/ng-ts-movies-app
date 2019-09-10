@@ -13,6 +13,8 @@ import { ThemeService } from "../../../shared/services/theme/theme.service";
 })
 export class AddMovieComponent implements OnInit, AfterViewInit {
   foundMovieData: any;
+  foundMovieCrew: any;
+  foundPosterPath: string;
   genres = [
     { name: "Adventure", prefix: "g", selected: false, id: 1 },
     { name: "Animation", prefix: "g", selected: false, id: 2 },
@@ -50,14 +52,22 @@ export class AddMovieComponent implements OnInit, AfterViewInit {
   onImdbIDSubmit(form: NgForm) {
     console.log(form.value);
     this.tmdbService.getMovieByIMDBID(form.value.ImdbId).subscribe(data => {
-      data.movie_results.length > 0
-        ? this.tmdbService
-            .getMovieDetailsbyTMDBID(data.movie_results[0].id)
-            .subscribe(data => {
-              this.foundMovieData = data;
-              console.log(data);
-            })
-        : this.alertService.openWarningAlert("Wrong ID!", 1);
+      if (data.movie_results.length > 0) {
+          this.tmdbService
+          .getMovieDetailsbyTMDBID(data.movie_results[0].id)
+          .subscribe(data => {
+            this.foundMovieData = data;
+            this.foundPosterPath = "https://image.tmdb.org/t/p/w300_and_h450_bestv2"+this.foundMovieData.poster_path;
+            console.log(data);
+          });
+          this.tmdbService
+          .getMovieCrewbyTMDBID(data.movie_results[0].id)
+          .subscribe(data => {
+            this.foundMovieCrew = data;
+          });
+      } else {
+        this.alertService.openWarningAlert("Wrong ID!", 1);
+      }
     });
   }
 
@@ -72,7 +82,7 @@ export class AddMovieComponent implements OnInit, AfterViewInit {
     }
     const movieData: Movie = {
       mid: this.generateMovieID(form.value.Date, form.value.MovieName),
-      dateAdded: Math.round(+new Date()/1000),
+      dateAdded: Math.round(+new Date() / 1000),
       title: form.value.MovieName,
       releaseDate: form.value.Date,
       country: form.value.Country,
@@ -83,7 +93,7 @@ export class AddMovieComponent implements OnInit, AfterViewInit {
       runtime: form.value.Runtime,
       budget: form.value.Budget,
       revenue: form.value.Revenue,
-      overview: form.value.Overview,
+      overview: form.value.Overview
     };
     this.movieService.addMovie(movieData);
   }
