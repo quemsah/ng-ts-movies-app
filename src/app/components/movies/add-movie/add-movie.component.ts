@@ -16,19 +16,19 @@ export class AddMovieComponent implements OnInit, AfterViewInit {
   foundMovieCrew: any;
   foundPosterPath: string;
   genres = [
-    { name: "Adventure", prefix: "g", selected: false, id: 12 },
-    { name: "Animation", prefix: "g", selected: false, id: 16 },
-    { name: "Comedy", prefix: "g", selected: false, id: 35 },
-    { name: "Crime", prefix: "g", selected: false, id: 80 },
-    { name: "Documentary", prefix: "g", selected: false, id: 99 },
-    { name: "Drama", prefix: "g", selected: false, id: 18 },
-    { name: "Fantasy", prefix: "g", selected: false, id: 14 },
-    { name: "History", prefix: "g", selected: false, id: 36 },
-    { name: "Horror", prefix: "g", selected: false, id: 27 },
-    { name: "Music", prefix: "g", selected: false, id: 10402 },
-    { name: "Romance", prefix: "g", selected: false, id: 10749 },
-    { name: "Sci-Fi", prefix: "g", selected: false, id: 878 },
-    { name: "Thriller", prefix: "g", selected: false, id: 53 }
+    { name: "Adventure", prefix: "g", selected: false, id: 1 },
+    { name: "Animation", prefix: "g", selected: false, id: 2 },
+    { name: "Comedy", prefix: "g", selected: false, id: 3 },
+    { name: "Crime", prefix: "g", selected: false, id: 4 },
+    { name: "Documentary", prefix: "g", selected: false, id: 5 },
+    { name: "Drama", prefix: "g", selected: false, id: 6 },
+    { name: "Fantasy", prefix: "g", selected: false, id: 7 },
+    { name: "History", prefix: "g", selected: false, id: 8 },
+    { name: "Horror", prefix: "g", selected: false, id: 9 },
+    { name: "Music", prefix: "g", selected: false, id: 10 },
+    { name: "Romance", prefix: "g", selected: false, id: 11 },
+    { name: "Sci-Fi", prefix: "g", selected: false, id: 12 },
+    { name: "Thriller", prefix: "g", selected: false, id: 13 }
   ];
   generateMovieID = (date, moviename) =>
     date.substr(date.length - 4) +
@@ -58,18 +58,7 @@ export class AddMovieComponent implements OnInit, AfterViewInit {
           .subscribe(data => {
             this.foundMovieData = data;
             this.foundPosterPath = "https://image.tmdb.org/t/p/w300_and_h450_bestv2"+this.foundMovieData.poster_path;
-            //console.log(data);
-            let arr = data.genres;
-            //console.log(arr);
-            for (let key in arr) {
-              if (arr.hasOwnProperty(key)) {
-
-                this.genres.forEach(function (item, key) {
-                  console.log(arr[key].id); // value (ex. turkey)
-                  console.log(item); // value (ex. turkey)
-                });
-              }
-            }
+            console.log(data);
           });
           this.tmdbService
           .getMovieCrewbyTMDBID(data.movie_results[0].id)
