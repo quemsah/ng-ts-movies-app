@@ -1,5 +1,7 @@
 export interface Movie {
    mid: string;
+   imdb_id: string;
+   tmdb_id: string;
    dateAdded: number;
    title: string;
    releaseDate: string;

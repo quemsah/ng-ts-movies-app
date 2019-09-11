@@ -14,13 +14,16 @@ export class MovieService {
   ) {}
 
   generateMovieID = (date, moviename) =>
-    date.substring(0,4) +
-    "-" +
-    moviename.replace(/\s+/g, "-").toLowerCase();
+    date.substring(0, 4) + "-" + moviename.replace(/\s+/g, "-").toLowerCase();
   compareGenres = (genres, fetchedGenres) =>
     genres.map(x =>
       fetchedGenres.map(y => (x.id === y.id ? (x.selected = true) : null))
     );
+  sliceMovieCrew = crewData =>
+    Object.keys(crewData)
+      .slice(0, 10)
+      .map(key => ({ [key]: crewData[key] }));
+
   genresToArray = genres => {
     const genresArray = [];
     // tslint:disable-next-line: forin

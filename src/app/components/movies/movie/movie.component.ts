@@ -4,6 +4,7 @@ import { ThemeService } from "../../../shared/services/theme/theme.service";
 import { ActivatedRoute } from "@angular/router";
 import { MovieService } from "../../../shared/services/movie/movie.service";
 import { Title } from "@angular/platform-browser";
+import { TMDBService } from "../../../shared/services/tmdb/TMDB.service";
 
 @Component({
   selector: "app-movie",
@@ -12,10 +13,13 @@ import { Title } from "@angular/platform-browser";
 })
 export class MovieComponent implements OnInit, AfterViewInit {
   movieData: Movie;
+  movieCrew: any;
+  movieSimilars: any;
 
   constructor(
     private route: ActivatedRoute,
     private movieService: MovieService,
+    private tmdbService: TMDBService,
     private titleService: Title,
     private themeService: ThemeService
   ) {}
@@ -32,6 +36,14 @@ export class MovieComponent implements OnInit, AfterViewInit {
     this.movieService.fetchMovie(id).subscribe(movie => {
       this.movieData = movie;
       this.titleService.setTitle(this.movieData.title);
+    });
+    this.getMovieCrew(parseInt(this.movieData.tmdb_id));
+  }
+
+  getMovieCrew(id: number): void {
+    this.tmdbService.getMovieCrewbyTMDBID(id).subscribe(movieCrewData => {
+      this.movieCrew = this.movieService.sliceMovieCrew(movieCrewData.cast);
+      console.log(this.movieCrew);
     });
   }
 }

@@ -30,14 +30,14 @@
               <div class="col-md-4 ">
                 <div class="md-form form-sm mb-0">
                   <input placeholder="–" type="text" class="form-control form-control-sm"
-                    [(ngModel)]=foundMovieData.imdb_id name="ImdbId" disabled>
+                    [(ngModel)]=foundMovieData.imdb_id name="ImdbId">
                   <label class="">IMDB ID</label>
                 </div>
               </div>
               <div class="col-md-4">
                 <div class="md-form form-sm mb-0">
-                  <input placeholder="–" type="text" class="form-control form-control-sm" [(ngModel)]=foundMovieData.id
-                    name="TmdbId" disabled>
+                  <input placeholder="–" type="text" class="form-control form-control-sm"
+                    [(ngModel)]=foundMovieData.id name="TmdbId">
                   <label class="">TMDB ID</label>
                 </div>
               </div>
@@ -54,7 +54,7 @@
               <div class="col-md-4 ">
                 <div class="md-form form-sm mb-0">
                   <input type="datetime-local" id="date-picker" class="form-control form-control-sm datepicker"
-                    [(ngModel)]=foundMovieData.release_date (click)="dateChanged = true" name="Date" required #dateInput="ngModel">
+                    [(ngModel)]=foundMovieData.release_date (click)="dateChanged = true" name="Date" #dateInput="ngModel">
                   <span class="valid-error" *ngIf="!dateChanged">Field must not be empty</span>
                   <label for="date-picker">Release Date</label>
                 </div>

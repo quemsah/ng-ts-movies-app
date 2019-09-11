@@ -16,6 +16,7 @@ declare var $: any;
 export class AddMovieComponent implements OnInit, AfterViewInit {
   foundMovieData = {
     id: "",
+    tmdb_id: "",
     imdb_id: "",
     original_title: "",
     vote_average: "",
@@ -128,6 +129,8 @@ export class AddMovieComponent implements OnInit, AfterViewInit {
         form.value.Date,
         form.value.MovieName
       ),
+      imdb_id: form.value.ImdbId,
+      tmdb_id: form.value.TmdbId,
       dateAdded: Math.round(+new Date() / 1000),
       title: form.value.MovieName,
       releaseDate: form.value.Date,
