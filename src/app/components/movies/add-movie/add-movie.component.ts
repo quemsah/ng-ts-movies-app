@@ -5,6 +5,8 @@ import { TMDBService } from "../../../shared/services/tmdb/TMDB.service";
 import { AlertService } from "../../../shared/services/alert/alert.service";
 import { MovieService } from "../../../shared/services/movie/movie.service";
 import { ThemeService } from "../../../shared/services/theme/theme.service";
+import { forkJoin, of } from "rxjs";
+import { mergeMap, concatMap, map } from "rxjs/operators";
 
 @Component({
   selector: "app-add-movie",
@@ -13,33 +15,30 @@ import { ThemeService } from "../../../shared/services/theme/theme.service";
 })
 export class AddMovieComponent implements OnInit, AfterViewInit {
   foundMovieData = {
-    id : "",
-    poster_path : "",
-    production_countries : [{name:''}]
+    id: "",
+    poster_path: "",
+    production_countries: [{ name: "" }]
   };
   foundMovieCrew = {
-    crew : [{name:''}]
+    crew: [{ name: "" }]
   };
   foundPosterPath: string;
   genres = [
-    { name: "Adventure", prefix: "g", selected: false, id: 1 },
-    { name: "Animation", prefix: "g", selected: false, id: 2 },
-    { name: "Comedy", prefix: "g", selected: false, id: 3 },
-    { name: "Crime", prefix: "g", selected: false, id: 4 },
-    { name: "Documentary", prefix: "g", selected: false, id: 5 },
-    { name: "Drama", prefix: "g", selected: false, id: 6 },
-    { name: "Fantasy", prefix: "g", selected: false, id: 7 },
-    { name: "History", prefix: "g", selected: false, id: 8 },
-    { name: "Horror", prefix: "g", selected: false, id: 9 },
-    { name: "Music", prefix: "g", selected: false, id: 10 },
-    { name: "Romance", prefix: "g", selected: false, id: 11 },
-    { name: "Sci-Fi", prefix: "g", selected: false, id: 12 },
-    { name: "Thriller", prefix: "g", selected: false, id: 13 }
+    { name: "Adventure", prefix: "g", selected: false, id: 12 },
+    { name: "Animation", prefix: "g", selected: false, id: 16 },
+    { name: "Comedy", prefix: "g", selected: false, id: 35 },
+    { name: "Crime", prefix: "g", selected: false, id: 80 },
+    { name: "Documentary", prefix: "g", selected: false, id: 99 },
+    { name: "Drama", prefix: "g", selected: false, id: 18 },
+    { name: "Fantasy", prefix: "g", selected: false, id: 14 },
+    { name: "History", prefix: "g", selected: false, id: 36 },
+    { name: "Horror", prefix: "g", selected: false, id: 27 },
+    { name: "Music", prefix: "g", selected: false, id: 10402 },
+    { name: "Romance", prefix: "g", selected: false, id: 10749 },
+    { name: "Sci-Fi", prefix: "g", selected: false, id: 878 },
+    { name: "Thriller", prefix: "g", selected: false, id: 53 }
   ];
-  generateMovieID = (date, moviename) =>
-    date.substr(date.length - 4) +
-    "-" +
-    moviename.replace(/\s+/g, "-").toLowerCase();
+
   constructor(
     public tmdbService: TMDBService,
     public alertService: AlertService,
@@ -57,26 +56,44 @@ export class AddMovieComponent implements OnInit, AfterViewInit {
   // полученному TMDB идентификатору(число) возвращает полную информацию о фильме
   onImdbIDSubmit(form: NgForm) {
     console.log(form.value);
-    this.tmdbService.getMovieByIMDBID(form.value.ImdbId).subscribe(data => {
-      if (data.movie_results.length > 0) {
-        this.tmdbService
-          .getMovieDetailsbyTMDBID(data.movie_results[0].id)
-          .subscribe(data => {
-            this.foundMovieData = data;
-            this.foundPosterPath =
-              "https://image.tmdb.org/t/p/w300_and_h450_bestv2" +
-              this.foundMovieData.poster_path;
-            console.log(data);
-          });
-        this.tmdbService
-          .getMovieCrewbyTMDBID(data.movie_results[0].id)
-          .subscribe(data => {
-            this.foundMovieCrew = data;
-          });
-      } else {
-        this.alertService.openWarningAlert("Wrong ID!", 1);
-      }
-    });
+    // this.tmdbService.getMovieByIMDBID(form.value.ImdbId).subscribe(data => {
+    //   if (data.movie_results.length > 0) {
+    //     forkJoin(
+    //       this.tmdbService.getMovieDetailsbyTMDBID(data.movie_results[0].id),
+    //       this.tmdbService.getMovieCrewbyTMDBID(data.movie_results[0].id)
+    //     ).subscribe(([detailData, crewData]) => {
+    //       this.foundMovieData = detailData;
+    //       this.foundPosterPath =
+    //         "https://image.tmdb.org/t/p/w300_and_h450_bestv2" +
+    //         this.foundMovieData.poster_path;
+    //       console.log(this.genres);
+    //       this.movieService.compareGenres(this.genres, detailData.genres);
+    //       this.foundMovieCrew = crewData;
+    //     });
+    //     console.log(data);
+    //   } else {
+    //     this.alertService.openWarningAlert("Wrong ID!", 1);
+    //   }
+    // });
+
+    // Переписан без подписки внутри подписки
+    // Часть до подписки перенесена в TMDB.service
+
+    this.tmdbService
+      .getMovieByIMDBID(form.value.ImdbId)
+      .subscribe(([detailData, crewData]) => {
+        if (detailData) {
+          this.foundMovieData = detailData;
+          this.foundPosterPath =
+            "https://image.tmdb.org/t/p/w300_and_h450_bestv2" +
+            this.foundMovieData.poster_path;
+          console.log(this.genres);
+          this.movieService.compareGenres(this.genres, detailData.genres);
+          this.foundMovieCrew = crewData;
+        } else {
+          this.alertService.openWarningAlert("Wrong ID!", 1);
+        }
+      });
   }
 
   onAddMovieSubmit(form: NgForm) {
@@ -88,8 +105,12 @@ export class AddMovieComponent implements OnInit, AfterViewInit {
         ? genresArray.push(propt.substring(1))
         : null;
     }
+    // приводим к нужному виду
     const movieData: Movie = {
-      mid: this.generateMovieID(form.value.Date, form.value.MovieName),
+      mid: this.movieService.generateMovieID(
+        form.value.Date,
+        form.value.MovieName
+      ),
       dateAdded: Math.round(+new Date() / 1000),
       title: form.value.MovieName,
       releaseDate: form.value.Date,

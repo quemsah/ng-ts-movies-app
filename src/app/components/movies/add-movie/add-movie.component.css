@@ -1,6 +1,6 @@
-.valid-error {
+/* .valid-error {
   position: absolute;
-}
+} */
 
 .genres {
   text-align: left !important;
@@ -8,4 +8,8 @@
 
 .md-form label {
   transform: translateY(-14px) scale(0.8);
+}
+
+.genres-label.md-form label {
+  transform: none;
 }

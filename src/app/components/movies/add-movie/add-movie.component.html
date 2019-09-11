@@ -112,7 +112,7 @@
             </div>
             <div class="row">
               <div class="col-md-12">
-                <div class="genres md-form form-sm mb-0">
+                <div class="genres genres-label md-form form-sm mb-0">
                   <div class="form-check form-check-inline" *ngFor='let g of genres; let i=index'>
                     <input type="checkbox" class="form-check-input" id={{g.id}} [(ngModel)]=g.selected
                       name={{g.prefix+g.name}}>
@@ -132,7 +132,7 @@
               </div>
             </div>
             <div class="row">
-              <div class="col-md-12 text-center my-4">
+              <div class="col-md-12 text-center my-1">
                 <span class="waves-input-wrapper waves-effect waves-light"><input type="submit" value="Add Movie"
                     class="btn btn-info btn-rounded blue-gradient" [disabled]="addNewMovie.invalid"></span>
               </div>

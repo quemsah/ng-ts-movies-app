@@ -13,6 +13,15 @@ export class MovieService {
     private alertService: AlertService
   ) {}
 
+  generateMovieID = (date, moviename) =>
+    date.substr(date.length - 4) +
+    "-" +
+    moviename.replace(/\s+/g, "-").toLowerCase();
+  compareGenres = (genres, fetchedGenres) =>
+    genres.map(x =>
+      fetchedGenres.map(y => (x.id == y.id ? (x.selected = true) : null))
+    );
+
   addMovie(movieData: Movie) {
     console.log(movieData);
     this.afs
