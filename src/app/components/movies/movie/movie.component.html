@@ -66,7 +66,7 @@
     </div>
   </section>
   <!-- Actors & Trailers -->
-  <section class="mb-4 mt-4">
+  <section class="mb-4 mt-4" *ngIf="movieCrew">
     <div class="row">
       <div class="movie-tabs">
         <ul class="nav nav-tabs nav-justified md-tabs blue-gradient" id="myTabJust" role="tablist">
@@ -83,23 +83,19 @@
           <div class="tab-pane fade show active" id="home-just" role="tabpanel" aria-labelledby="home-tab-just">
             <div class="row">
               <div class="col-xl-2 col-lg-3 col-md- col-sm-4 col-6 mb-4"
-                *ngFor="let person of movieCrew; let i = index">
+                *ngFor="let actor of movieCrew; let i = index">
                 <div class="actor-card card align-items-center">
                   <div class="view overlay">
-                    <!-- src="{{(person[i].profile_path) 
-                      ? 'https://image.tmdb.org/t/p/w138_and_h175_face'+person[i].profile_path 
-                      : '../../../../assets/img/no_actor_img.jpg'}}"  -->
-                    <!-- <img src="https://image.tmdb.org/t/p/w138_and_h175_face{{person[i].profile_path}}" -->
-                    <img src="{{(person[i].profile_path) 
-                      ? 'https://image.tmdb.org/t/p/w138_and_h175_face'+person[i].profile_path 
+                    <img src="{{(actor[i].profile_path) 
+                      ? 'https://image.tmdb.org/t/p/w138_and_h175_face'+actor[i].profile_path 
                       : '../../../../assets/img/no_actor_img.jpg'}}" 
                       class="card-img-top" alt="">
                   </div>
                   <div class="card-body text-center">
                     <a href="" class="grey-text">
-                      <p class="h6">{{ (person[i].character) ? person[i].character : 'No Information' }}</p>
+                      <p class="h6">{{ (actor[i].character) ? actor[i].character : 'No Information' }}</p>
                     </a>
-                    <p class="h6"><a href=""><strong>{{ person[i].name }}</strong></a></p>
+                    <p class="h6"><a href=""><strong>{{ actor[i].name }}</strong></a></p>
                   </div>
                 </div>
               </div>
@@ -107,19 +103,10 @@
           </div>
           <div class="tab-pane fade" id="profile-just" role="tabpanel" aria-labelledby="profile-tab-just">
             <div class="row">
-              <div class="col-xl-4 col-sm-6 col-xs-12 mb-4">
+              <div class="col-xl-4 col-sm-6 col-xs-12 mb-4" *ngFor="let trailer of movieTrailers; let i = index">
                 <div class="embed-responsive embed-responsive-16by9">
-                  <iframe class="embed-responsive-item" src="//www.youtube.com/embed/tGpTpVyI_OQ?rel=0"></iframe>
-                </div>
-              </div>
-              <div class="col-xl-4 col-sm-6 col-xs-12 mb-4">
-                <div class="embed-responsive embed-responsive-16by9">
-                  <iframe class="embed-responsive-item" src="//www.youtube.com/embed/tGpTpVyI_OQ?rel=0"></iframe>
-                </div>
-              </div>
-              <div class="col-xl-4 col-sm-6 col-xs-12 mb-4">
-                <div class="embed-responsive embed-responsive-16by9">
-                  <iframe class="embed-responsive-item" src="//www.youtube.com/embed/tGpTpVyI_OQ?rel=0"></iframe>
+                    <!-- <p class="h6"><strong>{{trailer[i].key}}</strong></p> -->
+                  <iframe class="embed-responsive-item" [src]="sanitizer.bypassSecurityTrustResourceUrl(trailer[i].key)"></iframe>
                 </div>
               </div>
             </div>

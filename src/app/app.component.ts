@@ -37,7 +37,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
   ngAfterViewInit() {
     // Dark mode включен по умолчанию
-    this.themeService.toggleDarkMode();
+    // this.themeService.toggleDarkMode();
     // $("#dark-mode").click(() => this.themeService.toggleDarkMode());
     document.getElementById("dark-mode").addEventListener("click", () => {
       this.themeService.toggleDarkMode();

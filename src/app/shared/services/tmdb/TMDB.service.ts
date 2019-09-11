@@ -49,7 +49,7 @@ export class TMDBService {
   }
   getMovieTrailersByTMDBID(movieId: number): Observable<any> {
     return this.http.get<any>(
-      `${this.URL_MOVIE}/${movieId}/credits?api_key=${this.API_KEY}&language=en-US}`
+      `${this.URL_MOVIE}/${movieId}/videos?api_key=${this.API_KEY}&language=en-US}`
     );
   }
 }

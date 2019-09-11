@@ -3,7 +3,7 @@ import { Routes, RouterModule } from "@angular/router";
 // canActivate
 import { AuthGuard } from "../../shared/guard/auth.guard";
 import { InnerPagesGuard } from "../../shared/guard/inner-pages.guard";
-import { OuterPagesGuard } from '../../shared/guard/outer-pages.guard';
+import { OuterPagesGuard } from "../../shared/guard/outer-pages.guard";
 // Компоненты
 import { LoginComponent } from "../../components/users/login/login.component";
 import { RegisterComponent } from "../../components/users/register/register.component";
@@ -14,14 +14,14 @@ import { AboutComponent } from "../../components/about/about.component";
 import { NotFoundComponent } from "../../components/not-found/not-found.component";
 import { AddMovieComponent } from "../../components/movies/add-movie/add-movie.component";
 import { MovieComponent } from "../../components/movies/movie/movie.component";
-import { MoviesListComponent } from '../../components/movies/movies-list/movies-list.component';
+import { MoviesListComponent } from "../../components/movies/movies-list/movies-list.component";
 
 const routes: Routes = [
   {
     path: "login",
     component: LoginComponent,
-    data: { title: "Login" },
-    canActivate: [InnerPagesGuard]
+    data: { title: "Login" }
+    // canActivate: [InnerPagesGuard]
   },
   {
     path: "register",
@@ -70,7 +70,12 @@ const routes: Routes = [
     data: { title: "Movies" },
     canActivate: [AuthGuard]
   },
-  { path: "", redirectTo: "/login", pathMatch: "full" },
+  {
+    path: "",
+    redirectTo: "/login",
+    pathMatch: "full",
+    canActivate: [OuterPagesGuard]
+  },
   {
     path: "**",
     component: NotFoundComponent,

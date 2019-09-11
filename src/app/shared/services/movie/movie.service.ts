@@ -19,10 +19,10 @@ export class MovieService {
     genres.map(x =>
       fetchedGenres.map(y => (x.id === y.id ? (x.selected = true) : null))
     );
-  sliceMovieCrew = crewData =>
-    Object.keys(crewData)
-      .slice(0, 10)
-      .map(key => ({ [key]: crewData[key] }));
+  sliceData = (object,num) =>
+    Object.keys(object)
+      .slice(0, num)
+      .map(key => ({ [key]: object[key] }));
 
   genresToArray = genres => {
     const genresArray = [];
