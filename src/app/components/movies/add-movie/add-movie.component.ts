@@ -69,14 +69,14 @@ export class AddMovieComponent implements OnInit, AfterViewInit {
     this.themeService.checkDarkMode();
   }
   // Делается запрос к TMDB методом getMovieByIMDBID, который по индентификатору IMDB(строка) вовзращает
-  // информацию о фильме. Далее запрос getMovieDetailsbyTMDBID по только что
+  // информацию о фильме. Далее запрос getMovieDetailsByTMDBID по только что
   // полученному TMDB идентификатору(число) возвращает полную информацию о фильме
   onImdbIDSubmit(form: NgForm) {
     console.log(form.value);
     // this.tmdbService.getMovieByIMDBID(form.value.ImdbId).subscribe(data => {
     //   if (data.movie_results.length > 0) {
     //     forkJoin(
-    //       this.tmdbService.getMovieDetailsbyTMDBID(data.movie_results[0].id),
+    //       this.tmdbService.getMovieDetailsByTMDBID(data.movie_results[0].id),
     //       this.tmdbService.getMovieCrewbyTMDBID(data.movie_results[0].id)
     //     ).subscribe(([detailData, crewData]) => {
     //       this.foundMovieData = detailData;

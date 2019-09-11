@@ -28,7 +28,7 @@ export class TMDBService {
         mergeMap(data =>
           data.movie_results.length > 0
             ? forkJoin(
-                this.getMovieDetailsbyTMDBID(data.movie_results[0].id),
+                this.getMovieDetailsByTMDBID(data.movie_results[0].id),
                 this.getMovieCrewbyTMDBID(data.movie_results[0].id)
               )
             : of(null)
@@ -36,13 +36,18 @@ export class TMDBService {
       );
   }
 
-  getMovieDetailsbyTMDBID(movieId: number): Observable<any> {
+  getMovieDetailsByTMDBID(movieId: number): Observable<any> {
     return this.http.get<any>(
       `${this.URL_MOVIE}/${movieId}?api_key=${this.API_KEY}&language=en-US}`
     );
   }
 
   getMovieCrewbyTMDBID(movieId: number): Observable<any> {
+    return this.http.get<any>(
+      `${this.URL_MOVIE}/${movieId}/credits?api_key=${this.API_KEY}&language=en-US}`
+    );
+  }
+  getMovieTrailersByTMDBID(movieId: number): Observable<any> {
     return this.http.get<any>(
       `${this.URL_MOVIE}/${movieId}/credits?api_key=${this.API_KEY}&language=en-US}`
     );

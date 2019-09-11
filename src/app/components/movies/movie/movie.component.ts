@@ -36,8 +36,10 @@ export class MovieComponent implements OnInit, AfterViewInit {
     this.movieService.fetchMovie(id).subscribe(movie => {
       this.movieData = movie;
       this.titleService.setTitle(this.movieData.title);
+      if (this.movieData.tmdb_id) {
+        this.getMovieCrew(parseInt(this.movieData.tmdb_id));
+      }
     });
-    this.getMovieCrew(parseInt(this.movieData.tmdb_id));
   }
 
   getMovieCrew(id: number): void {

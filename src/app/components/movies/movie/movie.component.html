@@ -16,7 +16,8 @@
                 <div class="chip waves-effect waves-effect my-1">{{genre}}</div>
               </li>
             </ul>
-            <h6 *ngIf="movie.IMDBRating" class="h6 yellow-text my-2 p-0"><i class="far fa-star"> </i> {{movie.IMDBRating}} IMDB</h6>
+            <h6 *ngIf="movie.IMDBRating" class="h6 yellow-text my-2 p-0"><i class="far fa-star"> </i>
+              {{movie.IMDBRating}} IMDB</h6>
             <!-- <ul class="rating my-3">
               <li>
                 <i class="fas fa-star blue-text"></i>
@@ -56,8 +57,7 @@
             </a>
           </div>
           <div class="">
-            <img
-              src="{{(movie.posterLink) ? movie.posterLink : '../../../assets/img/no_poster_available.jpg'}}"
+            <img src="{{(movie.posterLink) ? movie.posterLink : '../../../assets/img/no_poster_available.jpg'}}"
               class="movie-card-img" alt="Movie Poster">
           </div>
         </div>
@@ -82,144 +82,24 @@
         <div class="tab-content card pt-5" id="myTabContentJust">
           <div class="tab-pane fade show active" id="home-just" role="tabpanel" aria-labelledby="home-tab-just">
             <div class="row">
-              <div class="col-xl-2 col-lg-3 col-md- col-sm-4 col-6 mb-4 ">
+              <div class="col-xl-2 col-lg-3 col-md- col-sm-4 col-6 mb-4"
+                *ngFor="let person of movieCrew; let i = index">
                 <div class="actor-card card align-items-center">
                   <div class="view overlay">
-                    <img src="https://image.tmdb.org/t/p/w138_and_h175_face/sHjkE7GZbKAa9aZeiKrEBhMDT14.jpg"
+                    <!-- src="{{(person[i].profile_path) 
+                      ? 'https://image.tmdb.org/t/p/w138_and_h175_face'+person[i].profile_path 
+                      : '../../../../assets/img/no_actor_img.jpg'}}"  -->
+                    <!-- <img src="https://image.tmdb.org/t/p/w138_and_h175_face{{person[i].profile_path}}" -->
+                    <img src="{{(person[i].profile_path) 
+                      ? 'https://image.tmdb.org/t/p/w138_and_h175_face'+person[i].profile_path 
+                      : '../../../../assets/img/no_actor_img.jpg'}}" 
                       class="card-img-top" alt="">
                   </div>
                   <div class="card-body text-center">
                     <a href="" class="grey-text">
-                      <p class="h6">Vincent Vega</p>
+                      <p class="h6">{{ (person[i].character) ? person[i].character : 'No Information' }}</p>
                     </a>
-                    <p class="h6"><a href=""><strong>John Travolta</strong></a></p>
-                  </div>
-                </div>
-              </div>
-              <div class="col-xl-2 col-lg-3 col-md- col-sm-4 col-6 mb-4 ">
-                <div class="actor-card card align-items-center">
-                  <div class="view overlay">
-                    <img src="https://image.tmdb.org/t/p/w138_and_h175_face/qjYcO8jKNlb7lnJ05vh2U7lNt8r.jpg"
-                      class="card-img-top" alt="">
-                  </div>
-                  <div class="card-body text-center">
-                    <a href="" class="grey-text">
-                      <p class="h6">Jules Winfield</p>
-                    </a>
-                    <p class="h6"><a href=""><strong>Samuel L. Jackson</strong></a></p>
-                  </div>
-                </div>
-              </div>
-              <div class="col-xl-2 col-lg-3 col-md- col-sm-4 col-6 mb-4 ">
-                <div class="actor-card card align-items-center">
-                  <div class="view overlay">
-                    <img src="https://image.tmdb.org/t/p/w138_and_h175_face/xuxgPXyv6KjUHIM8cZaxx4ry25L.jpg"
-                      class="card-img-top" alt="">
-                  </div>
-                  <div class="card-body text-center">
-                    <a href="" class="grey-text">
-                      <p class="h6">Mia Wallace</p>
-                    </a>
-                    <p class="h6"><a href=""><strong>Uma Thurman</strong></a></p>
-                  </div>
-                </div>
-              </div>
-              <div class="col-xl-2 col-lg-3 col-md- col-sm-4 col-6 mb-4 ">
-                <div class="actor-card card align-items-center">
-                  <div class="view overlay">
-                    <img src="https://image.tmdb.org/t/p/w138_and_h175_face/zoTPQXh3qLd0Nj8JCVZqdWowQw7.jpg"
-                      class="card-img-top" alt="">
-                  </div>
-                  <div class="card-body text-center">
-                    <a href="" class="grey-text">
-                      <p class="h6">Butch Coolidge</p>
-                    </a>
-                    <p class="h6"><a href=""><strong>Bruce Willis</strong></a></p>
-                  </div>
-                </div>
-              </div>
-              <div class="col-xl-2 col-lg-3 col-md- col-sm-4 col-6 mb-4 ">
-                <div class="actor-card card align-items-center">
-                  <div class="view overlay">
-                    <img src="https://image.tmdb.org/t/p/w138_and_h175_face/8nS83GOu0iqxjL2Oj2DgwkAceFQ.jpg"
-                      class="card-img-top" alt="">
-                  </div>
-                  <div class="card-body text-center">
-                    <a href="" class="grey-text">
-                      <p class="h6">Marsellus Wallace</p>
-                    </a>
-                    <p class="h6"><a href="">
-                        <strong>Ving Rhames</strong></a></p>
-                  </div>
-                </div>
-              </div>
-              <div class="col-xl-2 col-lg-3 col-md- col-sm-4 col-6 mb-4 ">
-                <div class="actor-card card align-items-center">
-                  <div class="view overlay">
-                    <img src="https://image.tmdb.org/t/p/w138_and_h175_face/c1KlwOAlnFhBWfcPIvA6hmrElb6.jpg"
-                      class="card-img-top" alt="">
-                  </div>
-                  <div class="card-body text-center">
-                    <a href="" class="grey-text">
-                      <p class="h6">Wolf</p>
-                    </a>
-                    <p class="h6"><a href=""><strong>Harvey Keitel</strong></a></p>
-                  </div>
-                </div>
-              </div>
-              <div class="col-xl-2 col-lg-3 col-md- col-sm-4 col-6 mb-4 ">
-                <div class="actor-card card align-items-center">
-                  <div class="view overlay">
-                    <img src="https://image.tmdb.org/t/p/w138_and_h175_face/fXaULtqnMDKsqT1to8vnLjSXe0w.jpg"
-                      class="card-img-top" alt="">
-                  </div>
-                  <div class="card-body text-center">
-                    <a href="" class="grey-text">
-                      <p class="h6">Lance</p>
-                    </a>
-                    <p class="h6"><a href=""><strong>Eric Stoltz</strong></a></p>
-                  </div>
-                </div>
-              </div>
-              <div class="col-xl-2 col-lg-3 col-md- col-sm-4 col-6 mb-4 ">
-                <div class="actor-card card align-items-center">
-                  <div class="view overlay">
-                    <img src="https://image.tmdb.org/t/p/w138_and_h175_face/r4jtlboNqWPz2dOHafrPJE4Yd94.jpg"
-                      class="card-img-top" alt="">
-                  </div>
-                  <div class="card-body text-center">
-                    <a href="" class="grey-text">
-                      <p class="h6">Pumpkin</p>
-                    </a>
-                    <p class="h6"><a href=""><strong>Tim Roth</strong></a></p>
-                  </div>
-                </div>
-              </div>
-              <div class="col-xl-2 col-lg-3 col-md- col-sm-4 col-6 mb-4 ">
-                <div class="actor-card card align-items-center">
-                  <div class="view overlay">
-                    <img src="https://image.tmdb.org/t/p/w138_and_h175_face/uICpVUj29yBcwCEGVZzE77FL98W.jpg"
-                      class="card-img-top" alt="">
-                  </div>
-                  <div class="card-body text-center">
-                    <a href="" class="grey-text">
-                      <p class="h6">Honey Bunny</p>
-                    </a>
-                    <p class="h6"><a href=""><strong>Amanda Plummer</strong></a></p>
-                  </div>
-                </div>
-              </div>
-              <div class="col-xl-2 col-lg-3 col-md- col-sm-4 col-6 mb-4 ">
-                <div class="actor-card card align-items-center">
-                  <div class="view overlay">
-                    <img src="https://image.tmdb.org/t/p/w138_and_h175_face/waZ8GlQJ1K9NQGr6lIipSZONNPb.jpg"
-                      class="card-img-top" alt="">
-                  </div>
-                  <div class="card-body text-center">
-                    <a href="" class="grey-text">
-                      <p class="h6">Fabienne</p>
-                    </a>
-                    <p class="h6"><a href=""><strong>Maria de Medeiros</strong></a></p>
+                    <p class="h6"><a href=""><strong>{{ person[i].name }}</strong></a></p>
                   </div>
                 </div>
               </div>
