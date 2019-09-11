@@ -12,7 +12,7 @@ export class MoviesListComponent implements OnInit, AfterViewInit {
   movies: Movie[];
   constructor(
     private movieService: MovieService,
-    public themeService: ThemeService
+    private themeService: ThemeService
   ) {}
 
   ngOnInit() {

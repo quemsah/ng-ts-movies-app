@@ -14,9 +14,9 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   productPhotoPaths: string[] = [];
   constructor(
     public authService: AuthService,
-    public router: Router,
-    public ngZone: NgZone,
-    public themeService: ThemeService
+    private router: Router,
+    private ngZone: NgZone,
+    private themeService: ThemeService
   ) {
     this.data = {};
   }

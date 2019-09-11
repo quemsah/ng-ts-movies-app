@@ -14,9 +14,9 @@ import { ThemeService } from "../services/theme/theme.service";
 })
 export class InnerPagesGuard implements CanActivate {
   constructor(
-    public themeService: ThemeService,
+    private themeService: ThemeService,
     public authService: AuthService,
-    public router: Router
+    private router: Router
   ) {}
 
   canActivate(

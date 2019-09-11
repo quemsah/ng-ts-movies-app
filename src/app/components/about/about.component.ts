@@ -7,7 +7,7 @@ import { ThemeService } from "../../shared/services/theme/theme.service";
   styleUrls: ["./about.component.css"]
 })
 export class AboutComponent implements OnInit, AfterViewInit {
-  constructor(public themeService: ThemeService) {}
+  constructor(private themeService: ThemeService) {}
 
   ngOnInit() {}
   ngAfterViewInit() {

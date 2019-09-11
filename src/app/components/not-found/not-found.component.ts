@@ -7,7 +7,7 @@ import { ThemeService } from "../../shared/services/theme/theme.service";
   styleUrls: ["./not-found.component.css"]
 })
 export class NotFoundComponent implements OnInit, AfterViewInit {
-  constructor(public themeService: ThemeService) {}
+  constructor(private themeService: ThemeService) {}
 
   ngOnInit() {}
   ngAfterViewInit() {

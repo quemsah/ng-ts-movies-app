@@ -20,11 +20,11 @@ export class AuthService {
 
   constructor(
     private alertService: AlertService,
-    public storage: AngularFireStorage,
-    public afs: AngularFirestore,
-    public afAuth: AngularFireAuth,
-    public router: Router,
-    public ngZone: NgZone
+    private storage: AngularFireStorage,
+    private afs: AngularFirestore,
+    private afAuth: AngularFireAuth,
+    private router: Router,
+    private ngZone: NgZone
   ) {
     // Cохраняем данные пользователя в localstorage
     // и удаляем, когда он выходит

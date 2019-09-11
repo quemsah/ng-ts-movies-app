@@ -9,7 +9,7 @@ import { Observable } from "rxjs";
 })
 export class MovieService {
   constructor(
-    public afs: AngularFirestore,
+    private afs: AngularFirestore,
     private alertService: AlertService
   ) {}
 

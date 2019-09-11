@@ -17,7 +17,7 @@ export class MovieComponent implements OnInit, AfterViewInit {
     private route: ActivatedRoute,
     private movieService: MovieService,
     private titleService: Title,
-    public themeService: ThemeService
+    private themeService: ThemeService
   ) {}
 
   ngOnInit(): void {

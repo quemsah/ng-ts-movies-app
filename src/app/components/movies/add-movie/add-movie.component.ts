@@ -16,8 +16,16 @@ import { mergeMap, concatMap, map } from "rxjs/operators";
 export class AddMovieComponent implements OnInit, AfterViewInit {
   foundMovieData = {
     id: "",
+    imdb_id: "",
+    original_title: "",
+    vote_average: "",
     poster_path: "",
     backdrop_path: "",
+    runtime: "",
+    revenue: "",
+    budget: "",
+    release_date: "",
+    overview: "",
     production_countries: [{ name: "" }]
   };
   foundMovieCrew = {
@@ -25,6 +33,9 @@ export class AddMovieComponent implements OnInit, AfterViewInit {
   };
   foundPosterPath: string;
   foundBackdropPath: string;
+  foundRuntime: string;
+  foundRevenue: string;
+  foundBudget: string;
   genres = [
     { name: "Adventure", prefix: "g", selected: false, id: 12 },
     { name: "Animation", prefix: "g", selected: false, id: 16 },
@@ -42,10 +53,10 @@ export class AddMovieComponent implements OnInit, AfterViewInit {
   ];
 
   constructor(
-    public tmdbService: TMDBService,
-    public alertService: AlertService,
-    public movieService: MovieService,
-    public themeService: ThemeService
+    private tmdbService: TMDBService,
+    private alertService: AlertService,
+    private movieService: MovieService,
+    private themeService: ThemeService
   ) {}
 
   ngOnInit() {}
@@ -92,6 +103,9 @@ export class AddMovieComponent implements OnInit, AfterViewInit {
           this.foundBackdropPath =
             "https://image.tmdb.org/t/p/w1400_and_h450_face" +
             this.foundMovieData.backdrop_path;
+          this.foundRuntime = this.foundMovieData.runtime + " min";
+          this.foundRevenue = "$ " + this.foundMovieData.revenue;
+          this.foundBudget = "$ " + this.foundMovieData.budget;
           console.log(detailData);
           this.movieService.compareGenres(this.genres, detailData.genres);
           this.foundMovieCrew = crewData;
@@ -119,7 +133,9 @@ export class AddMovieComponent implements OnInit, AfterViewInit {
       dateAdded: Math.round(+new Date() / 1000),
       title: form.value.MovieName,
       releaseDate: form.value.Date,
-      country: form.value.Country,
+      country: form.value.Country = "United States of America"
+        ? "USA"
+        : form.value.Country,
       IMDBRating: form.value.IMDBRating,
       genres: genresArray,
       director: form.value.Director,

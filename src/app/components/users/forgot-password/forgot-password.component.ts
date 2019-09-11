@@ -10,7 +10,7 @@ import { AuthService } from "../../../shared/services/auth/auth.service";
 export class ForgotPasswordComponent implements OnInit, AfterViewInit {
   constructor(
     public authService: AuthService,
-    public themeService: ThemeService
+    private themeService: ThemeService
   ) {}
 
   ngOnInit() {}

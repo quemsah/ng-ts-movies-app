@@ -10,7 +10,7 @@ export class TMDBService {
   private URL_FIND = "https://api.themoviedb.org/3/find";
   private URL_MOVIE = "https://api.themoviedb.org/3/movie";
 
-  constructor(private http: HttpClient, public alertService: AlertService) {}
+  constructor(private http: HttpClient, private alertService: AlertService) {}
 
   getMovieByIMDBID(ImdbId: string): Observable<any> {
     return this.http

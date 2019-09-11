@@ -11,7 +11,7 @@ import { ThemeService } from "../services/theme/theme.service";
   providedIn: "root"
 })
 export class OuterPagesGuard implements CanActivate {
-  constructor(public themeService: ThemeService) {}
+  constructor(private themeService: ThemeService) {}
 
   canActivate(
     next: ActivatedRouteSnapshot,
