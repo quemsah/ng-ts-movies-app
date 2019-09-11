@@ -8,6 +8,7 @@ export interface Movie {
    genres?: string[];
    director: string;
    posterLink?: string;
+   backdropLink?: string;
    runtime?: string;
    budget?: string;
    revenue?: string;

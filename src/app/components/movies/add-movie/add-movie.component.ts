@@ -17,12 +17,14 @@ export class AddMovieComponent implements OnInit, AfterViewInit {
   foundMovieData = {
     id: "",
     poster_path: "",
+    backdrop_path: "",
     production_countries: [{ name: "" }]
   };
   foundMovieCrew = {
     crew: [{ name: "" }]
   };
   foundPosterPath: string;
+  foundBackdropPath: string;
   genres = [
     { name: "Adventure", prefix: "g", selected: false, id: 12 },
     { name: "Animation", prefix: "g", selected: false, id: 16 },
@@ -87,7 +89,10 @@ export class AddMovieComponent implements OnInit, AfterViewInit {
           this.foundPosterPath =
             "https://image.tmdb.org/t/p/w300_and_h450_bestv2" +
             this.foundMovieData.poster_path;
-          console.log(this.genres);
+          this.foundBackdropPath =
+            "https://image.tmdb.org/t/p/w1400_and_h450_face" +
+            this.foundMovieData.backdrop_path;
+          console.log(detailData);
           this.movieService.compareGenres(this.genres, detailData.genres);
           this.foundMovieCrew = crewData;
         } else {
@@ -119,6 +124,7 @@ export class AddMovieComponent implements OnInit, AfterViewInit {
       genres: genresArray,
       director: form.value.Director,
       posterLink: form.value.Poster,
+      backdropLink: form.value.Backdrop,
       runtime: form.value.Runtime,
       budget: form.value.Budget,
       revenue: form.value.Revenue,

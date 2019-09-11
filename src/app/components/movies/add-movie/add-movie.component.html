@@ -86,6 +86,7 @@
               <div class="col-md-8">
                 <div class="md-form form-sm mb-0">
                   <input type="text" class="form-control form-control-sm" [(ngModel)]=foundPosterPath name="Poster">
+                  <input type="hidden" class="form-control form-control-sm" [(ngModel)]=foundBackdropPath name="Backdrop">
                   <label class="">Link to a poster</label>
                 </div>
               </div>
@@ -124,7 +125,7 @@
             <div class="row">
               <div class="col-md-12">
                 <div class="md-form mb-0 text-dark">
-                  <textarea class="md-textarea form-control" rows="3" [(ngModel)]=foundMovieData.overview name="Overview" required
+                  <textarea class="md-textarea form-control" rows="2" [(ngModel)]=foundMovieData.overview name="Overview" required
                     #overviewInput="ngModel"></textarea>
                   <span class="valid-error" *ngIf="overviewInput.hasError('required')">Field must not be empty</span>
                   <label class="">Overview</label>

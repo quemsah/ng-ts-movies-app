@@ -2,7 +2,7 @@
   <!-- Movie card -->
   <section class="mb-4 mt-4" *ngIf="movieData as movie">
     <div class="row movie-row">
-      <!-- <img class="hipstah-fix" src="https://image.tmdb.org/t/p/w1400_and_h450_face/4cDFJr4HnXN5AdPw4AKrmLlMWdO.jpg"> -->
+      <img *ngIf="movie.backdropLink" class="hipstah-fix" src="{{movie.backdropLink}}">
       <!-- Jumbotron -->
       <div class="movie-bg card card-image">
         <div class="text-white stylish-card p-4 d-flex justify-content-between">
