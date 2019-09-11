@@ -14,13 +14,23 @@ export class MovieService {
   ) {}
 
   generateMovieID = (date, moviename) =>
-    date.substr(date.length - 4) +
+    date.substring(0,4) +
     "-" +
     moviename.replace(/\s+/g, "-").toLowerCase();
   compareGenres = (genres, fetchedGenres) =>
     genres.map(x =>
-      fetchedGenres.map(y => (x.id == y.id ? (x.selected = true) : null))
+      fetchedGenres.map(y => (x.id === y.id ? (x.selected = true) : null))
     );
+  genresToArray = genres => {
+    const genresArray = [];
+    // tslint:disable-next-line: forin
+    for (let propt in genres) {
+      genres[propt] === true && propt.startsWith("g") === true
+        ? genresArray.push(propt.substring(1))
+        : null;
+    }
+    return genresArray;
+  };
 
   addMovie(movieData: Movie) {
     console.log(movieData);

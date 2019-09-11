@@ -11,7 +11,7 @@
             <div class="md-form mb-0">
               <input class="form-control" type="text" ngModel name="ImdbId">
               <label>IMDB ID</label>
-              <button class="btn btn-info btn-rounded btn-sm waves-effect waves-light blue-gradient">Submit</button><br>
+              <button class="btn btn-info btn-rounded btn-sm waves-effect waves-light blue-gradient" (click)="dateChanged = true">Submit</button><br>
             </div>
           </form>
         </div>
@@ -29,14 +29,14 @@
             <div class="row">
               <div class="col-md-4 ">
                 <div class="md-form form-sm mb-0">
-                  <input type="text" class="form-control form-control-sm" [(ngModel)]=foundMovieData.imdb_id name="ImdbId"
-                    disabled>
+                  <input placeholder="–" type="text" class="form-control form-control-sm"
+                    [(ngModel)]=foundMovieData.imdb_id name="ImdbId" disabled>
                   <label class="">IMDB ID</label>
                 </div>
               </div>
               <div class="col-md-4">
                 <div class="md-form form-sm mb-0">
-                  <input type="text" class="form-control form-control-sm" [(ngModel)]=foundMovieData.id
+                  <input placeholder="–" type="text" class="form-control form-control-sm" [(ngModel)]=foundMovieData.id
                     name="TmdbId" disabled>
                   <label class="">TMDB ID</label>
                 </div>
@@ -53,15 +53,16 @@
             <div class="row">
               <div class="col-md-4 ">
                 <div class="md-form form-sm mb-0">
-                  <input type="text" class="form-control form-control-sm" [(ngModel)]=foundMovieData.release_date name="Date" required
-                    #dateInput="ngModel">
-                  <span class="valid-error" *ngIf="dateInput.hasError('required')">Field must not be empty</span>
-                  <label class="">Date</label>
+                  <input type="datetime-local" id="date-picker" class="form-control form-control-sm datepicker"
+                    [(ngModel)]=foundMovieData.release_date (click)="dateChanged = true" name="Date" required #dateInput="ngModel">
+                  <span class="valid-error" *ngIf="!dateChanged">Field must not be empty</span>
+                  <label for="date-picker">Release Date</label>
                 </div>
               </div>
               <div class="col-md-4">
                 <div class="md-form form-sm mb-0">
-                  <input type="text" class="form-control form-control-sm" [(ngModel)]=foundMovieData.production_countries[0].name  name="Country" required
+                  <input type="text" class="form-control form-control-sm"
+                    [(ngModel)]=foundMovieData.production_countries[0].name name="Country" required
                     #countryInput="ngModel">
                   <span class="valid-error" *ngIf="countryInput.hasError('required')">Field must not be empty</span>
                   <label class="">Country</label>
@@ -69,7 +70,8 @@
               </div>
               <div class="col-md-4">
                 <div class="md-form form-sm mb-0">
-                  <input type="text" class="form-control form-control-sm" [(ngModel)]=foundMovieData.vote_average name="IMDBRating">
+                  <input type="text" class="form-control form-control-sm" [(ngModel)]=foundMovieData.vote_average
+                    name="IMDBRating">
                   <label class="">IMDB Rating</label>
                 </div>
               </div>
@@ -77,8 +79,8 @@
             <div class="row">
               <div class="col-md-4">
                 <div class="md-form form-sm mb-0">
-                  <input type="text" class="form-control form-control-sm" [(ngModel)]=foundMovieCrew.crew[0].name name="Director" required
-                    #directorInput="ngModel">
+                  <input type="text" class="form-control form-control-sm" [(ngModel)]=foundMovieCrew.crew[0].name
+                    name="Director" required #directorInput="ngModel">
                   <span class="valid-error" *ngIf="directorInput.hasError('required')">Field must not be empty</span>
                   <label class="">Director</label>
                 </div>
@@ -86,7 +88,8 @@
               <div class="col-md-8">
                 <div class="md-form form-sm mb-0">
                   <input type="text" class="form-control form-control-sm" [(ngModel)]=foundPosterPath name="Poster">
-                  <input type="hidden" class="form-control form-control-sm" [(ngModel)]=foundBackdropPath name="Backdrop">
+                  <input type="hidden" class="form-control form-control-sm" [(ngModel)]=foundBackdropPath
+                    name="Backdrop">
                   <label class="">Link to a poster</label>
                 </div>
               </div>
@@ -125,8 +128,8 @@
             <div class="row">
               <div class="col-md-12">
                 <div class="md-form mb-0 text-dark">
-                  <textarea class="md-textarea form-control" rows="2" [(ngModel)]=foundMovieData.overview name="Overview" required
-                    #overviewInput="ngModel"></textarea>
+                  <textarea class="md-textarea form-control" rows="2" [(ngModel)]=foundMovieData.overview
+                    name="Overview" required #overviewInput="ngModel"></textarea>
                   <span class="valid-error" *ngIf="overviewInput.hasError('required')">Field must not be empty</span>
                   <label class="">Overview</label>
                 </div>

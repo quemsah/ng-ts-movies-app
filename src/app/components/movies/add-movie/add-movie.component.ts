@@ -5,8 +5,8 @@ import { TMDBService } from "../../../shared/services/tmdb/TMDB.service";
 import { AlertService } from "../../../shared/services/alert/alert.service";
 import { MovieService } from "../../../shared/services/movie/movie.service";
 import { ThemeService } from "../../../shared/services/theme/theme.service";
-import { forkJoin, of } from "rxjs";
-import { mergeMap, concatMap, map } from "rxjs/operators";
+
+declare var $: any;
 
 @Component({
   selector: "app-add-movie",
@@ -31,11 +31,12 @@ export class AddMovieComponent implements OnInit, AfterViewInit {
   foundMovieCrew = {
     crew: [{ name: "" }]
   };
-  foundPosterPath: string;
-  foundBackdropPath: string;
-  foundRuntime: string;
-  foundRevenue: string;
-  foundBudget: string;
+  foundPosterPath = "";
+  foundBackdropPath = "";
+  foundRuntime = "";
+  foundRevenue = "";
+  foundBudget = "";
+  dateChanged = false;
   genres = [
     { name: "Adventure", prefix: "g", selected: false, id: 12 },
     { name: "Animation", prefix: "g", selected: false, id: 16 },
@@ -62,6 +63,8 @@ export class AddMovieComponent implements OnInit, AfterViewInit {
   ngOnInit() {}
 
   ngAfterViewInit() {
+    // Data Picker Initialization
+    $(".datepicker").pickadate();
     this.themeService.checkDarkMode();
   }
   // Делается запрос к TMDB методом getMovieByIMDBID, который по индентификатору IMDB(строка) вовзращает
@@ -91,6 +94,9 @@ export class AddMovieComponent implements OnInit, AfterViewInit {
 
     // Переписан без подписки внутри подписки
     // Часть до подписки перенесена в TMDB.service
+    // и добавлено изменение полей к удобночитаемому виду (min,$)
+    // Это вынужденная мера, так как в случае форматирования на
+    // этапе вывода информации
 
     this.tmdbService
       .getMovieByIMDBID(form.value.ImdbId)
@@ -116,14 +122,6 @@ export class AddMovieComponent implements OnInit, AfterViewInit {
   }
 
   onAddMovieSubmit(form: NgForm) {
-    const genresArray = [];
-    // жанры в массив
-    // tslint:disable-next-line: forin
-    for (let propt in form.value) {
-      form.value[propt] === true && propt.startsWith("g") === true
-        ? genresArray.push(propt.substring(1))
-        : null;
-    }
     // приводим к нужному виду
     const movieData: Movie = {
       mid: this.movieService.generateMovieID(
@@ -137,7 +135,7 @@ export class AddMovieComponent implements OnInit, AfterViewInit {
         ? "USA"
         : form.value.Country,
       IMDBRating: form.value.IMDBRating,
-      genres: genresArray,
+      genres: this.movieService.genresToArray(form.value),
       director: form.value.Director,
       posterLink: form.value.Poster,
       backdropLink: form.value.Backdrop,
