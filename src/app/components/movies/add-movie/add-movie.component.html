@@ -11,7 +11,7 @@
             <div class="md-form mb-0">
               <input class="form-control" type="text" ngModel name="ImdbId">
               <label>IMDB ID</label>
-              <button class="btn btn-info btn-rounded btn-sm waves-effect waves-light blue-gradient" (click)="dateChanged = true">Submit</button><br>
+              <button class="btn btn-info btn-rounded btn-sm waves-effect waves-light blue-gradient">Submit</button><br>
             </div>
           </form>
         </div>
@@ -53,9 +53,9 @@
             <div class="row">
               <div class="col-md-4 ">
                 <div class="md-form form-sm mb-0">
-                  <input type="datetime-local" id="date-picker" class="form-control form-control-sm datepicker"
-                    [(ngModel)]=foundMovieData.release_date (click)="dateChanged = true" name="Date" #dateInput="ngModel">
-                  <span class="valid-error" *ngIf="!dateChanged">Field must not be empty</span>
+                  <input class="date-input" type="date" id="date-picker" class="form-control form-control-sm datepicker"
+                    [(ngModel)]=foundMovieData.release_date name="Date" required #dateInput="ngModel">
+                    <span class="valid-error" *ngIf="dateInput.hasError('required')">Field must not be empty</span>
                   <label for="date-picker">Release Date</label>
                 </div>
               </div>

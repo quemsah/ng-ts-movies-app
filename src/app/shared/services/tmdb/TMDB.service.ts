@@ -52,4 +52,9 @@ export class TMDBService {
       `${this.URL_MOVIE}/${movieId}/videos?api_key=${this.API_KEY}&language=en-US}`
     );
   }
+  getSimilarMoviesByTMDBID(movieId: number): Observable<any> {
+    return this.http.get<any>(
+      `${this.URL_MOVIE}/${movieId}/similar?api_key=${this.API_KEY}&language=en-US&page=1}`
+    );
+  }
 }

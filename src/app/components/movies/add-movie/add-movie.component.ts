@@ -37,7 +37,6 @@ export class AddMovieComponent implements OnInit, AfterViewInit {
   foundRuntime = "";
   foundRevenue = "";
   foundBudget = "";
-  dateChanged = false;
   genres = [
     { name: "Adventure", prefix: "g", selected: false, id: 12 },
     { name: "Animation", prefix: "g", selected: false, id: 16 },
@@ -65,14 +64,16 @@ export class AddMovieComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     // Data Picker Initialization
-    $(".datepicker").pickadate();
     this.themeService.checkDarkMode();
   }
+  
   // Делается запрос к TMDB методом getMovieByIMDBID, который по индентификатору IMDB(строка) вовзращает
   // информацию о фильме. Далее запрос getMovieDetailsByTMDBID по только что
   // полученному TMDB идентификатору(число) возвращает полную информацию о фильме
+
   onImdbIDSubmit(form: NgForm) {
     console.log(form.value);
+
     // this.tmdbService.getMovieByIMDBID(form.value.ImdbId).subscribe(data => {
     //   if (data.movie_results.length > 0) {
     //     forkJoin(
@@ -96,8 +97,9 @@ export class AddMovieComponent implements OnInit, AfterViewInit {
     // Переписан без подписки внутри подписки
     // Часть до подписки перенесена в TMDB.service
     // и добавлено изменение полей к удобночитаемому виду (min,$)
-    // Это вынужденная мера, так как в случае форматирования на
-    // этапе вывода информации
+    // Это вынужденная мера, так как в случае ручного добавления
+    // администратор может это делать в любом виде
+    // (иначе он будет переводить часы в минуты, $ в рубли и т.д.)
 
     this.tmdbService
       .getMovieByIMDBID(form.value.ImdbId)
@@ -124,6 +126,7 @@ export class AddMovieComponent implements OnInit, AfterViewInit {
 
   onAddMovieSubmit(form: NgForm) {
     // приводим к нужному виду
+    //console.log(form.value.Date);
     const movieData: Movie = {
       mid: this.movieService.generateMovieID(
         form.value.Date,
@@ -134,9 +137,10 @@ export class AddMovieComponent implements OnInit, AfterViewInit {
       dateAdded: Math.round(+new Date() / 1000),
       title: form.value.MovieName,
       releaseDate: form.value.Date,
-      country: form.value.Country = "United States of America"
-        ? "USA"
-        : form.value.Country,
+      country:
+        form.value.Country == "United States of America"
+          ? "USA"
+          : form.value.Country,
       IMDBRating: form.value.IMDBRating,
       genres: this.movieService.genresToArray(form.value),
       director: form.value.Director,

@@ -82,14 +82,12 @@
         <div class="tab-content card pt-5" id="myTabContentJust">
           <div class="tab-pane fade show active" id="home-just" role="tabpanel" aria-labelledby="home-tab-just">
             <div class="row">
-              <div class="col-xl-2 col-lg-3 col-md- col-sm-4 col-6 mb-4"
-                *ngFor="let actor of movieCrew; let i = index">
+              <div class="col-xl-2 col-lg-3 col-md- col-sm-4 col-6 mb-4" *ngFor="let actor of movieCrew; let i = index">
                 <div class="actor-card card align-items-center">
                   <div class="view overlay">
                     <img src="{{(actor[i].profile_path) 
                       ? 'https://image.tmdb.org/t/p/w138_and_h175_face'+actor[i].profile_path 
-                      : '../../../../assets/img/no_actor_img.jpg'}}" 
-                      class="card-img-top" alt="">
+                      : '../../../../assets/img/no_actor_img.jpg'}}" class="card-img-top" alt="">
                   </div>
                   <div class="card-body text-center">
                     <a href="" class="grey-text">
@@ -105,8 +103,9 @@
             <div class="row">
               <div class="col-xl-4 col-sm-6 col-xs-12 mb-4" *ngFor="let trailer of movieTrailers; let i = index">
                 <div class="embed-responsive embed-responsive-16by9">
-                    <!-- <p class="h6"><strong>{{trailer[i].key}}</strong></p> -->
-                  <iframe class="embed-responsive-item" [src]="sanitizer.bypassSecurityTrustResourceUrl(trailer[i].key)"></iframe>
+                  <!-- <p class="h6"><strong>{{trailer[i].key}}</strong></p> -->
+                  <iframe class="embed-responsive-item"
+                    [src]="sanitizer.bypassSecurityTrustResourceUrl(trailer[i].key)"></iframe>
                 </div>
               </div>
             </div>
@@ -116,193 +115,35 @@
     </div>
   </section>
   <!-- Similar movies -->
-  <!-- <section class="mb-4 mt-4">
+  <section class="mb-4 mt-4">
     <div class="row">
       <h2 class="profile-title col-lg-12 font-weight-bold mb-3"><strong>Similar movies
         </strong></h2>
-      <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+      <div class="col-lg-3 col-md-4 col-sm-6 mb-4" *ngFor="let smovie of movieSimilars; let i = index">
         <div class="card movie-card h-100">
           <div class="card-rating">
-            <a class="">7.3 <i class="far fa-star"> </i></a>
-          </div>
-          <div class="card-favourite">
-            <a class=""><i class="far fa-heart"></i></a>
-          </div>
-          <div class="card-watch-later">
-            <a class=""><i class="far fa-clock"></i></a>
+            <a class="">{{smovie[i].vote_average}} <i class="far fa-star"> </i></a>
           </div>
           <div class="view overlay">
-            <img
-              src="https://m.media-amazon.com/images/M/MV5BMjIyOTkyMDE5N15BMl5BanBnXkFtZTcwNjIwNzQwMw@@._V1_SX300.jpg"
-              class="card-img-top" alt="sample">
+            <img src="{{(smovie[i].poster_path) 
+                ? 'https://image.tmdb.org/t/p/w300_and_h450_bestv2'+smovie[i].poster_path 
+                : '../../../assets/img/no_poster_available.jpg'}}" class="card-img-top" alt="sample">
             <a>
               <div class="mask rgba-white-slight"></div>
             </a>
           </div>
           <div class="card-body">
             <a>
-              <h4 class="card-title">Dogtooth</h4>
+              <h4 class="card-title">{{smovie[i].title}}</h4>
             </a>
             <p></p>
             <hr>
-            <p class="card-text mb-0">Yorgos Lanthimos</p>
-            <p class="card-text mb-0">11 Nov 2009, Greece</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
-        <div class="card movie-card h-100">
-          <div class="card-rating">
-            <a class="">6.9 <i class="far fa-star"> </i></a>
-          </div>
-          <div class="card-favourite">
-            <a class=""><i class="far fa-heart"></i></a>
-          </div>
-          <div class="card-watch-later">
-            <a class=""><i class="far fa-clock"></i></a>
-          </div>
-          <div class="view overlay">
-            <img
-              src="https://m.media-amazon.com/images/M/MV5BY2VlODI5ZmMtZDExYS00OWI4LWJiMWItZWZkZWRkNzlmZWI2XkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg"
-              class="card-img-top" alt="sample">
-            <a>
-              <div class="mask rgba-white-slight"></div>
-            </a>
-          </div>
-          <div class="card-body">
-            <a>
-              <h4 class="card-title">Triangle</h4>
-            </a>
-            <p></p>
-            <hr>
-            <p class="card-text mb-0">Christopher Smith</p>
-            <p class="card-text mb-0">16 Oct 2009, UK, Australia</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
-        <div class="card movie-card h-100">
-          <div class="card-rating">
-            <a class="">7.3 <i class="far fa-star"> </i></a>
-          </div>
-          <div class="card-favourite">
-            <a class=""><i class="far fa-heart"></i></a>
-          </div>
-          <div class="card-watch-later">
-            <a class=""><i class="far fa-clock"></i></a>
-          </div>
-          <div class="view overlay">
-            <img src="https://m.media-amazon.com/images/M/MV5BMjE2NzgyNDYzNl5BMl5BanBnXkFtZTYwODM2Nzc2._V1_SX300.jpg"
-              class="card-img-top" alt="sample">
-            <a>
-              <div class="mask rgba-white-slight"></div>
-            </a>
-          </div>
-          <div class="card-body">
-            <a>
-              <h4 class="card-title">Identity</h4>
-            </a>
-            <p></p>
-            <hr>
-            <p class="card-text mb-0">James Mangold</p>
-            <p class="card-text mb-0">25 Apr 2003, USA</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
-        <div class="card movie-card h-100">
-          <div class="card-rating">
-            <a class="">8.8 <i class="far fa-star"> </i></a>
-          </div>
-          <div class="card-favourite">
-            <a class=""><i class="far fa-heart"></i></a>
-          </div>
-          <div class="card-watch-later">
-            <a class=""><i class="far fa-clock"></i></a>
-          </div>
-          <div class="view overlay">
-            <img
-              src="https://m.media-amazon.com/images/M/MV5BNThjM2Y3MDUtYTIyNC00ZDliLWJlMmItNWY1N2E5NjhmMGM4XkEyXkFqcGdeQXVyNjU2ODM5MjU@._V1_SX300.jpg"
-              class="card-img-top" alt="sample">
-            <a>
-              <div class="mask rgba-white-slight"></div>
-            </a>
-          </div>
-          <div class="card-body">
-            <a>
-              <h4 class="card-title">Westworld</h4>
-            </a>
-            <p></p>
-            <hr>
-            <p class="card-text mb-0">N/A</p>
-            <p class="card-text mb-0">02 Oct 2016, USA</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
-        <div class="card movie-card h-100">
-          <div class="card-rating">
-            <a class="">6.6 <i class="far fa-star"> </i></a>
-          </div>
-          <div class="card-favourite">
-            <a class=""><i class="far fa-heart"></i></a>
-          </div>
-          <div class="card-watch-later">
-            <a class=""><i class="far fa-clock"></i></a>
-          </div>
-          <div class="view overlay">
-            <img
-              src="https://m.media-amazon.com/images/M/MV5BMjE3MjQ2ODc1N15BMl5BanBnXkFtZTcwNjYyMzI5Mg@@._V1_SX300.jpg"
-              class="card-img-top" alt="sample">
-            <a>
-              <div class="mask rgba-white-slight"></div>
-            </a>
-          </div>
-          <div class="card-body">
-            <a>
-              <h4 class="card-title">Antichrist</h4>
-            </a>
-            <p></p>
-            <hr>
-            <p class="card-text mb-0">Lars von Trier</p>
-            <p class="card-text mb-0">20 May 2009, Denmark</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
-        <div class="card movie-card movie-card h-100">
-          <div class="card-rating">
-            <a class="">8.3 <i class="far fa-star"> </i></a>
-          </div>
-          <div class="card-favourite">
-            <a class=""><i class="far fa-heart"></i></a>
-          </div>
-          <div class="card-watch-later">
-            <a class=""><i class="far fa-clock"></i></a>
-          </div>
-          <div class="view overlay">
-            <img
-              src="https://m.media-amazon.com/images/M/MV5BZmExNmEwYWItYmQzOS00YjA5LTk2MjktZjEyZDE1Y2QxNjA1XkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg"
-              class="card-img-top" alt="sample">
-            <a>
-              <div class="mask rgba-white-slight"></div>
-            </a>
-          </div>
-          <div class="card-body">
-            <a>
-              <h4 class="card-title">Reservoir Dogs</h4>
-            </a>
-            <p></p>
-            <hr>
-            <p class="card-text mb-0">Quentin Tarantino</p>
-            <p class="card-text mb-0">02 Sep 1992, USA</p>
-            <div class="card-footer">
-            </div>
+            <p class="card-text mb-0">{{smovie[i].release_date  | date }}</p>
           </div>
         </div>
       </div>
     </div>
-  </section> -->
+  </section>
   <!-- Comments -->
   <!-- <section class="mb-4 mt-4">
     <div class="row">

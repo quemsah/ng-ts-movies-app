@@ -23,7 +23,7 @@ export class MovieComponent implements OnInit, AfterViewInit {
     private tmdbService: TMDBService,
     private titleService: Title,
     private themeService: ThemeService,
-    private sanitizer: DomSanitizer
+    public sanitizer: DomSanitizer
   ) {}
 
   ngOnInit(): void {
@@ -38,32 +38,31 @@ export class MovieComponent implements OnInit, AfterViewInit {
     this.movieService.fetchMovie(id).subscribe(movie => {
       this.movieData = movie;
       this.titleService.setTitle(this.movieData.title);
-      this.movieData.tmdb_id
-        ? this.getMovieCrew(parseInt(this.movieData.tmdb_id))
-        : null;
-      this.movieData.tmdb_id
-        ? this.getMovieTrailers(parseInt(this.movieData.tmdb_id))
-        : null;
+      let tmdb_id = this.movieData.tmdb_id;
+      tmdb_id ? this.getMovieCrew(parseInt(tmdb_id)) : null;
+      tmdb_id ? this.getMovieTrailers(parseInt(tmdb_id)) : null;
+      tmdb_id ? this.getSimilarMovies(parseInt(tmdb_id)) : null;
     });
   }
 
   getMovieCrew(id: number): void {
-    this.tmdbService.getMovieCrewbyTMDBID(id).subscribe(movieCrewData => {
-      this.movieCrew = this.movieService.sliceData(movieCrewData.cast, 12);
+    this.tmdbService.getMovieCrewbyTMDBID(id).subscribe(data => {
+      this.movieCrew = this.movieService.sliceData(data.cast, 12);
     });
   }
   getMovieTrailers(id: number): void {
-    this.tmdbService
-      .getMovieTrailersByTMDBID(id)
-      .subscribe(movieTrailersData => {
-        this.movieTrailers = this.movieService.sliceData(
-          movieTrailersData.results,
-          12
-        );
-        this.movieTrailers.forEach(function(value, i) {
-          value[i].key =
-            "https://www.youtube.com/embed/" + value[i].key + "?rel=0";
-        });
-      });
+    this.tmdbService.getMovieTrailersByTMDBID(id).subscribe(data => {
+      this.movieTrailers = this.movieService.sliceData(data.results, 12);
+      this.movieTrailers.forEach(
+        (value, i) =>
+          (value[i].key =
+            "https://www.youtube.com/embed/" + value[i].key + "?rel=0")
+      );
+    });
+  }
+  getSimilarMovies(id: number): void {
+    this.tmdbService.getSimilarMoviesByTMDBID(id).subscribe(data => {
+      this.movieSimilars = this.movieService.sliceData(data.results, 8);
+    });
   }
 }

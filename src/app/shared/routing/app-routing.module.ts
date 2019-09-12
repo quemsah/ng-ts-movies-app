@@ -62,7 +62,7 @@ const routes: Routes = [
   {
     path: "movie/:id",
     component: MovieComponent,
-    canActivate: [AuthGuard]
+    canActivate: [OuterPagesGuard]
   },
   {
     path: "movies",
