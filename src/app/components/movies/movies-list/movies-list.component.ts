@@ -3,6 +3,8 @@ import { Component, OnInit, AfterViewInit } from "@angular/core";
 import { ThemeService } from "../../../shared/services/theme/theme.service";
 import { MovieService } from "../../../shared/services/movie/movie.service";
 
+declare var $: any;
+
 @Component({
   selector: "app-movies-list",
   templateUrl: "./movies-list.component.html",
@@ -10,6 +12,8 @@ import { MovieService } from "../../../shared/services/movie/movie.service";
 })
 export class MoviesListComponent implements OnInit, AfterViewInit {
   movies: Movie[];
+  items = [];
+  pageOfItems: Array<any>;
   constructor(
     private movieService: MovieService,
     private themeService: ThemeService
@@ -17,22 +21,30 @@ export class MoviesListComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.getMovies();
+    //this.items = Array(150).fill(0).map((x, i) => ({ id: (i + 1), name: `Item ${i + 1}`}));
   }
   ngAfterViewInit() {
     this.themeService.checkDarkMode();
   }
-
-  // getMovie(): void {
-  //   const id = this.route.snapshot.paramMap.get("id");
-  //   this.movieService.getMovie(id).subscribe(movie => {
-  //     this.movieData = movie;
-  //     this.titleService.setTitle(this.movieData.title);
-  //   });
-  // }
-
+  handleListClick() {
+    document
+      .querySelectorAll(".movie-item")
+      .forEach(x => x.classList.add("list-item"));
+    //$(".movie-item").addClass("list-item");
+  }
+  handleGridClick() {
+    document
+      .querySelectorAll(".movie-item")
+      .forEach(x => x.classList.remove("list-item"));
+    //$(".movie-item").removeClass("list-item");
+  }
   getMovies(): void {
     this.movieService.fetchMovies().subscribe(movies => {
       this.movies = movies;
     });
   }
+  onChangePage(pageOfItems: Array<any>) {
+    // update current page of items
+    this.pageOfItems = pageOfItems;
+}
 }

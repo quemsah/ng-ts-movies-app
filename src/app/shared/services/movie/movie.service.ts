@@ -14,12 +14,19 @@ export class MovieService {
   ) {}
 
   generateMovieID = (date, moviename) =>
-    date.substring(0, 4) + "-" + moviename.replace(/\s+/g, "-").toLowerCase();
+    date.substring(0, 4) +
+    "-" +
+    moviename
+      .replace(/[^a-zA-Z0-9 ]/g, "") // удаляем символы всякие
+      .replace(/\s+/g, "-") // заменяем пробелы на тире
+      .toLowerCase();
+
   compareGenres = (genres, fetchedGenres) =>
     genres.map(x =>
       fetchedGenres.map(y => (x.id === y.id ? (x.selected = true) : null))
     );
-  sliceData = (object,num) =>
+
+  sliceData = (object, num) =>
     Object.keys(object)
       .slice(0, num)
       .map(key => ({ [key]: object[key] }));

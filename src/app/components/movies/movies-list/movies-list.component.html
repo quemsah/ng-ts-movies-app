@@ -6,10 +6,10 @@
       <div class="row select-by col-12 mb-2">
         <div class="col-sm-3 d-flex justify-content-start align-items-center">
           <div class="btn-movies-type btn-group">
-            <button id="grid" type="button" class="btn btn-sm blue-gradient btn-rounded">
+            <button id="grid" (click)="handleGridClick()" type="button" class="btn btn-sm blue-gradient btn-rounded">
               <i class="fas fa-table"></i>
             </button>
-            <button id="list" type="button" class="btn btn-sm blue-gradient btn-rounded">
+            <button id="list" (click)="handleListClick()" type="button" class="btn btn-sm blue-gradient btn-rounded">
               <i class="fas fa-list"></i>
             </button>
           </div>
@@ -36,7 +36,7 @@
           </div>
         </div>
       </div>
-      <div *ngFor="let movie of movies" class="movie-item col-lg-3 col-md-4 col-sm-6 mb-4">
+      <div *ngFor="let movie of pageOfItems" class="movie-item col-lg-3 col-md-4 col-sm-6 mb-4">
         <div class="card movie-card h-100">
           <div *ngIf="movie.IMDBRating" class="card-rating">
             <a class="">{{movie.IMDBRating}} <i class="far fa-star"> </i></a>
@@ -68,22 +68,12 @@
       </div>
     </div>
   </section>
-  <!-- Pagination -->
-  <!-- <section class="mb-4 mt-4">
-          <div class="col">
-            <nav>
-              <ul class="pagination pagination-lg justify-content-center ">
-                <li class="page-item disabled">
-                  <a class="page-link" tabindex="-1">Previous</a>
-                </li>
-                <li class="page-item"><a class="page-link">1</a></li>
-                <li class="page-item"><a class="page-link">2</a></li>
-                <li class="page-item"><a class="page-link">3</a></li>
-                <li class="page-item">
-                  <a class="page-link">Next</a>
-                </li>
-              </ul>
-            </nav>
-          </div>
-        </section> -->
+  <section class="mb-4 mt-4">
+    <div class="col">
+      <nav>
+        <jw-pagination class="pagination pagination-lg justify-content-center " [items]="movies" [pageSize]=12
+          (changePage)="onChangePage($event)"></jw-pagination>
+      </nav>
+    </div>
+  </section>
 </div>

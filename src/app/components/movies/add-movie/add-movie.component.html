@@ -36,8 +36,8 @@
               </div>
               <div class="col-md-4">
                 <div class="md-form form-sm mb-0">
-                  <input placeholder="–" type="text" class="form-control form-control-sm"
-                    [(ngModel)]=foundMovieData.id name="TmdbId">
+                  <input placeholder="–" type="text" class="form-control form-control-sm" [(ngModel)]=foundMovieData.id
+                    name="TmdbId">
                   <label class="">TMDB ID</label>
                 </div>
               </div>
@@ -55,7 +55,7 @@
                 <div class="md-form form-sm mb-0">
                   <input class="date-input" type="date" id="date-picker" class="form-control form-control-sm datepicker"
                     [(ngModel)]=foundMovieData.release_date name="Date" required #dateInput="ngModel">
-                    <span class="valid-error" *ngIf="dateInput.hasError('required')">Field must not be empty</span>
+                  <span class="valid-error" *ngIf="dateInput.hasError('required')">Field must not be empty</span>
                   <label for="date-picker">Release Date</label>
                 </div>
               </div>

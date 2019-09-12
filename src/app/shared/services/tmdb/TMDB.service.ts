@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable, forkJoin, of } from "rxjs";
 import { map, mergeMap } from "rxjs/operators";
-import { AlertService } from '../alert/alert.service';
+import { AlertService } from "../alert/alert.service";
 
 @Injectable()
 export class TMDBService {

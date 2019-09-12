@@ -44,5 +44,6 @@ export class AppComponent implements OnInit, AfterViewInit {
     });
     // инициализация боковое меню
     $(".button-collapse").sideNav({'closeOnClick': true});
+    // и кнопок смены вида
   }
 }

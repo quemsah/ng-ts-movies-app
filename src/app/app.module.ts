@@ -2,6 +2,7 @@ import { BrowserModule, Title } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { HttpClientModule } from "@angular/common/http";
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
+import { JwPaginationComponent } from 'jw-angular-pagination';
 // MatSnackBar (замена window.alert)
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
@@ -49,7 +50,8 @@ import { MoviesListComponent } from "./components/movies/movies-list/movies-list
     NavbarComponent,
     AddMovieComponent,
     MovieComponent,
-    MoviesListComponent
+    MoviesListComponent,
+    JwPaginationComponent
   ],
   imports: [
     HttpClientModule,
