@@ -61,7 +61,7 @@ export class MovieService {
       .catch(error => this.alertService.openWarningAlert(error.message, 2));
   }
 
-  addComment(commentData: Comment, mid) {
+  addComment(commentData: Comment, mid: string) {
     this.afs
       .collection(`movies/`)
       .doc(mid)
@@ -73,10 +73,23 @@ export class MovieService {
       )
       .catch(error => this.alertService.openWarningAlert(error.message, 2));
   }
-
+  deleteComment(cid: string, mid: string) {
+    this.afs
+      .collection(`movies/`)
+      .doc(mid)
+      .collection(`comments/`)
+      .doc(cid)
+      .delete()
+      .then(smth =>
+        this.alertService.openSuccessAlert("Comment successfully deleted", 1)
+      )
+      .catch(error => this.alertService.openWarningAlert(error.message, 2));
+  }
+  fetchComment(cid: string, mid: string): Observable<any> {
+    return this.afs.collection(`movies/${mid}/comments/${cid}/`).valueChanges();
+  }
   fetchComments(mid: string): Observable<any> {
-    return this.afs.collection(`movies/${mid}/comments`)
-      .valueChanges();
+    return this.afs.collection(`movies/${mid}/comments`).valueChanges();
   }
 
   fetchMovie(id: string): Observable<any> {

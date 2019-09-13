@@ -20,6 +20,7 @@ export class MovieComponent implements OnInit, AfterViewInit {
   movieCrew: any;
   movieTrailers: any;
   movieSimilars: any;
+  currentText: string;
 
   constructor(
     public authService: AuthService,
@@ -38,7 +39,9 @@ export class MovieComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     this.themeService.checkDarkMode();
   }
-
+  scroll(el: HTMLElement) {
+    el.scrollIntoView();
+  }
   getMovie(): void {
     const id = this.route.snapshot.paramMap.get("id");
     this.movieService.fetchMovie(id).subscribe(movie => {
@@ -88,5 +91,17 @@ export class MovieComponent implements OnInit, AfterViewInit {
     };
     this.movieService.addComment(commentData, this.movieData.mid);
     form.reset();
+  }
+  handleCommentEdit(event) {
+    const target = event.target || event.srcElement || event.currentTarget;
+    const cid = target.attributes.id.nodeValue;
+    const text = document.getElementById("t" + cid).innerText;
+    this.currentText = text;
+    this.movieService.deleteComment(cid, this.movieData.mid);
+  }
+  handleCommentDelete(event) {
+    const target = event.target || event.srcElement || event.currentTarget;
+    const cid = target.attributes.id.nodeValue;
+    this.movieService.deleteComment(cid, this.movieData.mid);
   }
 }

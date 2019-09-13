@@ -151,45 +151,24 @@
         <strong>Comments</strong>
       </h2>
       <div class="col-xl-6 col-xs-12 mb-4" *ngFor="let comment of movieComments">
-        <div class="question-card card mb-4">
+        <div id="{{comment.cid }}" class="question-card card mb-4">
           <div class="card-header blue-gradient d-flex justify-content-between">
             <p class="pt-2 mb-0 text-white">
               <strong><a class="h5 text-white" href="profile.html" target="_blank">{{comment.user_name}} </a></strong>
               <i class="fas fa-angle-double-left"></i> {{comment.date}}</p>
-            <div class="comment-btns d-flex flex-row-reverse flex-wrap">
-              <a type="button" class="btn btn-outline-danger btn-sm px-2 waves-effect">
-                <i class="far fa-trash-alt ml-1"></i>
+            <div class="comment-btns d-flex flex-row-reverse flex-wrap" *ngIf="user.uid === comment.user_id">
+              <a id="{{comment.cid}}" type="button" (click)="handleCommentDelete($event);scroll(cform);"
+                class="btn btn-outline-danger btn-sm px-2 waves-effect">
+                <i id="{{comment.cid}}" class="far fa-trash-alt ml-1"></i>
               </a>
-              <a type="button" class="btn btn-outline-white btn-sm px-2 waves-effect">
-                <i class="far fa-edit ml-1"></i>
-              </a>
-            </div>
-          </div>
-          <div class="card-body">
-              {{comment.text}}
-          </div>
-        </div>
-      </div>
-      <div class="col-xl-6 col-xs-12 mb-4">
-        <div class="question-card card mb-4">
-          <div class="card-header blue-gradient d-flex justify-content-between">
-            <p class="pt-2 mb-0 text-white">
-              <strong><a class="h5 text-white" href="profile.html" target="_blank">Outoftouch69 </a></strong>
-              <i class="fas fa-angle-double-left"></i> 13-08-2019</p>
-            <div class="comment-btns d-flex flex-row-reverse flex-wrap">
-              <a type="button" class="btn btn-outline-danger btn-sm px-2 waves-effect">
-                <i class="far fa-trash-alt ml-1"></i>
-              </a>
-              <a type="button" class="btn btn-outline-white btn-sm px-2 waves-effect">
-                <i class="far fa-edit ml-1"></i>
+              <a id="{{comment.cid}}" type="button" (click)="handleCommentEdit($event);scroll(cform);"
+                class="btn btn-outline-white btn-sm px-2 waves-effect">
+                <i id="{{comment.cid}}" class="far fa-edit ml-1"></i>
               </a>
             </div>
           </div>
-          <div class="card-body">
-            Если бы меня попросили охарактеризовать этот фильм одним словом, пожалуй, наиболее подходящее здесь
-            слово 'незабываемый'. Для меня он идеален, и забыть его не возможно. Особое внимание, как и во многих
-            фильмах 'мастера' было уделено сценарию. С интересными, живыми, лёгкими диалогами не заскучает никто, а
-            разделение фильма на три истории заставят досмотреть до конца каждого.
+          <div id="t{{comment.cid}}"class="card-body">
+            {{comment.text}}
           </div>
         </div>
       </div>
@@ -202,11 +181,11 @@
               <strong><a class="h5 text-white" target="_blank">Leave a comment as
                   {{user.displayName}}</a></strong>
           </div>
-          <div class="card-body">
+          <div #cform class="card-body">
             <form #fAddComment="ngForm" (ngSubmit)="handleAddComment(fAddComment)">
               <div class="form-group">
                 <label for="replyFormComment">Your comment</label>
-                <textarea type="text" class="form-control" ngModel name="CommentText" rows="3"></textarea>
+                <textarea type="text" class="form-control" [(ngModel)]=currentText name="CommentText" rows="3"></textarea>
               </div>
               <div class="text-center mt-2">
                 <button class="btn btn-info btn-md blue-gradient" type="submit">Post</button>
