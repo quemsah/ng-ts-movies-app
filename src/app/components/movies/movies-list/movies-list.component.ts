@@ -3,8 +3,6 @@ import { Component, OnInit, AfterViewInit } from "@angular/core";
 import { ThemeService } from "../../../shared/services/theme/theme.service";
 import { MovieService } from "../../../shared/services/movie/movie.service";
 
-declare var $: any;
-
 @Component({
   selector: "app-movies-list",
   templateUrl: "./movies-list.component.html",
@@ -13,7 +11,7 @@ declare var $: any;
 export class MoviesListComponent implements OnInit, AfterViewInit {
   movies: Movie[];
   items = [];
-  pageOfItems: Array<any>;
+  pageOfItems: Array<Movie>;
   constructor(
     private movieService: MovieService,
     private themeService: ThemeService
@@ -43,8 +41,7 @@ export class MoviesListComponent implements OnInit, AfterViewInit {
       this.movies = movies;
     });
   }
-  onChangePage(pageOfItems: Array<any>) {
-    // update current page of items
+  onChangePage(pageOfItems: Array<Movie>) {
     this.pageOfItems = pageOfItems;
 }
 }

@@ -6,8 +6,6 @@ import { AlertService } from "../../../shared/services/alert/alert.service";
 import { MovieService } from "../../../shared/services/movie/movie.service";
 import { ThemeService } from "../../../shared/services/theme/theme.service";
 
-declare var $: any;
-
 @Component({
   selector: "app-add-movie",
   templateUrl: "./add-movie.component.html",

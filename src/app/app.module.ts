@@ -24,6 +24,7 @@ import { AppComponent } from "./app.component";
 import { LoginComponent } from "./components/users/login/login.component";
 import { RegisterComponent } from "./components/users/register/register.component";
 import { ProfileComponent } from "./components/users/profile/profile.component";
+import { FriendsComponent } from './components/users/friends/friends.component';
 import { ForgotPasswordComponent } from "./components/users/forgot-password/forgot-password.component";
 import { VerifyEmailComponent } from "./components/users/verify-email/verify-email.component";
 import { FooterComponent } from "./components/footer/footer.component";
@@ -51,7 +52,8 @@ import { MoviesListComponent } from "./components/movies/movies-list/movies-list
     AddMovieComponent,
     MovieComponent,
     MoviesListComponent,
-    JwPaginationComponent
+    JwPaginationComponent,
+    FriendsComponent
   ],
   imports: [
     HttpClientModule,

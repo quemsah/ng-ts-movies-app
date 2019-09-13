@@ -8,6 +8,7 @@ import { OuterPagesGuard } from "../../shared/guard/outer-pages.guard";
 import { LoginComponent } from "../../components/users/login/login.component";
 import { RegisterComponent } from "../../components/users/register/register.component";
 import { ProfileComponent } from "../../components/users/profile/profile.component";
+import { FriendsComponent } from "src/app/components/users/friends/friends.component";
 import { ForgotPasswordComponent } from "../../components/users/forgot-password/forgot-password.component";
 import { VerifyEmailComponent } from "../../components/users/verify-email/verify-email.component";
 import { AboutComponent } from "../../components/about/about.component";
@@ -33,6 +34,12 @@ const routes: Routes = [
     path: "profile",
     component: ProfileComponent,
     data: { title: "Profile" },
+    canActivate: [AuthGuard]
+  },
+  {
+    path: "friends",
+    component: FriendsComponent,
+    data: { title: "Friends" },
     canActivate: [AuthGuard]
   },
   {
