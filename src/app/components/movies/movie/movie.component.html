@@ -150,7 +150,7 @@
       <h2 class="profile-title col-lg-12 font-weight-bold mb-3">
         <strong>Comments</strong>
       </h2>
-      <div class="col-xl-6 col-xs-12 mb-4" *ngFor="let comment of movieComments">
+      <div class="col-xl-4 col-md-6 col-xs-12 mb-4" *ngFor="let comment of movieComments">
         <div id="{{comment.cid }}" class="question-card card mb-4">
           <div class="card-header blue-gradient d-flex justify-content-between">
             <p class="pt-2 mb-0 text-white">
@@ -167,7 +167,7 @@
               </a>
             </div>
           </div>
-          <div id="t{{comment.cid}}"class="card-body">
+          <div id="t{{comment.cid}}" class="card-body">
             {{comment.text}}
           </div>
         </div>
@@ -185,7 +185,8 @@
             <form #fAddComment="ngForm" (ngSubmit)="handleAddComment(fAddComment)">
               <div class="form-group">
                 <label for="replyFormComment">Your comment</label>
-                <textarea type="text" class="form-control" [(ngModel)]=currentText name="CommentText" rows="3"></textarea>
+                <textarea type="text" class="form-control" [(ngModel)]=currentText name="CommentText"
+                  rows="3"></textarea>
               </div>
               <div class="text-center mt-2">
                 <button class="btn btn-info btn-md blue-gradient" type="submit">Post</button>

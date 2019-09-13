@@ -24,12 +24,12 @@ export class MovieComponent implements OnInit, AfterViewInit {
 
   constructor(
     public authService: AuthService,
+    public sanitizer: DomSanitizer,
     private route: ActivatedRoute,
     private movieService: MovieService,
     private tmdbService: TMDBService,
     private titleService: Title,
-    private themeService: ThemeService,
-    public sanitizer: DomSanitizer
+    private themeService: ThemeService
   ) {}
 
   ngOnInit(): void {
