@@ -1,3 +1,4 @@
+import { Comment } from "./../../models/comment";
 import { Movie } from "../../models/movie";
 import { Injectable } from "@angular/core";
 import { AngularFirestore } from "@angular/fire/firestore";
@@ -19,6 +20,12 @@ export class MovieService {
     moviename
       .replace(/[^a-zA-Z0-9 ]/g, "") // удаляем символы всякие
       .replace(/\s+/g, "-") // заменяем пробелы на тире
+      .toLowerCase();
+
+  generateCommentID = date =>
+    date
+      .replace(/[^a-zA-Z0-9 ]/g, "") // удаляем символы всякие
+      .replace(/\s+/g, "") // заменяем пробелы на тире
       .toLowerCase();
 
   compareGenres = (genres, fetchedGenres) =>
@@ -52,6 +59,24 @@ export class MovieService {
         this.alertService.openSuccessAlert("Movie successfully added", 1)
       )
       .catch(error => this.alertService.openWarningAlert(error.message, 2));
+  }
+
+  addComment(commentData: Comment, mid) {
+    this.afs
+      .collection(`movies/`)
+      .doc(mid)
+      .collection(`comments/`)
+      .doc(commentData.cid)
+      .set(commentData)
+      .then(smth =>
+        this.alertService.openSuccessAlert("Comment successfully added", 1)
+      )
+      .catch(error => this.alertService.openWarningAlert(error.message, 2));
+  }
+
+  fetchComments(mid: string): Observable<any> {
+    return this.afs.collection(`movies/${mid}/comments`)
+      .valueChanges();
   }
 
   fetchMovie(id: string): Observable<any> {
