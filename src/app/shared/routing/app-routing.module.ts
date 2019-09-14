@@ -49,7 +49,7 @@ const routes: Routes = [
     canActivate: [InnerPagesGuard]
   },
   {
-    path: "verify-email-address",
+    path: "verify-email",
     component: VerifyEmailComponent,
     data: { title: "Verify E-mail address" },
     canActivate: [InnerPagesGuard]

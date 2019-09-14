@@ -46,7 +46,7 @@ export class AuthService {
   // Залогинен ли юзер?
   get isLoggedIn(): boolean {
     const user = JSON.parse(localStorage.getItem("user"));
-    return user !== null ? true : false;
+    return (user !== null && user.emailVerified !== false) ? true : false;
   }
   // Текущий пользователь
   get currentUser() {
@@ -126,7 +126,7 @@ export class AuthService {
 
   SendVerificationMail() {
     return this.currentUser.sendEmailVerification().then(() => {
-      this.router.navigate(["verify-email-address"]);
+      this.router.navigate(["verify-email"]);
     });
   }
 

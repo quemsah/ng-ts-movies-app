@@ -24,7 +24,10 @@ export class InnerPagesGuard implements CanActivate {
     state: RouterStateSnapshot
   ): Observable<boolean> | Promise<boolean> | boolean {
     this.themeService.forceDisableDarkModeBeforeRoute();
+    console.log("Inner guard!");
     if (this.authService.isLoggedIn) {
+      console.log(this.authService.userData.emailVerified)
+      console.log("this.authService.isLoggedIn =  true");
       // window.alert("You are not allowed to access this URL!");
       this.router.navigate(["profile"]);
     }
