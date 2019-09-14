@@ -11,6 +11,7 @@ import { AngularFireStorage } from "@angular/fire/storage";
 import { Router } from "@angular/router";
 import { finalize } from "rxjs/operators";
 import { AlertService } from "../alert/alert.service";
+import { Observable } from "rxjs";
 
 @Injectable({
   providedIn: "root"
@@ -43,18 +44,24 @@ export class AuthService {
 
   errCatching = error => this.alertService.openWarningAlert(error.message, 2);
 
+  // fetchFriends(): Observable<any> {
+  //   return this.afs.collection(`users/${this.userData.uid}/friends`).valueChanges();
+  // }
   // Залогинен ли юзер?
   get isLoggedIn(): boolean {
     const user = JSON.parse(localStorage.getItem("user"));
-    return (user !== null && user.emailVerified !== false) ? true : false;
+    return user !== null && user.emailVerified !== false ? true : false;
   }
   // Текущий пользователь
   get currentUser() {
     return this.afAuth.auth.currentUser;
   }
-  // Ссылка на коллекцию
+  // Ссылка на документ
   get profileRef() {
     return this.afs.doc(`users/${this.currentUser.uid}`);
+  }
+  get friendsRef() {
+    return this.afs.collection(`users/${this.userData.uid}/friends`);
   }
 
   SignIn(email, password) {
@@ -153,7 +160,7 @@ export class AuthService {
   }
 
   MicrosoftAuth() {
-    return this.AuthLogin(new auth.OAuthProvider('microsoft.com'));
+    return this.AuthLogin(new auth.OAuthProvider("microsoft.com"));
   }
 
   AuthLogin(provider) {

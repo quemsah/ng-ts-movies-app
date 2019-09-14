@@ -2,7 +2,7 @@ import { BrowserModule, Title } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { HttpClientModule } from "@angular/common/http";
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
-import { JwPaginationComponent } from 'jw-angular-pagination';
+import { JwPaginationComponent } from "jw-angular-pagination";
 // MatSnackBar (замена window.alert)
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
@@ -18,13 +18,13 @@ import { environment } from "../environments/environment";
 // Сервисы
 import { AuthService } from "./shared/services/auth/auth.service";
 import { TMDBService } from "./shared/services/tmdb/TMDB.service";
-import { ThemeService } from './shared/services/theme/theme.service';
+import { ThemeService } from "./shared/services/theme/theme.service";
 // Компоненты
 import { AppComponent } from "./app.component";
 import { LoginComponent } from "./components/users/login/login.component";
 import { RegisterComponent } from "./components/users/register/register.component";
 import { ProfileComponent } from "./components/users/profile/profile.component";
-import { FriendsComponent } from './components/users/friends/friends.component';
+import { FriendsComponent } from "./components/users/friends/friends.component";
 import { ForgotPasswordComponent } from "./components/users/forgot-password/forgot-password.component";
 import { VerifyEmailComponent } from "./components/users/verify-email/verify-email.component";
 import { FooterComponent } from "./components/footer/footer.component";
@@ -67,7 +67,13 @@ import { MoviesListComponent } from "./components/movies/movies-list/movies-list
     ReactiveFormsModule,
     MatSnackBarModule
   ],
-  providers: [AuthService, AngularFireStorage, TMDBService, Title, ThemeService],
+  providers: [
+    AuthService,
+    AngularFireStorage,
+    TMDBService,
+    Title,
+    ThemeService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

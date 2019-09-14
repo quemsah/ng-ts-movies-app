@@ -1,7 +1,6 @@
-import { Component, OnInit, AfterViewInit, NgZone } from "@angular/core";
+import { Component, OnInit, AfterViewInit } from "@angular/core";
 import { ThemeService } from "../../../shared/services/theme/theme.service";
 import { AuthService } from "../../../shared/services/auth/auth.service";
-import { Router } from "@angular/router";
 import { NgForm } from "@angular/forms";
 
 @Component({
@@ -12,8 +11,6 @@ import { NgForm } from "@angular/forms";
 export class ProfileComponent implements OnInit, AfterViewInit {
   constructor(
     public authService: AuthService,
-    private router: Router,
-    private ngZone: NgZone,
     private themeService: ThemeService
   ) {}
 
