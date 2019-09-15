@@ -125,7 +125,7 @@ export class AuthService {
           // });
           // и обновляем в AngularFirestore
           this.profileRef.set({ displayName: newName }, { merge: true });
-          this.alertService.openSuccessAlert("Name successfully changed!", 1);
+          this.alertService.openSuccessAlert("Name successfully changed!", 2);
         })
         .catch(this.errCatching)
     );

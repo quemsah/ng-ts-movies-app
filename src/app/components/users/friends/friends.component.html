@@ -39,7 +39,8 @@
         </div>
         <div class="card-foter text-right my-2 mr-2">
           <button class="btn btn-info btn-rounded btn-sm waves-effect waves-light blue-gradient">Movies</button>
-          <button class="btn btn-danger btn-rounded btn-sm waves-effect waves-light">Delete</button>
+          <button id="{{item.value.fid}}" class="btn btn-danger btn-rounded btn-sm waves-effect waves-light"
+            (click)="handleRequestDelete($event)">Delete</button>
         </div>
       </div>
     </div>
@@ -58,7 +59,8 @@
           </div>
         </div>
         <div class="card-foter text-right my-2 mr-2">
-          <button class="btn btn-success btn-rounded btn-sm waves-effect waves-light">Accept</button>
+          <button id="{{item.value.fid}}" class="btn btn-success btn-rounded btn-sm waves-effect waves-light"
+            (click)="handleRequestAccept($event)">Accept</button>
           <button id="{{item.value.fid}}" class="btn btn-danger btn-rounded btn-sm waves-effect waves-light"
             (click)="handleRequestDelete($event)">Decline</button>
         </div>

@@ -56,7 +56,7 @@ export class MovieService {
       .doc(movieData.mid)
       .set(movieData)
       .then(smth =>
-        this.alertService.openSuccessAlert("Movie successfully added", 1)
+        this.alertService.openSuccessAlert("Movie successfully added", 2)
       )
       .catch(error => this.alertService.openWarningAlert(error.message, 2));
   }
@@ -69,7 +69,7 @@ export class MovieService {
       .doc(commentData.cid)
       .set(commentData)
       .then(smth =>
-        this.alertService.openSuccessAlert("Comment successfully added", 1)
+        this.alertService.openSuccessAlert("Comment successfully added", 2)
       )
       .catch(error => this.alertService.openWarningAlert(error.message, 2));
   }
@@ -81,7 +81,7 @@ export class MovieService {
       .doc(cid)
       .delete()
       .then(smth =>
-        this.alertService.openSuccessAlert("Comment successfully deleted", 1)
+        this.alertService.openSuccessAlert("Comment successfully deleted", 2)
       )
       .catch(error => this.alertService.openWarningAlert(error.message, 2));
   }

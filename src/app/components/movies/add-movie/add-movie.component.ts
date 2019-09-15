@@ -117,7 +117,7 @@ export class AddMovieComponent implements OnInit, AfterViewInit {
           this.movieService.compareGenres(this.genres, detailData.genres);
           this.foundMovieCrew = crewData;
         } else {
-          this.alertService.openWarningAlert("Wrong ID!", 1);
+          this.alertService.openWarningAlert("Wrong ID!", 2);
         }
       });
   }

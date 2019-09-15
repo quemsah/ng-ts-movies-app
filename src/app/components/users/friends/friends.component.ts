@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { NgForm } from "@angular/forms";
 import { UserService } from "../../../shared/services/user/user.service";
 import { AuthService } from "../../../shared/services/auth/auth.service";
-import { Observable } from "rxjs";
+import { Friends } from "../../../shared/models/friends";
 
 @Component({
   selector: "app-friends",
@@ -10,10 +10,9 @@ import { Observable } from "rxjs";
   styleUrls: ["./friends.component.css"]
 })
 export class FriendsComponent implements OnInit {
-  //убрать any
-  friends: any;
-  outRequests: any;
-  inRequests: any;
+  friends: Friends;
+  outRequests: Friends;
+  inRequests: Friends;
   constructor(
     public authService: AuthService,
     private userService: UserService
@@ -30,7 +29,7 @@ export class FriendsComponent implements OnInit {
   ngOnInit() {
     this.getFriends();
   }
-
+  // добавляем к сухим айдишниками информацию о друзьях/запросах
   getFriendsInfo(friendsData: any) {
     Object.keys(friendsData).filter(key => {
       this.userService.getUserInfo(friendsData[key].fid).subscribe(data => {
@@ -61,10 +60,15 @@ export class FriendsComponent implements OnInit {
     this.userService.addFriend(form.value.friendsEmail);
     form.reset();
   }
-
+  // удаляет и запросы в друзья и друзей в целом
   handleRequestDelete(event) {
     const target = event.target || event.srcElement || event.currentTarget;
     const fid = target.attributes.id.nodeValue;
     this.userService.deleteRequests(fid);
+  }
+  handleRequestAccept(event) {
+    const target = event.target || event.srcElement || event.currentTarget;
+    const fid = target.attributes.id.nodeValue;
+    this.userService.acceptRequests(fid);
   }
 }

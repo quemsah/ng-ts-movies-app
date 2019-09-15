@@ -21,7 +21,7 @@ export class TMDBService {
         map(answer =>
           answer.movie_results.length > 0
             ? answer
-            : this.alertService.openWarningAlert("Wrong ID!", 1)
+            : this.alertService.openWarningAlert("Wrong ID!", 2)
         )
       )
       .pipe(
