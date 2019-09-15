@@ -35,6 +35,7 @@ import { SidenavComponent } from "./components/sidenav/sidenav.component";
 import { NavbarComponent } from "./components/navbar/navbar.component";
 import { MovieComponent } from "./components/movies/movie/movie.component";
 import { MoviesListComponent } from "./components/movies/movies-list/movies-list.component";
+import { EditMovieComponent } from './components/movies/edit-movie/edit-movie.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { MoviesListComponent } from "./components/movies/movies-list/movies-list
     MovieComponent,
     MoviesListComponent,
     JwPaginationComponent,
-    FriendsComponent
+    FriendsComponent,
+    EditMovieComponent
   ],
   imports: [
     HttpClientModule,

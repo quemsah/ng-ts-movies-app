@@ -10,8 +10,8 @@ import { MovieService } from "../../../shared/services/movie/movie.service";
 })
 export class MoviesListComponent implements OnInit, AfterViewInit {
   movies: Movie[];
-  items = [];
   pageOfItems: Array<Movie>;
+  searchValue: string = "";
   constructor(
     private movieService: MovieService,
     private themeService: ThemeService
@@ -19,29 +19,46 @@ export class MoviesListComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.getMovies();
-    //this.items = Array(150).fill(0).map((x, i) => ({ id: (i + 1), name: `Item ${i + 1}`}));
   }
+
   ngAfterViewInit() {
     this.themeService.checkDarkMode();
   }
+
   handleListClick() {
     document
       .querySelectorAll(".movie-item")
       .forEach(x => x.classList.add("list-item"));
-    //$(".movie-item").addClass("list-item");
   }
+
   handleGridClick() {
     document
       .querySelectorAll(".movie-item")
       .forEach(x => x.classList.remove("list-item"));
-    //$(".movie-item").removeClass("list-item");
   }
+
   getMovies(): void {
-    this.movieService.fetchMovies().subscribe(movies => {
+    // this.movieService.fetchMovies(this.searchValue).subscribe(movies => {
+    //   console.log('get movies');
+    //   this.movies = movies;
+    // });
+  }
+
+  searchByName(): void {
+    const value = this.searchValue;
+    console.log(value);
+    this.movieService.fetchMovies(this.searchValue).subscribe(movies => {
+      console.log('getting movies');
       this.movies = movies;
     });
+    // this.firebaseService.searchUsers(value)
+    // .subscribe(result => {
+    //   this.name_filtered_items = result;
+    //   this.items = this.combineLists(result, this.age_filtered_items);
+    // })
   }
+
   onChangePage(pageOfItems: Array<Movie>) {
     this.pageOfItems = pageOfItems;
-}
+  }
 }

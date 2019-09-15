@@ -31,7 +31,11 @@
             </select>
           </div>
           <div class="md-form form-sm mb-0 mr-2">
-            <input type="text" id="form3" class="form-control form-control-sm">
+            <input type="text" id="form3" class="form-control form-control-sm" [(ngModel)]="searchValue"
+              [ngModelOptions]="{standalone: true}" placeholder="что-то аыа" (keyup)="searchByName()">
+            <!-- <input type="text" class="form-control" [(ngModel)]="searchValue" 
+              [ngModelOptions]="{standalone: true}" placeholder="Search by name..."
+               (keyup)="searchByName()"> -->
             <label for="form3" class="">Filter</label>
           </div>
         </div>

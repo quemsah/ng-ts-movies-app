@@ -96,9 +96,34 @@ export class MovieService {
     return this.afs.doc(`movies/${id}`).valueChanges();
   }
 
-  fetchMovies(): Observable<any> {
+  // fetchMovies(filterValue: string): Observable<any> {
+  //   return this.afs
+  //     .collection("movies", ref => ref.orderBy("dateAdded"))
+  //     .valueChanges();
+  // }
+
+  fetchMovies(filterValue: string): Observable<any> {
+    let val = filterValue.toLowerCase();
     return this.afs
-      .collection("movies", ref => ref.orderBy("dateAdded"))
+      .collection("movies", ref =>
+        ref
+          .where("releaseDate", ">=", filterValue)
+          .where("releaseDate", "<=", filterValue + "\uf8ff")
+      )
       .valueChanges();
   }
+
+  //  .collection('users',ref => ref.where('nameToSearch', '>=', searchValue)
+  //   .where('nameToSearch', '<=', searchValue + '\uf8ff'))
+
+  // fetchMovies(filterValue: string): Observable<any> {
+  //   return this.afs
+  //     .collection("movies", ref =>
+  //       ref
+  //         .orderBy("dateAdded")
+  //         .startAt('T')
+  //         .endAt('T' + "\uf8ff")
+  //     )
+  //     .valueChanges();
+  // }
 }
