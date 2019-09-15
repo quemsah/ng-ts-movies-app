@@ -23,19 +23,19 @@
     </div>
   </div>
 
-  <span>{{friends | json}}</span>
-  <span>{{inRequests | json}}</span>
-  <span>{{outRequests | json}}</span>
-
+  <!-- <span>{{friends | json}}</span>
+  <span>{{inRequests | json}}</span> -->
+  <!-- <span>(friends | json) != ({} | json)</span> -->
+  <!-- *ngIf="Object.keys(friends).length === 0" -->
   <div class="row mt-2">
-    <h2 class="profile-title col-lg-12 mt-lg-12 font-weight-bold"><strong>Friends</strong></h2>
-
-    <div class="col-xl-4 col-md-6 mb-xl-0 my-4">
-      <div class="friend-card card card-cascade cascading-admin-card">
+    <h2 class="profile-title col-lg-12 mt-lg-12 font-weight-bold" *ngIf="(friends | json) != '{}'"><strong>Friends</strong></h2>
+    <div class="col-xl-4 col-md-6 mb-xl-0">
+      <div class="friend-card card card-cascade cascading-admin-card mt-5" *ngFor="let item of friends | keyvalue">
         <div class="admin-up">
-          <img src="../img/avatars/a1.jpg" alt="User Photo" class="z-depth-1 mb-0 mx-auto">
+          <img src="{{(item.value.photoURL) ? item.value.photoURL : '../../../assets/img/avatars/user.png'}}"
+          alt="User Photo"class="z-depth-1 mb-0 mx-auto">
           <div class="data p-0">
-            <h4 class="font-weight-bold">DarkMoon</h4>
+              <h5 class="font-weight-bold">{{item.value.displayName}}</h5>
           </div>
         </div>
         <div class="card-foter text-right my-2 mr-2">
@@ -48,35 +48,35 @@
 
   <div class="row mt-2">
     <div class="col-md-6 mt-4">
-      <h2 class="profile-title col-lg-12 mt-lg-12 mt-4 font-weight-bold"><strong>Incoming requests</strong></h2>
-      <div class="friend-card card card-cascade cascading-admin-card" *ngFor="let item of inRequests | keyvalue">
+      <h2 class="profile-title col-lg-12 mt-lg-12 mt-4 font-weight-bold" *ngIf="(inRequests | json) != '{}'"><strong>Incoming requests</strong></h2>
+      <div class="friend-card card card-cascade cascading-admin-card mt-5" *ngFor="let item of inRequests | keyvalue">
         <div class="admin-up">
-          <img src="../img/avatars/a6.jpg" alt="User Photo" class="z-depth-1 mb-0 mx-auto">
+          <img src="{{(item.value.photoURL) ? item.value.photoURL : '../../../assets/img/avatars/user.png'}}"
+            alt="User Photo" class="z-depth-1 mb-0 mx-auto">
           <div class="data p-0">
-            <h4 class="font-weight-bold">aneye</h4>
+            <h5 class="font-weight-bold">{{item.value.displayName}}</h5>
           </div>
         </div>
         <div class="card-foter text-right my-2 mr-2">
-          <button class="btn btn-success btn-rounded btn-sm waves-effect waves-light">{{item.key}}</button>
-          <button class="btn btn-danger btn-rounded btn-sm waves-effect waves-light">{{item.value}}</button>
+          <button class="btn btn-success btn-rounded btn-sm waves-effect waves-light">Accept</button>
+          <button class="btn btn-danger btn-rounded btn-sm waves-effect waves-light">Decline</button>
         </div>
       </div>
     </div>
     <div class="col-md-6 mt-4">
-      <h2 class="profile-title col-lg-12 mt-lg-12 mt-4 font-weight-bold"><strong>Outcoming requests</strong></h2>
-      <div class="friend-card card card-cascade cascading-admin-card" *ngFor="let item of outRequests | keyvalue">
+      <h2 class="profile-title col-lg-12 mt-lg-12 mt-4 font-weight-bold" *ngIf="(outRequests | json) != '{}'"><strong>Outcoming requests</strong></h2>
+      <div class="friend-card card card-cascade cascading-admin-card mt-5" *ngFor="let item of outRequests | keyvalue">
         <div class="admin-up">
-          <img src="../img/avatars/a6.jpg" alt="User Photo" class="z-depth-1 mb-0 mx-auto">
+          <img src="{{(item.value.photoURL) ? item.value.photoURL : '../../../assets/img/avatars/user.png'}}"
+            alt="User Photo" class="z-depth-1 mb-0 mx-auto">
           <div class="data p-0">
-            <h4 class="font-weight-bold">aneye</h4>
+            <h5 class="font-weight-bold">{{item.value.displayName}}</h5>
           </div>
         </div>
         <div class="card-foter text-right my-2 mr-2">
-          <button class="btn btn-success btn-rounded btn-sm waves-effect waves-light">{{item.key}}</button>
-          <button class="btn btn-danger btn-rounded btn-sm waves-effect waves-light">{{item.value}}</button>
+          <button class="btn btn-danger btn-rounded btn-sm waves-effect waves-light">Cancel</button>
         </div>
       </div>
     </div>
   </div>
-
 </div>

@@ -8,15 +8,6 @@ import { AuthService } from "../auth/auth.service";
   providedIn: "root"
 })
 export class UserService {
-  //uid: string;
-  constructor(
-    private afs: AngularFirestore,
-    private alertService: AlertService,
-    private authService: AuthService
-  ) {
-    //this.uid = this.authService.userData.uid;
-  }
-
   // Мы с тобой решили, что в юзерах будут inRequests, OutRequests и friends,
   // так вот я начал эти все реквесты делать и присел немношк и ко мне пришла идея
   // При добавлении в друзья у обоих пользователей ставить во user/friends
@@ -27,6 +18,11 @@ export class UserService {
   // На этапе отображения если айдишник друга = айдишник инициатора и false, то это исходящий непринятый
   // На этапе отображения если айдишник друга != айдишник инициатора и false, то это входящий непринятый
   // Есть шанс провала?
+  constructor(
+    private afs: AngularFirestore,
+    private alertService: AlertService,
+    private authService: AuthService
+  ) {}
   // fetchFriends(): Observable<any> {
   //   return this.afs.collection(`users/${this.uid}/friends`).valueChanges();
   // }

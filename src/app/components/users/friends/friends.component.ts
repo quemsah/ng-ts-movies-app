@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { NgForm } from "@angular/forms";
 import { UserService } from "../../../shared/services/user/user.service";
 import { AuthService } from "../../../shared/services/auth/auth.service";
+import { Observable } from "rxjs";
 
 @Component({
   selector: "app-friends",
@@ -30,21 +31,33 @@ export class FriendsComponent implements OnInit {
     this.getFriends();
   }
 
-  getUserInfo(uid: string): void {
-    this.userService.fetchUserInfo(uid).valueChanges().subscribe(data => {
-      console.log(data);
+  getUserInfo(uid: string): Observable<any> {
+    return this.userService.fetchUserInfo(uid).valueChanges();
+  }
+
+  getFriendsInfo(friendsData: any) {
+    Object.keys(friendsData).filter(key => {
+      this.getUserInfo(friendsData[key].fid).subscribe(data => {
+        friendsData[key].displayName = data.displayName;
+        friendsData[key].email = data.email;
+        friendsData[key].photoURL = data.photoURL;
+      });
     });
   }
 
   getFriends(): void {
     this.authService.friendsRef.valueChanges().subscribe(data => {
+      // разносим друзей и входящие/исходящие запросы
+      // см. user.service.ts
       this.friends = this.filterObject(data, this.mapFriends);
       this.outRequests = this.filterObject(data, this.mapOutRequests);
       this.inRequests = this.filterObject(data, this.mapInRequests);
+      this.getFriendsInfo(this.friends);
+      this.getFriendsInfo(this.outRequests);
+      this.getFriendsInfo(this.inRequests);
       console.log(this.friends);
       console.log(this.outRequests);
       console.log(this.inRequests);
-      this.getUserInfo('FOd0LBh9dlPqLYbjCPZy2vLov2O2');
     });
   }
 
