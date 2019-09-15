@@ -31,13 +31,9 @@ export class FriendsComponent implements OnInit {
     this.getFriends();
   }
 
-  getUserInfo(uid: string): Observable<any> {
-    return this.userService.fetchUserInfo(uid).valueChanges();
-  }
-
   getFriendsInfo(friendsData: any) {
     Object.keys(friendsData).filter(key => {
-      this.getUserInfo(friendsData[key].fid).subscribe(data => {
+      this.userService.getUserInfo(friendsData[key].fid).subscribe(data => {
         friendsData[key].displayName = data.displayName;
         friendsData[key].email = data.email;
         friendsData[key].photoURL = data.photoURL;
@@ -55,14 +51,20 @@ export class FriendsComponent implements OnInit {
       this.getFriendsInfo(this.friends);
       this.getFriendsInfo(this.outRequests);
       this.getFriendsInfo(this.inRequests);
-      console.log(this.friends);
-      console.log(this.outRequests);
-      console.log(this.inRequests);
+      // console.log(this.friends);
+      // console.log(this.outRequests);
+      // console.log(this.inRequests);
     });
   }
 
   handleAddFriend(form: NgForm) {
     this.userService.addFriend(form.value.friendsEmail);
     form.reset();
+  }
+
+  handleRequestDelete(event) {
+    const target = event.target || event.srcElement || event.currentTarget;
+    const fid = target.attributes.id.nodeValue;
+    this.userService.deleteRequests(fid);
   }
 }

@@ -13,7 +13,7 @@
             placeholder="Type a friend's e-mail address">
           <span class="valid-error mt-2" *ngIf="emailInput.hasError('pattern')">E-Mail is invalid</span>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 mt-md-0 mt-sm-3 mt-3">
           <div class="input-group-prepend">
             <span class="waves-input-wrapper waves-effect waves-light"><input type="submit" value="Submit"
                 class="btn blue-gradient btn-rounded btn-sm my-0" [disabled]="faddFriend.invalid"></span>
@@ -22,20 +22,19 @@
       </form>
     </div>
   </div>
-
   <!-- <span>{{friends | json}}</span>
   <span>{{inRequests | json}}</span> -->
   <!-- <span>(friends | json) != ({} | json)</span> -->
-  <!-- *ngIf="Object.keys(friends).length === 0" -->
-  <div class="row mt-2">
-    <h2 class="profile-title col-lg-12 mt-lg-12 font-weight-bold" *ngIf="(friends | json) != '{}'"><strong>Friends</strong></h2>
+  <div class="row mt-1">
+    <h2 class="profile-title col-lg-12 mt-lg-12 font-weight-bold" *ngIf="(friends | json) != '{}'">
+      <strong>Friends</strong></h2>
     <div class="col-xl-4 col-md-6 mb-xl-0">
       <div class="friend-card card card-cascade cascading-admin-card mt-5" *ngFor="let item of friends | keyvalue">
         <div class="admin-up">
           <img src="{{(item.value.photoURL) ? item.value.photoURL : '../../../assets/img/avatars/user.png'}}"
-          alt="User Photo"class="z-depth-1 mb-0 mx-auto">
+            alt="User Photo" class="z-depth-1 mb-0 mx-auto">
           <div class="data p-0">
-              <h5 class="font-weight-bold">{{item.value.displayName}}</h5>
+            <h5 class="font-weight-bold">{{item.value.displayName}}</h5>
           </div>
         </div>
         <div class="card-foter text-right my-2 mr-2">
@@ -46,9 +45,10 @@
     </div>
   </div>
 
-  <div class="row mt-2">
+  <div class="row mt-1">
     <div class="col-md-6 mt-4">
-      <h2 class="profile-title col-lg-12 mt-lg-12 mt-4 font-weight-bold" *ngIf="(inRequests | json) != '{}'"><strong>Incoming requests</strong></h2>
+      <h2 class="profile-title col-lg-12 mt-lg-12 mt-4 font-weight-bold" *ngIf="(inRequests | json) != '{}'">
+        <strong>Incoming requests</strong></h2>
       <div class="friend-card card card-cascade cascading-admin-card mt-5" *ngFor="let item of inRequests | keyvalue">
         <div class="admin-up">
           <img src="{{(item.value.photoURL) ? item.value.photoURL : '../../../assets/img/avatars/user.png'}}"
@@ -59,12 +59,14 @@
         </div>
         <div class="card-foter text-right my-2 mr-2">
           <button class="btn btn-success btn-rounded btn-sm waves-effect waves-light">Accept</button>
-          <button class="btn btn-danger btn-rounded btn-sm waves-effect waves-light">Decline</button>
+          <button id="{{item.value.fid}}" class="btn btn-danger btn-rounded btn-sm waves-effect waves-light"
+            (click)="handleRequestDelete($event)">Decline</button>
         </div>
       </div>
     </div>
     <div class="col-md-6 mt-4">
-      <h2 class="profile-title col-lg-12 mt-lg-12 mt-4 font-weight-bold" *ngIf="(outRequests | json) != '{}'"><strong>Outcoming requests</strong></h2>
+      <h2 class="profile-title col-lg-12 mt-lg-12 mt-4 font-weight-bold" *ngIf="(outRequests | json) != '{}'">
+        <strong>Outcoming requests</strong></h2>
       <div class="friend-card card card-cascade cascading-admin-card mt-5" *ngFor="let item of outRequests | keyvalue">
         <div class="admin-up">
           <img src="{{(item.value.photoURL) ? item.value.photoURL : '../../../assets/img/avatars/user.png'}}"
@@ -74,7 +76,8 @@
           </div>
         </div>
         <div class="card-foter text-right my-2 mr-2">
-          <button class="btn btn-danger btn-rounded btn-sm waves-effect waves-light">Cancel</button>
+          <button id="{{item.value.fid}}" class="btn btn-danger btn-rounded btn-sm waves-effect waves-light"
+            (click)="handleRequestDelete($event)">Cancel</button>
         </div>
       </div>
     </div>

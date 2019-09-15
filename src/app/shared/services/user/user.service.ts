@@ -31,8 +31,9 @@ export class UserService {
       .collection("users", ref => ref.where("email", "==", email))
       .valueChanges();
   }
-  fetchUserInfo(uid: string) {
-    return this.afs.doc(`users/${uid}/`);
+
+  getUserInfo(uid: string): Observable<any> {
+    return this.afs.doc(`users/${uid}/`).valueChanges();
   }
   addFriend(email: string) {
     this.getUserIdByEmail(email).subscribe(data => {
@@ -79,5 +80,24 @@ export class UserService {
         accepted: accepted,
         fid: fid
       });
+  }
+  deleteRequests(fid: string) {
+    const uid = this.authService.userData.uid;
+    this.deleteRequest(uid, fid).catch(error =>
+      this.alertService.openWarningAlert(error.message, 2)
+    );
+    this.deleteRequest(fid, uid)
+      .then(smth =>
+        this.alertService.openSuccessAlert("Request successfully deleted", 1)
+      )
+      .catch(error => this.alertService.openWarningAlert(error.message, 2));
+  }
+  deleteRequest(uid: string, fid: string) {
+    return this.afs
+      .collection(`users/`)
+      .doc(uid)
+      .collection(`friends/`)
+      .doc(fid)
+      .delete();
   }
 }
