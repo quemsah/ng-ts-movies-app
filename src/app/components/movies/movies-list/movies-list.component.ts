@@ -11,6 +11,8 @@ import { MovieService } from "../../../shared/services/movie/movie.service";
 export class MoviesListComponent implements OnInit, AfterViewInit {
   movies: Movie[];
   pageOfItems: Array<Movie>;
+  sortingValue: string = "dateAdded";
+  sortingType: string = "desc";
   searchValue: string = "";
   sortingValues = [
     { id: 0, value: "dateAdded", name: "Date Added" },
@@ -23,8 +25,6 @@ export class MoviesListComponent implements OnInit, AfterViewInit {
     { id: 7, value: "budget", name: "Budget" },
     { id: 8, value: "revenue", name: "Revenue" }
   ];
-  sortingValue: string = "dateAdded";
-  sortingType: string = "desc";
   constructor(
     private movieService: MovieService,
     private themeService: ThemeService
@@ -50,18 +50,6 @@ export class MoviesListComponent implements OnInit, AfterViewInit {
       .forEach(x => x.classList.remove("list-item"));
   }
 
-  getMovies(): void {
-    this.movieService
-      .fetchMovies(this.sortingValue, this.sortingType)
-      .subscribe(movies => {
-        console.log("Fetching movies!");
-        console.log(this.sortingValue);
-        console.log(this.sortingType);
-        console.log("Fetched!");
-        this.movies = movies;
-      });
-  }
-
   onSortingValueChange(sValue: string): void {
     this.sortingValue = sValue.substr(3);
     this.getMovies();
@@ -72,9 +60,31 @@ export class MoviesListComponent implements OnInit, AfterViewInit {
     this.getMovies();
   }
 
-  searchByName(): void {
-    const value = this.searchValue;
-    console.log(value);
+  onSearchChange(): void {
+    this.getMovies();
+  }
+  // Filter array over multiple properties
+  filterByAll = (movies, key) =>
+    movies.filter(obj =>
+      Object.keys(movies[0]).some(
+        k =>
+          obj[k]
+            .toString()
+            .toLowerCase()
+            .indexOf(key) !== -1
+      )
+    );
+
+  getMovies(): void {
+    this.movieService
+      .fetchMovies(this.sortingValue, this.sortingType)
+      .subscribe(movies => {
+        console.log("Fetching movies!");
+        console.log(this.sortingValue);
+        console.log(this.sortingType);
+        console.log("Fetched!");
+        this.movies = this.filterByAll(movies, this.searchValue.toLowerCase());
+      });
   }
 
   onChangePage(pageOfItems: Array<Movie>) {
