@@ -11,7 +11,6 @@ import { AngularFireStorage } from "@angular/fire/storage";
 import { Router } from "@angular/router";
 import { finalize } from "rxjs/operators";
 import { AlertService } from "../alert/alert.service";
-import { Observable } from "rxjs";
 
 @Injectable({
   providedIn: "root"

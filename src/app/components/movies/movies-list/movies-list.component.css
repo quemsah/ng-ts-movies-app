@@ -1,0 +1,6 @@
+.filter-label {
+    transform: translateY(-22px) scale(0.8);
+}
+.sort-label {
+    transform: translateY(-13px) scale(0.8);
+}

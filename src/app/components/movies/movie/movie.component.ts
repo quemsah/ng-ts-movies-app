@@ -1,6 +1,6 @@
 import { Component, OnInit, AfterViewInit } from "@angular/core";
 import { ThemeService } from "../../../shared/services/theme/theme.service";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { MovieService } from "../../../shared/services/movie/movie.service";
 import { Title, DomSanitizer } from "@angular/platform-browser";
 import { TMDBService } from "../../../shared/services/tmdb/TMDB.service";
@@ -30,6 +30,7 @@ export class MovieComponent implements OnInit, AfterViewInit {
     public authService: AuthService,
     public sanitizer: DomSanitizer,
     private route: ActivatedRoute,
+    private router: Router,
     private movieService: MovieService,
     private tmdbService: TMDBService,
     private titleService: Title,
@@ -40,12 +41,15 @@ export class MovieComponent implements OnInit, AfterViewInit {
     this.getMovie();
     this.getComments();
   }
+
   ngAfterViewInit() {
     this.themeService.checkDarkMode();
   }
+
   scroll(el: HTMLElement) {
     el.scrollIntoView();
   }
+
   getMovie(): void {
     const id = this.route.snapshot.paramMap.get("id");
     this.movieService.fetchMovie(id).subscribe(movie => {
@@ -57,21 +61,24 @@ export class MovieComponent implements OnInit, AfterViewInit {
       tmdb_id ? this.getSimilarMovies(parseInt(tmdb_id)) : null;
     });
   }
+
   getComments(): void {
     const id = this.route.snapshot.paramMap.get("id");
     this.movieService.fetchComments(id).subscribe(data => {
       this.movieComments = data;
-      console.log("Comments");
-      console.log(this.movieComments);
+      // console.log("Comments");
+      // console.log(this.movieComments);
     });
   }
+
   getMovieCrew(id: number): void {
     this.tmdbService.getMovieCrewbyTMDBID(id).subscribe(data => {
       this.movieCrew = this.movieService.sliceData(data.cast, 12);
-      console.log("Crew");
-      console.log(this.movieCrew);
+      // console.log("Crew");
+      // console.log(this.movieCrew);
     });
   }
+
   getMovieTrailers(id: number): void {
     this.tmdbService.getMovieTrailersByTMDBID(id).subscribe(data => {
       this.movieTrailers = this.movieService.sliceData(data.results, 12);
@@ -80,17 +87,28 @@ export class MovieComponent implements OnInit, AfterViewInit {
           (value[i].key =
             "https://www.youtube.com/embed/" + value[i].key + "?rel=0")
       );
-      console.log("Trailers");
-      console.log(this.movieTrailers);
+      // console.log("Trailers");
+      // console.log(this.movieTrailers);
     });
   }
+
   getSimilarMovies(id: number): void {
     this.tmdbService.getSimilarMoviesByTMDBID(id).subscribe(data => {
       this.movieSimilars = this.movieService.sliceData(data.results, 8);
-      console.log("Similar movies");
-      console.log(this.movieSimilars);
+      // console.log("Similar movies");
+      // console.log(this.movieSimilars);
     });
   }
+
+  handleMovieEdit() {
+    console.log(this.movieData.mid);
+    //this.movieService.deleteMovie(this.movieData.mid);
+  }
+  
+  handleMovieDelete() {
+    this.movieService.deleteMovie(this.movieData.mid);
+  }
+
   handleAddComment(form: NgForm) {
     const now = new Date().toLocaleString();
     const commentData: Comment = {
@@ -103,6 +121,7 @@ export class MovieComponent implements OnInit, AfterViewInit {
     this.movieService.addComment(commentData, this.movieData.mid);
     form.reset();
   }
+
   handleCommentEdit(event) {
     const target = event.target || event.srcElement || event.currentTarget;
     const cid = target.attributes.id.nodeValue;
@@ -110,6 +129,7 @@ export class MovieComponent implements OnInit, AfterViewInit {
     this.currentCommentText = text;
     this.movieService.deleteComment(cid, this.movieData.mid);
   }
+
   handleCommentDelete(event) {
     const target = event.target || event.srcElement || event.currentTarget;
     const cid = target.attributes.id.nodeValue;

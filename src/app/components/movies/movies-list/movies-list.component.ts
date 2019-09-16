@@ -79,10 +79,6 @@ export class MoviesListComponent implements OnInit, AfterViewInit {
     this.movieService
       .fetchMovies(this.sortingValue, this.sortingType)
       .subscribe(movies => {
-        console.log("Fetching movies!");
-        console.log(this.sortingValue);
-        console.log(this.sortingType);
-        console.log("Fetched!");
         this.movies = this.filterByAll(movies, this.searchValue.toLowerCase());
       });
   }

@@ -149,7 +149,7 @@ export class AddMovieComponent implements OnInit, AfterViewInit {
       revenue: form.value.Revenue,
       overview: form.value.Overview
     };
-    this.movieService.addMovie(movieData);
+    this.movieService.setMovieData(movieData);
     form.reset();
   }
 }

@@ -5,6 +5,7 @@ import { AngularFirestore } from "@angular/fire/firestore";
 import { AlertService } from "../alert/alert.service";
 import { Observable } from "rxjs";
 import { OrderByDirection } from "../../order-by-direction";
+import { Router } from "@angular/router";
 
 @Injectable({
   providedIn: "root"
@@ -12,7 +13,8 @@ import { OrderByDirection } from "../../order-by-direction";
 export class MovieService {
   constructor(
     private afs: AngularFirestore,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private router: Router
   ) {}
 
   generateMovieID = (date, moviename) =>
@@ -50,7 +52,7 @@ export class MovieService {
     return genresArray;
   };
 
-  addMovie(movieData: Movie) {
+  setMovieData(movieData: Movie) {
     console.log(movieData);
     this.afs
       .collection(`movies/`)
@@ -59,6 +61,18 @@ export class MovieService {
       .then(smth =>
         this.alertService.openSuccessAlert("Movie successfully added", 2)
       )
+      .catch(error => this.alertService.openWarningAlert(error.message, 2));
+  }
+
+  deleteMovie(mid: string) {
+    this.afs
+      .collection(`movies/`)
+      .doc(mid)
+      .delete()
+      .then(smth => {
+        this.alertService.openSuccessAlert("Movie successfully deleted", 2);
+        this.router.navigate(["movies"]);
+      })
       .catch(error => this.alertService.openWarningAlert(error.message, 2));
   }
 
@@ -97,7 +111,17 @@ export class MovieService {
   }
 
   fetchMovie(id: string): Observable<any> {
-    return this.afs.doc(`movies/${id}`).valueChanges();
+    //return this.afs.doc(`movies/${id}`).valueChanges();
+    let movie = this.afs.collection("movies").doc(`${id}`);
+    let that = this;
+    movie.ref.get().then(function(doc) {
+      if (doc.exists) {
+      } else {
+        that.alertService.openWarningAlert("Wrong URL!", 2);
+        that.router.navigate(["movies"]);
+      }
+    });
+    return movie.valueChanges();
   }
   // Сортируем на сервере, остальное – на клиенте
   fetchMovies(orderField: string, sortType: string): Observable<any> {
@@ -107,7 +131,7 @@ export class MovieService {
       .valueChanges();
   }
 
-  // server-side date filter
+  // server-side data filter
   // Попытки тщетны, так как фильтровать в Firestore
   // можно только по нескольким полям без ухищрений нельзя
   // https://stackoverflow.com/questions/26700924/query-based-on-multiple-where-clauses-in-firebase
