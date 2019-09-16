@@ -16,26 +16,24 @@
         </div>
         <div class="col-sm-9 sort-by d-flex flex-row-reverse align-items-center">
           <div class="btn-group" role="group" aria-label="Basic example">
-            <button type="button" class="btn btn-sm blue-gradient btn-rounded"><i class="fas fa-arrow-up"></i></button>
-            <button type="button" class="btn btn-sm blue-gradient btn-rounded"><i
-                class="fas fa-arrow-down"></i></button>
+            <button type="button" class="btn btn-sm blue-gradient btn-rounded" (click)="onSortingTypeChange('asc')">
+              <i class="fas fa-arrow-up"></i>
+            </button>
+            <button type="button" class="btn btn-sm blue-gradient btn-rounded" (click)="onSortingTypeChange('desc')">
+              <i class="fas fa-arrow-down"></i>
+            </button>
           </div>
           <div class="form-sm mb-0 mr-2">
-            <select class="browser-default custom-select select-rating">
-              <option class="select-option" selected>Sort by</option>
-              <option class="select-option" value="1">Date</option>
-              <option class="select-option" value="2">Genre</option>
-              <option class="select-option" value="3">IMDB Rating</option>
-              <option class="select-option" value="4">Director</option>
-              <option class="select-option" value="5">Country</option>
+            <select [(ngModel)]="sortingValue" class="browser-default custom-select select-rating"
+              (change)="onSortingValueChange($event.target.value)">
+              <!-- <option class="select-option" selected>Sort by</option> -->
+              <option *ngFor="let item of sortingValues" [ngValue]="item.value" class="select-option">{{item.name}}
+              </option>
             </select>
           </div>
           <div class="md-form form-sm mb-0 mr-2">
             <input type="text" id="form3" class="form-control form-control-sm" [(ngModel)]="searchValue"
-              [ngModelOptions]="{standalone: true}" placeholder="что-то аыа" (keyup)="searchByName()">
-            <!-- <input type="text" class="form-control" [(ngModel)]="searchValue" 
-              [ngModelOptions]="{standalone: true}" placeholder="Search by name..."
-               (keyup)="searchByName()"> -->
+              [ngModelOptions]="{standalone: true}" placeholder="что-то" (keyup)="searchByName()">
             <label for="form3" class="">Filter</label>
           </div>
         </div>

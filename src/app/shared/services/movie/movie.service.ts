@@ -4,6 +4,7 @@ import { Injectable } from "@angular/core";
 import { AngularFirestore } from "@angular/fire/firestore";
 import { AlertService } from "../alert/alert.service";
 import { Observable } from "rxjs";
+import { OrderByDirection } from "../../order-by-direction";
 
 @Injectable({
   providedIn: "root"
@@ -73,6 +74,7 @@ export class MovieService {
       )
       .catch(error => this.alertService.openWarningAlert(error.message, 2));
   }
+
   deleteComment(cid: string, mid: string) {
     this.afs
       .collection(`movies/`)
@@ -85,9 +87,11 @@ export class MovieService {
       )
       .catch(error => this.alertService.openWarningAlert(error.message, 2));
   }
+
   fetchComment(cid: string, mid: string): Observable<any> {
     return this.afs.collection(`movies/${mid}/comments/${cid}/`).valueChanges();
   }
+
   fetchComments(mid: string): Observable<any> {
     return this.afs.collection(`movies/${mid}/comments`).valueChanges();
   }
@@ -95,34 +99,38 @@ export class MovieService {
   fetchMovie(id: string): Observable<any> {
     return this.afs.doc(`movies/${id}`).valueChanges();
   }
-
-  // fetchMovies(filterValue: string): Observable<any> {
-  //   return this.afs
-  //     .collection("movies", ref => ref.orderBy("dateAdded"))
-  //     .valueChanges();
-  // }
-
-  fetchMovies(filterValue: string): Observable<any> {
-    let val = filterValue.toLowerCase();
+  // Сортируем на сервере, остальное – на клиенте
+  fetchMovies(orderField: string, sortType: string): Observable<any> {
+    const type: OrderByDirection = sortType as OrderByDirection;
     return this.afs
-      .collection("movies", ref =>
-        ref
-          .where("releaseDate", ">=", filterValue)
-          .where("releaseDate", "<=", filterValue + "\uf8ff")
-      )
+      .collection("movies", ref => ref.orderBy(orderField, type))
       .valueChanges();
   }
 
-  //  .collection('users',ref => ref.where('nameToSearch', '>=', searchValue)
-  //   .where('nameToSearch', '<=', searchValue + '\uf8ff'))
+  // server-side date filter
+  // Попытки тщетны, так как фильтровать в Firestore
+  // можно только по нескольким полям без ухищрений нельзя
+  // https://stackoverflow.com/questions/26700924/query-based-on-multiple-where-clauses-in-firebase
+  // И совсем невозможно добавить к этому сортировку
+
+  // fetchMovies(filterValue: string): Observable<any> {
+  //   let val = filterValue.toLowerCase();
+  //   return this.afs
+  //     .collection("movies", ref =>
+  //       ref
+  //         .where("releaseDate", ">=", filterValue)
+  //         .where("releaseDate", "<=", filterValue + "\uf8ff")
+  //     )
+  //     .valueChanges();
+  // }
 
   // fetchMovies(filterValue: string): Observable<any> {
   //   return this.afs
   //     .collection("movies", ref =>
   //       ref
   //         .orderBy("dateAdded")
-  //         .startAt('T')
-  //         .endAt('T' + "\uf8ff")
+  //         .startAt(filterValue)
+  //         .endAt(filterValue + "\uf8ff")
   //     )
   //     .valueChanges();
   // }
