@@ -36,6 +36,7 @@ import { NavbarComponent } from "./components/navbar/navbar.component";
 import { MovieComponent } from "./components/movies/movie/movie.component";
 import { MoviesListComponent } from "./components/movies/movies-list/movies-list.component";
 import { EditMovieComponent } from './components/movies/edit-movie/edit-movie.component';
+import { NoInfoPipe } from './shared/pipes/no-info.pipe';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { EditMovieComponent } from './components/movies/edit-movie/edit-movie.co
     MoviesListComponent,
     JwPaginationComponent,
     FriendsComponent,
-    EditMovieComponent
+    EditMovieComponent,
+    NoInfoPipe
   ],
   imports: [
     HttpClientModule,

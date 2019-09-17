@@ -6,6 +6,7 @@ import { Title, DomSanitizer } from "@angular/platform-browser";
 import { TMDBService } from "../../../shared/services/tmdb/TMDB.service";
 import { NgForm } from "@angular/forms";
 import { AuthService } from "../../../shared/services/auth/auth.service";
+import { NoInfoPipe } from "../../../shared/pipes/no-info.pipe";
 // Интерфейсы
 import { SimilarMovie } from "../../../shared/models/similar-movie";
 import { Crew } from "./../../../shared/models/crew";
@@ -103,7 +104,7 @@ export class MovieComponent implements OnInit, AfterViewInit {
   handleMovieEdit() {
     console.log(this.movieData.mid);
   }
-  
+
   handleMovieDelete() {
     this.movieService.deleteMovie(this.movieData.mid);
   }

@@ -37,8 +37,8 @@
             </ul> -->
             <h4 class="h4 my-3 p-0">Overview</h4>
             <p class="my-3">{{movie.overview}}</p>
-            <p *ngIf="movie.budget" class="m-0 p-0">Budget: {{movie.budget}}</p>
-            <p *ngIf="movie.revenue" class="mb-2 p-0">Revenue: {{movie.revenue}}</p>
+            <p *ngIf="movie.budget" class="m-0 p-0">Budget: {{movie.budget | noInfo}}</p>
+            <p *ngIf="movie.revenue" class="mb-2 p-0">Revenue: {{movie.revenue | noInfo}}</p>
             <button type="button" class="btn btn-md blue-gradient ml-0">
               <i class="far fa-clock pr-1"></i> Watch later
             </button>
@@ -48,7 +48,8 @@
             <button type="button" class="btn btn-md blue-gradient ml-0">
               <i class="fas fa-share-alt pr-1"></i> Share
             </button>
-            <a routerLink="/edit-movie/{{movie.mid}}" id="{{movie.mid}}" type="button" class="btn btn-md btn-blue-grey ml-0" (click)="handleMovieEdit()">
+            <a routerLink="/edit-movie/{{movie.mid}}" id="{{movie.mid}}" type="button"
+              class="btn btn-md btn-blue-grey ml-0" (click)="handleMovieEdit()">
               <i class="far fa-edit pr-1"></i> Edit
             </a>
             <a id="{{movie.mid}}" type="button" class="btn btn-md btn-danger ml-0" (click)="handleMovieDelete()">
@@ -66,7 +67,9 @@
   </section>
   <!-- Actors & Trailers -->
   <section class="mb-4 mt-4" *ngIf="movieCrew">
-    <div class="row">
+    <!-- двойная проверка, так как если фильм добавлен вручную
+    то массив будет пустой -->
+    <div class="row" *ngIf="movieCrew.length>0">
       <div class="movie-tabs">
         <ul class="nav nav-tabs nav-justified md-tabs blue-gradient" id="myTabJust" role="tablist">
           <li class="nav-item">
@@ -115,7 +118,9 @@
   </section>
   <!-- Similar movies -->
   <section class="mb-4 mt-4" *ngIf="movieSimilars">
-    <div class="row">
+    <!-- двойная проверка, так как если фильм добавлен вручную
+    то массив будет пустой -->
+    <div class="row" *ngIf="movieSimilars.length>0">
       <h2 class="profile-title col-lg-12 font-weight-bold mb-3"><strong>Similar movies
         </strong></h2>
       <div class="col-lg-3 col-md-4 col-sm-6 mb-4" *ngFor="let smovie of movieSimilars; let i = index">
