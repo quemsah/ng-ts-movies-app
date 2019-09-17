@@ -1,1 +1,135 @@
-<p>edit-movie works!</p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-12 mb-4">
+      <div class="card card-cascade narrower">
+        <div class="view view-cascade gradient-card-header blue-gradient">
+          <h5 class="mb-0 font-weight-bold">Edit Movie</h5>
+        </div>
+        <div class="card-body card-body-cascade text-center">
+          <form #editMovie="ngForm" (ngSubmit)="onEditMovieSubmit(editMovie)">
+            <div class="row">
+              <div class="col-md-4 ">
+                <div class="md-form form-sm mb-0">
+                  <input placeholder="–" type="text" class="form-control form-control-sm"
+                    [(ngModel)]=currentMovieData.imdb_id name="ImdbId" disabled>
+                  <label class="">IMDB ID</label>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="md-form form-sm mb-0">
+                  <input placeholder="–" type="text" class="form-control form-control-sm"
+                    [(ngModel)]=currentMovieData.tmdb_id name="TmdbId" disabled>
+                  <label class="">TMDB ID</label>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="md-form form-sm mb-0">
+                  <input type="text" class="form-control form-control-sm" [(ngModel)]=currentMovieData.title
+                    name="MovieName" required #movieNameInput="ngModel">
+                  <span class="valid-error" *ngIf="movieNameInput.hasError('required')">Field must not be empty</span>
+                  <label class="">Name</label>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4 ">
+                <div class="md-form form-sm mb-0">
+                  <input class="date-input" type="date" id="date-picker" class="form-control form-control-sm datepicker"
+                    [(ngModel)]=currentMovieData.releaseDate name="Date" required #dateInput="ngModel">
+                  <span class="valid-error" *ngIf="dateInput.hasError('required')">Field must not be empty</span>
+                  <label for="date-picker">Release Date</label>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="md-form form-sm mb-0">
+                  <input type="text" class="form-control form-control-sm" [(ngModel)]=currentMovieData.country
+                    name="Country" required #countryInput="ngModel">
+                  <span class="valid-error" *ngIf="countryInput.hasError('required')">Field must not be empty</span>
+                  <label class="">Country</label>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="md-form form-sm mb-0">
+                  <input type="text" class="form-control form-control-sm" [(ngModel)]=currentMovieData.IMDBRating
+                    name="IMDBRating">
+                  <label class="">IMDB Rating</label>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                <div class="md-form form-sm mb-0">
+                  <input type="text" class="form-control form-control-sm" [(ngModel)]=currentMovieData.director
+                    name="Director" required #directorInput="ngModel">
+                  <input type="hidden" class="form-control form-control-sm" [(ngModel)]=currentMovieData.genres
+                    name="Genres">
+                  <span class="valid-error" *ngIf="directorInput.hasError('required')">Field must not be empty</span>
+                  <label class="">Director</label>
+                </div>
+              </div>
+              <div class="col-md-8">
+                <div class="md-form form-sm mb-0">
+                  <input type="text" class="form-control form-control-sm" [(ngModel)]=currentMovieData.posterLink
+                    name="Poster">
+                  <input type="hidden" class="form-control form-control-sm" [(ngModel)]=currentMovieData.backdropLink
+                    name="Backdrop">
+                  <label class="">Link to a poster</label>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                <div class="md-form form-sm mb-0">
+                  <input type="text" class="form-control form-control-sm" [(ngModel)]=currentMovieData.runtime
+                    name="Runtime">
+                  <label class="">Runtime</label>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="md-form form-sm mb-0">
+                  <input type="text" class="form-control form-control-sm" [(ngModel)]=currentMovieData.budget
+                    name="Budget">
+                  <label class="">Budget</label>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="md-form form-sm mb-0">
+                  <input type="text" class="form-control form-control-sm" [(ngModel)]=currentMovieData.revenue
+                    name="Revenue">
+                  <label class="">Revenue</label>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="genres genres-label md-form form-sm mb-0">
+                  <div class="form-check form-check-inline" *ngFor='let g of genres; let i=index'>
+                    <input type="checkbox" class="form-check-input" id={{g.id}} [(ngModel)]=g.selected
+                      name={{g.prefix+g.name}}>
+                    <label class="form-check-label" for={{g.id}}>{{g.name}}</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="md-form mb-0 text-dark">
+                  <textarea class="md-textarea form-control" rows="2" [(ngModel)]=currentMovieData.overview
+                    name="Overview" required #overviewInput="ngModel"></textarea>
+                  <span class="valid-error" *ngIf="overviewInput.hasError('required')">Field must not be empty</span>
+                  <label class="">Overview</label>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 text-center my-1">
+                <span class="waves-input-wrapper waves-effect waves-light"><input type="submit" value="Edit Movie"
+                    class="btn btn-info btn-rounded blue-gradient" [disabled]="editMovie.invalid"></span>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

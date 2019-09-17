@@ -102,7 +102,6 @@ export class MovieComponent implements OnInit, AfterViewInit {
 
   handleMovieEdit() {
     console.log(this.movieData.mid);
-    //this.movieService.deleteMovie(this.movieData.mid);
   }
   
   handleMovieDelete() {

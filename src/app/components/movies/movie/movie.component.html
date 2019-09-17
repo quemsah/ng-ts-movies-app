@@ -48,7 +48,7 @@
             <button type="button" class="btn btn-md blue-gradient ml-0">
               <i class="fas fa-share-alt pr-1"></i> Share
             </button>
-            <a id="{{movie.mid}}" type="button" class="btn btn-md btn-blue-grey ml-0" (click)="handleMovieEdit()">
+            <a routerLink="/edit-movie/{{movie.mid}}" id="{{movie.mid}}" type="button" class="btn btn-md btn-blue-grey ml-0" (click)="handleMovieEdit()">
               <i class="far fa-edit pr-1"></i> Edit
             </a>
             <a id="{{movie.mid}}" type="button" class="btn btn-md btn-danger ml-0" (click)="handleMovieDelete()">
@@ -149,7 +149,7 @@
       <h2 class="profile-title col-lg-12 font-weight-bold mb-3">
         <strong>Comments</strong>
       </h2>
-      <div class="col-xl-4 col-md-6 col-xs-12 mb-4" *ngFor="let comment of movieComments">
+      <div class="col-md-6 col-xs-12 mb-4" *ngFor="let comment of movieComments">
         <div id="{{comment.cid }}" class="question-card card mb-4">
           <div class="card-header blue-gradient d-flex justify-content-between">
             <p class="pt-2 mb-0 text-white">

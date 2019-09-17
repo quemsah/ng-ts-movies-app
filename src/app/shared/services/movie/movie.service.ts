@@ -57,9 +57,9 @@ export class MovieService {
     this.afs
       .collection(`movies/`)
       .doc(movieData.mid)
-      .set(movieData)
+      .set(movieData, { merge: true })
       .then(smth =>
-        this.alertService.openSuccessAlert("Movie successfully added", 2)
+        this.alertService.openSuccessAlert("Movie info successfully added", 2)
       )
       .catch(error => this.alertService.openWarningAlert(error.message, 2));
   }

@@ -16,6 +16,7 @@ import { NotFoundComponent } from "../../components/not-found/not-found.componen
 import { AddMovieComponent } from "../../components/movies/add-movie/add-movie.component";
 import { MovieComponent } from "../../components/movies/movie/movie.component";
 import { MoviesListComponent } from "../../components/movies/movies-list/movies-list.component";
+import { EditMovieComponent } from "src/app/components/movies/edit-movie/edit-movie.component";
 
 const routes: Routes = [
   {
@@ -64,6 +65,12 @@ const routes: Routes = [
     path: "add-movie",
     component: AddMovieComponent,
     data: { title: "New movie" },
+    canActivate: [AuthGuard]
+  },
+  {
+    path: "edit-movie/:id",
+    component: EditMovieComponent,
+    data: { title: "Edit movie" },
     canActivate: [AuthGuard]
   },
   {
