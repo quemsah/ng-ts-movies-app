@@ -1,0 +1,24 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-6 mb-4 mt-0 mt-md-4">
+      <div class="card card-cascade narrower">
+        <div class="view view-cascade gradient-card-header" [style.background]="themeService.themeGradient | safe: 'style'">
+          <h5 class="mb-0 font-weight-bold">Edit Account</h5>
+        </div>
+        <div class="card-body card-body-cascade text-center update-profile-form">
+          R:
+          <input value="255" type="number" min="0" max="255" [(ngModel)]="red" name="red" (change)="handleColorChange()">
+          <input type="range" min="0" max="255" step="1" value="255" [(ngModel)]="red" name="red" (change)="handleColorChange()">
+          <br>
+          G:
+          <input value="255" type="number" min="0" max="255" [(ngModel)]="green" name="green" (change)="handleColorChange()">
+          <input type="range" min="0" max="255" step="1" value="255" [(ngModel)]="green" name="green" (change)="handleColorChange()">
+          <br>
+          B:
+          <input value="255" type="number" min="0" max="255" [(ngModel)]="blue" name="blue" (change)="handleColorChange()">
+          <input type="range" min="0" max="255" step="1" value="255" [(ngModel)]="blue" name="blue" (change)="handleColorChange()">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

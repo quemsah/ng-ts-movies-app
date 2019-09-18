@@ -37,6 +37,8 @@ import { MoviesListComponent } from "./components/movies/movies-list/movies-list
 import { EditMovieComponent } from "./components/movies/edit-movie/edit-movie.component";
 import { NoInfoPipe } from "./shared/pipes/no-info.pipe";
 import { PaginationComponent } from "./components/pagination/pagination.component";
+import { SettingsComponent } from './components/settings/settings.component';
+import { SafePipe } from './shared/pipes/safe.pipe';
 
 @NgModule({
   declarations: [
@@ -57,7 +59,9 @@ import { PaginationComponent } from "./components/pagination/pagination.componen
     FriendsComponent,
     EditMovieComponent,
     NoInfoPipe,
-    PaginationComponent
+    PaginationComponent,
+    SettingsComponent,
+    SafePipe
   ],
   imports: [
     HttpClientModule,

@@ -17,6 +17,7 @@ import { AddMovieComponent } from "../../components/movies/add-movie/add-movie.c
 import { MovieComponent } from "../../components/movies/movie/movie.component";
 import { MoviesListComponent } from "../../components/movies/movies-list/movies-list.component";
 import { EditMovieComponent } from "src/app/components/movies/edit-movie/edit-movie.component";
+import { SettingsComponent } from 'src/app/components/settings/settings.component';
 
 const routes: Routes = [
   {
@@ -35,6 +36,12 @@ const routes: Routes = [
     path: "profile",
     component: ProfileComponent,
     data: { title: "Profile" },
+    canActivate: [AuthGuard]
+  },
+  {
+    path: "settings",
+    component: SettingsComponent,
+    data: { title: "Settings" },
     canActivate: [AuthGuard]
   },
   {

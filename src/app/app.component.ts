@@ -2,7 +2,7 @@ import { Component, OnInit, AfterViewInit, ElementRef } from "@angular/core";
 import { Title } from "@angular/platform-browser";
 import { Router, NavigationEnd, ActivatedRoute } from "@angular/router";
 import { filter, map } from "rxjs/operators";
-import { ThemeService } from './shared/services/theme/theme.service';
+import { ThemeService } from "./shared/services/theme/theme.service";
 
 declare var $: any;
 
@@ -16,8 +16,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     private titleService: Title,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private themeService: ThemeService,
-    private elRef:ElementRef
+    private themeService: ThemeService
   ) {}
 
   ngOnInit() {
@@ -43,9 +42,9 @@ export class AppComponent implements OnInit, AfterViewInit {
     // document.getElementById("dark-mode").addEventListener("click", () => {
     //   this.themeService.toggleDarkMode();
     // });
-    
+
     // инициализация боковое меню
-    $(".button-collapse").sideNav({'closeOnClick': true});
+    $(".button-collapse").sideNav({ closeOnClick: true });
     // и кнопок смены вида
   }
 }
