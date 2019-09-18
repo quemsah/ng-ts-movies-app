@@ -13,8 +13,10 @@ export class SettingsComponent implements OnInit {
   blue = this.themeService.blue;
   ngOnInit() {
     this.themeService.setGradient(this.red, this.green, this.blue);
+    this.themeService.setColor(this.red, this.green, this.blue);
   }
   handleColorChange() {
     this.themeService.setGradient(this.red, this.green, this.blue);
+    this.themeService.setColor(this.red, this.green, this.blue);
   }
 }

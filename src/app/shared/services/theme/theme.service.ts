@@ -9,10 +9,11 @@ export class ThemeService {
   isDarkMode: boolean = false;
   wasRouted: boolean = false;
   // начальные значения
-  red: number = 32;
-  green: number = 199;
-  blue: number = 107;
+  red: number = 31;
+  green: number = 119;
+  blue: number = 239;
   themeGradient: string = this.setGradient(this.red, this.green, this.blue);
+  themeColor: string = this.setColor(this.red, this.green, this.blue);
 
   constructor() //setGradient(32,199,107);
   {}
@@ -44,6 +45,12 @@ export class ThemeService {
       ")";
     this.themeGradient = gr;
     return gr;
+    //console.log(this.themeGradient);
+  }
+  setColor(red: number, green: number, blue: number): string {
+    const color = "#" + this.fullColorHex(red, green, blue);
+    this.themeColor = color;
+    return color;
     //console.log(this.themeGradient);
   }
   // перед переходом выключаем дарк мод, если он был

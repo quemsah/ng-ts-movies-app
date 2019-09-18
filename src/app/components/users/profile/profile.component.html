@@ -4,7 +4,8 @@ src="{{(user.photoURL) ? user.photoURL : '/src/assets/img/avatars/user.png'}}" a
   <div class="row" *ngIf="authService.userData as user">
     <div class="col-lg-6 mb-4 mt-0 mt-md-4">
       <div class="card card-cascade narrower">
-        <div class="view view-cascade gradient-card-header" [style.background]="themeService.themeGradient | safe: 'style'">
+        <div class="view view-cascade gradient-card-header"
+          [style.background]="themeService.themeGradient | safe: 'style'">
           <h5 class="mb-0 font-weight-bold">Edit Account</h5>
         </div>
         <div class="card-body card-body-cascade text-center update-profile-form">
@@ -68,7 +69,8 @@ src="{{(user.photoURL) ? user.photoURL : '/src/assets/img/avatars/user.png'}}" a
             <div class="row">
               <div class="col-md-12 text-center my-4">
                 <span class="waves-input-wrapper waves-effect waves-light"><input type="submit" value="Update Account"
-                    class="btn btn-info btn-rounded " [style.background]="themeService.themeGradient | safe: 'style'" [disabled]="f1.invalid"></span>
+                    class="btn btn-info btn-rounded btn-sm"
+                    [style.background]="themeService.themeGradient | safe: 'style'" [disabled]="f1.invalid"></span>
                 <!-- [disabled]="f.invalid" -->
               </div>
             </div>
@@ -78,7 +80,8 @@ src="{{(user.photoURL) ? user.photoURL : '/src/assets/img/avatars/user.png'}}" a
     </div>
     <div class="col-lg-3 mb-4 mt-4">
       <div class="card profile-card card-cascade narrower">
-        <div class="view view-cascade gradient-card-header " [style.background]="themeService.themeGradient | safe: 'style'">
+        <div class="view view-cascade gradient-card-header "
+          [style.background]="themeService.themeGradient | safe: 'style'">
           <h5 class="mb-0 font-weight-bold">Edit Photo</h5>
         </div>
         <div class="card-profile card-body card-body-cascade text-center">
@@ -86,18 +89,20 @@ src="{{(user.photoURL) ? user.photoURL : '/src/assets/img/avatars/user.png'}}" a
             src="{{(user.photoURL) ? user.photoURL : '../../../assets/img/avatars/user.png'}}" alt="User Photo">
           <p class="text-muted"><small>Avatar should be a square</small></p>
           <div class="row flex-center file-field">
-            <button class="btn btn-info btn-rounded btn-sm waves-effect waves-light " [style.background]="themeService.themeGradient | safe: 'style'">Upload New
+            <button class="btn btn-info btn-rounded btn-sm waves-effect waves-light "
+              [style.background]="themeService.themeGradient | safe: 'style'">Upload New
               Photo
             </button>
             <input type="file" (change)="onClickPhoto($event)"><br>
-            <button class="btn btn-danger btn-rounded btn-sm waves-effect waves-light">Delete</button>
+            <!-- <button class="btn btn-danger btn-rounded btn-sm waves-effect waves-light">Delete</button> -->
           </div>
         </div>
       </div>
     </div>
     <div class="col-lg-3 mb-4 mt-4">
       <div class="card card-cascade narrower">
-        <div class="view view-cascade gradient-card-header " [style.background]="themeService.themeGradient | safe: 'style'">
+        <div class="view view-cascade gradient-card-header "
+          [style.background]="themeService.themeGradient | safe: 'style'">
           <h5 class="mb-0 font-weight-bold">Change Name</h5>
         </div>
         <div class="card-body card-body-cascade text-center update-profile-form">
@@ -117,7 +122,8 @@ src="{{(user.photoURL) ? user.photoURL : '/src/assets/img/avatars/user.png'}}" a
             <div class="row">
               <div class="col-md-12 text-center my-4">
                 <span class="waves-input-wrapper waves-effect waves-light"><input type="submit" value="Update"
-                    class="btn btn-info btn-rounded " [style.background]="themeService.themeGradient | safe: 'style'" [disabled]="f2.invalid"></span>
+                    class="btn btn-info btn-rounded btn-sm"
+                    [style.background]="themeService.themeGradient | safe: 'style'" [disabled]="f2.invalid"></span>
                 <!-- [disabled]="f.invalid" -->
               </div>
             </div>
