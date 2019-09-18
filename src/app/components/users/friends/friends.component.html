@@ -1,9 +1,9 @@
 <div class="container-fluid">
   <!-- <div class="row" *ngIf="authService.userData as user">
-    <span>{{user | json}}</span>
+    <span>{{user | json}}</span>  
   </div> -->
   <div class="row">
-    <h2 class="profile-title col-lg-12 mt-lg-12 font-weight-bold mt-4"><strong>Find a friend</strong>
+    <h2 class="profile-title col-lg-12 mt-lg-12 font-weight-bold mt-0 mt-md-4"><strong>Find a friend</strong>
     </h2>
     <div class="find-a-friend input-group md-form form-sm form-1 pl-0">
       <form #faddFriend="ngForm" (ngSubmit)="handleAddFriend(faddFriend)">
@@ -34,11 +34,11 @@
           <img src="{{(item.value.photoURL) ? item.value.photoURL : '../../../assets/img/avatars/user.png'}}"
             alt="User Photo" class="z-depth-1 mb-0 mx-auto">
           <div class="data p-0">
-            <h5 class="font-weight-bold">{{item.value.displayName}}</h5>
+            <h5 class="font-weight-bold">{{(item.value.displayName) ? item.value.displayName : 'User Deleted'}}</h5>
           </div>
         </div>
         <div class="card-foter text-right my-2 mr-2">
-          <button class="btn btn-info btn-rounded btn-sm waves-effect waves-light blue-gradient">Movies</button>
+          <button *ngIf="item.value.displayName" class="btn btn-info btn-rounded btn-sm waves-effect waves-light blue-gradient">Movies</button>
           <button id="{{item.value.fid}}" class="btn btn-danger btn-rounded btn-sm waves-effect waves-light"
             (click)="handleRequestDelete($event)">Delete</button>
         </div>
@@ -55,7 +55,7 @@
           <img src="{{(item.value.photoURL) ? item.value.photoURL : '../../../assets/img/avatars/user.png'}}"
             alt="User Photo" class="z-depth-1 mb-0 mx-auto">
           <div class="data p-0">
-            <h5 class="font-weight-bold">{{item.value.displayName}}</h5>
+            <h5 class="font-weight-bold">{{(item.value.displayName) ? item.value.displayName : 'User Deleted'}}</h5>
           </div>
         </div>
         <div class="card-foter text-right my-2 mr-2">
@@ -74,7 +74,7 @@
           <img src="{{(item.value.photoURL) ? item.value.photoURL : '../../../assets/img/avatars/user.png'}}"
             alt="User Photo" class="z-depth-1 mb-0 mx-auto">
           <div class="data p-0">
-            <h5 class="font-weight-bold">{{item.value.displayName}}</h5>
+            <h5 class="font-weight-bold">{{(item.value.displayName) ? item.value.displayName : 'User Deleted'}}</h5>
           </div>
         </div>
         <div class="card-foter text-right my-2 mr-2">

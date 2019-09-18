@@ -30,7 +30,8 @@ export class FriendsComponent implements OnInit {
     this.getFriends();
   }
   // добавляем к сухим айдишниками информацию о друзьях/запросах
-  getFriendsInfo(friendsData: any) {
+  getFriendsInfo(friendsData: Friends) {
+    console.log(friendsData);
     Object.keys(friendsData).filter(key => {
       this.userService.getUserInfo(friendsData[key].fid).subscribe(data => {
         friendsData[key].displayName = data.displayName;

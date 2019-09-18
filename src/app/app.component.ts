@@ -39,9 +39,11 @@ export class AppComponent implements OnInit, AfterViewInit {
     // Dark mode включен по умолчанию
     // this.themeService.toggleDarkMode();
     // $("#dark-mode").click(() => this.themeService.toggleDarkMode());
-    document.getElementById("dark-mode").addEventListener("click", () => {
-      this.themeService.toggleDarkMode();
-    });
+
+    // document.getElementById("dark-mode").addEventListener("click", () => {
+    //   this.themeService.toggleDarkMode();
+    // });
+    
     // инициализация боковое меню
     $(".button-collapse").sideNav({'closeOnClick': true});
     // и кнопок смены вида

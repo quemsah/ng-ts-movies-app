@@ -16,7 +16,8 @@ import { AlertService } from "../alert/alert.service";
   providedIn: "root"
 })
 export class AuthService {
-  userData: any; // Данные пользователя
+  // Данные пользователя из authState
+  userData: User;
 
   constructor(
     private alertService: AlertService,
@@ -175,7 +176,7 @@ export class AuthService {
         // (result.user.emailVerified == false)
         this.SetUserData(result.user, true);
         this.profileRef.set({ emailVerified: true }, { merge: true });
-        // попытки тщетны, так как править поле emailVerified Firebase позволяет только 
+        // попытки тщетны, так как править поле emailVerified Firebase позволяет только
         // админам, а мне нет смысла тянуть весь админский пакет фич только для этого
         // admin.auth().updateUser(kUserUid, {
         //   emailVerified: true,

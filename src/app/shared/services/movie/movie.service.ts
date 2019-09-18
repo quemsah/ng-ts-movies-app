@@ -21,7 +21,7 @@ export class MovieService {
     date.substring(0, 4) +
     "-" +
     moviename
-      .replace(/[^a-zA-Z0-9 ]/g, "") // удаляем символы всякие
+      .replace(/[^a-zA-Z0-9А-Яа-я ]/g, "") // удаляем символы всякие
       .replace(/\s+/g, "-") // заменяем пробелы на тире
       .toLowerCase();
 

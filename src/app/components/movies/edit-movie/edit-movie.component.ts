@@ -10,7 +10,7 @@ import { NgForm } from "@angular/forms";
   styleUrls: ["./edit-movie.component.css"]
 })
 export class EditMovieComponent implements OnInit {
-  currentMovieData: any;
+  currentMovieData: Movie;
   title: string;
   releaseDate: string;
   // {make: null};
