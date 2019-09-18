@@ -9,7 +9,7 @@
               <strong>{{user.email}}</strong>
               to verify that the address is correct</h5>
             <h5>Please check your email and click on the link.</h5>
-            <button type="button" class="btn blue-gradient" (click)="authService.SendVerificationMail()">
+            <button type="button" class="btn " [style.background]="themeService.themeGradient | safe: 'style'" (click)="authService.SendVerificationMail()">
               <i class="fas fa-redo-alt"></i> Resend verification email</button>
             <hr class="mt-4">
             <h5>Go back to <a routerLink="/login">Log in</a></h5>

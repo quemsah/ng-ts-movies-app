@@ -8,9 +8,14 @@ declare const enableDarkMode: any;
 export class ThemeService {
   isDarkMode: boolean = false;
   wasRouted: boolean = false;
-  themeGradient: string;
+  // начальные значения
+  red: number = 32;
+  green: number = 199;
+  blue: number = 107;
+  themeGradient: string = this.setGradient(this.red, this.green, this.blue);
 
-  constructor() {}
+  constructor() //setGradient(32,199,107);
+  {}
 
   rgbToHex(rgb: number) {
     var hex = Math.round(Math.min(Math.max(0, rgb), 255)).toString(16);
@@ -22,7 +27,7 @@ export class ThemeService {
   mix(color: number, param: number) {
     return Math.round((1 + param) * color);
   }
-  setGradient(red: number, green: number, blue: number) {
+  setGradient(red: number, green: number, blue: number): string {
     const alpha = 0.3;
     const beta = -0.5;
     const sRed = this.mix(red, alpha);
@@ -31,12 +36,14 @@ export class ThemeService {
     const eRed = this.mix(red, beta);
     const eGreen = this.mix(green, beta);
     const eBlue = this.mix(blue, beta);
-    this.themeGradient =
+    const gr =
       "linear-gradient(40deg, #" +
       this.fullColorHex(sRed, sGreen, sBlue) +
       ", #" +
       this.fullColorHex(eRed, eGreen, eBlue) +
       ")";
+    this.themeGradient = gr;
+    return gr;
     //console.log(this.themeGradient);
   }
   // перед переходом выключаем дарк мод, если он был

@@ -39,13 +39,16 @@
             <p class="my-3">{{movie.overview}}</p>
             <p *ngIf="movie.budget" class="m-0 p-0">Budget: {{movie.budget | noInfo}}</p>
             <p *ngIf="movie.revenue" class="mb-2 p-0">Revenue: {{movie.revenue | noInfo}}</p>
-            <button type="button" class="btn btn-md blue-gradient ml-0">
+            <button type="button" class="btn btn-md ml-0"
+              [style.background]="themeService.themeGradient | safe: 'style'">
               <i class="far fa-clock pr-1"></i> Watch later
             </button>
-            <button type="button" class="btn btn-md blue-gradient ml-0">
+            <button type="button" class="btn btn-md ml-0"
+              [style.background]="themeService.themeGradient | safe: 'style'">
               <i class="far fa-heart pr-1"></i> Favourite
             </button>
-            <button type="button" class="btn btn-md blue-gradient ml-0">
+            <button type="button" class="btn btn-md ml-0"
+              [style.background]="themeService.themeGradient | safe: 'style'">
               <i class="fas fa-share-alt pr-1"></i> Share
             </button>
             <a routerLink="/edit-movie/{{movie.mid}}" id="{{movie.mid}}" type="button"
@@ -71,7 +74,8 @@
     то массив будет пустой -->
     <div class="row" *ngIf="movieCrew.length>0">
       <div class="movie-tabs">
-        <ul class="nav nav-tabs nav-justified md-tabs blue-gradient" id="myTabJust" role="tablist">
+        <ul class="nav nav-tabs nav-justified md-tabs " [style.background]="themeService.themeGradient | safe: 'style'"
+          id="myTabJust" role="tablist">
           <li class="nav-item">
             <a class="nav-link active" id="home-tab-just" data-toggle="tab" href="#home-just" role="tab"
               aria-controls="home-just" aria-selected="true">Cast</a>
@@ -156,7 +160,8 @@
       </h2>
       <div class="col-md-6 col-xs-12 mb-4" *ngFor="let comment of movieComments">
         <div id="{{comment.cid }}" class="question-card card mb-4">
-          <div class="card-header blue-gradient d-flex justify-content-between">
+          <div class="card-header d-flex justify-content-between"
+            [style.background]="themeService.themeGradient | safe: 'style'">
             <p class="pt-2 mb-0 text-white">
               <strong><a class="h5 text-white" href="profile.html" target="_blank">{{comment.user_name}} </a></strong>
               <i class="fas fa-angle-double-left"></i> {{comment.date}}</p>
@@ -180,7 +185,8 @@
     <div class="row justify-content-center">
       <div class="col-xl-6 col-xs-12 mb-4">
         <div class="question-card card mb-4">
-          <div class="card-header blue-gradient d-flex justify-content-between">
+          <div class="card-header d-flex justify-content-between"
+            [style.background]="themeService.themeGradient | safe: 'style'">
             <p class="pt-2 mb-0 text-white">
               <strong><a class="h5 text-white" target="_blank">Leave a comment as
                   {{user.displayName}}</a></strong>
@@ -193,7 +199,8 @@
                   rows="3"></textarea>
               </div>
               <div class="text-center mt-2">
-                <button class="btn btn-info btn-md blue-gradient" type="submit">Post</button>
+                <button class="btn btn-info btn-md " [style.background]="themeService.themeGradient | safe: 'style'"
+                  type="submit">Post</button>
               </div>
             </form>
           </div>

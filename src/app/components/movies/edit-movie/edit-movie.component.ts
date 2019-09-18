@@ -3,6 +3,7 @@ import { ActivatedRoute } from "@angular/router";
 import { MovieService } from "../../../shared/services/movie/movie.service";
 import { Movie } from "../../../shared/models/movie";
 import { NgForm } from "@angular/forms";
+import { ThemeService } from '../../../shared/services/theme/theme.service';
 
 @Component({
   selector: "app-edit-movie",
@@ -16,7 +17,8 @@ export class EditMovieComponent implements OnInit {
   // {make: null};
   constructor(
     private route: ActivatedRoute,
-    private movieService: MovieService
+    private movieService: MovieService,
+    private themeService: ThemeService
   ) {}
 
   ngOnInit() {

@@ -11,7 +11,7 @@
             <div class="md-form mb-0">
               <input class="form-control" type="text" ngModel name="ImdbId">
               <label>IMDB ID</label>
-              <button class="btn btn-info btn-rounded btn-sm waves-effect waves-light blue-gradient">Submit</button><br>
+              <button class="btn btn-info btn-rounded btn-sm waves-effect waves-light " [style.background]="themeService.themeGradient | safe: 'style'">Submit</button><br>
             </div>
           </form>
         </div>
@@ -138,7 +138,7 @@
             <div class="row">
               <div class="col-md-12 text-center my-1">
                 <span class="waves-input-wrapper waves-effect waves-light"><input type="submit" value="Add Movie"
-                    class="btn btn-info btn-rounded blue-gradient" [disabled]="addNewMovie.invalid"></span>
+                    class="btn btn-info btn-rounded " [style.background]="themeService.themeGradient | safe: 'style'" [disabled]="addNewMovie.invalid"></span>
               </div>
             </div>
           </form>

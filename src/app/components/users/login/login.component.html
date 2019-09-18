@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-xl-5 col-lg-6 col-md-8 col-sm-8 mx-auto mt-5">
         <div class="card-body">
-          <div class="form-header blue-gradient">
+          <div class="form-header " [style.background]="themeService.themeGradient | safe: 'style'">
             <h3 class="font-weight-500 my-2 py-1"><i class="fas fa-user"></i> Log in</h3>
           </div>
           <div class="md-form">
@@ -17,13 +17,13 @@
             <!-- <label>Your password</label> -->
           </div>
           <div class="text-center">
-            <button class="btn blue-gradient btn-lg"
+            <button class="btn btn-lg" [style.background]="themeService.themeGradient | safe: 'style'"
               (click)="authService.SignIn(userName.value, userPassword.value)">Log in</button>
-            <button class="btn blue-gradient btn-lg" (click)="authService.GoogleAuth()"><i
-                class="fab fa-google"></i></button>
-            <!-- <button class="btn blue-gradient btn-lg" (click)="authService.GithubAuth()"><i
+            <button class="btn btn-lg" [style.background]="themeService.themeGradient | safe: 'style'"
+              (click)="authService.GoogleAuth()"><i class="fab fa-google"></i></button>
+            <!-- <button class="btn btn-lg" [style.background]="themeService.themeGradient | safe: 'style'" (click)="authService.GithubAuth()"><i
                 class="fab fa-github"></i></button>
-            <button class="btn blue-gradient btn-lg" (click)="authService.MicrosoftAuth()"><i
+            <button class="btn btn-lg" [style.background]="themeService.themeGradient | safe: 'style'" (click)="authService.MicrosoftAuth()"><i
                 class="fab fa-windows"></i></button> -->
             <hr class="mt-4">
             <h5><a routerLink="/forgot-password">Forgot password?</a></h5>

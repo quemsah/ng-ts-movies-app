@@ -6,20 +6,24 @@
       <div class="row select-by col-12 mb-2">
         <div class="col-sm-3 d-flex justify-content-start align-items-center">
           <div class="btn-movies-type btn-group">
-            <button id="grid" (click)="handleGridClick()" type="button" class="btn btn-sm blue-gradient btn-rounded">
+            <button id="grid" (click)="handleGridClick()" type="button" class="btn btn-sm btn-rounded"
+              [style.background]="themeService.themeGradient | safe: 'style'">
               <i class="fas fa-table"></i>
             </button>
-            <button id="list" (click)="handleListClick()" type="button" class="btn btn-sm blue-gradient btn-rounded">
+            <button id="list" (click)="handleListClick()" type="button" class="btn btn-sm btn-rounded"
+              [style.background]="themeService.themeGradient | safe: 'style'">
               <i class="fas fa-list"></i>
             </button>
           </div>
         </div>
         <div class="col-sm-9 sort-by d-flex flex-row-reverse align-items-center">
           <div class="btn-group" role="group" aria-label="Basic example">
-            <button type="button" class="btn btn-sm blue-gradient btn-rounded" (click)="onSortingTypeChange('asc')">
+            <button type="button" class="btn btn-sm btn-rounded"
+              [style.background]="themeService.themeGradient | safe: 'style'" (click)="onSortingTypeChange('asc')">
               <i class="fas fa-arrow-up"></i>
             </button>
-            <button type="button" class="btn btn-sm blue-gradient btn-rounded" (click)="onSortingTypeChange('desc')">
+            <button type="button" class="btn btn-sm btn-rounded"
+              [style.background]="themeService.themeGradient | safe: 'style'" (click)="onSortingTypeChange('desc')">
               <i class="fas fa-arrow-down"></i>
             </button>
           </div>

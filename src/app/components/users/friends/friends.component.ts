@@ -3,6 +3,7 @@ import { NgForm } from "@angular/forms";
 import { UserService } from "../../../shared/services/user/user.service";
 import { AuthService } from "../../../shared/services/auth/auth.service";
 import { Friends } from "../../../shared/models/friends";
+import { ThemeService } from '../../../shared/services/theme/theme.service';
 
 @Component({
   selector: "app-friends",
@@ -15,7 +16,8 @@ export class FriendsComponent implements OnInit {
   inRequests: Friends;
   constructor(
     public authService: AuthService,
-    private userService: UserService
+    private userService: UserService,
+    private themeService: ThemeService
   ) {}
 
   filterObject = (obj, predicate) =>

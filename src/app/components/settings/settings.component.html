@@ -1,22 +1,35 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-lg-6 mb-4 mt-0 mt-md-4">
+    <div class="col-xl-5 col-lg-6 col-md-8 col-sm-8 mx-auto mt-5">
       <div class="card card-cascade narrower">
-        <div class="view view-cascade gradient-card-header" [style.background]="themeService.themeGradient | safe: 'style'">
-          <h5 class="mb-0 font-weight-bold">Edit Account</h5>
+        <div class="view view-cascade gradient-card-header"
+          [style.background]="themeService.themeGradient | safe: 'style'">
+          <h5 class="mb-0 font-weight-bold">Edit Color Scheme</h5>
         </div>
         <div class="card-body card-body-cascade text-center update-profile-form">
-          R:
-          <input value="255" type="number" min="0" max="255" [(ngModel)]="red" name="red" (change)="handleColorChange()">
-          <input type="range" min="0" max="255" step="1" value="255" [(ngModel)]="red" name="red" (change)="handleColorChange()">
+          <div class="d-flex justify-content-between md-form my-0">
+            <h4>Red </h4>
+            <input value="255" type="number" class="quantity" min="0" max="255" [(ngModel)]="red" name="red"
+              (change)="handleColorChange()">
+          </div>
+          <input type="range" class="custom-range" min="0" max="255" step="1" value="255" [(ngModel)]="red" name="red"
+            (change)="handleColorChange()">
           <br>
-          G:
-          <input value="255" type="number" min="0" max="255" [(ngModel)]="green" name="green" (change)="handleColorChange()">
-          <input type="range" min="0" max="255" step="1" value="255" [(ngModel)]="green" name="green" (change)="handleColorChange()">
+          <div class="d-flex justify-content-between md-form my-0">
+            <h4>Green </h4>
+            <input value="255" type="number" min="0" max="255" [(ngModel)]="green" name="green"
+              (change)="handleColorChange()">
+          </div>
+          <input type="range" class="custom-range" min="0" max="255" step="1" value="255" [(ngModel)]="green"
+            name="green" (change)="handleColorChange()">
           <br>
-          B:
-          <input value="255" type="number" min="0" max="255" [(ngModel)]="blue" name="blue" (change)="handleColorChange()">
-          <input type="range" min="0" max="255" step="1" value="255" [(ngModel)]="blue" name="blue" (change)="handleColorChange()">
+          <div class="d-flex justify-content-between md-form my-0">
+            <h4>Blue </h4>
+            <input value="255" type="number" min="0" max="255" [(ngModel)]="blue" name="blue"
+              (change)="handleColorChange()">
+          </div>
+          <input type="range" class="custom-range" min="0" max="255" step="1" value="255" [(ngModel)]="blue" name="blue"
+            (change)="handleColorChange()">
         </div>
       </div>
     </div>

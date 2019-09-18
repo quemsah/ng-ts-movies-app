@@ -25,6 +25,7 @@
           <a *ngIf="!authService.isLoggedIn" routerLink="/register" class="dropdown-item">Sign up</a>
           <a *ngIf="authService.isLoggedIn" routerLink="/friends" class="dropdown-item">Friends</a>
           <a *ngIf="authService.isLoggedIn" routerLink="/profile" class="dropdown-item">My account</a>
+          <a *ngIf="authService.isLoggedIn" routerLink="/settings" class="dropdown-item">Settings</a>
           <a *ngIf="authService.isLoggedIn" (click)="authService.SignOut()" class="dropdown-item">Log out</a>
         </div>
       </li>

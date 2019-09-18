@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { ThemeService } from '../../shared/services/theme/theme.service';
 
 declare var $: any;
 
@@ -8,7 +9,7 @@ declare var $: any;
   styleUrls: ["./sidenav.component.css"]
 })
 export class SidenavComponent implements OnInit {
-  constructor() {}
+  constructor( private themeService: ThemeService) {}
 
   ngOnInit() {
   }
