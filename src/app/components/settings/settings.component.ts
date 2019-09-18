@@ -7,13 +7,13 @@ import { ThemeService } from "src/app/shared/services/theme/theme.service";
   styleUrls: ["./settings.component.css"]
 })
 export class SettingsComponent implements OnInit {
-  red: number = 255;
-  green: number = 255;
-  blue: number = 255;
+  red: number = 32;
+  green: number = 199;
+  blue: number = 107;
   constructor(private themeService: ThemeService) {}
 
   ngOnInit() {
-    console.log(this.themeService.themeGradient);
+    this.themeService.setGradient(this.red,this.green,this.blue)
   }
   handleColorChange() {
     this.themeService.setGradient(this.red,this.green,this.blue)

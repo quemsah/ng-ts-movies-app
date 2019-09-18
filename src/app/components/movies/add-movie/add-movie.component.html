@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-lg-4 mb-4">
       <div class="card card-cascade narrower">
-        <div class="view view-cascade gradient-card-header blue-gradient">
+        <div class="view view-cascade gradient-card-header" [style.background]="themeService.themeGradient | safe: 'style'">
           <h5 class="mb-0 font-weight-bold">Get info via TMDB</h5>
         </div>
         <div class="card-body card-body-cascade text-center">
@@ -21,7 +21,7 @@
     <span>{{this.foundMovieCrew | json}}</span> -->
     <div class="col-lg-8 mb-4">
       <div class="card card-cascade narrower">
-        <div class="view view-cascade gradient-card-header blue-gradient">
+        <div class="view view-cascade gradient-card-header" [style.background]="themeService.themeGradient | safe: 'style'">
           <h5 class="mb-0 font-weight-bold">Add Movie</h5>
         </div>
         <div class="card-body card-body-cascade text-center">
