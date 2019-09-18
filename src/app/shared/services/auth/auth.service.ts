@@ -169,14 +169,25 @@ export class AuthService {
         this.ngZone.run(() => {
           this.router.navigate(["profile"]);
         });
-        console.log(result.user);
-        this.SetUserData(result.user);
+        // в случае логина через гитхаб или майкрософт emailVerified будет false
+        // так как Firebase ставит именно так это создает проблемы со входом, так как есть
+        // пользователи, которые зарегистрировались через почту и emailVerified которых надо проверять
+        // (result.user.emailVerified == false)
+        this.SetUserData(result.user, true);
+        this.profileRef.set({ emailVerified: true }, { merge: true });
+        // попытки тщетны, так как править поле emailVerified Firebase позволяет только 
+        // админам, а мне нет смысла тянуть весь админский пакет фич только для этого
+        // admin.auth().updateUser(kUserUid, {
+        //   emailVerified: true,
+        // });
+        // UPD: Firebase Admin SDK на клиенте поставить нельзя
       })
       .catch(this.errCatching);
   }
 
-  // Записываем данные пользователя в собсвенную таблицу
-  SetUserData(user) {
+  // Записываем данные пользователя документ
+  SetUserData(user, verified?: boolean) {
+    console.log(verified ? verified : user.emailVerified);
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(
       `users/${user.uid}`
     );
@@ -185,7 +196,7 @@ export class AuthService {
       email: user.email,
       displayName: user.displayName,
       photoURL: user.photoURL,
-      emailVerified: user.emailVerified
+      emailVerified: verified ? verified : user.emailVerified
     };
     return userRef.set(userData, {
       merge: true
