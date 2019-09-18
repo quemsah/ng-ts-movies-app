@@ -2,7 +2,6 @@ import { BrowserModule, Title } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { HttpClientModule } from "@angular/common/http";
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
-import { JwPaginationComponent } from "jw-angular-pagination";
 // MatSnackBar (замена window.alert)
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
@@ -35,8 +34,9 @@ import { SidenavComponent } from "./components/sidenav/sidenav.component";
 import { NavbarComponent } from "./components/navbar/navbar.component";
 import { MovieComponent } from "./components/movies/movie/movie.component";
 import { MoviesListComponent } from "./components/movies/movies-list/movies-list.component";
-import { EditMovieComponent } from './components/movies/edit-movie/edit-movie.component';
-import { NoInfoPipe } from './shared/pipes/no-info.pipe';
+import { EditMovieComponent } from "./components/movies/edit-movie/edit-movie.component";
+import { NoInfoPipe } from "./shared/pipes/no-info.pipe";
+import { PaginationComponent } from "./components/pagination/pagination.component";
 
 @NgModule({
   declarations: [
@@ -54,10 +54,10 @@ import { NoInfoPipe } from './shared/pipes/no-info.pipe';
     AddMovieComponent,
     MovieComponent,
     MoviesListComponent,
-    JwPaginationComponent,
     FriendsComponent,
     EditMovieComponent,
-    NoInfoPipe
+    NoInfoPipe,
+    PaginationComponent
   ],
   imports: [
     HttpClientModule,
