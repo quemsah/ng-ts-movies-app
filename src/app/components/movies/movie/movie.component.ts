@@ -12,6 +12,7 @@ import { Crew } from "./../../../shared/models/crew";
 import { Comment } from "./../../../shared/models/comment";
 import { Movie } from "../../../shared/models/movie";
 import { Trailer } from "../../../shared/models/trailer";
+import { MovieListItem } from "../../../shared/models/movie-list-comment";
 
 @Component({
   selector: "app-movie",
@@ -25,6 +26,8 @@ export class MovieComponent implements OnInit, AfterViewInit {
   movieTrailers: Trailer[];
   movieSimilars: SimilarMovie[];
   currentCommentText: string;
+  // currentCommentText: string;
+  // currentCommentText: string;
 
   constructor(
     public authService: AuthService,
@@ -45,7 +48,7 @@ export class MovieComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     // this.themeService.checkDarkMode();
   }
-
+  // прыгнуть к изменению своего комментария
   scroll(el: HTMLElement) {
     el.scrollIntoView();
   }
@@ -101,11 +104,31 @@ export class MovieComponent implements OnInit, AfterViewInit {
   }
 
   handleMovieEdit() {
+    // роутит на соответствующую страничку
     console.log(this.movieData.mid);
   }
 
   handleMovieDelete() {
     this.movieService.deleteMovie(this.movieData.mid);
+  }
+
+  getElementId(event): string {
+    const target = event.target || event.srcElement || event.currentTarget;
+    return target.attributes.id.nodeValue;
+  }
+
+  handleToWatchLater(event) {
+    const watchLaterMovieData: MovieListItem = {
+      mid: this.getElementId(event),
+      date: new Date().toLocaleString()
+    };
+    console.log(watchLaterMovieData);
+    this.movieService.toggleWatchLater(watchLaterMovieData, this.authService.userData.uid);
+  }
+
+  handleToFavourites(event) {
+    const mid = this.getElementId(event);
+    console.log(mid);
   }
 
   handleAddComment(form: NgForm) {
@@ -122,16 +145,14 @@ export class MovieComponent implements OnInit, AfterViewInit {
   }
 
   handleCommentEdit(event) {
-    const target = event.target || event.srcElement || event.currentTarget;
-    const cid = target.attributes.id.nodeValue;
+    const cid = this.getElementId(event);
     const text = document.getElementById("t" + cid).innerText;
     this.currentCommentText = text;
     this.movieService.deleteComment(cid, this.movieData.mid);
   }
 
   handleCommentDelete(event) {
-    const target = event.target || event.srcElement || event.currentTarget;
-    const cid = target.attributes.id.nodeValue;
+    const cid = this.getElementId(event);
     this.movieService.deleteComment(cid, this.movieData.mid);
   }
 }

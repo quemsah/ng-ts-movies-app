@@ -6,6 +6,7 @@ import { AlertService } from "../alert/alert.service";
 import { Observable } from "rxjs";
 import { OrderByDirection } from "../../order-by-direction";
 import { Router } from "@angular/router";
+import { MovieListItem } from "../../models/movie-list-comment";
 
 @Injectable({
   providedIn: "root"
@@ -76,40 +77,6 @@ export class MovieService {
       .catch(error => this.alertService.openWarningAlert(error.message, 2));
   }
 
-  addComment(commentData: Comment, mid: string) {
-    this.afs
-      .collection(`movies/`)
-      .doc(mid)
-      .collection(`comments/`)
-      .doc(commentData.cid)
-      .set(commentData)
-      .then(smth =>
-        this.alertService.openSuccessAlert("Comment successfully added", 2)
-      )
-      .catch(error => this.alertService.openWarningAlert(error.message, 2));
-  }
-
-  deleteComment(cid: string, mid: string) {
-    this.afs
-      .collection(`movies/`)
-      .doc(mid)
-      .collection(`comments/`)
-      .doc(cid)
-      .delete()
-      .then(smth =>
-        this.alertService.openSuccessAlert("Comment successfully deleted", 2)
-      )
-      .catch(error => this.alertService.openWarningAlert(error.message, 2));
-  }
-
-  fetchComment(cid: string, mid: string): Observable<any> {
-    return this.afs.collection(`movies/${mid}/comments/${cid}/`).valueChanges();
-  }
-
-  fetchComments(mid: string): Observable<any> {
-    return this.afs.collection(`movies/${mid}/comments`).valueChanges();
-  }
-
   fetchMovie(id: string): Observable<any> {
     //return this.afs.doc(`movies/${id}`).valueChanges();
     let movie = this.afs.collection("movies").doc(`${id}`);
@@ -158,4 +125,81 @@ export class MovieService {
   //     )
   //     .valueChanges();
   // }
+
+  toggleWatchLater(listMovieData: MovieListItem, uid: string) {
+    // this.afs
+    //   .collection(`users/`)
+    //   .doc(uid)
+    //   .collection(`watchlater/`)
+    //   .doc(listMovieData.mid)
+    //   .set(listMovieData)
+    //   .then(smth =>
+    //     this.alertService.openSuccessAlert("Comment successfully added", 2)
+    //   )
+    //   .catch(error => this.alertService.openWarningAlert(error.message, 2));
+    const movieDoc = this.afs
+      .collection(`users/`)
+      .doc(uid)
+      .collection(`watchlater/`)
+      .doc(listMovieData.mid);
+
+    movieDoc
+      .get()
+      .toPromise()
+      .then(doc => {
+        if (doc.exists) {
+          console.log("Movie data:", doc.data());
+        } else {
+          // console.log("No such movie!");
+          movieDoc
+            .set(listMovieData)
+            .then(smth =>
+              this.alertService.openSuccessAlert(
+                "Comment successfully added",
+                2
+              )
+            )
+            .catch(error =>
+              this.alertService.openWarningAlert(error.message, 2)
+            );
+        }
+      })
+      .catch(function(error) {
+        console.log("Error getting document:", error);
+      });
+  }
+
+  addComment(commentData: Comment, mid: string) {
+    this.afs
+      .collection(`movies/`)
+      .doc(mid)
+      .collection(`comments/`)
+      .doc(commentData.cid)
+      .set(commentData)
+      .then(smth =>
+        this.alertService.openSuccessAlert("Comment successfully added", 2)
+      )
+      .catch(error => this.alertService.openWarningAlert(error.message, 2));
+  }
+
+  deleteComment(cid: string, mid: string) {
+    this.afs
+      .collection(`movies/`)
+      .doc(mid)
+      .collection(`comments/`)
+      .doc(cid)
+      .delete()
+      .then(smth =>
+        this.alertService.openSuccessAlert("Comment successfully deleted", 2)
+      )
+      .catch(error => this.alertService.openWarningAlert(error.message, 2));
+  }
+
+  fetchComment(cid: string, mid: string): Observable<any> {
+    return this.afs.collection(`movies/${mid}/comments/${cid}/`).valueChanges();
+  }
+
+  fetchComments(mid: string): Observable<any> {
+    return this.afs.collection(`movies/${mid}/comments`).valueChanges();
+  }
 }

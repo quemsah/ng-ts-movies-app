@@ -38,6 +38,11 @@ export class FriendsComponent implements OnInit, AfterViewInit {
   mapOutRequests = x => x.accepted === false && x.uid === x.initiator;
 
   mapInRequests = x => x.accepted === false && x.uid !== x.initiator;
+
+  getElementId(event): string {
+    const target = event.target || event.srcElement || event.currentTarget;
+    return target.attributes.id.nodeValue;
+  }
   // добавляем к сухим айдишниками информацию о друзьях/запросах
   getFriendsInfo(friendsData: Friends) {
     console.log(friendsData);
@@ -72,13 +77,12 @@ export class FriendsComponent implements OnInit, AfterViewInit {
   }
   // удаляет и запросы в друзья и друзей в целом
   handleRequestDelete(event) {
-    const target = event.target || event.srcElement || event.currentTarget;
-    const fid = target.attributes.id.nodeValue;
+    const fid = this.getElementId(event);
     this.userService.deleteRequests(fid);
   }
+
   handleRequestAccept(event) {
-    const target = event.target || event.srcElement || event.currentTarget;
-    const fid = target.attributes.id.nodeValue;
+    const fid = this.getElementId(event);
     this.userService.acceptRequests(fid);
   }
 }

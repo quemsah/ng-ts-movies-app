@@ -9,9 +9,9 @@ export class ThemeService {
   isDarkMode: boolean = false;
   wasRouted: boolean = false;
   // начальные значения
-  red: number = 7;
-  green: number = 103;
-  blue: number = 251;
+  red: number = 50;
+  green: number = 138;
+  blue: number = 255;
   themeGradient: string = this.setGradient(this.red, this.green, this.blue);
   themeColor: string = this.setColor(this.red, this.green, this.blue);
   constructor() //setGradient(32,199,107);
