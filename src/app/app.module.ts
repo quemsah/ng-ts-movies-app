@@ -76,13 +76,7 @@ import { SettingsComponent } from "./components/settings/settings.component";
     ReactiveFormsModule,
     MatSnackBarModule
   ],
-  providers: [
-    AuthService,
-    AngularFireStorage,
-    TMDBService,
-    Title,
-    ThemeService
-  ],
+  providers: [AuthService, AngularFireStorage, TMDBService, Title, ThemeService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

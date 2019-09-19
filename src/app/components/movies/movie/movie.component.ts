@@ -86,9 +86,7 @@ export class MovieComponent implements OnInit, AfterViewInit {
     this.tmdbService.getMovieTrailersByTMDBID(id).subscribe(data => {
       this.movieTrailers = this.movieService.sliceData(data.results, 12);
       this.movieTrailers.forEach(
-        (value, i) =>
-          (value[i].key =
-            "https://www.youtube.com/embed/" + value[i].key + "?rel=0")
+        (value, i) => (value[i].key = "https://www.youtube.com/embed/" + value[i].key + "?rel=0")
       );
       // console.log("Trailers");
       // console.log(this.movieTrailers);

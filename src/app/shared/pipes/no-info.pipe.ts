@@ -5,8 +5,6 @@ import { Pipe, PipeTransform } from "@angular/core";
 })
 export class NoInfoPipe implements PipeTransform {
   transform(value: string) {
-    return (value = value
-      ? (value = value == "$ 0" ? "No information" : value)
-      : value);
+    return (value = value ? (value = value == "$ 0" ? "No information" : value) : value);
   }
 }

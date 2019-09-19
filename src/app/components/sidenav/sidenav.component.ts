@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { ThemeService } from '../../shared/services/theme/theme.service';
+import { ThemeService } from "../../shared/services/theme/theme.service";
 
 declare var $: any;
 
@@ -9,15 +9,16 @@ declare var $: any;
   styleUrls: ["./sidenav.component.css"]
 })
 export class SidenavComponent implements OnInit {
-  constructor( public themeService: ThemeService) {}
+  constructor(public themeService: ThemeService) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
   // https://github.com/Dogfalo/materialize/issues/1676
   // https://stackoverflow.com/questions/32591402/materialize-sidenav-produces-multiple-sidenav-overlay
   sidenavClose() {
     $(".button-collapse").sideNav("hide");
-    $(".button-collapse").off("click").sideNav();
+    $(".button-collapse")
+      .off("click")
+      .sideNav();
     $("div[id^=sidenav-overlay]").remove();
   }
 }

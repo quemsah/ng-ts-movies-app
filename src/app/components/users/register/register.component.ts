@@ -8,10 +8,7 @@ import { AuthService } from "../../../shared/services/auth/auth.service";
   styleUrls: ["./register.component.css"]
 })
 export class RegisterComponent implements OnInit, AfterViewInit {
-  constructor(
-    public authService: AuthService,
-    public themeService: ThemeService
-  ) {}
+  constructor(public authService: AuthService, public themeService: ThemeService) {}
 
   ngOnInit() {}
 

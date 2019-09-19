@@ -8,10 +8,7 @@ import { AuthService } from "../../../shared/services/auth/auth.service";
   styleUrls: ["./verify-email.component.css"]
 })
 export class VerifyEmailComponent implements OnInit, AfterViewInit {
-  constructor(
-    public authService: AuthService,
-    public themeService: ThemeService
-  ) {}
+  constructor(public authService: AuthService, public themeService: ThemeService) {}
 
   ngOnInit() {}
 

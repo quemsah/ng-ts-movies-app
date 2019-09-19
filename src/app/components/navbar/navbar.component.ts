@@ -14,10 +14,7 @@ export class NavbarComponent implements OnInit {
   profile: boolean = false;
   settings: boolean = false;
   logout: boolean = false;
-  constructor(
-    public authService: AuthService,
-    public themeService: ThemeService
-  ) {}
+  constructor(public authService: AuthService, public themeService: ThemeService) {}
 
   ngOnInit() {}
 }

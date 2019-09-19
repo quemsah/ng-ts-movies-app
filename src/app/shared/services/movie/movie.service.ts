@@ -33,14 +33,14 @@ export class MovieService {
       .toLowerCase();
 
   compareGenres = (genres, fetchedGenres) =>
-    genres.map(x =>
-      fetchedGenres.map(y => (x.id === y.id ? (x.selected = true) : null))
-    );
+    genres.map(x => fetchedGenres.map(y => (x.id === y.id ? (x.selected = true) : null)));
 
   sliceData = (object, num) =>
     Object.keys(object)
       .slice(0, num)
-      .map(key => ({ [key]: object[key] }));
+      .map(key => ({
+        [key]: object[key]
+      }));
 
   genresToArray = genres => {
     const genresArray = [];
@@ -58,10 +58,10 @@ export class MovieService {
     this.afs
       .collection(`movies/`)
       .doc(movieData.mid)
-      .set(movieData, { merge: true })
-      .then(smth =>
-        this.alertService.openSuccessAlert("Movie info successfully added", 2)
-      )
+      .set(movieData, {
+        merge: true
+      })
+      .then(smth => this.alertService.openSuccessAlert("Movie info successfully added", 2))
       .catch(error => this.alertService.openWarningAlert(error.message, 2));
   }
 
@@ -93,9 +93,7 @@ export class MovieService {
   // Сортируем на сервере, остальное – на клиенте
   fetchMovies(orderField: string, sortType: string): Observable<any> {
     const type: OrderByDirection = sortType as OrderByDirection;
-    return this.afs
-      .collection("movies", ref => ref.orderBy(orderField, type))
-      .valueChanges();
+    return this.afs.collection("movies", ref => ref.orderBy(orderField, type)).valueChanges();
   }
 
   // server-side data filter
@@ -127,16 +125,6 @@ export class MovieService {
   // }
 
   toggleWatchLater(listMovieData: MovieListItem, uid: string) {
-    // this.afs
-    //   .collection(`users/`)
-    //   .doc(uid)
-    //   .collection(`watchlater/`)
-    //   .doc(listMovieData.mid)
-    //   .set(listMovieData)
-    //   .then(smth =>
-    //     this.alertService.openSuccessAlert("Comment successfully added", 2)
-    //   )
-    //   .catch(error => this.alertService.openWarningAlert(error.message, 2));
     const movieDoc = this.afs
       .collection(`users/`)
       .doc(uid)
@@ -147,26 +135,27 @@ export class MovieService {
       .get()
       .toPromise()
       .then(doc => {
+        // метод из Firebase
         if (doc.exists) {
-          console.log("Movie data:", doc.data());
+          movieDoc
+            .delete()
+            .then(smth =>
+              this.alertService.openInfoAlert("Movie successfully deleted from list", 0.5)
+            )
+            .catch(error => this.alertService.openWarningAlert(error.message, 2));
         } else {
           // console.log("No such movie!");
           movieDoc
             .set(listMovieData)
             .then(smth =>
-              this.alertService.openSuccessAlert(
-                "Comment successfully added",
-                2
-              )
+              this.alertService.openSuccessAlert("Movie successfully added to list", 0.5)
             )
-            .catch(error =>
-              this.alertService.openWarningAlert(error.message, 2)
-            );
+            .catch(error => this.alertService.openWarningAlert(error.message, 2));
         }
       })
-      .catch(function(error) {
-        console.log("Error getting document:", error);
-      });
+      .catch(error =>
+        this.alertService.openWarningAlert("Error getting movie data!: " + error.message, 2)
+      );
   }
 
   addComment(commentData: Comment, mid: string) {
@@ -176,9 +165,7 @@ export class MovieService {
       .collection(`comments/`)
       .doc(commentData.cid)
       .set(commentData)
-      .then(smth =>
-        this.alertService.openSuccessAlert("Comment successfully added", 2)
-      )
+      .then(smth => this.alertService.openSuccessAlert("Comment successfully added", 2))
       .catch(error => this.alertService.openWarningAlert(error.message, 2));
   }
 
@@ -189,9 +176,7 @@ export class MovieService {
       .collection(`comments/`)
       .doc(cid)
       .delete()
-      .then(smth =>
-        this.alertService.openSuccessAlert("Comment successfully deleted", 2)
-      )
+      .then(smth => this.alertService.openSuccessAlert("Comment successfully deleted", 2))
       .catch(error => this.alertService.openWarningAlert(error.message, 2));
   }
 

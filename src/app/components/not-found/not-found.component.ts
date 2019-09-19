@@ -10,7 +10,7 @@ export class NotFoundComponent implements OnInit, AfterViewInit {
   constructor(public themeService: ThemeService) {}
 
   ngOnInit() {}
-  
+
   ngAfterViewInit() {
     // this.themeService.checkDarkMode();
   }

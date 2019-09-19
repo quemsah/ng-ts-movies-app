@@ -8,10 +8,7 @@ import { AuthService } from "../../../shared/services/auth/auth.service";
   styleUrls: ["./login.component.css"]
 })
 export class LoginComponent implements OnInit, AfterViewInit {
-  constructor(
-    public authService: AuthService,
-    public themeService: ThemeService
-  ) {}
+  constructor(public authService: AuthService, public themeService: ThemeService) {}
 
   ngOnInit() {}
 

@@ -25,10 +25,7 @@ export class MoviesListComponent implements OnInit, AfterViewInit {
     { id: 7, value: "budget", name: "Budget" },
     { id: 8, value: "revenue", name: "Revenue" }
   ];
-  constructor(
-    private movieService: MovieService,
-    public themeService: ThemeService
-  ) {}
+  constructor(private movieService: MovieService, public themeService: ThemeService) {}
 
   ngOnInit() {
     this.getMovies();
@@ -39,15 +36,11 @@ export class MoviesListComponent implements OnInit, AfterViewInit {
   }
 
   handleListClick() {
-    document
-      .querySelectorAll(".movie-item")
-      .forEach(x => x.classList.add("list-item"));
+    document.querySelectorAll(".movie-item").forEach(x => x.classList.add("list-item"));
   }
 
   handleGridClick() {
-    document
-      .querySelectorAll(".movie-item")
-      .forEach(x => x.classList.remove("list-item"));
+    document.querySelectorAll(".movie-item").forEach(x => x.classList.remove("list-item"));
   }
 
   onSortingValueChange(sValue: string): void {
@@ -76,11 +69,9 @@ export class MoviesListComponent implements OnInit, AfterViewInit {
     );
 
   getMovies(): void {
-    this.movieService
-      .fetchMovies(this.sortingValue, this.sortingType)
-      .subscribe(movies => {
-        this.movies = this.filterByAll(movies, this.searchValue.toLowerCase());
-      });
+    this.movieService.fetchMovies(this.sortingValue, this.sortingType).subscribe(movies => {
+      this.movies = this.filterByAll(movies, this.searchValue.toLowerCase());
+    });
   }
 
   onChangePage(pageOfItems: Array<Movie>) {

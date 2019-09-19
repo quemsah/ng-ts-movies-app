@@ -37,16 +37,8 @@ export class PaginationComponent implements OnInit, OnChanges {
   }
 
   setPage(page: number) {
-    this.pager = this.paginate(
-      this.items.length,
-      page,
-      this.pageSize,
-      this.maxPages
-    );
-    const pageOfItems = this.items.slice(
-      this.pager.startIndex,
-      this.pager.endIndex + 1
-    );
+    this.pager = this.paginate(this.items.length, page, this.pageSize, this.maxPages);
+    const pageOfItems = this.items.slice(this.pager.startIndex, this.pager.endIndex + 1);
     this.changePage.emit(pageOfItems);
   }
 
@@ -83,9 +75,7 @@ export class PaginationComponent implements OnInit, OnChanges {
     }
     const startIndex = (currentPage - 1) * pageSize;
     const endIndex = Math.min(startIndex + pageSize - 1, totalItems - 1);
-    const pages = Array.from(Array(endPage + 1 - startPage).keys()).map(
-      i => startPage + i
-    );
+    const pages = Array.from(Array(endPage + 1 - startPage).keys()).map(i => startPage + i);
     return {
       totalItems,
       currentPage,

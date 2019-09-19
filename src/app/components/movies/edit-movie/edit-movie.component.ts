@@ -37,10 +37,7 @@ export class EditMovieComponent implements OnInit, AfterViewInit {
   onEditMovieSubmit(form: NgForm) {
     // приводим к нужному виду
     const movieData: Movie = {
-      mid: this.movieService.generateMovieID(
-        form.value.Date,
-        form.value.MovieName
-      ),
+      mid: this.movieService.generateMovieID(form.value.Date, form.value.MovieName),
       imdb_id: this.currentMovieData.imdb_id,
       tmdb_id: this.currentMovieData.tmdb_id,
       dateAdded: Math.round(+new Date() / 1000),

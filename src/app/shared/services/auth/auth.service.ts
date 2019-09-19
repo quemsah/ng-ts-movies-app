@@ -3,10 +3,7 @@ import { User } from "../../models/user";
 import { auth } from "firebase/app";
 import * as firebase from "firebase";
 import { AngularFireAuth } from "@angular/fire/auth";
-import {
-  AngularFirestore,
-  AngularFirestoreDocument
-} from "@angular/fire/firestore";
+import { AngularFirestore, AngularFirestoreDocument } from "@angular/fire/firestore";
 import { AngularFireStorage } from "@angular/fire/storage";
 import { Router } from "@angular/router";
 import { finalize } from "rxjs/operators";
@@ -104,10 +101,7 @@ export class AuthService {
             this.ngZone.run(() => {
               this.router.navigate(["login"]);
             });
-            this.alertService.openSuccessAlert(
-              "Password successfully changed!",
-              1
-            );
+            this.alertService.openSuccessAlert("Password successfully changed!", 1);
           })
           .catch(this.errCatching);
       })
@@ -142,10 +136,7 @@ export class AuthService {
     return this.afAuth.auth
       .sendPasswordResetEmail(passwordResetEmail)
       .then(() => {
-        this.alertService.openInfoAlert(
-          "Password reset email sent, check your inbox.",
-          2
-        );
+        this.alertService.openInfoAlert("Password reset email sent, check your inbox.", 2);
       })
       .catch(error => {
         window.alert(error);
@@ -223,9 +214,7 @@ export class AuthService {
   // Записываем данные пользователя документ
   SetUserData(user, verified?: boolean) {
     console.log(verified ? verified : user.emailVerified);
-    const userRef: AngularFirestoreDocument<any> = this.afs.doc(
-      `users/${user.uid}`
-    );
+    const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
     const userData: User = {
       uid: user.uid,
       email: user.email,

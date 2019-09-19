@@ -1,10 +1,5 @@
 import { Injectable } from "@angular/core";
-import {
-  CanActivate,
-  ActivatedRouteSnapshot,
-  RouterStateSnapshot,
-  Router
-} from "@angular/router";
+import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from "@angular/router";
 import { AuthService } from "../services/auth/auth.service";
 import { Observable } from "rxjs";
 import { ThemeService } from "../services/theme/theme.service";
@@ -26,7 +21,7 @@ export class InnerPagesGuard implements CanActivate {
     this.themeService.forceDisableDarkModeBeforeRoute();
     console.log("Inner guard!");
     if (this.authService.isLoggedIn) {
-      console.log(this.authService.userData.emailVerified)
+      console.log(this.authService.userData.emailVerified);
       console.log("this.authService.isLoggedIn =  true");
       // window.alert("You are not allowed to access this URL!");
       this.router.navigate(["profile"]);

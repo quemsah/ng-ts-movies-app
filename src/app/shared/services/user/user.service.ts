@@ -28,9 +28,7 @@ export class UserService {
   //   return this.afs.collection(`users/${this.uid}/friends`).valueChanges();
   // }
   getUserIdByEmail(email: string): Observable<any> {
-    return this.afs
-      .collection("users", ref => ref.where("email", "==", email))
-      .valueChanges();
+    return this.afs.collection("users", ref => ref.where("email", "==", email)).valueChanges();
   }
 
   getUserInfo(uid: string): Observable<any> {
@@ -58,12 +56,7 @@ export class UserService {
           accepted: false,
           fid: uid
         })
-          .then(smth =>
-            this.alertService.openSuccessAlert(
-              "Request was successfully sent",
-              1
-            )
-          )
+          .then(smth => this.alertService.openSuccessAlert("Request was successfully sent", 1))
           .catch(error => this.alertService.openWarningAlert(error.message, 2));
       } else {
         this.alertService.openWarningAlert(
@@ -95,9 +88,7 @@ export class UserService {
       this.alertService.openWarningAlert(error.message, 2)
     );
     this.deleteRequest(fid, uid)
-      .then(smth =>
-        this.alertService.openSuccessAlert("Successfully deleted!", 2)
-      )
+      .then(smth => this.alertService.openSuccessAlert("Successfully deleted!", 2))
       .catch(error => this.alertService.openWarningAlert(error.message, 2));
   }
 
@@ -128,9 +119,7 @@ export class UserService {
       accepted: true,
       fid: uid
     })
-      .then(smth =>
-        this.alertService.openSuccessAlert("Friend was successfully added", 2)
-      )
+      .then(smth => this.alertService.openSuccessAlert("Friend was successfully added", 2))
       .catch(error => this.alertService.openWarningAlert(error.message, 2));
   }
 }

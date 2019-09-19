@@ -9,10 +9,7 @@ import { NgForm } from "@angular/forms";
   styleUrls: ["./profile.component.css"]
 })
 export class ProfileComponent implements OnInit, AfterViewInit {
-  constructor(
-    public authService: AuthService,
-    public themeService: ThemeService
-  ) {}
+  constructor(public authService: AuthService, public themeService: ThemeService) {}
 
   ngOnInit() {}
 
@@ -27,10 +24,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 
   onProfileSubmit(form: NgForm) {
     console.log(form.value);
-    this.authService.UpdateUserPassword(
-      form.value.password,
-      form.value.oldPassword
-    );
+    this.authService.UpdateUserPassword(form.value.password, form.value.oldPassword);
   }
 
   onClickPhoto(file: File) {

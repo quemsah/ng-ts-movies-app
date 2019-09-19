@@ -8,10 +8,7 @@ import { AuthService } from "../../../shared/services/auth/auth.service";
   styleUrls: ["./forgot-password.component.css"]
 })
 export class ForgotPasswordComponent implements OnInit, AfterViewInit {
-  constructor(
-    public authService: AuthService,
-    public themeService: ThemeService
-  ) {}
+  constructor(public authService: AuthService, public themeService: ThemeService) {}
 
   ngOnInit() {}
 
