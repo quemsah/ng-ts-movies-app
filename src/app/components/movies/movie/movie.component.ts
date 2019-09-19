@@ -115,18 +115,30 @@ export class MovieComponent implements OnInit, AfterViewInit {
     return target.attributes.id.nodeValue;
   }
 
-  handleToWatchLater(event) {
+  handleToWatchLater() {
     const watchLaterMovieData: MovieListItem = {
-      mid: this.getElementId(event),
+      mid: this.movieData.mid,
       date: new Date().toLocaleString()
     };
-    console.log(watchLaterMovieData);
-    this.movieService.toggleWatchLater(watchLaterMovieData, this.authService.userData.uid);
+    //console.log(watchLaterMovieData);
+    this.movieService.toggleMovieToList(
+      "watchlater",
+      watchLaterMovieData,
+      this.authService.userData.uid
+    );
   }
 
-  handleToFavourites(event) {
-    const mid = this.getElementId(event);
-    console.log(mid);
+  handleToFavourites() {
+    const watchLaterMovieData: MovieListItem = {
+      mid: this.movieData.mid,
+      date: new Date().toLocaleString()
+    };
+    //console.log(watchLaterMovieData);
+    this.movieService.toggleMovieToList(
+      "favourites",
+      watchLaterMovieData,
+      this.authService.userData.uid
+    );
   }
 
   handleAddComment(form: NgForm) {

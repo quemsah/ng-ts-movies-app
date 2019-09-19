@@ -124,19 +124,20 @@ export class MovieService {
   //     .valueChanges();
   // }
 
-  toggleWatchLater(listMovieData: MovieListItem, uid: string) {
+  toggleMovieToList(type: string, listMovieData: MovieListItem, uid: string) {
     const movieDoc = this.afs
       .collection(`users/`)
       .doc(uid)
-      .collection(`watchlater/`)
+      .collection(type + `/`)
       .doc(listMovieData.mid);
-
     movieDoc
       .get()
       .toPromise()
       .then(doc => {
         // метод из Firebase
+        // если такой фильм в списке
         if (doc.exists) {
+          // удаляем
           movieDoc
             .delete()
             .then(smth =>
@@ -144,6 +145,7 @@ export class MovieService {
             )
             .catch(error => this.alertService.openWarningAlert(error.message, 2));
         } else {
+          // добавляем в список
           // console.log("No such movie!");
           movieDoc
             .set(listMovieData)

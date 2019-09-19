@@ -40,11 +40,11 @@
             <p class="my-3">{{movie.overview}}</p>
             <p *ngIf="movie.budget" class="m-0 p-0">Budget: {{movie.budget | noInfo}}</p>
             <p *ngIf="movie.revenue" class="mb-2 p-0">Revenue: {{movie.revenue | noInfo}}</p>
-            <button type="button" id="{{movie.mid}}" class="btn btn-md ml-0" (click)="handleToWatchLater($event)"
+            <button type="button" class="btn btn-md ml-0" (click)="handleToWatchLater()"
               [style.background]="themeService.themeGradient | safe: 'style'">
               <i class="far fa-clock pr-1"></i> Watch later
             </button>
-            <button type="button" id="{{movie.mid}}" class="btn btn-md ml-0" (click)="handleToFavourites($event)"
+            <button type="button" class="btn btn-md ml-0" (click)="handleToFavourites()"
               [style.background]="themeService.themeGradient | safe: 'style'">
               <i class="far fa-heart pr-1"></i> Favourite
             </button>
