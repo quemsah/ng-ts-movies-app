@@ -36,4 +36,8 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   onClickPhoto(file: File) {
     this.authService.UploadNewAvatar(file);
   }
+
+  onDeletePhoto() {
+    this.authService.DeleteAvatar();
+  }
 }

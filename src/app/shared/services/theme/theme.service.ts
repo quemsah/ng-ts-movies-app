@@ -9,12 +9,11 @@ export class ThemeService {
   isDarkMode: boolean = false;
   wasRouted: boolean = false;
   // начальные значения
-  red: number = 31;
-  green: number = 119;
-  blue: number = 239;
+  red: number = 7;
+  green: number = 103;
+  blue: number = 251;
   themeGradient: string = this.setGradient(this.red, this.green, this.blue);
   themeColor: string = this.setColor(this.red, this.green, this.blue);
-
   constructor() //setGradient(32,199,107);
   {}
 
@@ -22,12 +21,15 @@ export class ThemeService {
     var hex = Math.round(Math.min(Math.max(0, rgb), 255)).toString(16);
     return hex.length < 2 ? "0" + hex : hex;
   }
+
   fullColorHex(red: number, green: number, blue: number) {
     return this.rgbToHex(red) + this.rgbToHex(green) + this.rgbToHex(blue);
   }
+
   mix(color: number, param: number) {
     return Math.round((1 + param) * color);
   }
+
   setGradient(red: number, green: number, blue: number): string {
     const alpha = 0.3;
     const beta = -0.5;
@@ -47,6 +49,7 @@ export class ThemeService {
     return gr;
     //console.log(this.themeGradient);
   }
+
   setColor(red: number, green: number, blue: number): string {
     const color = "#" + this.fullColorHex(red, green, blue);
     this.themeColor = color;

@@ -60,6 +60,7 @@ export class AuthService {
   get profileRef() {
     return this.afs.doc(`users/${this.currentUser.uid}`);
   }
+
   get friendsRef() {
     return this.afs.collection(`users/${this.userData.uid}/friends`);
   }
@@ -234,5 +235,15 @@ export class AuthService {
         })
       )
       .subscribe();
+  }
+
+  DeleteAvatar() {
+    return this.currentUser
+      .updateProfile({ photoURL: "" })
+      .then(result => {
+        this.profileRef.set({ photoURL: "" }, { merge: true });
+        this.alertService.openSuccessAlert("Image successfully deleted!", 2);
+      })
+      .catch(this.errCatching);
   }
 }

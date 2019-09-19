@@ -94,7 +94,7 @@ src="{{(user.photoURL) ? user.photoURL : '/src/assets/img/avatars/user.png'}}" a
               Photo
             </button>
             <input type="file" (change)="onClickPhoto($event)"><br>
-            <!-- <button class="btn btn-danger btn-rounded btn-sm waves-effect waves-light">Delete</button> -->
+             <button class="btn btn-danger btn-rounded btn-sm waves-effect waves-light" (click)="onDeletePhoto()">Delete</button>
           </div>
         </div>
       </div>
