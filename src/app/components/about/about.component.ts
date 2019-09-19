@@ -7,10 +7,11 @@ import { ThemeService } from "../../shared/services/theme/theme.service";
   styleUrls: ["./about.component.css"]
 })
 export class AboutComponent implements OnInit, AfterViewInit {
-  constructor(private themeService: ThemeService) {}
+  constructor(public themeService: ThemeService) {}
 
   ngOnInit() {}
+
   ngAfterViewInit() {
-    this.themeService.checkDarkMode();
+    // this.themeService.checkDarkMode();
   }
 }

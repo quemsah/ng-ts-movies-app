@@ -55,14 +55,13 @@ export class AddMovieComponent implements OnInit, AfterViewInit {
     private tmdbService: TMDBService,
     private alertService: AlertService,
     private movieService: MovieService,
-    private themeService: ThemeService
+    public themeService: ThemeService
   ) {}
 
   ngOnInit() {}
 
   ngAfterViewInit() {
-    // Data Picker Initialization
-    this.themeService.checkDarkMode();
+    // this.themeService.checkDarkMode();
   }
   
   // Делается запрос к TMDB методом getMovieByIMDBID, который по индентификатору IMDB(строка) вовзращает

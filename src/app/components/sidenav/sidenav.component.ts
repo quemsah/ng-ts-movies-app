@@ -9,7 +9,7 @@ declare var $: any;
   styleUrls: ["./sidenav.component.css"]
 })
 export class SidenavComponent implements OnInit {
-  constructor( private themeService: ThemeService) {}
+  constructor( public themeService: ThemeService) {}
 
   ngOnInit() {
   }

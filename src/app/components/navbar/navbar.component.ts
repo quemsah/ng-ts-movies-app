@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { AuthService } from "../../shared/services/auth/auth.service";
-import { ThemeService } from 'src/app/shared/services/theme/theme.service';
+import { ThemeService } from "src/app/shared/services/theme/theme.service";
 
 @Component({
   selector: "app-navbar",
@@ -8,9 +8,15 @@ import { ThemeService } from 'src/app/shared/services/theme/theme.service';
   styleUrls: ["./navbar.component.css"]
 })
 export class NavbarComponent implements OnInit {
+  login: boolean = false;
+  register: boolean = false;
+  friends: boolean = false;
+  profile: boolean = false;
+  settings: boolean = false;
+  logout: boolean = false;
   constructor(
     public authService: AuthService,
-    private themeService: ThemeService
+    public themeService: ThemeService
   ) {}
 
   ngOnInit() {}

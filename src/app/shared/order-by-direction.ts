@@ -1,1 +1,1 @@
-export type OrderByDirection = 'desc' | 'asc';
+export type OrderByDirection = "desc" | "asc";

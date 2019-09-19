@@ -6,7 +6,6 @@ import { Title, DomSanitizer } from "@angular/platform-browser";
 import { TMDBService } from "../../../shared/services/tmdb/TMDB.service";
 import { NgForm } from "@angular/forms";
 import { AuthService } from "../../../shared/services/auth/auth.service";
-import { NoInfoPipe } from "../../../shared/pipes/no-info.pipe";
 // Интерфейсы
 import { SimilarMovie } from "../../../shared/models/similar-movie";
 import { Crew } from "./../../../shared/models/crew";
@@ -35,7 +34,7 @@ export class MovieComponent implements OnInit, AfterViewInit {
     private movieService: MovieService,
     private tmdbService: TMDBService,
     private titleService: Title,
-    private themeService: ThemeService
+    public themeService: ThemeService
   ) {}
 
   ngOnInit(): void {
@@ -44,7 +43,7 @@ export class MovieComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.themeService.checkDarkMode();
+    // this.themeService.checkDarkMode();
   }
 
   scroll(el: HTMLElement) {
@@ -56,7 +55,7 @@ export class MovieComponent implements OnInit, AfterViewInit {
     this.movieService.fetchMovie(id).subscribe(movie => {
       this.movieData = movie;
       this.titleService.setTitle(this.movieData.title);
-      let tmdb_id = this.movieData.tmdb_id;
+      const tmdb_id = this.movieData.tmdb_id;
       tmdb_id ? this.getMovieCrew(parseInt(tmdb_id)) : null;
       tmdb_id ? this.getMovieTrailers(parseInt(tmdb_id)) : null;
       tmdb_id ? this.getSimilarMovies(parseInt(tmdb_id)) : null;

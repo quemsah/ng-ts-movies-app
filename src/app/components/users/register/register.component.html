@@ -19,7 +19,7 @@
               (click)="authService.SignUp(userEmail.value, userPwd.value)"><a class="text-white">Register</a></button>
             <button class="btn btn-lg" [style.background]="themeService.themeGradient | safe: 'style'"
               (click)="authService.GoogleAuth()"><a class="text-white">
-                Continue with <i class="fab fa-google"></i></a></button>
+                Continue with &nbsp;<i class="fab fa-google"></i></a></button>
             <hr class="mt-4">
             <h5>Already have an account? <a routerLink="/login">Log in</a></h5>
           </div>

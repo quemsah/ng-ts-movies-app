@@ -21,7 +21,7 @@
               (click)="authService.SignIn(userName.value, userPassword.value)">Log in</button>
             <button class="btn btn-lg text-white" [style.background]="themeService.themeGradient | safe: 'style'"
               (click)="authService.GoogleAuth()">
-              Continue with <i class="fab fa-google"></i></button>
+              Continue with &nbsp;<i class="fab fa-google"></i></button>
             <!-- <button class="btn btn-lg" [style.background]="themeService.themeGradient | safe: 'style'" (click)="authService.GithubAuth()"><i
                 class="fab fa-github"></i></button>
             <button class="btn btn-lg" [style.background]="themeService.themeGradient | safe: 'style'" (click)="authService.MicrosoftAuth()"><i

@@ -1,36 +1,43 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, AfterViewInit } from "@angular/core";
 import { NgForm } from "@angular/forms";
 import { UserService } from "../../../shared/services/user/user.service";
 import { AuthService } from "../../../shared/services/auth/auth.service";
 import { Friends } from "../../../shared/models/friends";
-import { ThemeService } from '../../../shared/services/theme/theme.service';
+import { ThemeService } from "../../../shared/services/theme/theme.service";
 
 @Component({
   selector: "app-friends",
   templateUrl: "./friends.component.html",
   styleUrls: ["./friends.component.css"]
 })
-export class FriendsComponent implements OnInit {
+export class FriendsComponent implements OnInit, AfterViewInit {
   friends: Friends;
   outRequests: Friends;
   inRequests: Friends;
   constructor(
     public authService: AuthService,
     private userService: UserService,
-    private themeService: ThemeService
+    public themeService: ThemeService
   ) {}
+
+  ngOnInit() {
+    this.getFriends();
+  }
+
+  ngAfterViewInit() {
+    // this.themeService.checkDarkMode();
+  }
 
   filterObject = (obj, predicate) =>
     Object.keys(obj)
       .filter(key => predicate(obj[key]))
       .reduce((res, key) => ((res[key] = obj[key]), res), {});
-  mapFriends = x => x.accepted == true;
-  mapOutRequests = x => x.accepted === false && x.uid === x.initiator;
-  mapInRequests = x => x.accepted === false && x.uid !== x.initiator;
 
-  ngOnInit() {
-    this.getFriends();
-  }
+  mapFriends = x => x.accepted === true;
+
+  mapOutRequests = x => x.accepted === false && x.uid === x.initiator;
+
+  mapInRequests = x => x.accepted === false && x.uid !== x.initiator;
   // добавляем к сухим айдишниками информацию о друзьях/запросах
   getFriendsInfo(friendsData: Friends) {
     console.log(friendsData);

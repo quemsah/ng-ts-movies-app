@@ -11,13 +11,13 @@ import { NgForm } from "@angular/forms";
 export class ProfileComponent implements OnInit, AfterViewInit {
   constructor(
     public authService: AuthService,
-    private themeService: ThemeService
+    public themeService: ThemeService
   ) {}
 
   ngOnInit() {}
 
   ngAfterViewInit() {
-    this.themeService.checkDarkMode();
+    // this.themeService.checkDarkMode();
   }
 
   onNameSubmit(form: NgForm) {

@@ -18,6 +18,9 @@ import { environment } from "../environments/environment";
 import { AuthService } from "./shared/services/auth/auth.service";
 import { TMDBService } from "./shared/services/tmdb/TMDB.service";
 import { ThemeService } from "./shared/services/theme/theme.service";
+// Пайпы
+import { NoInfoPipe } from "./shared/pipes/no-info.pipe";
+import { SafePipe } from "./shared/pipes/safe.pipe";
 // Компоненты
 import { AppComponent } from "./app.component";
 import { LoginComponent } from "./components/users/login/login.component";
@@ -35,10 +38,8 @@ import { NavbarComponent } from "./components/navbar/navbar.component";
 import { MovieComponent } from "./components/movies/movie/movie.component";
 import { MoviesListComponent } from "./components/movies/movies-list/movies-list.component";
 import { EditMovieComponent } from "./components/movies/edit-movie/edit-movie.component";
-import { NoInfoPipe } from "./shared/pipes/no-info.pipe";
 import { PaginationComponent } from "./components/pagination/pagination.component";
-import { SettingsComponent } from './components/settings/settings.component';
-import { SafePipe } from './shared/pipes/safe.pipe';
+import { SettingsComponent } from "./components/settings/settings.component";
 
 @NgModule({
   declarations: [

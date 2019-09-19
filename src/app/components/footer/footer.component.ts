@@ -7,7 +7,7 @@ import { ThemeService } from 'src/app/shared/services/theme/theme.service';
   styleUrls: ["./footer.component.css"]
 })
 export class FooterComponent implements OnInit {
-  constructor(private themeService: ThemeService) {}
+  constructor(public themeService: ThemeService) {}
 
   ngOnInit() {}
 }

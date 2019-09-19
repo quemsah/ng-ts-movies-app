@@ -1,16 +1,16 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, AfterViewInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { MovieService } from "../../../shared/services/movie/movie.service";
 import { Movie } from "../../../shared/models/movie";
 import { NgForm } from "@angular/forms";
-import { ThemeService } from '../../../shared/services/theme/theme.service';
+import { ThemeService } from "../../../shared/services/theme/theme.service";
 
 @Component({
   selector: "app-edit-movie",
   templateUrl: "./edit-movie.component.html",
   styleUrls: ["./edit-movie.component.css"]
 })
-export class EditMovieComponent implements OnInit {
+export class EditMovieComponent implements OnInit, AfterViewInit {
   currentMovieData: Movie;
   title: string;
   releaseDate: string;
@@ -18,7 +18,7 @@ export class EditMovieComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private movieService: MovieService,
-    private themeService: ThemeService
+    public themeService: ThemeService
   ) {}
 
   ngOnInit() {
@@ -29,6 +29,11 @@ export class EditMovieComponent implements OnInit {
       this.releaseDate = movie.releaseDate;
     });
   }
+
+  ngAfterViewInit() {
+    // this.themeService.checkDarkMode();
+  }
+
   onEditMovieSubmit(form: NgForm) {
     // приводим к нужному виду
     const movieData: Movie = {

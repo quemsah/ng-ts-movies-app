@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { ThemeService } from "src/app/shared/services/theme/theme.service";
 
 @Component({
@@ -6,14 +6,18 @@ import { ThemeService } from "src/app/shared/services/theme/theme.service";
   templateUrl: "./settings.component.html",
   styleUrls: ["./settings.component.css"]
 })
-export class SettingsComponent implements OnInit {
+export class SettingsComponent implements OnInit,AfterViewInit {
   red = this.themeService.red;
   green = this.themeService.green;
   blue = this.themeService.blue;
-  constructor(private themeService: ThemeService) {}
+  constructor(public themeService: ThemeService) {}
 
   ngOnInit() {
     //this.updateColor();
+  }
+
+  ngAfterViewInit() {
+    // this.themeService.checkDarkMode();
   }
 
   handleColorChange() {

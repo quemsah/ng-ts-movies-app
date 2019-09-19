@@ -27,7 +27,7 @@ export class MoviesListComponent implements OnInit, AfterViewInit {
   ];
   constructor(
     private movieService: MovieService,
-    private themeService: ThemeService
+    public themeService: ThemeService
   ) {}
 
   ngOnInit() {
@@ -35,7 +35,7 @@ export class MoviesListComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.themeService.checkDarkMode();
+    // this.themeService.checkDarkMode();
   }
 
   handleListClick() {

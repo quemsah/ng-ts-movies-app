@@ -22,26 +22,26 @@
         </a>
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
           <a *ngIf="!authService.isLoggedIn"
-            [style.background]="(login === 1) ? (themeService.themeColor | safe: 'style') : 'transparent'"
-            (mouseover)="login = 1" (mouseout)="login = -1" routerLink="/login" class="dropdown-item">Log in</a>
+            [style.background]="(login === true) ? (themeService.themeColor | safe: 'style') : 'transparent'"
+            (mouseover)="login = true" (mouseout)="login = false" routerLink="/login" class="dropdown-item">Log in</a>
           <a *ngIf="!authService.isLoggedIn"
-            [style.background]="(register === 1) ? (themeService.themeColor | safe: 'style') : 'transparent'"
-            (mouseover)="register = 1" (mouseout)="register = -1" routerLink="/register" class="dropdown-item">Sign
+            [style.background]="(register === true) ? (themeService.themeColor | safe: 'style') : 'transparent'"
+            (mouseover)="register = true" (mouseout)="register = false" routerLink="/register" class="dropdown-item">Sign
             up</a>
           <a *ngIf="authService.isLoggedIn"
-            [style.background]="(friends === 1) ? (themeService.themeColor | safe: 'style') : 'transparent'"
-            (mouseover)="friends = 1" (mouseout)="friends = -1" routerLink="/friends" class="dropdown-item">Friends</a>
+            [style.background]="(friends === true) ? (themeService.themeColor | safe: 'style') : 'transparent'"
+            (mouseover)="friends = true" (mouseout)="friends = false" routerLink="/friends" class="dropdown-item">Friends</a>
           <a *ngIf="authService.isLoggedIn"
-            [style.background]="(profile === 1) ? (themeService.themeColor | safe: 'style') : 'transparent'"
-            (mouseover)="profile = 1" (mouseout)="profile = -1" routerLink="/profile" class="dropdown-item">My
+            [style.background]="(profile === true) ? (themeService.themeColor | safe: 'style') : 'transparent'"
+            (mouseover)="profile = true" (mouseout)="profile = false" routerLink="/profile" class="dropdown-item">My
             account</a>
           <a *ngIf="authService.isLoggedIn"
-            [style.background]="(settings === 1) ? (themeService.themeColor | safe: 'style') : 'transparent'"
-            (mouseover)="settings = 1" (mouseout)="settings = -1" routerLink="/settings"
+            [style.background]="(settings === true) ? (themeService.themeColor | safe: 'style') : 'transparent'"
+            (mouseover)="settings = true" (mouseout)="settings = false" routerLink="/settings"
             class="dropdown-item">Settings</a>
           <a *ngIf="authService.isLoggedIn"
-            [style.background]="(logout === 1) ? (themeService.themeColor | safe: 'style') : 'transparent'"
-            (mouseover)="logout = 1" (mouseout)="logout = -1" (click)="authService.SignOut()" class="dropdown-item">Log
+            [style.background]="(logout === true) ? (themeService.themeColor | safe: 'style') : 'transparent'"
+            (mouseover)="logout = true" (mouseout)="logout = false" (click)="authService.SignOut()" class="dropdown-item">Log
             out</a>
         </div>
       </li>

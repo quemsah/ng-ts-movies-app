@@ -16,7 +16,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     private titleService: Title,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private themeService: ThemeService
+    public themeService: ThemeService
   ) {}
 
   ngOnInit() {
@@ -34,6 +34,7 @@ export class AppComponent implements OnInit, AfterViewInit {
       )
       .subscribe((ttl: string) => this.titleService.setTitle(ttl));
   }
+
   ngAfterViewInit() {
     // Dark mode включен по умолчанию
     // this.themeService.toggleDarkMode();

@@ -187,32 +187,6 @@ export class AuthService {
       .catch(this.errCatching);
   }
 
-  // Записываем данные пользователя документ
-  SetUserData(user, verified?: boolean) {
-    console.log(verified ? verified : user.emailVerified);
-    const userRef: AngularFirestoreDocument<any> = this.afs.doc(
-      `users/${user.uid}`
-    );
-    const userData: User = {
-      uid: user.uid,
-      email: user.email,
-      displayName: user.displayName,
-      photoURL: user.photoURL,
-      emailVerified: verified ? verified : user.emailVerified
-    };
-    return userRef.set(userData, {
-      merge: true
-    });
-  }
-
-  // Sign out
-  SignOut() {
-    return this.afAuth.auth.signOut().then(() => {
-      localStorage.removeItem("user");
-      this.router.navigate(["login"]);
-    });
-  }
-
   UploadNewAvatar(event: any) {
     const file = event.target.files[0];
     const path = "users/" + this.currentUser.uid + "/" + file.name;
@@ -245,5 +219,30 @@ export class AuthService {
         this.alertService.openSuccessAlert("Image successfully deleted!", 2);
       })
       .catch(this.errCatching);
+  }
+  // Записываем данные пользователя документ
+  SetUserData(user, verified?: boolean) {
+    console.log(verified ? verified : user.emailVerified);
+    const userRef: AngularFirestoreDocument<any> = this.afs.doc(
+      `users/${user.uid}`
+    );
+    const userData: User = {
+      uid: user.uid,
+      email: user.email,
+      displayName: user.displayName,
+      photoURL: user.photoURL,
+      emailVerified: verified ? verified : user.emailVerified
+    };
+    return userRef.set(userData, {
+      merge: true
+    });
+  }
+
+  // Sign out
+  SignOut() {
+    return this.afAuth.auth.signOut().then(() => {
+      localStorage.removeItem("user");
+      this.router.navigate(["login"]);
+    });
   }
 }

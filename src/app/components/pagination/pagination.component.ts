@@ -22,7 +22,33 @@ export class PaginationComponent implements OnInit, OnChanges {
   @Input() maxPages = 10;
 
   pager: any = {};
-  constructor(private themeService: ThemeService) {}
+  constructor(public themeService: ThemeService) {}
+
+  ngOnInit() {
+    if (this.items && this.items.length) {
+      this.setPage(this.initialPage);
+    }
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.items.currentValue !== changes.items.previousValue) {
+      this.setPage(this.initialPage);
+    }
+  }
+
+  setPage(page: number) {
+    this.pager = this.paginate(
+      this.items.length,
+      page,
+      this.pageSize,
+      this.maxPages
+    );
+    const pageOfItems = this.items.slice(
+      this.pager.startIndex,
+      this.pager.endIndex + 1
+    );
+    this.changePage.emit(pageOfItems);
+  }
 
   paginate(
     totalItems: number,
@@ -71,31 +97,5 @@ export class PaginationComponent implements OnInit, OnChanges {
       endIndex,
       pages
     };
-  }
-
-  ngOnInit() {
-    if (this.items && this.items.length) {
-      this.setPage(this.initialPage);
-    }
-  }
-
-  ngOnChanges(changes: SimpleChanges) {
-    if (changes.items.currentValue !== changes.items.previousValue) {
-      this.setPage(this.initialPage);
-    }
-  }
-
-  setPage(page: number) {
-    this.pager = this.paginate(
-      this.items.length,
-      page,
-      this.pageSize,
-      this.maxPages
-    );
-    const pageOfItems = this.items.slice(
-      this.pager.startIndex,
-      this.pager.endIndex + 1
-    );
-    this.changePage.emit(pageOfItems);
   }
 }

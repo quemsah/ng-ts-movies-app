@@ -85,6 +85,6 @@ export class ThemeService {
       this.isDarkMode = false;
       enableDarkMode();
     }
-    // console.log("Dark Mode = " + this.isDarkMode);
+    console.log("Dark Mode toggled = " + this.isDarkMode);
   }
 }
