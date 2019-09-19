@@ -39,7 +39,7 @@
           </div>
         </div>
         <div class="card-foter text-right my-2 mr-2">
-          <button *ngIf="item.value.displayName" class="btn btn-info btn-rounded btn-sm waves-effect waves-light "
+          <button routerLink="/user/{{item.value.fid}}" *ngIf="item.value.displayName" class="btn btn-info btn-rounded btn-sm waves-effect waves-light "
             [style.background]="themeService.themeGradient | safe: 'style'">Movies</button>
           <button id="{{item.value.fid}}" class="btn btn-danger btn-rounded btn-sm waves-effect waves-light"
             (click)="handleRequestDelete($event)">Delete</button>

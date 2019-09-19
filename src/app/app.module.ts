@@ -40,6 +40,7 @@ import { MoviesListComponent } from "./components/movies/movies-list/movies-list
 import { EditMovieComponent } from "./components/movies/edit-movie/edit-movie.component";
 import { PaginationComponent } from "./components/pagination/pagination.component";
 import { SettingsComponent } from "./components/settings/settings.component";
+import { UserComponent } from './components/users/user/user.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,8 @@ import { SettingsComponent } from "./components/settings/settings.component";
     NoInfoPipe,
     PaginationComponent,
     SettingsComponent,
-    SafePipe
+    SafePipe,
+    UserComponent
   ],
   imports: [
     HttpClientModule,

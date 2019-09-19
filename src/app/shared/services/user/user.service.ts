@@ -82,6 +82,10 @@ export class UserService {
       });
   }
 
+  // isFriends(uid: string, fid:string): Observable<any> {
+  //   return this.afs.collection("users", ref => ref.where("email", "==", email)).valueChanges();
+  // }
+
   deleteRequests(fid: string) {
     const uid = this.authService.userData.uid;
     this.deleteRequest(uid, fid).catch(error =>
