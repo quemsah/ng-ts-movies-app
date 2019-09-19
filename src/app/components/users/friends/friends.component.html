@@ -29,8 +29,8 @@
   <div class="row mt-1">
     <h2 class="profile-title col-lg-12 mt-lg-12 font-weight-bold" *ngIf="(friends | json) != '{}'">
       <strong>Friends</strong></h2>
-    <div class="col-xl-4 col-md-6 mb-xl-0">
-      <div class="friend-card card card-cascade cascading-admin-card mt-5" *ngFor="let item of friends | keyvalue">
+    <div class="col-xl-4 col-md-6 mb-xl-0" *ngFor="let item of friends | keyvalue">
+      <div class="friend-card card card-cascade cascading-admin-card mt-5">
         <div class="admin-up">
           <img src="{{(item.value.photoURL) ? item.value.photoURL : '../../../assets/img/avatars/user.png'}}"
             alt="User Photo" class="z-depth-1 mb-0 mx-auto">

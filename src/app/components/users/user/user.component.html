@@ -1,2 +1,7 @@
-<p>user works!</p>
-<h2>{{userData.displayName}}`s movies</h2>
+<div class="row" *ngIf="userData as user">
+  <h2>{{user.displayName}}'s movies</h2>
+
+</div>
+
+<span>{{watchlater | json}}</span>
+<span>{{favourites | json}}</span>

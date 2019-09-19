@@ -27,12 +27,17 @@ export class UserService {
   // fetchFriends(): Observable<any> {
   //   return this.afs.collection(`users/${this.uid}/friends`).valueChanges();
   // }
+  getUserInfo(uid: string): Observable<any> {
+    return this.afs.doc(`users/${uid}/`).valueChanges();
+  }
   getUserIdByEmail(email: string): Observable<any> {
     return this.afs.collection("users", ref => ref.where("email", "==", email)).valueChanges();
   }
-
-  getUserInfo(uid: string): Observable<any> {
-    return this.afs.doc(`users/${uid}/`).valueChanges();
+  fetchWatchLaterList(uid: string): Observable<any> {
+    return this.afs.collection(`users/${uid}/watchlater`).valueChanges();
+  }
+  fetchFavouritesList(uid: string): Observable<any> {
+    return this.afs.collection(`users/${uid}/favourites`).valueChanges();
   }
   // создание исходящего запроса у одного
   // и входящего у второго
@@ -82,8 +87,8 @@ export class UserService {
       });
   }
 
-  // isFriends(uid: string, fid:string): Observable<any> {
-  //   return this.afs.collection("users", ref => ref.where("email", "==", email)).valueChanges();
+  // isFriends(uid: string, fid: string): Observable<any> {
+  //   //return this.afs.collection("users", ref => ref.where("email", "==", email)).valueChanges();
   // }
 
   deleteRequests(fid: string) {

@@ -59,8 +59,16 @@ export class AuthService {
   }
 
   get friendsRef() {
-    return this.afs.collection(`users/${this.userData.uid}/friends`);
+    return this.afs.collection(`users/${this.currentUser.uid}/friends`);
   }
+
+  // get watchLaterRef() {
+  //   return this.afs.collection(`users/${this.currentUser.uid}/watchlater`);
+  // }
+
+  // get favouritesRef() {
+  //   return this.afs.collection(`users/${this.currentUser.uid}/favourites`);
+  // }
 
   SignIn(email, password) {
     return this.afAuth.auth
