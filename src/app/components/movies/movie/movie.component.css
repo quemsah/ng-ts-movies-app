@@ -5,3 +5,27 @@
 .actor-card {
   flex-direction: column;
 }
+
+.modal-header {
+  background-color: #eeeeee;
+}
+
+.modal-body {
+  background-color: #fff;
+}
+
+/* уменьшим чуть-чуть....... */
+.vk-color {
+  background-color: #4c75a3;
+  padding: 0.64rem 1.84rem;
+}
+
+.tw-color {
+  background-color: #55acee;
+  padding: 0.64rem 1.84rem;
+}
+
+.tg-color {
+  background-color: #0088cc;
+  padding: 0.64rem 1.84rem;
+}
