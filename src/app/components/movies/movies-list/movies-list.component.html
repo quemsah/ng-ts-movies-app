@@ -48,11 +48,11 @@
           <div *ngIf="movie.IMDBRating" class="card-rating">
             <a class="">{{movie.IMDBRating}} <i class="far fa-star"> </i></a>
           </div>
-          <div class="card-favourite">
-            <a class=""><i class="far fa-heart"></i></a>
+          <div class="card-favourite" (click)="handleToFavourites($event)">
+            <a class=""><i id="{{movie.mid}}" class="far fa-heart"></i></a>
           </div>
-          <div class="card-watch-later">
-            <a class=""><i class="far fa-clock"></i></a>
+          <div class="card-watch-later" (click)="handleToWatchLater($event)">
+            <a class=""><i id="{{movie.mid}}" class="far fa-clock"></i></a>
           </div>
           <div class="view overlay">
             <img src="{{(movie.posterLink) ? movie.posterLink : '../../../assets/img/no_poster_available.jpg'}}"

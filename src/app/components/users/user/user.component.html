@@ -1,6 +1,3 @@
-<span>{{watchlater | json}}</span>
-<span>{{favourites | json}}</span>
-
 <div class="container-fluid">
   <section class="mb-4 mt-0 mt-md-4">
     <div class="row">
@@ -15,11 +12,11 @@
           id="myTabJust" role="tablist">
           <li class="nav-item">
             <a class="nav-link active" id="home-tab-just" data-toggle="tab" href="#home-just" role="tab"
-              aria-controls="home-just" aria-selected="true">Favourites</a>
+              aria-controls="home-just" aria-selected="true">Watch Later</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" id="profile-tab-just" data-toggle="tab" href="#profile-just" role="tab"
-              aria-controls="profile-just" aria-selected="false">Watch Later</a>
+              aria-controls="profile-just" aria-selected="false">Favourites</a>
           </li>
         </ul>
         <div class="tab-content card pt-5" id="myTabContentJust">
@@ -30,11 +27,11 @@
                   <div *ngIf="movie.IMDBRating" class="card-rating">
                     <a class="">{{movie.IMDBRating}} <i class="far fa-star"> </i></a>
                   </div>
-                  <div class="card-favourite">
-                    <a class=""><i class="far fa-heart"></i></a>
+                  <div class="card-favourite" (click)="handleToFavourites($event)">
+                    <a class=""><i id="{{movie.mid}}" class="far fa-heart"></i></a>
                   </div>
-                  <div class="card-watch-later">
-                    <a class=""><i class="far fa-clock"></i></a>
+                  <div class="card-watch-later" (click)="handleToWatchLater($event)">
+                    <a class=""><i id="{{movie.mid}}" class="far fa-clock"></i></a>
                   </div>
                   <div class="view overlay">
                     <img src="{{(movie.posterLink) ? movie.posterLink : '../../../assets/img/no_poster_available.jpg'}}"
@@ -62,11 +59,11 @@
                   <div *ngIf="movie.IMDBRating" class="card-rating">
                     <a class="">{{movie.IMDBRating}} <i class="far fa-star"> </i></a>
                   </div>
-                  <div class="card-favourite">
-                    <a class=""><i class="far fa-heart"></i></a>
+                  <div class="card-favourite" (click)="handleToFavourites($event)">
+                    <a class=""><i id="{{movie.mid}}" class="far fa-heart"></i></a>
                   </div>
-                  <div class="card-watch-later">
-                    <a class=""><i class="far fa-clock"></i></a>
+                  <div class="card-watch-later" (click)="handleToWatchLater($event)">
+                    <a class=""><i id="{{movie.mid}}" class="far fa-clock"></i></a>
                   </div>
                   <div class="view overlay">
                     <img src="{{(movie.posterLink) ? movie.posterLink : '../../../assets/img/no_poster_available.jpg'}}"

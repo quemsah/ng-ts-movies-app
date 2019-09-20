@@ -53,6 +53,11 @@ export class MovieService {
     return genresArray;
   };
 
+  getElementId(event): string {
+    const target = event.target || event.srcElement || event.currentTarget;
+    return target.attributes.id.nodeValue;
+  }
+
   setMovieData(movieData: Movie) {
     console.log(movieData);
     this.afs

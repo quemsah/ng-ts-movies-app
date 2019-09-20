@@ -110,17 +110,11 @@ export class MovieComponent implements OnInit, AfterViewInit {
     this.movieService.deleteMovie(this.movieData.mid);
   }
 
-  getElementId(event): string {
-    const target = event.target || event.srcElement || event.currentTarget;
-    return target.attributes.id.nodeValue;
-  }
-
   handleToWatchLater() {
     const watchLaterMovieData: MovieListItem = {
       mid: this.movieData.mid,
       date: new Date().toLocaleString()
     };
-    //console.log(watchLaterMovieData);
     this.movieService.toggleMovieToList(
       "watchlater",
       watchLaterMovieData,
@@ -129,14 +123,13 @@ export class MovieComponent implements OnInit, AfterViewInit {
   }
 
   handleToFavourites() {
-    const watchLaterMovieData: MovieListItem = {
+    const favouritesMovieData: MovieListItem = {
       mid: this.movieData.mid,
       date: new Date().toLocaleString()
     };
-    //console.log(watchLaterMovieData);
     this.movieService.toggleMovieToList(
       "favourites",
-      watchLaterMovieData,
+      favouritesMovieData,
       this.authService.userData.uid
     );
   }
@@ -155,14 +148,14 @@ export class MovieComponent implements OnInit, AfterViewInit {
   }
 
   handleCommentEdit(event) {
-    const cid = this.getElementId(event);
+    const cid = this.movieService.getElementId(event);
     const text = document.getElementById("t" + cid).innerText;
     this.currentCommentText = text;
     this.movieService.deleteComment(cid, this.movieData.mid);
   }
 
   handleCommentDelete(event) {
-    const cid = this.getElementId(event);
+    const cid = this.movieService.getElementId(event);
     this.movieService.deleteComment(cid, this.movieData.mid);
   }
 }

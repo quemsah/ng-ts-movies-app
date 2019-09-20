@@ -4,6 +4,7 @@ import { UserService } from "../../../shared/services/user/user.service";
 import { AuthService } from "../../../shared/services/auth/auth.service";
 import { MovieService } from "../../../shared/services/movie/movie.service";
 import { ThemeService } from "../../../shared/services/theme/theme.service";
+import { MovieListItem } from "../../../shared/models/movie-list-comment";
 
 @Component({
   selector: "app-user",
@@ -25,8 +26,7 @@ export class UserComponent implements OnInit {
 
   ngOnInit() {
     this.getUser();
-    this.getLists();
-    //this.getMovieLists();
+    this.getMovieLists();
   }
 
   getUser(): void {
@@ -38,7 +38,6 @@ export class UserComponent implements OnInit {
   }
   // добавляем к айдишниками фильмов информацию о них
   getListInfo(listData: any) {
-    console.log(listData);
     Object.keys(listData).filter(key => {
       this.movieService.getMovieInfo(listData[key].mid).subscribe(data => {
         // берем только нужные поля
@@ -53,18 +52,39 @@ export class UserComponent implements OnInit {
     });
   }
 
-  getLists() {
+  getMovieLists() {
     const id = this.route.snapshot.paramMap.get("id");
     this.userService.fetchWatchLaterList(id).subscribe(data => {
       this.watchlater = data;
       this.getListInfo(this.watchlater);
     });
-    // this.userService.fetchFavouritesList(id).subscribe(data => {
-    //   this.favourites = data;
-    // });
     this.userService.fetchFavouritesList(id).subscribe(data => {
       this.favourites = data;
       this.getListInfo(this.favourites);
     });
+  }
+
+  handleToWatchLater(event) {
+    const watchLaterMovieData: MovieListItem = {
+      mid: this.movieService.getElementId(event),
+      date: new Date().toLocaleString()
+    };
+    this.movieService.toggleMovieToList(
+      "watchlater",
+      watchLaterMovieData,
+      this.authService.userData.uid
+    );
+  }
+
+  handleToFavourites(event) {
+    const favouriteMovieData: MovieListItem = {
+      mid: this.movieService.getElementId(event),
+      date: new Date().toLocaleString()
+    };
+    this.movieService.toggleMovieToList(
+      "favourites",
+      favouriteMovieData,
+      this.authService.userData.uid
+    );
   }
 }

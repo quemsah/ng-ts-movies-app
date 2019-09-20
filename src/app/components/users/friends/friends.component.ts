@@ -4,6 +4,7 @@ import { UserService } from "../../../shared/services/user/user.service";
 import { AuthService } from "../../../shared/services/auth/auth.service";
 import { Friends } from "../../../shared/models/friends";
 import { ThemeService } from "../../../shared/services/theme/theme.service";
+import { MovieService } from "../../../shared/services/movie/movie.service";
 
 @Component({
   selector: "app-friends",
@@ -17,6 +18,7 @@ export class FriendsComponent implements OnInit, AfterViewInit {
   constructor(
     public authService: AuthService,
     private userService: UserService,
+    private movieService: MovieService,
     public themeService: ThemeService
   ) {}
 
@@ -39,10 +41,6 @@ export class FriendsComponent implements OnInit, AfterViewInit {
 
   mapInRequests = x => x.accepted === false && x.uid !== x.initiator;
 
-  getElementId(event): string {
-    const target = event.target || event.srcElement || event.currentTarget;
-    return target.attributes.id.nodeValue;
-  }
   // добавляем к сухим айдишниками информацию о друзьях/запросах
   getFriendsInfo(friendsData: Friends) {
     console.log(friendsData);
@@ -77,12 +75,12 @@ export class FriendsComponent implements OnInit, AfterViewInit {
   }
   // удаляет и запросы в друзья и друзей в целом
   handleRequestDelete(event) {
-    const fid = this.getElementId(event);
+    const fid = this.movieService.getElementId(event);
     this.userService.deleteRequests(fid);
   }
 
   handleRequestAccept(event) {
-    const fid = this.getElementId(event);
+    const fid = this.movieService.getElementId(event);
     this.userService.acceptRequests(fid);
   }
 }

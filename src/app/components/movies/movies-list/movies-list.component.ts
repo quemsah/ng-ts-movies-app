@@ -2,6 +2,8 @@ import { Movie } from "../../../shared/models/movie";
 import { Component, OnInit, AfterViewInit } from "@angular/core";
 import { ThemeService } from "../../../shared/services/theme/theme.service";
 import { MovieService } from "../../../shared/services/movie/movie.service";
+import { AuthService } from "../../../shared/services/auth/auth.service";
+import { MovieListItem } from "../../../shared/models/movie-list-comment";
 
 @Component({
   selector: "app-movies-list",
@@ -25,7 +27,11 @@ export class MoviesListComponent implements OnInit, AfterViewInit {
     { id: 7, value: "budget", name: "Budget" },
     { id: 8, value: "revenue", name: "Revenue" }
   ];
-  constructor(private movieService: MovieService, public themeService: ThemeService) {}
+  constructor(
+    public authService: AuthService,
+    private movieService: MovieService,
+    public themeService: ThemeService
+  ) {}
 
   ngOnInit() {
     this.getMovies();
@@ -72,6 +78,30 @@ export class MoviesListComponent implements OnInit, AfterViewInit {
     this.movieService.fetchMovies(this.sortingValue, this.sortingType).subscribe(movies => {
       this.movies = this.filterByAll(movies, this.searchValue.toLowerCase());
     });
+  }
+
+  handleToWatchLater(event) {
+    const watchLaterMovieData: MovieListItem = {
+      mid: this.movieService.getElementId(event),
+      date: new Date().toLocaleString()
+    };
+    this.movieService.toggleMovieToList(
+      "watchlater",
+      watchLaterMovieData,
+      this.authService.userData.uid
+    );
+  }
+
+  handleToFavourites(event) {
+    const favouriteMovieData: MovieListItem = {
+      mid: this.movieService.getElementId(event),
+      date: new Date().toLocaleString()
+    };
+    this.movieService.toggleMovieToList(
+      "favourites",
+      favouriteMovieData,
+      this.authService.userData.uid
+    );
   }
 
   onChangePage(pageOfItems: Array<Movie>) {
