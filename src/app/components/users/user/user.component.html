@@ -1,7 +1,94 @@
-<div class="row" *ngIf="userData as user">
-  <h2>{{user.displayName}}'s movies</h2>
-
-</div>
-
 <span>{{watchlater | json}}</span>
 <span>{{favourites | json}}</span>
+
+<div class="container-fluid">
+  <section class="mb-4 mt-0 mt-md-4">
+    <div class="row">
+      <h2 class="profile-title col-lg-12 font-weight-bold"><strong>{{userData.displayName}}'s movies
+        </strong></h2>
+    </div>
+  </section>
+  <section class="mb-4 mt-4">
+    <div class="row">
+      <div class="movie-tabs">
+        <ul class="nav nav-tabs nav-justified md-tabs " [style.background]="themeService.themeGradient | safe: 'style'"
+          id="myTabJust" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" id="home-tab-just" data-toggle="tab" href="#home-just" role="tab"
+              aria-controls="home-just" aria-selected="true">Favourites</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="profile-tab-just" data-toggle="tab" href="#profile-just" role="tab"
+              aria-controls="profile-just" aria-selected="false">Watch Later</a>
+          </li>
+        </ul>
+        <div class="tab-content card pt-5" id="myTabContentJust">
+          <div class="tab-pane fade show active" id="home-just" role="tabpanel" aria-labelledby="home-tab-just">
+            <div class="row">
+              <div *ngFor="let movie of watchlater" class="movie-item col-lg-3 col-md-4 col-sm-6 mb-4">
+                <div class="card movie-card h-100">
+                  <div *ngIf="movie.IMDBRating" class="card-rating">
+                    <a class="">{{movie.IMDBRating}} <i class="far fa-star"> </i></a>
+                  </div>
+                  <div class="card-favourite">
+                    <a class=""><i class="far fa-heart"></i></a>
+                  </div>
+                  <div class="card-watch-later">
+                    <a class=""><i class="far fa-clock"></i></a>
+                  </div>
+                  <div class="view overlay">
+                    <img src="{{(movie.posterLink) ? movie.posterLink : '../../../assets/img/no_poster_available.jpg'}}"
+                      class="card-img-top" alt="Movie Poster">
+                    <a routerLink="/movie/{{movie.mid}}">
+                      <div class="mask rgba-white-slight"></div>
+                    </a>
+                  </div>
+                  <div class="card-body">
+                    <a routerLink="/movie/{{movie.mid}}">
+                      <h4 class="card-title">{{movie.title}}</h4>
+                    </a>
+                    <hr>
+                    <p class="card-text mb-0">{{movie.director}}</p>
+                    <p class="card-text mb-0">{{movie.releaseDate | date }}, {{movie.country}}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="profile-just" role="tabpanel" aria-labelledby="profile-tab-just">
+            <div class="row">
+              <div *ngFor="let movie of favourites" class="movie-item col-lg-3 col-md-4 col-sm-6 mb-4">
+                <div class="card movie-card h-100">
+                  <div *ngIf="movie.IMDBRating" class="card-rating">
+                    <a class="">{{movie.IMDBRating}} <i class="far fa-star"> </i></a>
+                  </div>
+                  <div class="card-favourite">
+                    <a class=""><i class="far fa-heart"></i></a>
+                  </div>
+                  <div class="card-watch-later">
+                    <a class=""><i class="far fa-clock"></i></a>
+                  </div>
+                  <div class="view overlay">
+                    <img src="{{(movie.posterLink) ? movie.posterLink : '../../../assets/img/no_poster_available.jpg'}}"
+                      class="card-img-top" alt="Movie Poster">
+                    <a routerLink="/movie/{{movie.mid}}">
+                      <div class="mask rgba-white-slight"></div>
+                    </a>
+                  </div>
+                  <div class="card-body">
+                    <a routerLink="/movie/{{movie.mid}}">
+                      <h4 class="card-title">{{movie.title}}</h4>
+                    </a>
+                    <hr>
+                    <p class="card-text mb-0">{{movie.director}}</p>
+                    <p class="card-text mb-0">{{movie.releaseDate | date }}, {{movie.country}}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

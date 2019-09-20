@@ -2,7 +2,8 @@ import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { UserService } from "../../../shared/services/user/user.service";
 import { AuthService } from "../../../shared/services/auth/auth.service";
-import { forkJoin } from "rxjs";
+import { MovieService } from "../../../shared/services/movie/movie.service";
+import { ThemeService } from "../../../shared/services/theme/theme.service";
 
 @Component({
   selector: "app-user",
@@ -15,9 +16,11 @@ export class UserComponent implements OnInit {
   favourites: any;
 
   constructor(
+    public themeService: ThemeService,
     private route: ActivatedRoute,
     private userService: UserService,
-    private authService: AuthService
+    private authService: AuthService,
+    private movieService: MovieService
   ) {}
 
   ngOnInit() {
@@ -33,25 +36,35 @@ export class UserComponent implements OnInit {
       this.userData = user;
     });
   }
+  // добавляем к айдишниками фильмов информацию о них
+  getListInfo(listData: any) {
+    console.log(listData);
+    Object.keys(listData).filter(key => {
+      this.movieService.getMovieInfo(listData[key].mid).subscribe(data => {
+        // берем только нужные поля
+        listData[key].title = data.title;
+        listData[key].director = data.director;
+        listData[key].IMDBRating = data.IMDBRating;
+        listData[key].posterLink = data.posterLink;
+        listData[key].releaseDate = data.releaseDate;
+        listData[key].director = data.director;
+        listData[key].country = data.country;
+      });
+    });
+  }
 
   getLists() {
     const id = this.route.snapshot.paramMap.get("id");
     this.userService.fetchWatchLaterList(id).subscribe(data => {
       this.watchlater = data;
+      this.getListInfo(this.watchlater);
     });
+    // this.userService.fetchFavouritesList(id).subscribe(data => {
+    //   this.favourites = data;
+    // });
     this.userService.fetchFavouritesList(id).subscribe(data => {
       this.favourites = data;
+      this.getListInfo(this.favourites);
     });
   }
-
-  // getFriendsInfo(friendsData: Friends) {
-  //   console.log(friendsData);
-  //   Object.keys(friendsData).filter(key => {
-  //     this.userService.getUserInfo(friendsData[key].fid).subscribe(data => {
-  //       friendsData[key].displayName = data.displayName;
-  //       friendsData[key].email = data.email;
-  //       friendsData[key].photoURL = data.photoURL;
-  //     });
-  //   });
-  // }
 }

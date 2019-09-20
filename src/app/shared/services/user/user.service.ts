@@ -30,15 +30,19 @@ export class UserService {
   getUserInfo(uid: string): Observable<any> {
     return this.afs.doc(`users/${uid}/`).valueChanges();
   }
+
   getUserIdByEmail(email: string): Observable<any> {
     return this.afs.collection("users", ref => ref.where("email", "==", email)).valueChanges();
   }
+
   fetchWatchLaterList(uid: string): Observable<any> {
     return this.afs.collection(`users/${uid}/watchlater`).valueChanges();
   }
+
   fetchFavouritesList(uid: string): Observable<any> {
     return this.afs.collection(`users/${uid}/favourites`).valueChanges();
   }
+
   // создание исходящего запроса у одного
   // и входящего у второго
   addFriend(email: string) {

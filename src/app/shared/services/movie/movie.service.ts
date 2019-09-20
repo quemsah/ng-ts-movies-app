@@ -181,6 +181,10 @@ export class MovieService {
       .then(smth => this.alertService.openSuccessAlert("Comment successfully deleted", 2))
       .catch(error => this.alertService.openWarningAlert(error.message, 2));
   }
+  // для списков watch later и favourites
+  getMovieInfo(mid: string): Observable<any> {
+    return this.afs.doc(`movies/${mid}/`).valueChanges();
+  }
 
   fetchComment(cid: string, mid: string): Observable<any> {
     return this.afs.collection(`movies/${mid}/comments/${cid}/`).valueChanges();
