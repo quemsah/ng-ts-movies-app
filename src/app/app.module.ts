@@ -2,6 +2,7 @@ import { BrowserModule, Title } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { HttpClientModule } from "@angular/common/http";
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
+import { ModalModule } from 'ngx-bootstrap/modal';
 // MatSnackBar (замена window.alert)
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
@@ -76,7 +77,8 @@ import { UserComponent } from './components/users/user/user.component';
     AngularFirestoreModule,
     FormsModule,
     ReactiveFormsModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    ModalModule.forRoot()
   ],
   providers: [AuthService, AngularFireStorage, TMDBService, Title, ThemeService],
   bootstrap: [AppComponent]

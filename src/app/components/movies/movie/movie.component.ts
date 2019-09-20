@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit } from "@angular/core";
+import { Component, OnInit, AfterViewInit, TemplateRef } from "@angular/core";
 import { ThemeService } from "../../../shared/services/theme/theme.service";
 import { ActivatedRoute, Router } from "@angular/router";
 import { MovieService } from "../../../shared/services/movie/movie.service";
@@ -6,6 +6,7 @@ import { Title, DomSanitizer } from "@angular/platform-browser";
 import { TMDBService } from "../../../shared/services/tmdb/TMDB.service";
 import { NgForm } from "@angular/forms";
 import { AuthService } from "../../../shared/services/auth/auth.service";
+import { BsModalService, BsModalRef } from "ngx-bootstrap/modal";
 // Интерфейсы
 import { SimilarMovie } from "../../../shared/models/similar-movie";
 import { Crew } from "./../../../shared/models/crew";
@@ -26,8 +27,7 @@ export class MovieComponent implements OnInit, AfterViewInit {
   movieTrailers: Trailer[];
   movieSimilars: SimilarMovie[];
   currentCommentText: string;
-  // currentCommentText: string;
-  // currentCommentText: string;
+  modalRef: BsModalRef;
 
   constructor(
     public authService: AuthService,
@@ -37,7 +37,8 @@ export class MovieComponent implements OnInit, AfterViewInit {
     private movieService: MovieService,
     private tmdbService: TMDBService,
     private titleService: Title,
-    public themeService: ThemeService
+    public themeService: ThemeService,
+    private modalService: BsModalService
   ) {}
 
   ngOnInit(): void {
@@ -157,5 +158,9 @@ export class MovieComponent implements OnInit, AfterViewInit {
   handleCommentDelete(event) {
     const cid = this.movieService.getElementId(event);
     this.movieService.deleteComment(cid, this.movieData.mid);
+  }
+
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template);
   }
 }
