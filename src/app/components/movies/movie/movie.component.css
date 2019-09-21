@@ -6,6 +6,10 @@
   flex-direction: column;
 }
 
+.list-unstyled {
+  margin-bottom: 0;
+}
+
 .modal-header {
   background-color: #eeeeee;
 }

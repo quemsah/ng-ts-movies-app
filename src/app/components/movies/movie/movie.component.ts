@@ -7,6 +7,7 @@ import { TMDBService } from "../../../shared/services/tmdb/TMDB.service";
 import { NgForm } from "@angular/forms";
 import { AuthService } from "../../../shared/services/auth/auth.service";
 import { BsModalService, BsModalRef } from "ngx-bootstrap/modal";
+import { StarRatingComponent } from "ng-starrating";
 // Интерфейсы
 import { SimilarMovie } from "../../../shared/models/similar-movie";
 import { Crew } from "./../../../shared/models/crew";
@@ -161,5 +162,12 @@ export class MovieComponent implements OnInit, AfterViewInit {
 
   openModal(template: TemplateRef<any>): void {
     this.modalRef = this.modalService.show(template);
+  }
+
+  onRate($event: { oldValue: number; newValue: number; starRating: StarRatingComponent }) {
+    alert(`Old Value:${$event.oldValue}, 
+      New Value: ${$event.newValue}, 
+      Checked Color: ${$event.starRating.checkedcolor}, 
+      Unchecked Color: ${$event.starRating.uncheckedcolor}`);
   }
 }

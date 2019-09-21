@@ -7,37 +7,25 @@
       <div class="movie-bg card card-image">
         <div class="text-white stylish-card p-4 d-flex justify-content-between">
           <div class="col-xl-8">
-            <h2 class="card-title h2 my-3">{{movie.title}}</h2>
+            <h2 class="card-title h2 my-2">{{movie.title}}</h2>
             <h5 class="h5 my-2" [style.color]="themeService.themeColor | safe: 'style'"> {{movie.releaseDate | date }},
               {{movie.country}}</h5>
-            <h5 class="h5 my-3 p-0">{{movie.director}}</h5>
-            <p *ngIf="movie.runtime" class=" my-2 p-0">Runtime: {{movie.runtime}}</p>
-            <ul *ngIf="movie.genres" class="list-unstyled d-flex justify-content-start my-2 p-0">
-              <li *ngFor="let genre of movie.genres" class="">
-                <div class="chip waves-effect waves-effect my-1">{{genre}}</div>
-              </li>
-            </ul>
+            <h5 class="h5 my-2 p-0">{{movie.director}}</h5>
+            <p *ngIf="movie.runtime" class="my-2 p-0">Runtime: {{movie.runtime}}</p>
             <h6 *ngIf="movie.IMDBRating" class="h6 yellow-text my-2 p-0"><i class="far fa-star"> </i>
               {{movie.IMDBRating}} IMDB</h6>
-            <!-- <ul class="rating my-3">
-              <li>
-                <i class="fas fa-star blue-text"></i>
+            <ul *ngIf="movie.genres" class="list-unstyled d-flex justify-content-start mt-3 p-0">
+              <li *ngFor="let genre of movie.genres" class="">
+                <div class="chip waves-effect waves-effect my-0">{{genre}}</div>
               </li>
-              <li>
-                <i class="fas fa-star blue-text"></i>
-              </li>
-              <li>
-                <i class="fas fa-star blue-text"></i>
-              </li>
-              <li>
-                <i class="fas fa-star blue-text"></i>
-              </li>
-              <li>
-                <i class="fas fa-star grey-text"></i>
-              </li>
-            </ul> -->
-            <h4 class="h4 my-3 p-0">Overview</h4>
-            <p class="my-3">{{movie.overview}}</p>
+            </ul>
+            <div class="">
+              <p class="my-1 p-0">Your rating:</p>
+              <star-rating value="0" checkedcolor="#ffeb3b" uncheckedcolor="#9e9e9e" size="24px" readonly="false"
+                (rate)="onRate($event)"></star-rating>
+            </div>
+            <h4 class="h4 my-0 p-0">Overview</h4>
+            <p class="my-2">{{movie.overview}}</p>
             <p *ngIf="movie.budget" class="m-0 p-0">Budget: {{movie.budget | noInfo}}</p>
             <p *ngIf="movie.revenue" class="mb-2 p-0">Revenue: {{movie.revenue | noInfo}}</p>
             <button type="button" class="btn btn-md ml-0" (click)="handleToWatchLater()"
@@ -62,16 +50,16 @@
               <div class="modal-body">
                 <h6>https://doesit.works/movie/{{movie.mid}}</h6>
                 <a [href]="'http://vkontakte.ru/share.php?url=https://doesit.works/movie/'+
-                movie.mid + '&title=Movies App&description=Look what I have found! ' + movie.title">
+                  movie.mid + '&title=Movies App&description=Look what I have found! ' + movie.title">
                   <button type="button" class="btn vk-color text-white">Via &nbsp;<i class="fab fa-vk left"></i>
                   </button>
                 </a>
                 <a [href]="'http://twitter.com/share?url=https://doesit.works/movie/' +
-                  movie.mid + '&text=Look what I have found! ' + movie.title">
+                    movie.mid + '&text=Look what I have found! ' + movie.title">
                   <button type="button" class="btn tw-color text-white">Via &nbsp;<i class="fab fa-twitter left"></i>
                   </button> </a>
                 <a [href]="sanitizer.bypassSecurityTrustResourceUrl('tg://msg_url?url=https://doesit.works/movie/'+
-                    movie.mid + '&text=Look what I have found! ' + movie.title)">
+                      movie.mid + '&text=Look what I have found! ' + movie.title)">
                   <button type="button" class="btn tg-color text-white">Via &nbsp;<i class="fab fa-telegram left"></i>
                   </button>
                 </a>
@@ -97,7 +85,7 @@
   <!-- Actors & Trailers -->
   <section class="mb-4 mt-4" *ngIf="movieCrew">
     <!-- двойная проверка, так как если фильм добавлен вручную
-    то массив будет пустой -->
+      то массив будет пустой -->
     <div class="row" *ngIf="movieCrew.length>0">
       <div class="movie-tabs">
         <ul class="nav nav-tabs nav-justified md-tabs " [style.background]="themeService.themeGradient | safe: 'style'"
@@ -107,8 +95,8 @@
               aria-controls="wl-just" aria-selected="true">Cast</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" id="fav-tab-just" data-toggle="tab" href="#fav-just" role="tab"
-              aria-controls="fav-just" aria-selected="false">Trailers</a>
+            <a class="nav-link" id="fav-tab-just" data-toggle="tab" href="#fav-just" role="tab" aria-controls="fav-just"
+              aria-selected="false">Trailers</a>
           </li>
         </ul>
         <div class="tab-content card pt-5" id="myTabContentJust">
@@ -118,8 +106,8 @@
                 <div class="actor-card card align-items-center">
                   <div class="view overlay">
                     <img routerLink="/star/{{actor[i].id}}" src="{{(actor[i].profile_path) 
-                      ? 'https://image.tmdb.org/t/p/w138_and_h175_face'+actor[i].profile_path 
-                      : '../../../../assets/img/no_actor_img.jpg'}}" class="card-img-top" alt="Actor Image">
+                        ? 'https://image.tmdb.org/t/p/w138_and_h175_face'+actor[i].profile_path 
+                        : '../../../../assets/img/no_actor_img.jpg'}}" class="card-img-top" alt="Actor Image">
                   </div>
                   <div class="card-body text-center">
                     <a routerLink="/star/{{actor[i].id}}" class="grey-text">
@@ -151,7 +139,7 @@
   <!-- Similar movies -->
   <section class="mb-4 mt-4" *ngIf="movieSimilars">
     <!-- двойная проверка, так как если фильм добавлен вручную
-    то массив будет пустой -->
+      то массив будет пустой -->
     <div class="row" *ngIf="movieSimilars.length>0">
       <h2 class="profile-title col-lg-12 font-weight-bold mb-3"><strong>Similar movies
         </strong></h2>
@@ -162,8 +150,8 @@
           </div>
           <div class="view overlay">
             <img src="{{(smovie[i].poster_path) 
-                ? 'https://image.tmdb.org/t/p/w300_and_h450_bestv2'+smovie[i].poster_path 
-                : '../../../assets/img/no_poster_available.jpg'}}" class="card-img-top" alt="Poster image">
+                  ? 'https://image.tmdb.org/t/p/w300_and_h450_bestv2'+smovie[i].poster_path 
+                  : '../../../assets/img/no_poster_available.jpg'}}" class="card-img-top" alt="Poster image">
             <a>
               <div class="mask rgba-white-slight"></div>
             </a>

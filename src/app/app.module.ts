@@ -3,6 +3,7 @@ import { NgModule } from "@angular/core";
 import { HttpClientModule } from "@angular/common/http";
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { ModalModule } from "ngx-bootstrap/modal";
+import { RatingModule } from "ng-starrating";
 // MatSnackBar (замена window.alert)
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
@@ -80,6 +81,7 @@ import { StarComponent } from "./components/movies/star/star.component";
     FormsModule,
     ReactiveFormsModule,
     MatSnackBarModule,
+    RatingModule,
     ModalModule.forRoot()
   ],
   providers: [AuthService, AngularFireStorage, TMDBService, Title, ThemeService],

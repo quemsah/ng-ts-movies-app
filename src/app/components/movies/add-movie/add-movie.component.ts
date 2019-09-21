@@ -127,7 +127,8 @@ export class AddMovieComponent implements OnInit, AfterViewInit {
       dateAdded: Math.round(+new Date() / 1000),
       title: form.value.MovieName,
       releaseDate: form.value.Date,
-      country: form.value.Country == "United States of America" ? "USA" : form.value.Country,
+      country:
+        form.value.Country.trim() === "United States of America" ? "USA" : form.value.Country,
       IMDBRating: form.value.IMDBRating,
       genres: this.movieService.genresToArray(form.value),
       director: form.value.Director,
