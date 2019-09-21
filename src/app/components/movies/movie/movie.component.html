@@ -117,15 +117,15 @@
               <div class="col-xl-2 col-lg-3 col-md- col-sm-4 col-6 mb-4" *ngFor="let actor of movieCrew; let i = index">
                 <div class="actor-card card align-items-center">
                   <div class="view overlay">
-                    <img src="{{(actor[i].profile_path) 
+                    <img routerLink="/star/{{actor[i].id}}" src="{{(actor[i].profile_path) 
                       ? 'https://image.tmdb.org/t/p/w138_and_h175_face'+actor[i].profile_path 
                       : '../../../../assets/img/no_actor_img.jpg'}}" class="card-img-top" alt="Actor Image">
                   </div>
                   <div class="card-body text-center">
-                    <a href="" class="grey-text">
+                    <a routerLink="/star/{{actor[i].id}}" class="grey-text">
                       <p class="h6">{{ (actor[i].character) ? actor[i].character : 'No Information' }}</p>
                     </a>
-                    <p class="h6"><a href=""
+                    <p class="h6"><a routerLink="/star/{{actor[i].id}}"
                         [style.color]="themeService.themeColor | safe: 'style'"><strong>{{ actor[i].name }}</strong></a>
                     </p>
                   </div>

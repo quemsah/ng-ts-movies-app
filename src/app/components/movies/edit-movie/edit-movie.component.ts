@@ -34,7 +34,7 @@ export class EditMovieComponent implements OnInit, AfterViewInit {
     // this.themeService.checkDarkMode();
   }
 
-  onEditMovieSubmit(form: NgForm) {
+  onEditMovieSubmit(form: NgForm): void {
     // приводим к нужному виду
     const movieData: Movie = {
       mid: this.movieService.generateMovieID(form.value.Date, form.value.MovieName),
@@ -58,7 +58,7 @@ export class EditMovieComponent implements OnInit, AfterViewInit {
     // { merge: true }, а если менялись, то будет новый документ
     // с новым айдишником и новыми комментариями, так как это
     // уже будет другой фильм, требующий другого URL
-    this.title == form.value.MovieName && this.releaseDate == form.value.Date
+    this.title === form.value.MovieName && this.releaseDate === form.value.Date
       ? null
       : this.movieService.deleteMovie(this.currentMovieData.mid);
     this.movieService.setMovieData(movieData);

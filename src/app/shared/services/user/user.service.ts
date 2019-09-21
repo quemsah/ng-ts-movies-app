@@ -45,7 +45,7 @@ export class UserService {
 
   // создание исходящего запроса у одного
   // и входящего у второго
-  addFriend(email: string) {
+  addFriend(email: string): void {
     this.getUserIdByEmail(email).subscribe(data => {
       if (data.length !== 0) {
         const now = new Date().toLocaleString();
@@ -95,7 +95,7 @@ export class UserService {
   //   //return this.afs.collection("users", ref => ref.where("email", "==", email)).valueChanges();
   // }
 
-  deleteRequests(fid: string) {
+  deleteRequests(fid: string): void {
     const uid = this.authService.userData.uid;
     this.deleteRequest(uid, fid).catch(error =>
       this.alertService.openWarningAlert(error.message, 2)
@@ -114,7 +114,7 @@ export class UserService {
       .delete();
   }
 
-  acceptRequests(fid: string) {
+  acceptRequests(fid: string): void {
     const now = new Date().toLocaleString();
     const uid = this.authService.userData.uid;
     console.log(fid);

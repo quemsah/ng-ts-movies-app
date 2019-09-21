@@ -7,7 +7,7 @@ import { Injectable } from "@angular/core";
 export class AlertService {
   constructor(private _snackBar: MatSnackBar) {}
 
-  openAlert(message, durationInSeconds, type) {
+  openAlert(message, durationInSeconds, type): void {
     // styles.css
     const classType = type + "-alert-snackbar";
     this._snackBar.open(message, null, {
@@ -16,15 +16,15 @@ export class AlertService {
     });
   }
 
-  openInfoAlert(msg, dur) {
+  openInfoAlert(msg, dur): void {
     return this.openAlert(msg, dur, "info");
   }
 
-  openSuccessAlert(msg, dur) {
+  openSuccessAlert(msg, dur): void {
     return this.openAlert(msg, dur, "success");
   }
 
-  openWarningAlert(msg, dur) {
+  openWarningAlert(msg, dur): void {
     return this.openAlert(msg, dur, "warning");
   }
 }

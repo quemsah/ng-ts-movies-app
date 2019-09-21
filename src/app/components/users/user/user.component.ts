@@ -1,10 +1,10 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
+import { MovieListItem } from "../../../shared/models/movie-list-comment";
 import { UserService } from "../../../shared/services/user/user.service";
 import { AuthService } from "../../../shared/services/auth/auth.service";
 import { MovieService } from "../../../shared/services/movie/movie.service";
 import { ThemeService } from "../../../shared/services/theme/theme.service";
-import { MovieListItem } from "../../../shared/models/movie-list-comment";
 
 @Component({
   selector: "app-user",
@@ -37,7 +37,7 @@ export class UserComponent implements OnInit {
     });
   }
   // добавляем к айдишниками фильмов информацию о них
-  getListInfo(listData: any) {
+  getListInfo(listData: any): void {
     Object.keys(listData).filter(key => {
       this.movieService.getMovieInfo(listData[key].mid).subscribe(data => {
         // берем только нужные поля
@@ -52,7 +52,7 @@ export class UserComponent implements OnInit {
     });
   }
 
-  getMovieLists() {
+  getMovieLists(): void {
     const id = this.route.snapshot.paramMap.get("id");
     this.userService.fetchWatchLaterList(id).subscribe(data => {
       this.watchlater = data;
@@ -64,7 +64,7 @@ export class UserComponent implements OnInit {
     });
   }
 
-  handleToWatchLater(event) {
+  handleToWatchLater(event): void {
     const watchLaterMovieData: MovieListItem = {
       mid: this.movieService.getElementId(event),
       date: new Date().toLocaleString()
@@ -76,7 +76,7 @@ export class UserComponent implements OnInit {
     );
   }
 
-  handleToFavourites(event) {
+  handleToFavourites(event): void {
     const favouriteMovieData: MovieListItem = {
       mid: this.movieService.getElementId(event),
       date: new Date().toLocaleString()

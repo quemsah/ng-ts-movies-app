@@ -7,7 +7,7 @@ import {
   OnChanges,
   SimpleChanges
 } from "@angular/core";
-import { ThemeService } from "../../shared/services/theme/theme.service";
+import { ThemeService } from "../../../shared/services/theme/theme.service";
 
 @Component({
   selector: "app-pagination",
@@ -36,7 +36,7 @@ export class PaginationComponent implements OnInit, OnChanges {
     }
   }
 
-  setPage(page: number) {
+  setPage(page: number): void {
     this.pager = this.paginate(this.items.length, page, this.pageSize, this.maxPages);
     const pageOfItems = this.items.slice(this.pager.startIndex, this.pager.endIndex + 1);
     this.changePage.emit(pageOfItems);
@@ -47,7 +47,7 @@ export class PaginationComponent implements OnInit, OnChanges {
     currentPage: number = 1,
     pageSize: number = 10,
     maxPages: number = 10
-  ) {
+  ): any {
     const totalPages = Math.ceil(totalItems / pageSize);
     if (currentPage < 1) {
       currentPage = 1;

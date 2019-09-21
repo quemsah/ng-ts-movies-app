@@ -17,21 +17,21 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     // this.themeService.checkDarkMode();
   }
 
-  onNameSubmit(form: NgForm) {
+  onNameSubmit(form: NgForm): void {
     console.log(form.value);
-    this.authService.UpdateUserName(form.value.userName);
+    this.authService.UpdateUserName(form.value.userName.trim());
   }
 
-  onProfileSubmit(form: NgForm) {
+  onProfileSubmit(form: NgForm): void {
     console.log(form.value);
     this.authService.UpdateUserPassword(form.value.password, form.value.oldPassword);
   }
 
-  onClickPhoto(file: File) {
+  onClickPhoto(file: File): void {
     this.authService.UploadNewAvatar(file);
   }
 
-  onDeletePhoto() {
+  onDeletePhoto(): void {
     this.authService.DeleteAvatar();
   }
 }

@@ -22,6 +22,7 @@ export class MovieService {
     date.substring(0, 4) +
     "-" +
     moviename
+      .trim()
       .replace(/[^a-zA-Z0-9А-Яа-я ]/g, "") // удаляем символы всякие
       .replace(/\s+/g, "-") // заменяем пробелы на тире
       .toLowerCase();
@@ -58,7 +59,7 @@ export class MovieService {
     return target.attributes.id.nodeValue;
   }
 
-  setMovieData(movieData: Movie) {
+  setMovieData(movieData: Movie): void {
     console.log(movieData);
     this.afs
       .collection(`movies/`)
@@ -70,7 +71,7 @@ export class MovieService {
       .catch(error => this.alertService.openWarningAlert(error.message, 2));
   }
 
-  deleteMovie(mid: string) {
+  deleteMovie(mid: string): void {
     this.afs
       .collection(`movies/`)
       .doc(mid)
@@ -129,7 +130,7 @@ export class MovieService {
   //     .valueChanges();
   // }
 
-  toggleMovieToList(type: string, listMovieData: MovieListItem, uid: string) {
+  toggleMovieToList(type: string, listMovieData: MovieListItem, uid: string): void {
     const movieDoc = this.afs
       .collection(`users/`)
       .doc(uid)
@@ -140,7 +141,7 @@ export class MovieService {
       .toPromise()
       .then(doc => {
         // метод из Firebase
-        // если такой фильм в списке
+        // если такой фильм в есть списке
         if (doc.exists) {
           // удаляем
           movieDoc
@@ -150,7 +151,7 @@ export class MovieService {
             )
             .catch(error => this.alertService.openWarningAlert(error.message, 2));
         } else {
-          // добавляем в список
+          // если нету – добавляем в список
           // console.log("No such movie!");
           movieDoc
             .set(listMovieData)

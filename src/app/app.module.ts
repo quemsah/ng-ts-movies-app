@@ -2,7 +2,7 @@ import { BrowserModule, Title } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { HttpClientModule } from "@angular/common/http";
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
-import { ModalModule } from 'ngx-bootstrap/modal';
+import { ModalModule } from "ngx-bootstrap/modal";
 // MatSnackBar (замена window.alert)
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
@@ -39,9 +39,10 @@ import { NavbarComponent } from "./components/navbar/navbar.component";
 import { MovieComponent } from "./components/movies/movie/movie.component";
 import { MoviesListComponent } from "./components/movies/movies-list/movies-list.component";
 import { EditMovieComponent } from "./components/movies/edit-movie/edit-movie.component";
-import { PaginationComponent } from "./components/pagination/pagination.component";
-import { SettingsComponent } from "./components/settings/settings.component";
-import { UserComponent } from './components/users/user/user.component';
+import { PaginationComponent } from "./components/movies/pagination/pagination.component";
+import { SettingsComponent } from "./components/users/settings/settings.component";
+import { UserComponent } from "./components/users/user/user.component";
+import { StarComponent } from "./components/movies/star/star.component";
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import { UserComponent } from './components/users/user/user.component';
     PaginationComponent,
     SettingsComponent,
     SafePipe,
-    UserComponent
+    UserComponent,
+    StarComponent
   ],
   imports: [
     HttpClientModule,

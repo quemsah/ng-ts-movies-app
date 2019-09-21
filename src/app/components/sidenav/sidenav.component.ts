@@ -14,7 +14,7 @@ export class SidenavComponent implements OnInit {
   ngOnInit() {}
   // https://github.com/Dogfalo/materialize/issues/1676
   // https://stackoverflow.com/questions/32591402/materialize-sidenav-produces-multiple-sidenav-overlay
-  sidenavClose() {
+  sidenavClose(): void {
     $(".button-collapse").sideNav("hide");
     $(".button-collapse")
       .off("click")

@@ -1,5 +1,5 @@
 import { Component, OnInit, AfterViewInit } from "@angular/core";
-import { ThemeService } from "src/app/shared/services/theme/theme.service";
+import { ThemeService } from "../../../shared/services/theme/theme.service";
 
 @Component({
   selector: "app-settings",
@@ -13,17 +13,17 @@ export class SettingsComponent implements OnInit, AfterViewInit {
   constructor(public themeService: ThemeService) {}
 
   ngOnInit() {
-    //this.updateColor();
+    // this.updateColor();
   }
 
   ngAfterViewInit() {
     // this.themeService.checkDarkMode();
   }
 
-  handleColorChange() {
+  handleColorChange(): void {
     this.themeService.setGradient(this.red, this.green, this.blue);
     this.themeService.setColor(this.red, this.green, this.blue);
-    //this.updateColor();
+    // this.updateColor();
   }
   // updateColor() {
   //   this.themeService.setGradient(this.red, this.green, this.blue);

@@ -48,7 +48,7 @@ export class FriendsComponent implements OnInit, AfterViewInit {
   mapInRequests = x => x.accepted === false && x.uid !== x.initiator;
 
   // добавляем к сухим айдишниками информацию о друзьях/запросах
-  getFriendsInfo(friendsData: Friends) {
+  getFriendsInfo(friendsData: Friends): void {
     console.log(friendsData);
     Object.keys(friendsData).filter(key => {
       this.userService.getUserInfo(friendsData[key].fid).subscribe(data => {
@@ -78,17 +78,17 @@ export class FriendsComponent implements OnInit, AfterViewInit {
       });
   }
 
-  handleAddFriend(form: NgForm) {
+  handleAddFriend(form: NgForm): void {
     this.userService.addFriend(form.value.friendsEmail);
     form.reset();
   }
   // удаляет и запросы в друзья и друзей в целом
-  handleRequestDelete(event) {
+  handleRequestDelete(event): void {
     const fid = this.movieService.getElementId(event);
     this.userService.deleteRequests(fid);
   }
 
-  handleRequestAccept(event) {
+  handleRequestAccept(event): void {
     const fid = this.movieService.getElementId(event);
     this.userService.acceptRequests(fid);
   }

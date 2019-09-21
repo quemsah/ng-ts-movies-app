@@ -41,11 +41,11 @@ export class MoviesListComponent implements OnInit, AfterViewInit {
     // this.themeService.checkDarkMode();
   }
 
-  handleListClick() {
+  handleListClick(): void {
     document.querySelectorAll(".movie-item").forEach(x => x.classList.add("list-item"));
   }
 
-  handleGridClick() {
+  handleGridClick(): void {
     document.querySelectorAll(".movie-item").forEach(x => x.classList.remove("list-item"));
   }
 
@@ -63,7 +63,7 @@ export class MoviesListComponent implements OnInit, AfterViewInit {
     this.getMovies();
   }
   // Filter array over multiple properties
-  filterByAll = (movies, key) =>
+  filterByAll = (movies, key): Movie[] =>
     movies.filter(obj =>
       Object.keys(movies[0]).some(
         k =>
@@ -76,11 +76,11 @@ export class MoviesListComponent implements OnInit, AfterViewInit {
 
   getMovies(): void {
     this.movieService.fetchMovies(this.sortingValue, this.sortingType).subscribe(movies => {
-      this.movies = this.filterByAll(movies, this.searchValue.toLowerCase());
+      this.movies = this.filterByAll(movies, this.searchValue.trim().toLowerCase());
     });
   }
 
-  handleToWatchLater(event) {
+  handleToWatchLater(event): void {
     const watchLaterMovieData: MovieListItem = {
       mid: this.movieService.getElementId(event),
       date: new Date().toLocaleString()
@@ -92,7 +92,7 @@ export class MoviesListComponent implements OnInit, AfterViewInit {
     );
   }
 
-  handleToFavourites(event) {
+  handleToFavourites(event): void {
     const favouriteMovieData: MovieListItem = {
       mid: this.movieService.getElementId(event),
       date: new Date().toLocaleString()
@@ -104,7 +104,7 @@ export class MoviesListComponent implements OnInit, AfterViewInit {
     );
   }
 
-  onChangePage(pageOfItems: Array<Movie>) {
+  onChangePage(pageOfItems: Array<Movie>): void {
     this.pageOfItems = pageOfItems;
   }
 }

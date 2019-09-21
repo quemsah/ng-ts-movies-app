@@ -9,24 +9,24 @@ export class ThemeService {
   isDarkMode: boolean = false;
   wasRouted: boolean = false;
   // начальные значения
-  red: number = 50;
-  green: number = 138;
-  blue: number = 255;
+  red: number = 59;
+  green: number = 113;
+  blue: number = 206;
   themeGradient: string = this.setGradient(this.red, this.green, this.blue);
   themeColor: string = this.setColor(this.red, this.green, this.blue);
   constructor() //setGradient(32,199,107);
   {}
 
-  rgbToHex(rgb: number) {
+  rgbToHex(rgb: number): string {
     var hex = Math.round(Math.min(Math.max(0, rgb), 255)).toString(16);
     return hex.length < 2 ? "0" + hex : hex;
   }
 
-  fullColorHex(red: number, green: number, blue: number) {
+  fullColorHex(red: number, green: number, blue: number): string {
     return this.rgbToHex(red) + this.rgbToHex(green) + this.rgbToHex(blue);
   }
 
-  mix(color: number, param: number) {
+  mix(color: number, param: number): number {
     return Math.round((1 + param) * color);
   }
 
@@ -58,7 +58,7 @@ export class ThemeService {
   }
   // перед переходом выключаем дарк мод, если он был
   // и ставим wasRouted = true, чтобы потом включить
-  forceDisableDarkModeBeforeRoute() {
+  forceDisableDarkModeBeforeRoute(): void {
     if (this.isDarkMode === true) {
       this.toggleDarkMode();
       this.wasRouted = true;
@@ -68,7 +68,7 @@ export class ThemeService {
   }
   // если был переход (wasRouted = true), то включаем даркмод обратно
   // и не забываем обнулить wasRouted
-  checkDarkMode() {
+  checkDarkMode(): void {
     if (this.wasRouted === true) {
       this.toggleDarkMode();
       this.wasRouted = false;
@@ -77,7 +77,7 @@ export class ThemeService {
     }
   }
   // вкл/выкл
-  toggleDarkMode() {
+  toggleDarkMode(): void {
     if (this.isDarkMode === false) {
       this.isDarkMode = true;
       enableDarkMode();

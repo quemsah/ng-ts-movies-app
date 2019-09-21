@@ -68,7 +68,7 @@ export class AddMovieComponent implements OnInit, AfterViewInit {
   // информацию о фильме. Далее запрос getMovieDetailsByTMDBID по только что
   // полученному TMDB идентификатору(число) возвращает полную информацию о фильме
 
-  onImdbIDSubmit(form: NgForm) {
+  onImdbIDSubmit(form: NgForm): void {
     console.log(form.value);
 
     // this.tmdbService.getMovieByIMDBID(form.value.ImdbId).subscribe(data => {
@@ -117,7 +117,7 @@ export class AddMovieComponent implements OnInit, AfterViewInit {
     });
   }
 
-  onAddMovieSubmit(form: NgForm) {
+  onAddMovieSubmit(form: NgForm): void {
     // приводим к нужному виду
     //console.log(form.value.Date);
     const movieData: Movie = {

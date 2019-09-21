@@ -40,7 +40,7 @@ export class MovieComponent implements OnInit, AfterViewInit {
     private modalService: BsModalService
   ) {}
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.getMovie();
     this.getComments();
   }
@@ -49,7 +49,7 @@ export class MovieComponent implements OnInit, AfterViewInit {
     // this.themeService.checkDarkMode();
   }
   // прыгнуть к изменению своего комментария
-  scroll(el: HTMLElement) {
+  scroll(el: HTMLElement): void {
     el.scrollIntoView();
   }
 
@@ -84,7 +84,7 @@ export class MovieComponent implements OnInit, AfterViewInit {
 
   getMovieTrailers(id: number): void {
     this.tmdbService.getMovieTrailersByTMDBID(id).subscribe(data => {
-      this.movieTrailers = this.movieService.sliceData(data.results, 12);
+      this.movieTrailers = this.movieService.sliceData(data.results, 6);
       this.movieTrailers.forEach(
         (value, i) => (value[i].key = "https://www.youtube.com/embed/" + value[i].key + "?rel=0")
       );
@@ -101,16 +101,16 @@ export class MovieComponent implements OnInit, AfterViewInit {
     });
   }
 
-  handleMovieEdit() {
+  handleMovieEdit(): void {
     // роутит на соответствующую страничку
     console.log(this.movieData.mid);
   }
 
-  handleMovieDelete() {
+  handleMovieDelete(): void {
     this.movieService.deleteMovie(this.movieData.mid);
   }
 
-  handleToWatchLater() {
+  handleToWatchLater(): void {
     const watchLaterMovieData: MovieListItem = {
       mid: this.movieData.mid,
       date: new Date().toLocaleString()
@@ -122,7 +122,7 @@ export class MovieComponent implements OnInit, AfterViewInit {
     );
   }
 
-  handleToFavourites() {
+  handleToFavourites(): void {
     const favouritesMovieData: MovieListItem = {
       mid: this.movieData.mid,
       date: new Date().toLocaleString()
@@ -134,7 +134,7 @@ export class MovieComponent implements OnInit, AfterViewInit {
     );
   }
 
-  handleAddComment(form: NgForm) {
+  handleAddComment(form: NgForm): void {
     const now = new Date().toLocaleString();
     const commentData: Comment = {
       cid: this.movieService.generateCommentID(now),
@@ -147,19 +147,19 @@ export class MovieComponent implements OnInit, AfterViewInit {
     form.reset();
   }
 
-  handleCommentEdit(event) {
+  handleCommentEdit(event): void {
     const cid = this.movieService.getElementId(event);
     const text = document.getElementById("t" + cid).innerText;
     this.currentCommentText = text;
     this.movieService.deleteComment(cid, this.movieData.mid);
   }
 
-  handleCommentDelete(event) {
+  handleCommentDelete(event): void {
     const cid = this.movieService.getElementId(event);
     this.movieService.deleteComment(cid, this.movieData.mid);
   }
 
-  openModal(template: TemplateRef<any>) {
+  openModal(template: TemplateRef<any>): void {
     this.modalRef = this.modalService.show(template);
   }
 }

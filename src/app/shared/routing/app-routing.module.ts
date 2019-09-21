@@ -8,7 +8,7 @@ import { OuterPagesGuard } from "../../shared/guard/outer-pages.guard";
 import { LoginComponent } from "../../components/users/login/login.component";
 import { RegisterComponent } from "../../components/users/register/register.component";
 import { ProfileComponent } from "../../components/users/profile/profile.component";
-import { FriendsComponent } from "src/app/components/users/friends/friends.component";
+import { FriendsComponent } from "../../components/users/friends/friends.component";
 import { ForgotPasswordComponent } from "../../components/users/forgot-password/forgot-password.component";
 import { VerifyEmailComponent } from "../../components/users/verify-email/verify-email.component";
 import { AboutComponent } from "../../components/about/about.component";
@@ -16,9 +16,10 @@ import { NotFoundComponent } from "../../components/not-found/not-found.componen
 import { AddMovieComponent } from "../../components/movies/add-movie/add-movie.component";
 import { MovieComponent } from "../../components/movies/movie/movie.component";
 import { MoviesListComponent } from "../../components/movies/movies-list/movies-list.component";
-import { EditMovieComponent } from "src/app/components/movies/edit-movie/edit-movie.component";
-import { SettingsComponent } from "src/app/components/settings/settings.component";
-import { UserComponent } from '../../components/users/user/user.component';
+import { EditMovieComponent } from "../../components/movies/edit-movie/edit-movie.component";
+import { SettingsComponent } from "../../components/users/settings/settings.component";
+import { UserComponent } from "../../components/users/user/user.component";
+import { StarComponent } from "../../components/movies/star/star.component";
 
 const routes: Routes = [
   {
@@ -89,6 +90,11 @@ const routes: Routes = [
   {
     path: "movie/:id",
     component: MovieComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: "star/:id",
+    component: StarComponent,
     canActivate: [AuthGuard]
   },
   {

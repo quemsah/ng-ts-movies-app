@@ -188,7 +188,7 @@ export class AuthService {
       .catch(this.errCatching);
   }
 
-  UploadNewAvatar(event: any) {
+  UploadNewAvatar(event: any): void {
     const file = event.target.files[0];
     const path = "users/" + this.currentUser.uid + "/" + file.name;
     const ref = this.storage.ref(path);
