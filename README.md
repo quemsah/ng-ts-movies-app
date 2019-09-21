@@ -1,7 +1,9 @@
 ## A movie app made for T-Systems FrontEnd School
 
 Frontend is build by Angular 8 and backend informations come from Firebase and external API service [TheMovieDB](https://developers.themoviedb.org/3)
+
 **Deployed version -> https://www.doesit.works**
+
 This is an application that allows you to maintain a database of watched/favourited films, add your own ratings and comments to them, add others users to friends, accept friend request and share the database with them.
 Filtration and search available for movies. User can get all the movie details including cast, trailers and related films.
 The user can log in using Google, register (with confirmation by e-mail) as well as reset his password and change personal information of his account.

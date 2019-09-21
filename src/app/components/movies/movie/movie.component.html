@@ -52,7 +52,6 @@
               [style.background]="themeService.themeGradient | safe: 'style'">
               <i class="fas fa-share-alt pr-1"></i> Share
             </button>
-
             <ng-template #template>
               <div class="modal-header">
                 <h4 class="modal-title pull-left"><i class="fas fa-share-alt pr-1"></i> Share {{movie.title}}</h4>
@@ -78,7 +77,6 @@
                 </a>
               </div>
             </ng-template>
-
             <a routerLink="/edit-movie/{{movie.mid}}" id="{{movie.mid}}" type="button"
               class="btn btn-md btn-blue-grey ml-0" (click)="handleMovieEdit()">
               <i class="far fa-edit pr-1"></i> Edit

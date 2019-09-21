@@ -24,8 +24,8 @@ const routes: Routes = [
   {
     path: "login",
     component: LoginComponent,
-    data: { title: "Login" }
-    // canActivate: [InnerPagesGuard]
+    data: { title: "Login" },
+    canActivate: [InnerPagesGuard]
   },
   {
     path: "register",

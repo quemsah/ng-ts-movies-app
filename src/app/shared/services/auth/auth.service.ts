@@ -58,8 +58,10 @@ export class AuthService {
     return this.afs.doc(`users/${this.currentUser.uid}`);
   }
 
-  get friendsRef() {
-    return this.afs.collection(`users/${this.currentUser.uid}/friends`);
+  friendsRef() {
+    console.log(this.userData.uid);
+    return this.afs.collection(`users/${this.userData.uid}/friends`);
+    //return this.afs.collection(`users/${uid}/friends`);
   }
 
   // get watchLaterRef() {
@@ -75,7 +77,7 @@ export class AuthService {
       .signInWithEmailAndPassword(email, password)
       .then(result => {
         this.ngZone.run(() => {
-          this.router.navigate(["profile"]);
+          this.router.navigate(["movies"]);
         });
         console.log(result.user);
         this.SetUserData(result.user);
@@ -168,7 +170,7 @@ export class AuthService {
       .signInWithPopup(provider)
       .then(result => {
         this.ngZone.run(() => {
-          this.router.navigate(["profile"]);
+          this.router.navigate(["movies"]);
         });
         // в случае логина через гитхаб или майкрософт emailVerified будет false
         // так как Firebase ставит именно так это создает проблемы со входом, так как есть

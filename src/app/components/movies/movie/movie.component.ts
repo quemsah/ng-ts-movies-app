@@ -1,6 +1,6 @@
 import { Component, OnInit, AfterViewInit, TemplateRef } from "@angular/core";
 import { ThemeService } from "../../../shared/services/theme/theme.service";
-import { ActivatedRoute, Router } from "@angular/router";
+import { ActivatedRoute } from "@angular/router";
 import { MovieService } from "../../../shared/services/movie/movie.service";
 import { Title, DomSanitizer } from "@angular/platform-browser";
 import { TMDBService } from "../../../shared/services/tmdb/TMDB.service";
@@ -33,7 +33,6 @@ export class MovieComponent implements OnInit, AfterViewInit {
     public authService: AuthService,
     public sanitizer: DomSanitizer,
     private route: ActivatedRoute,
-    private router: Router,
     private movieService: MovieService,
     private tmdbService: TMDBService,
     private titleService: Title,

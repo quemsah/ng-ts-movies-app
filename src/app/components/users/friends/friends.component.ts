@@ -1,7 +1,7 @@
 import { Component, OnInit, AfterViewInit } from "@angular/core";
 import { NgForm } from "@angular/forms";
-import { UserService } from "../../../shared/services/user/user.service";
 import { AuthService } from "../../../shared/services/auth/auth.service";
+import { UserService } from "../../../shared/services/user/user.service";
 import { Friends } from "../../../shared/models/friends";
 import { ThemeService } from "../../../shared/services/theme/theme.service";
 import { MovieService } from "../../../shared/services/movie/movie.service";
@@ -12,6 +12,8 @@ import { MovieService } from "../../../shared/services/movie/movie.service";
   styleUrls: ["./friends.component.css"]
 })
 export class FriendsComponent implements OnInit, AfterViewInit {
+  userId1: string;
+  userId2: string;
   friends: Friends;
   outRequests: Friends;
   inRequests: Friends;
@@ -23,10 +25,14 @@ export class FriendsComponent implements OnInit, AfterViewInit {
   ) {}
 
   ngOnInit() {
+    // разобраться, почему все работает только когда
+    // getFriends вызываю два раза
+    // мб https://javebratt.com/firebase-user-undefined/
     this.getFriends();
   }
 
   ngAfterViewInit() {
+    this.getFriends();
     // this.themeService.checkDarkMode();
   }
 
@@ -54,19 +60,22 @@ export class FriendsComponent implements OnInit, AfterViewInit {
   }
 
   getFriends(): void {
-    this.authService.friendsRef.valueChanges().subscribe(data => {
-      // разносим друзей и входящие/исходящие запросы
-      // см. user.service.ts
-      this.friends = this.filterObject(data, this.mapFriends);
-      this.outRequests = this.filterObject(data, this.mapOutRequests);
-      this.inRequests = this.filterObject(data, this.mapInRequests);
-      this.getFriendsInfo(this.friends);
-      this.getFriendsInfo(this.outRequests);
-      this.getFriendsInfo(this.inRequests);
-      // console.log(this.friends);
-      // console.log(this.outRequests);
-      // console.log(this.inRequests);
-    });
+    this.authService
+      .friendsRef()
+      .valueChanges()
+      .subscribe(data => {
+        // разносим друзей и входящие/исходящие запросы
+        // см. user.service.ts
+        this.friends = this.filterObject(data, this.mapFriends);
+        this.outRequests = this.filterObject(data, this.mapOutRequests);
+        this.inRequests = this.filterObject(data, this.mapInRequests);
+        this.getFriendsInfo(this.friends);
+        this.getFriendsInfo(this.outRequests);
+        this.getFriendsInfo(this.inRequests);
+        // console.log(this.friends);
+        // console.log(this.outRequests);
+        // console.log(this.inRequests);
+      });
   }
 
   handleAddFriend(form: NgForm) {
