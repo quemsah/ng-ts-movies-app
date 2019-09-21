@@ -12,7 +12,6 @@ export class NavbarComponent implements OnInit {
   register: boolean = false;
   friends: boolean = false;
   profile: boolean = false;
-  settings: boolean = false;
   logout: boolean = false;
   constructor(public authService: AuthService, public themeService: ThemeService) {}
 

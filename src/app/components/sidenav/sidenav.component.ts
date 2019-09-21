@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { ThemeService } from "../../shared/services/theme/theme.service";
+import { AuthService } from "../../shared/services/auth/auth.service";
 
 declare var $: any;
 
@@ -9,7 +10,7 @@ declare var $: any;
   styleUrls: ["./sidenav.component.css"]
 })
 export class SidenavComponent implements OnInit {
-  constructor(public themeService: ThemeService) {}
+  constructor(public themeService: ThemeService, public authService: AuthService) {}
 
   ngOnInit() {}
   // https://github.com/Dogfalo/materialize/issues/1676

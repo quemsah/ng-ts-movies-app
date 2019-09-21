@@ -32,7 +32,7 @@ export class UserComponent implements OnInit {
   getUser(): void {
     const id = this.route.snapshot.paramMap.get("id");
     this.userService.getUserInfo(id).subscribe(user => {
-      console.log(user);
+      // console.log(user);
       this.userData = user;
     });
   }
@@ -54,6 +54,7 @@ export class UserComponent implements OnInit {
 
   getMovieLists(): void {
     const id = this.route.snapshot.paramMap.get("id");
+    // const id = "me" ? this.authService.userData.uid : this.route.snapshot.paramMap.get("id");
     this.userService.fetchWatchLaterList(id).subscribe(data => {
       this.watchlater = data;
       this.getListInfo(this.watchlater);

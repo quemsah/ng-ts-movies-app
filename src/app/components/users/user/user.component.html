@@ -1,7 +1,16 @@
 <div class="container-fluid">
   <section class="mb-4 mt-0 mt-md-4">
-    <div class="row">
-      <h2 class="profile-title col-lg-12 font-weight-bold"><strong>{{userData.displayName}}'s movies
+    <div class="row" *ngIf="authService.userData as user">
+      <!-- <div *ngIf="(user$ | async) as user; else loading">
+        <h1>{{user.firstName}} {{user.lastName}}</h1>
+        <publications [publications]="user.publications"></publications>
+      </div> -->
+      <!-- *ngIf="(friends | json) != '{}'" -->
+      <h2 *ngIf="userData.displayName === user.displayName" class="profile-title col-lg-12 font-weight-bold">
+        <strong>Your movies lists
+        </strong></h2>
+      <h2 *ngIf="userData.displayName !== user.displayName" class="profile-title col-lg-12 font-weight-bold">
+        <strong>{{userData.displayName}}'s movies
         </strong></h2>
     </div>
   </section>
@@ -11,16 +20,16 @@
         <ul class="nav nav-tabs nav-justified md-tabs " [style.background]="themeService.themeGradient | safe: 'style'"
           id="myTabJust" role="tablist">
           <li class="nav-item">
-            <a class="nav-link active" id="home-tab-just" data-toggle="tab" href="#home-just" role="tab"
-              aria-controls="home-just" aria-selected="true">Watch Later</a>
+            <a class="nav-link active" id="wl-tab-just" data-toggle="tab" href="#wl-just" role="tab"
+              aria-controls="wl-just" aria-selected="true">Watch Later</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" id="profile-tab-just" data-toggle="tab" href="#profile-just" role="tab"
-              aria-controls="profile-just" aria-selected="false">Favourites</a>
+            <a class="nav-link" id="fav-tab-just" data-toggle="tab" href="#fav-just" role="tab"
+              aria-controls="fav-just" aria-selected="false">Favourites</a>
           </li>
         </ul>
         <div class="tab-content card pt-5" id="myTabContentJust">
-          <div class="tab-pane fade show active" id="home-just" role="tabpanel" aria-labelledby="home-tab-just">
+          <div class="tab-pane fade show active" id="wl-just" role="tabpanel" aria-labelledby="wl-tab-just">
             <div class="row">
               <div *ngFor="let movie of watchlater" class="movie-item col-lg-3 col-md-4 col-sm-6 mb-4">
                 <div class="card movie-card h-100">
@@ -52,7 +61,7 @@
               </div>
             </div>
           </div>
-          <div class="tab-pane fade" id="profile-just" role="tabpanel" aria-labelledby="profile-tab-just">
+          <div class="tab-pane fade" id="fav-just" role="tabpanel" aria-labelledby="fav-tab-just">
             <div class="row">
               <div *ngFor="let movie of favourites" class="movie-item col-lg-3 col-md-4 col-sm-6 mb-4">
                 <div class="card movie-card h-100">
