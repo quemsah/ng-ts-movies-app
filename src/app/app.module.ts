@@ -44,6 +44,7 @@ import { PaginationComponent } from "./components/movies/pagination/pagination.c
 import { SettingsComponent } from "./components/users/settings/settings.component";
 import { UserComponent } from "./components/users/user/user.component";
 import { StarComponent } from "./components/movies/star/star.component";
+import { RatedComponent } from './components/users/rated/rated.component';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,8 @@ import { StarComponent } from "./components/movies/star/star.component";
     SettingsComponent,
     SafePipe,
     UserComponent,
-    StarComponent
+    StarComponent,
+    RatedComponent
   ],
   imports: [
     HttpClientModule,

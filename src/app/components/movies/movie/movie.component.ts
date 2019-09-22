@@ -27,6 +27,7 @@ export class MovieComponent implements OnInit, AfterViewInit {
   movieCrew: Crew[];
   movieTrailers: Trailer[];
   movieSimilars: SimilarMovie[];
+  currentMovieRating: number;
   currentCommentText: string;
   modalRef: BsModalRef;
 
@@ -60,6 +61,7 @@ export class MovieComponent implements OnInit, AfterViewInit {
       this.movieData = movie;
       this.titleService.setTitle(this.movieData.title);
       const tmdb_id = this.movieData.tmdb_id;
+      this.getRating();
       tmdb_id ? this.getMovieCrew(parseInt(tmdb_id)) : null;
       tmdb_id ? this.getMovieTrailers(parseInt(tmdb_id)) : null;
       tmdb_id ? this.getSimilarMovies(parseInt(tmdb_id)) : null;
@@ -72,6 +74,16 @@ export class MovieComponent implements OnInit, AfterViewInit {
       this.movieComments = data;
       // console.log("Comments");
       // console.log(this.movieComments);
+    });
+  }
+
+  getRating(): void {
+    const mid = this.route.snapshot.paramMap.get("id");
+    const uid = this.authService.userData.uid;
+    this.movieService.fetchRating(uid, mid).subscribe(data => {
+      this.currentMovieRating = data.rated;
+      // console.log("Your rating");
+      // console.log(this.currentMovieRating);
     });
   }
 
@@ -135,6 +147,19 @@ export class MovieComponent implements OnInit, AfterViewInit {
     );
   }
 
+  handleRate($event: {
+    oldValue: number;
+    newValue: number;
+    starRating: StarRatingComponent;
+  }): void {
+    const ratedMovieData: MovieListItem = {
+      mid: this.movieData.mid,
+      date: new Date().toLocaleString(),
+      rated: $event.newValue
+    };
+    this.movieService.toggleMovieToList("rated", ratedMovieData, this.authService.userData.uid);
+  }
+
   handleAddComment(form: NgForm): void {
     const now = new Date().toLocaleString();
     const commentData: Comment = {
@@ -162,12 +187,5 @@ export class MovieComponent implements OnInit, AfterViewInit {
 
   openModal(template: TemplateRef<any>): void {
     this.modalRef = this.modalService.show(template);
-  }
-
-  onRate($event: { oldValue: number; newValue: number; starRating: StarRatingComponent }) {
-    alert(`Old Value:${$event.oldValue}, 
-      New Value: ${$event.newValue}, 
-      Checked Color: ${$event.starRating.checkedcolor}, 
-      Unchecked Color: ${$event.starRating.uncheckedcolor}`);
   }
 }

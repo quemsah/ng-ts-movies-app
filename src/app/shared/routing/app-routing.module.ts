@@ -20,6 +20,7 @@ import { EditMovieComponent } from "../../components/movies/edit-movie/edit-movi
 import { SettingsComponent } from "../../components/users/settings/settings.component";
 import { UserComponent } from "../../components/users/user/user.component";
 import { StarComponent } from "../../components/movies/star/star.component";
+import { RatedComponent } from "../../components/users/rated/rated.component";
 
 const routes: Routes = [
   {
@@ -43,6 +44,12 @@ const routes: Routes = [
   {
     path: "user/:id",
     component: UserComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: "rated",
+    component: RatedComponent,
+    data: { title: "Rated" },
     canActivate: [AuthGuard]
   },
   {

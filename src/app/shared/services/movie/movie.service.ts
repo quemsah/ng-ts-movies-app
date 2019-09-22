@@ -83,6 +83,11 @@ export class MovieService {
       .catch(error => this.alertService.openWarningAlert(error.message, 2));
   }
 
+  // для информации для списков watch later и favourites
+  getMovieInfo(mid: string): Observable<any> {
+    return this.afs.doc(`movies/${mid}/`).valueChanges();
+  }
+
   fetchMovie(id: string): Observable<any> {
     //return this.afs.doc(`movies/${id}`).valueChanges();
     let movie = this.afs.collection("movies").doc(`${id}`);
@@ -140,30 +145,45 @@ export class MovieService {
       .get()
       .toPromise()
       .then(doc => {
-        // метод из Firebase
-        // если такой фильм в есть списке
-        if (doc.exists) {
-          // удаляем
-          movieDoc
-            .delete()
-            .then(smth =>
-              this.alertService.openInfoAlert("Movie successfully deleted from list", 0.5)
-            )
-            .catch(error => this.alertService.openWarningAlert(error.message, 2));
-        } else {
-          // если нету – добавляем в список
-          // console.log("No such movie!");
+        // если это оценка фильма, то мы её записываем в любом случае
+        if (type === "rated") {
           movieDoc
             .set(listMovieData)
             .then(smth =>
               this.alertService.openSuccessAlert("Movie successfully added to list", 0.5)
             )
             .catch(error => this.alertService.openWarningAlert(error.message, 2));
+        } else {
+          // а если это посмотреть позже/любимые, проверяем
+          // есть такой фильм уже есть списке
+          // метод из Firebase
+          if (doc.exists) {
+            // если есть то удаляем
+            movieDoc
+              .delete()
+              .then(smth =>
+                this.alertService.openInfoAlert("Movie successfully deleted from list", 0.5)
+              )
+              .catch(error => this.alertService.openWarningAlert(error.message, 2));
+          } else {
+            // если нету – добавляем в список
+            // console.log("No such movie!");
+            movieDoc
+              .set(listMovieData)
+              .then(smth =>
+                this.alertService.openSuccessAlert("Movie successfully added to list", 0.5)
+              )
+              .catch(error => this.alertService.openWarningAlert(error.message, 2));
+          }
         }
       })
       .catch(error =>
         this.alertService.openWarningAlert("Error getting movie data!: " + error.message, 2)
       );
+  }
+
+  fetchRating(uid: string, mid: string): Observable<any> {
+    return this.afs.doc(`users/${uid}/rated/${mid}/`).valueChanges();
   }
 
   addComment(commentData: Comment, mid: string) {
@@ -186,14 +206,6 @@ export class MovieService {
       .delete()
       .then(smth => this.alertService.openSuccessAlert("Comment successfully deleted", 2))
       .catch(error => this.alertService.openWarningAlert(error.message, 2));
-  }
-  // для списков watch later и favourites
-  getMovieInfo(mid: string): Observable<any> {
-    return this.afs.doc(`movies/${mid}/`).valueChanges();
-  }
-
-  fetchComment(cid: string, mid: string): Observable<any> {
-    return this.afs.collection(`movies/${mid}/comments/${cid}/`).valueChanges();
   }
 
   fetchComments(mid: string): Observable<any> {

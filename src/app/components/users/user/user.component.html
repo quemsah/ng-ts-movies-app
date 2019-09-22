@@ -1,10 +1,6 @@
 <div class="container-fluid">
   <section class="mb-4 mt-0 mt-md-4">
     <div class="row" *ngIf="authService.userData as user">
-      <!-- <div *ngIf="(user$ | async) as user; else loading">
-        <h1>{{user.firstName}} {{user.lastName}}</h1>
-        <publications [publications]="user.publications"></publications>
-      </div> -->
       <!-- *ngIf="(friends | json) != '{}'" -->
       <h2 *ngIf="userData.displayName === user.displayName" class="profile-title col-lg-12 font-weight-bold">
         <strong>Your movies lists
@@ -24,8 +20,8 @@
               aria-controls="wl-just" aria-selected="true">Watch Later</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" id="fav-tab-just" data-toggle="tab" href="#fav-just" role="tab"
-              aria-controls="fav-just" aria-selected="false">Favourites</a>
+            <a class="nav-link" id="fav-tab-just" data-toggle="tab" href="#fav-just" role="tab" aria-controls="fav-just"
+              aria-selected="false">Favourites</a>
           </li>
         </ul>
         <div class="tab-content card pt-5" id="myTabContentJust">
