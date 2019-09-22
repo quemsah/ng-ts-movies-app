@@ -34,4 +34,4 @@ npm install
 npm run start
 ```
 
-Navigate to `http://localhost:4242/`.
+Navigate to `http://localhost:4242/`

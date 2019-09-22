@@ -102,7 +102,7 @@ const routes: Routes = [
   {
     path: "star/:id",
     component: StarComponent,
-    canActivate: [AuthGuard]
+    canActivate: [OuterPagesGuard]
   },
   {
     path: "movies",
