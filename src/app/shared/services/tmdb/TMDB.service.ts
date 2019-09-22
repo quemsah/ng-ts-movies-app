@@ -9,10 +9,11 @@ export class TMDBService {
   private API_KEY = "546bffd504ec7e8b262023ec0ec6f0e3";
   private URL_FIND = "https://api.themoviedb.org/3/find";
   private URL_MOVIE = "https://api.themoviedb.org/3/movie";
+  private URL_STAR = "https://api.themoviedb.org/3/person";
 
   constructor(private http: HttpClient, private alertService: AlertService) {}
 
-  getMovieByIMDBID(ImdbId: string): Observable<any> {
+  fetchMovieByIMDBID(ImdbId: string): Observable<any> {
     return this.http
       .get<any>(
         `${this.URL_FIND}/${ImdbId}?api_key=${this.API_KEY}&language=en-US&external_source=imdb_id`
@@ -28,35 +29,46 @@ export class TMDBService {
         mergeMap(data =>
           data.movie_results.length > 0
             ? forkJoin(
-                this.getMovieDetailsByTMDBID(data.movie_results[0].id),
-                this.getMovieCrewbyTMDBID(data.movie_results[0].id)
+                this.fetchMovieDetailsByTMDBID(data.movie_results[0].id),
+                this.fetchMovieCrewbyTMDBID(data.movie_results[0].id)
               )
             : of(null)
         )
       );
   }
 
-  getMovieDetailsByTMDBID(movieId: number): Observable<any> {
+  fetchMovieDetailsByTMDBID(mid: number): Observable<any> {
     return this.http.get<any>(
-      `${this.URL_MOVIE}/${movieId}?api_key=${this.API_KEY}&language=en-US}`
+      `${this.URL_MOVIE}/${mid}?api_key=${this.API_KEY}&language=en-US}`
     );
   }
 
-  getMovieCrewbyTMDBID(movieId: number): Observable<any> {
+  fetchMovieCrewbyTMDBID(mid: number): Observable<any> {
     return this.http.get<any>(
-      `${this.URL_MOVIE}/${movieId}/credits?api_key=${this.API_KEY}&language=en-US}`
+      `${this.URL_MOVIE}/${mid}/credits?api_key=${this.API_KEY}&language=en-US}`
     );
   }
 
-  getMovieTrailersByTMDBID(movieId: number): Observable<any> {
+  fetchMovieTrailersByTMDBID(mid: number): Observable<any> {
     return this.http.get<any>(
-      `${this.URL_MOVIE}/${movieId}/videos?api_key=${this.API_KEY}&language=en-US}`
+      `${this.URL_MOVIE}/${mid}/videos?api_key=${this.API_KEY}&language=en-US}`
     );
   }
 
-  getSimilarMoviesByTMDBID(movieId: number): Observable<any> {
+  fetchSimilarMoviesByTMDBID(mid: number): Observable<any> {
     return this.http.get<any>(
-      `${this.URL_MOVIE}/${movieId}/similar?api_key=${this.API_KEY}&language=en-US&page=1}`
+      `${this.URL_MOVIE}/${mid}/similar?api_key=${this.API_KEY}&language=en-US&page=1}`
+    );
+  }
+
+  fetchStar(sid: number): Observable<any> {
+    return this.http.get<any>(
+      `${this.URL_STAR}/${sid}?api_key=${this.API_KEY}&language=&language=en-US`
+    );
+  }
+  fetchStarMovies(sid: number): Observable<any> {
+    return this.http.get<any>(
+      `${this.URL_STAR}/${sid}/movie_credits?api_key=${this.API_KEY}&language=en-US&page=1`
     );
   }
 }

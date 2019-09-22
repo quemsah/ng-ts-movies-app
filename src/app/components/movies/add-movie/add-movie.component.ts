@@ -64,18 +64,18 @@ export class AddMovieComponent implements OnInit, AfterViewInit {
     // this.themeService.checkDarkMode();
   }
 
-  // Делается запрос к TMDB методом getMovieByIMDBID, который по индентификатору IMDB(строка) вовзращает
-  // информацию о фильме. Далее запрос getMovieDetailsByTMDBID по только что
+  // Делается запрос к TMDB методом fetchMovieByIMDBID, который по индентификатору IMDB(строка) вовзращает
+  // информацию о фильме. Далее запрос fetchMovieDetailsByTMDBID по только что
   // полученному TMDB идентификатору(число) возвращает полную информацию о фильме
 
   onImdbIDSubmit(form: NgForm): void {
     console.log(form.value);
 
-    // this.tmdbService.getMovieByIMDBID(form.value.ImdbId).subscribe(data => {
+    // this.tmdbService.fetchMovieByIMDBID(form.value.ImdbId).subscribe(data => {
     //   if (data.movie_results.length > 0) {
     //     forkJoin(
-    //       this.tmdbService.getMovieDetailsByTMDBID(data.movie_results[0].id),
-    //       this.tmdbService.getMovieCrewbyTMDBID(data.movie_results[0].id)
+    //       this.tmdbService.fetchMovieDetailsByTMDBID(data.movie_results[0].id),
+    //       this.tmdbService.fetchMovieCrewbyTMDBID(data.movie_results[0].id)
     //     ).subscribe(([detailData, crewData]) => {
     //       this.foundMovieData = detailData;
     //       this.foundPosterPath =
@@ -98,7 +98,7 @@ export class AddMovieComponent implements OnInit, AfterViewInit {
     // администратор может это делать в любом виде
     // (иначе он будет переводить часы в минуты, $ в рубли и т.д.)
 
-    this.tmdbService.getMovieByIMDBID(form.value.ImdbId).subscribe(([detailData, crewData]) => {
+    this.tmdbService.fetchMovieByIMDBID(form.value.ImdbId).subscribe(([detailData, crewData]) => {
       if (detailData) {
         this.foundMovieData = detailData;
         this.foundPosterPath =

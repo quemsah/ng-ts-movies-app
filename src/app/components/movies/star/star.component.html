@@ -1,1 +1,84 @@
-<p>star works!</p>
+<!-- <span>{{starData | json}}</span><span>{{starMovies | json}}</span> -->
+<div class="container-fluid">
+  <section class="mb-4 mt-0 mt-md-4">
+    <div class="row">
+      <div class="col-md-3 mb-md-0 mb-5">
+        <div class="card star-card">
+          <div class="photo z-depth-1-half mb-2">
+            <img src="{{(starData.profile_path) 
+                    ? 'https://image.tmdb.org/t/p/w300_and_h450_bestv2'+starData.profile_path 
+                    : '../../../assets/img/no_actor_img.jpg'}}" class="card-img-top" alt="Actor photo"></div>
+          <div class="card-body pt-0 mt-0">
+            <div class="text-center">
+              <h3 class="my-2 font-weight-bold"><strong>{{starData.name}}</strong></h3>
+              <h6 class="font-weight-bold my-2">{{(starData.gender===2)?'Male':'Female'}}</h6>
+            </div>
+            <ul class="striped list-unstyled">
+              <li><strong>Birthday:</strong> {{starData.birthday | date}}</li>
+              <li *ngIf="starData.deathday"><strong>Day of Death:</strong> {{starData.deathday | date}}</li>
+              <li><strong>Place of Birth:</strong> {{(starData.place_of_birth)}}</li>
+              <li><strong>Known Credits:</strong> {{starMovies.cast.length+starMovies.crew.length}}</li>
+              <li><strong>Also Known As:</strong> {{starData.also_known_as[0]}}</li>
+              <li *ngIf="starData.homepage"><strong>Official Site:</strong> <a href="{{starData.homepage}}">
+                  {{starData.homepage}}</a></li>
+              <li><strong>Popularity index:</strong> {{starData.popularity}}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-9">
+        <div class="row mb-1">
+          <div class="movie-tabs">
+            <ul class="nav nav-tabs nav-justified md-tabs "
+              [style.background]="themeService.themeGradient | safe: 'style'" id="myTabJust" role="tablist">
+              <li class="nav-item">
+                <a class="nav-link active" id="wl-tab-just" data-toggle="tab" href="#wl-just" role="tab"
+                  aria-controls="wl-just" aria-selected="true">Cast</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="fav-tab-just" data-toggle="tab" href="#fav-just" role="tab"
+                  aria-controls="fav-just" aria-selected="false">Trailers</a>
+              </li>
+            </ul>
+            <div class="tab-content card pt-5" id="myTabContentJust">
+              <div class="tab-pane fade show active" id="wl-just" role="tabpanel" aria-labelledby="wl-tab-just">
+                <div class="row">
+                  <div class="col-xl-2 col-lg-3 col-md- col-sm-4 col-6 mb-4"
+                    *ngFor="let actor of movieCrew; let i = index">
+                    <div class="actor-card card align-items-center">
+                      <div class="view overlay">
+                        <img routerLink="/star/{{actor[i].id}}" src="{{(actor[i].profile_path) 
+                                        ? 'https://image.tmdb.org/t/p/w138_and_h175_face'+actor[i].profile_path 
+                                        : '../../../../assets/img/no_actor_img.jpg'}}" class="card-img-top"
+                          alt="Actor Image">
+                      </div>
+                      <div class="card-body text-center">
+                        <a routerLink="/star/{{actor[i].id}}" class="grey-text">
+                          <p class="h6">{{ (actor[i].character) ? actor[i].character : 'No Information' }}</p>
+                        </a>
+                        <p class="h6"><a routerLink="/star/{{actor[i].id}}"
+                            [style.color]="themeService.themeColor | safe: 'style'"><strong>{{ actor[i].name }}</strong></a>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane fade" id="fav-just" role="tabpanel" aria-labelledby="fav-tab-just">
+                <div class="row">
+                  <div class="col-xl-4 col-sm-6 col-xs-12 mb-4" *ngFor="let trailer of movieTrailers; let i = index">
+                    <div class="embed-responsive embed-responsive-16by9">
+                      <!-- <p class="h6"><strong>{{trailer[i].key}}</strong></p> -->
+                      <iframe class="embed-responsive-item"
+                        [src]="sanitizer.bypassSecurityTrustResourceUrl(trailer[i].key)"></iframe>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

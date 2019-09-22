@@ -88,7 +88,7 @@ export class MovieComponent implements OnInit, AfterViewInit {
   }
 
   getMovieCrew(id: number): void {
-    this.tmdbService.getMovieCrewbyTMDBID(id).subscribe(data => {
+    this.tmdbService.fetchMovieCrewbyTMDBID(id).subscribe(data => {
       this.movieCrew = this.movieService.sliceData(data.cast, 12);
       // console.log("Crew");
       // console.log(this.movieCrew);
@@ -96,7 +96,7 @@ export class MovieComponent implements OnInit, AfterViewInit {
   }
 
   getMovieTrailers(id: number): void {
-    this.tmdbService.getMovieTrailersByTMDBID(id).subscribe(data => {
+    this.tmdbService.fetchMovieTrailersByTMDBID(id).subscribe(data => {
       this.movieTrailers = this.movieService.sliceData(data.results, 6);
       this.movieTrailers.forEach(
         (value, i) => (value[i].key = "https://www.youtube.com/embed/" + value[i].key + "?rel=0")
@@ -107,7 +107,7 @@ export class MovieComponent implements OnInit, AfterViewInit {
   }
 
   getSimilarMovies(id: number): void {
-    this.tmdbService.getSimilarMoviesByTMDBID(id).subscribe(data => {
+    this.tmdbService.fetchSimilarMoviesByTMDBID(id).subscribe(data => {
       this.movieSimilars = this.movieService.sliceData(data.results, 8);
       // console.log("Similar movies");
       // console.log(this.movieSimilars);
