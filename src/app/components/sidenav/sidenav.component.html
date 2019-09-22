@@ -1,6 +1,6 @@
 <div role="navigation" id="slide-out" class="side-nav sn-bg-4 fixed">
   <ul class="custom-scrollbar">
-    <li class="logo-sn waves-effect py-3 " [style.background]="themeService.themeGradient | safe: 'style'">
+    <li class="logo-sn waves-effect py-3" [style.background]="themeService.themeGradient | safe: 'style'">
       <div class="text-center">
         <a href="main.html" class="pl-0"><img src="../../../assets/img/logo/logo150.png" alt="Logo"></a>
       </div>
@@ -20,17 +20,18 @@
             <i class="fas fa-film"></i>Explore movies
           </a>
         </li>
-        <li>
-          <a routerLink="/user/{{authService.userData.uid}}" class="collapsible-header waves-effect">
+        <li *ngIf="authService.isLoggedIn">
+          <a routerLink="/user/{{authService.userData.uid}}" (click)="sidenavClose()"
+            class="collapsible-header waves-effect">
             <i class="far fa-heart"></i>My movies
           </a>
         </li>
-        <li>
-          <a routerLink="/rated" class="collapsible-header waves-effect">
+        <li *ngIf="authService.isLoggedIn">
+          <a routerLink="/rated" (click)="sidenavClose()" class="collapsible-header waves-effect">
             <i class="fas fa-star-half-alt"></i>Rated
           </a>
         </li>
-        <li>
+        <li *ngIf="authService.isLoggedIn">
           <a routerLink="/add-movie" (click)="sidenavClose()" class="collapsible-header waves-effect">
             <i class="fas fa-plus"></i>Add movie
           </a>

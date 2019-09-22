@@ -20,7 +20,7 @@ export class UserComponent implements OnInit {
     public themeService: ThemeService,
     private route: ActivatedRoute,
     private userService: UserService,
-    private authService: AuthService,
+    public authService: AuthService,
     private movieService: MovieService
   ) {}
 

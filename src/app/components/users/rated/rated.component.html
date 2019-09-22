@@ -1,1 +1,39 @@
-<p>rated works!</p>
+<div class="container-fluid">
+  <section class="mb-4 mt-0 mt-md-4">
+    <div class="row">
+      <h2 class="profile-title col-lg-12 font-weight-bold">
+        <strong>My ratings
+        </strong></h2>
+      <div *ngFor="let movie of rated" class="movie-item col-lg-3 col-md-4 col-sm-6 mb-4 list-item">
+        <div class="card movie-card h-100">
+          <div class="card-rating" *ngIf="movie.IMDBRating">
+            <a class="">{{movie.IMDBRating}} <i class="far fa-star"> </i></a>
+          </div>
+          <!-- (click)="handleToFavourites($event)" -->
+          <div class="card-favourite">
+            <a class=""><i id="{{movie.mid}}" class="far fa-heart"></i></a>
+          </div>
+          <!-- (click)="handleToWatchLater($event)" -->
+          <div class="card-watch-later">
+            <a class=""><i id="{{movie.mid}}" class="far fa-clock"></i></a>
+          </div>
+          <div class="view overlay">
+            <img src="{{(movie.posterLink) ? movie.posterLink : '../../../assets/img/no_poster_available.jpg'}}"
+              class="card-img-top" alt="Movie Poster">
+            <a routerLink="/movie/{{movie.mid}}">
+              <div class="mask rgba-white-slight"></div>
+            </a>
+          </div>
+          <div class="card-body">
+            <a routerLink="/movie/{{movie.mid}}">
+              <h4 class="card-title">{{movie.title}}</h4>
+            </a>
+            <hr>
+            <p class="card-text mb-0">{{movie.director}}</p>
+            <p class="card-text mb-0">Your rating: {{movie.rated}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

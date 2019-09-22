@@ -39,7 +39,8 @@
           </div>
         </div>
         <div class="card-foter text-right my-2 mr-2">
-          <button routerLink="/user/{{item.value.fid}}" *ngIf="item.value.displayName" class="btn btn-info btn-rounded btn-sm waves-effect waves-light "
+          <button routerLink="/user/{{item.value.fid}}" *ngIf="item.value.displayName"
+            class="btn btn-info btn-rounded btn-sm waves-effect waves-light "
             [style.background]="themeService.themeGradient | safe: 'style'">Movies</button>
           <button id="{{item.value.fid}}" class="btn btn-danger btn-rounded btn-sm waves-effect waves-light"
             (click)="handleRequestDelete($event)">Delete</button>
@@ -47,10 +48,9 @@
       </div>
     </div>
   </div>
-
   <div class="row mt-1">
     <div class="col-md-6 mt-4">
-      <h2 class="profile-title col-lg-12 mt-lg-12 mt-4 font-weight-bold" *ngIf="(inRequests | json) != '{}'">
+      <h2 class="profile-title col-lg-12 mt-lg-12 mt-4 pl-0 font-weight-bold" *ngIf="(inRequests | json) != '{}'">
         <strong>Incoming requests</strong></h2>
       <div class="friend-card card card-cascade cascading-admin-card mt-5" *ngFor="let item of inRequests | keyvalue">
         <div class="admin-up">
@@ -69,7 +69,7 @@
       </div>
     </div>
     <div class="col-md-6 mt-4">
-      <h2 class="profile-title col-lg-12 mt-lg-12 mt-4 font-weight-bold" *ngIf="(outRequests | json) != '{}'">
+      <h2 class="profile-title col-lg-12 mt-lg-12 mt-4 pl-0 font-weight-bold" *ngIf="(outRequests | json) != '{}'">
         <strong>Outcoming requests</strong></h2>
       <div class="friend-card card card-cascade cascading-admin-card mt-5" *ngFor="let item of outRequests | keyvalue">
         <div class="admin-up">

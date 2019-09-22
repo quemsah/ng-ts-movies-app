@@ -149,9 +149,7 @@ export class MovieService {
         if (type === "rated") {
           movieDoc
             .set(listMovieData)
-            .then(smth =>
-              this.alertService.openSuccessAlert("Movie successfully added to list", 0.5)
-            )
+            .then(smth => this.alertService.openSuccessAlert("Rated successfully", 0.5))
             .catch(error => this.alertService.openWarningAlert(error.message, 2));
         } else {
           // а если это посмотреть позже/любимые, проверяем

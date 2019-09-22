@@ -22,7 +22,7 @@ export class UserService {
   constructor(
     private afs: AngularFirestore,
     private alertService: AlertService,
-    private authService: AuthService
+    public authService: AuthService
   ) {}
   // fetchFriends(): Observable<any> {
   //   return this.afs.collection(`users/${this.uid}/friends`).valueChanges();
@@ -41,6 +41,10 @@ export class UserService {
 
   fetchFavouritesList(uid: string): Observable<any> {
     return this.afs.collection(`users/${uid}/favourites`).valueChanges();
+  }
+
+  fetchRatedList(): Observable<any> {
+    return this.afs.collection(`users/${this.authService.userData.uid}/rated`).valueChanges();
   }
 
   // создание исходящего запроса у одного

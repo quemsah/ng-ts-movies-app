@@ -1,17 +1,12 @@
 <div class="container-fluid">
-  <section class="mb-4 mt-0 mt-md-4">
+  <section class="mb-4 mt-0">
     <div class="row" *ngIf="authService.userData as user">
-      <!-- *ngIf="(friends | json) != '{}'" -->
       <h2 *ngIf="userData.displayName === user.displayName" class="profile-title col-lg-12 font-weight-bold">
-        <strong>Your movies lists
+        <strong>My movies lists
         </strong></h2>
       <h2 *ngIf="userData.displayName !== user.displayName" class="profile-title col-lg-12 font-weight-bold">
         <strong>{{userData.displayName}}'s movies
         </strong></h2>
-    </div>
-  </section>
-  <section class="mb-4 mt-4">
-    <div class="row">
       <div class="movie-tabs">
         <ul class="nav nav-tabs nav-justified md-tabs " [style.background]="themeService.themeGradient | safe: 'style'"
           id="myTabJust" role="tablist">

@@ -1,0 +1,39 @@
+.movie-card .card-body {
+  background: linear-gradient(to bottom, rgba(33, 37, 41, 0.2) 53%, #eeeeee);
+}
+
+.movie-card .card-body hr {
+  background-color: #424242;
+}
+
+.movie-card .card-body .card-title {
+  color: #424242;
+}
+
+.movie-card .card-body .card-text {
+  color: #424242;
+}
+
+@media (max-width: 540px) {
+  .card-rating {
+    display: none;
+  }
+
+  .card-favourite {
+    display: none;
+  }
+
+  .card-watch-later {
+    display: none;
+  }
+}
+
+/* <div class="card-rating" *ngIf="movie.IMDBRating">
+<a class="">{{movie.IMDBRating}} <i class="far fa-star"> </i></a>
+</div>
+<div class="card-favourite" (click)="handleToFavourites($event)">
+<a class=""><i id="{{movie.mid}}" class="far fa-heart"></i></a>
+</div>
+<div class="card-watch-later" (click)="handleToWatchLater($event)">
+<a class=""><i id="{{movie.mid}}" class="far fa-clock"></i></a>
+</div> */
