@@ -6,7 +6,7 @@ import { AlertService } from "../alert/alert.service";
 import { Observable } from "rxjs";
 import { OrderByDirection } from "../../order-by-direction";
 import { Router } from "@angular/router";
-import { MovieListItem } from "../../models/movie-list-comment";
+import { MovieListItem } from "../../models/movie-list-item";
 
 @Injectable({
   providedIn: "root"

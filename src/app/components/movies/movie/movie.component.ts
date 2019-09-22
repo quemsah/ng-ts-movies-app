@@ -14,7 +14,7 @@ import { Crew } from "./../../../shared/models/crew";
 import { Comment } from "./../../../shared/models/comment";
 import { Movie } from "../../../shared/models/movie";
 import { Trailer } from "../../../shared/models/trailer";
-import { MovieListItem } from "../../../shared/models/movie-list-comment";
+import { MovieListItem } from "../../../shared/models/movie-list-item";
 
 @Component({
   selector: "app-movie",

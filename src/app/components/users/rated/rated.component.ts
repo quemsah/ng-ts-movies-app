@@ -4,6 +4,8 @@ import { ActivatedRoute } from "@angular/router";
 import { UserService } from "../../../shared/services/user/user.service";
 import { AuthService } from "../../../shared/services/auth/auth.service";
 import { MovieService } from "../../../shared/services/movie/movie.service";
+import { MovieListItem } from "../../../shared/models/movie-list-item";
+import { StarRatingComponent } from "ng-starrating";
 
 @Component({
   selector: "app-rated",
@@ -11,7 +13,7 @@ import { MovieService } from "../../../shared/services/movie/movie.service";
   styleUrls: ["./rated.component.css"]
 })
 export class RatedComponent implements OnInit {
-  rated: any;
+  rated: MovieListItem;
   constructor(
     public themeService: ThemeService,
     private route: ActivatedRoute,
@@ -24,7 +26,7 @@ export class RatedComponent implements OnInit {
     this.getRatedList();
   }
   // добавляем к айдишкникам информацию о фильмах
-  getRatedListInfo(listData: any): void {
+  getRatedListInfo(listData: MovieListItem): void {
     Object.keys(listData).filter(key => {
       this.movieService.getMovieInfo(listData[key].mid).subscribe(data => {
         // берем только нужные поля
@@ -41,7 +43,48 @@ export class RatedComponent implements OnInit {
     this.userService.fetchRatedList().subscribe(data => {
       this.rated = data;
       this.getRatedListInfo(this.rated);
-      console.log(data);
+      // console.log(data);
     });
+  }
+
+  handleToWatchLater(event): void {
+    const watchLaterMovieData: MovieListItem = {
+      mid: this.movieService.getElementId(event),
+      date: new Date().toLocaleString()
+    };
+    this.movieService.toggleMovieToList(
+      "watchlater",
+      watchLaterMovieData,
+      this.authService.userData.uid
+    );
+  }
+
+  handleToFavourites(event): void {
+    const favouriteMovieData: MovieListItem = {
+      mid: this.movieService.getElementId(event),
+      date: new Date().toLocaleString()
+    };
+    this.movieService.toggleMovieToList(
+      "favourites",
+      favouriteMovieData,
+      this.authService.userData.uid
+    );
+  }
+
+  handleRate($event: {
+    oldValue: number;
+    newValue: number;
+    starRating: StarRatingComponent;
+  }): void {
+    // получаем id фильма (родительский элемент star-rating)
+    // без any будет ругаться на ошибку типов но все равно работать
+    const el = event.currentTarget as HTMLInputElement;
+    const attr: any = el.parentElement.parentElement.attributes;
+    const ratedMovieData: MovieListItem = {
+      mid: attr.id.nodeValue,
+      date: new Date().toLocaleString(),
+      rated: $event.newValue
+    };
+    this.movieService.toggleMovieToList("rated", ratedMovieData, this.authService.userData.uid);
   }
 }

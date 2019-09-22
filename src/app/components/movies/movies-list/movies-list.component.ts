@@ -3,7 +3,7 @@ import { Component, OnInit, AfterViewInit } from "@angular/core";
 import { ThemeService } from "../../../shared/services/theme/theme.service";
 import { MovieService } from "../../../shared/services/movie/movie.service";
 import { AuthService } from "../../../shared/services/auth/auth.service";
-import { MovieListItem } from "../../../shared/models/movie-list-comment";
+import { MovieListItem } from "../../../shared/models/movie-list-item";
 
 @Component({
   selector: "app-movies-list",

@@ -42,9 +42,12 @@ export class UserService {
   fetchFavouritesList(uid: string): Observable<any> {
     return this.afs.collection(`users/${uid}/favourites`).valueChanges();
   }
-
   fetchRatedList(): Observable<any> {
     return this.afs.collection(`users/${this.authService.userData.uid}/rated`).valueChanges();
+    // сортировка по дате добавления
+    // return this.afs
+    //   .collection(`users/${this.authService.userData.uid}/rated`, ref => ref.orderBy("date", "desc"))
+    //   .valueChanges();
   }
 
   // создание исходящего запроса у одного

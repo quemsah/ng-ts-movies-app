@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
-import { MovieListItem } from "../../../shared/models/movie-list-comment";
+import { User } from "../../../shared/models/user";
+import { MovieListItem } from "../../../shared/models/movie-list-item";
 import { UserService } from "../../../shared/services/user/user.service";
 import { AuthService } from "../../../shared/services/auth/auth.service";
 import { MovieService } from "../../../shared/services/movie/movie.service";
@@ -12,9 +13,9 @@ import { ThemeService } from "../../../shared/services/theme/theme.service";
   styleUrls: ["./user.component.css"]
 })
 export class UserComponent implements OnInit {
-  userData: any;
-  watchlater: any;
-  favourites: any;
+  userData: User;
+  watchlater: MovieListItem;
+  favourites: MovieListItem;
 
   constructor(
     public themeService: ThemeService,
@@ -37,7 +38,7 @@ export class UserComponent implements OnInit {
     });
   }
   // добавляем к айдишниками фильмов информацию о них
-  getListInfo(listData: any): void {
+  getListInfo(listData: MovieListItem): void {
     Object.keys(listData).filter(key => {
       this.movieService.getMovieInfo(listData[key].mid).subscribe(data => {
         // берем только нужные поля
