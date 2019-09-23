@@ -111,7 +111,7 @@ src="{{(user.photoURL) ? user.photoURL : '/src/assets/img/avatars/user.png'}}" a
               <div class="col-md-12">
                 <div class="md-form mb-0">
                   <input class="form-control" type="text" ngModel [ngModel]="user.displayName" name="userName" required
-                    minlength="5" #userNameInput="ngModel">
+                    minlength="4" #userNameInput="ngModel">
                   <span class="valid-error" *ngIf="userNameInput.hasError('required')">Field must not be empty</span>
                   <span class="valid-error" *ngIf="userNameInput.hasError('minlength')">The name must be of minimum
                     length 4 characters</span>

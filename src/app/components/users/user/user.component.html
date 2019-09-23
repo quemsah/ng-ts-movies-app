@@ -1,6 +1,7 @@
 <div class="container-fluid">
   <section class="mb-4 mt-0">
-    <div class="row" *ngIf="authService.userData as user">
+    <!-- *ngIf="expression && prototype?.valueType === 'Integer' && 'String'" -->
+    <div class="row" *ngIf="(watchlater.length !== 0 || favourites.length !== 0) && authService.userData as user">
       <h2 *ngIf="userData.displayName === user.displayName" class="profile-title col-lg-12 font-weight-bold">
         <strong>My movies lists
         </strong></h2>
@@ -85,6 +86,14 @@
             </div>
           </div>
         </div>
+      </div>
+    </div>
+    <div *ngIf="watchlater.length === 0 && favourites.length === 0" class="row d-flex justify-content-start p-2">
+      <div class="col-12 mt-4">
+        <h2 class="h2-responsive profile-title font-weight-bold mb-2">You don't have any movie lists yet</h2>
+        <h5 class="">
+          <a routerLink="/movies" [style.color]="themeService.themeColor | safe: 'style'">Go to the movies page!</a>
+        </h5>
       </div>
     </div>
   </section>

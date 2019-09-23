@@ -35,11 +35,13 @@
           <img src="{{(item.value.photoURL) ? item.value.photoURL : '../../../assets/img/avatars/user.png'}}"
             alt="User Photo" class="z-depth-1 mb-0 mx-auto">
           <div class="data p-0">
-            <h5 class="font-weight-bold">{{(item.value.displayName) ? item.value.displayName : 'User Deleted'}}</h5>
+            <h5 class="font-weight-bold">
+              {{(item.value.email) ? ((item.value.displayName) ? item.value.displayName : item.value.email) : 'User Deleted'}}
+            </h5>
           </div>
         </div>
         <div class="card-foter text-right my-2 mr-2">
-          <button routerLink="/user/{{item.value.fid}}" *ngIf="item.value.displayName"
+          <button routerLink="/user/{{item.value.fid}}" *ngIf="item.value.email"
             class="btn btn-info btn-rounded btn-sm waves-effect waves-light "
             [style.background]="themeService.themeGradient | safe: 'style'">Movies</button>
           <button id="{{item.value.fid}}" class="btn btn-danger btn-rounded btn-sm waves-effect waves-light"
@@ -57,7 +59,9 @@
           <img src="{{(item.value.photoURL) ? item.value.photoURL : '../../../assets/img/avatars/user.png'}}"
             alt="User Photo" class="z-depth-1 mb-0 mx-auto">
           <div class="data p-0">
-            <h5 class="font-weight-bold">{{(item.value.displayName) ? item.value.displayName : 'User Deleted'}}</h5>
+            <h5 class="font-weight-bold">
+              {{(item.value.email) ? ((item.value.displayName) ? item.value.displayName : item.value.email) : 'User Deleted'}}
+            </h5>
           </div>
         </div>
         <div class="card-foter text-right my-2 mr-2">
@@ -76,7 +80,9 @@
           <img src="{{(item.value.photoURL) ? item.value.photoURL : '../../../assets/img/avatars/user.png'}}"
             alt="User Photo" class="z-depth-1 mb-0 mx-auto">
           <div class="data p-0">
-            <h5 class="font-weight-bold">{{(item.value.displayName) ? item.value.displayName : 'User Deleted'}}</h5>
+            <h5 class="font-weight-bold">
+              {{(item.value.email) ? ((item.value.displayName) ? item.value.displayName : item.value.email) : 'User Deleted'}}
+            </h5>
           </div>
         </div>
         <div class="card-foter text-right my-2 mr-2">

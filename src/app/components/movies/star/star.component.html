@@ -21,8 +21,8 @@
               <li><strong>Known Credits:</strong> {{starMovies.cast.length+starMovies.crew.length}}</li>
               <li><strong>Also Known As:</strong>
                 {{((starData.also_known_as[0]) ? starData.also_known_as[0] : '')+
-                ', '+((starData.also_known_as[1]) ? starData.also_known_as[1] : '')+
-                ', '+((starData.also_known_as[2]) ? starData.also_known_as[2] : '')}}
+                ((starData.also_known_as[1]) ? ', ' + starData.also_known_as[1] : '')+
+                ((starData.also_known_as[2]) ? ', ' + starData.also_known_as[2] : '')}}
               </li>
               <li *ngIf="starData.homepage"><strong>Official Site:</strong> <a href="{{starData.homepage}}">
                   {{starData.homepage}}</a></li>
@@ -74,7 +74,7 @@
               <div class="tab-pane fade" id="bio-just" role="tabpanel" aria-labelledby="bio-tab-just">
                 <div class="row">
                   <div class="col-12 mb-4">
-                    <p>{{starData.biography}}</p>
+                    <p>{{starData.biography ? starData.biography : 'No information' }}</p>
                   </div>
                 </div>
               </div>

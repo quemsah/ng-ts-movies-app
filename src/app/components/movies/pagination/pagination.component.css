@@ -1,0 +1,19 @@
+@media (max-width: 640px) {
+  /* .first-item {
+    display: none;
+  } */
+
+  .number-item {
+    display: none;
+  }
+
+  .last-item {
+    display: none;
+  }
+}
+
+@media (max-width: 440px) {
+  .first-item {
+    display: none;
+  }
+}

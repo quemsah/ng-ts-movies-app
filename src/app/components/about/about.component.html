@@ -2,7 +2,9 @@
   <section class="mb-4 mt-0 mt-md-4">
     <div class="row">
       <div class="col-md-6 col-sm-12 mb-4">
-        <blockquote class="blockquote bq-primary my-4">
+        <!-- border-left: 3px solid #color  -->
+        <blockquote class="blockquote bq-primary my-4"
+          [style]="('border-left: 3px solid '+themeService.themeColor + ' !important') | safe: 'style'">
           <h3 class="" [style.color]="themeService.themeColor | safe: 'style'"><strong>About</strong></h3>
           <p>A movie app made for T-Systems FrontEnd School</p>
           <h4 class="mb-4 font-weight-bold"><strong>

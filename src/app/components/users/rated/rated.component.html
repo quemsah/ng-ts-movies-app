@@ -1,8 +1,8 @@
 <div class="container-fluid">
   <section class="mb-4 mt-0 mt-md-4">
-    <div class="row">
+    <div *ngIf="rated.length > 0" class="row">
       <h2 class="profile-title col-lg-12 font-weight-bold">
-        <strong>My ratings </strong>
+        <strong>My ratings</strong>
       </h2>
       <div *ngFor="let movie of rated" class="movie-item col-lg-3 col-md-4 col-sm-6 mb-4 list-item">
         <div class="card movie-card h-100">
@@ -32,6 +32,14 @@
               size="18px" readonly="false" (rate)="handleRate($event)"></star-rating>
           </div>
         </div>
+      </div>
+    </div>
+    <div *ngIf="rated.length === 0" class="row d-flex justify-content-start p-2">
+      <div class="col-12 mt-4">
+        <h2 class="h2-responsive profile-title font-weight-bold mb-2">You don't have any rated movies yet</h2>
+        <h5 class="">
+          <a routerLink="/movies" [style.color]="themeService.themeColor | safe: 'style'">Go to the movies page!</a>
+        </h5>
       </div>
     </div>
   </section>
