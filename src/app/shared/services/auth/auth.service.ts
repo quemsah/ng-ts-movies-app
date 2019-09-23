@@ -1,7 +1,7 @@
 import { Injectable, NgZone } from "@angular/core";
 import { User } from "../../models/user";
 import { auth } from "firebase/app";
-import * as firebase from "firebase";
+//import * as firebase from "firebase";
 import { AngularFireAuth } from "@angular/fire/auth";
 import { AngularFirestore, AngularFirestoreDocument } from "@angular/fire/firestore";
 import { AngularFireStorage } from "@angular/fire/storage";
@@ -59,7 +59,7 @@ export class AuthService {
   }
 
   friendsRef() {
-    console.log(this.userData.uid);
+    // console.log(this.userData.uid);
     return this.afs.collection(`users/${this.userData.uid}/friends`);
     //return this.afs.collection(`users/${uid}/friends`);
   }
@@ -79,7 +79,7 @@ export class AuthService {
         this.ngZone.run(() => {
           this.router.navigate(["movies"]);
         });
-        console.log(result.user);
+        // console.log(result.user);
         this.SetUserData(result.user);
       })
       .catch(this.errCatching);
@@ -97,7 +97,7 @@ export class AuthService {
 
   UpdateUserPassword(password, oldPassword) {
     // старые данные юзера
-    const credentials = firebase.auth.EmailAuthProvider.credential(
+    const credentials = auth.EmailAuthProvider.credential(
       this.currentUser.email,
       oldPassword
     );

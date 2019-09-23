@@ -49,7 +49,7 @@ export class FriendsComponent implements OnInit, AfterViewInit {
 
   // добавляем к сухим айдишниками информацию о друзьях/запросах
   getFriendsInfo(friendsData: Friends): void {
-    console.log(friendsData);
+    // console.log(friendsData);
     Object.keys(friendsData).filter(key => {
       this.userService.getUserInfo(friendsData[key].fid).subscribe(data => {
         friendsData[key].displayName = data.displayName;
