@@ -1,5 +1,6 @@
 import { Movie } from "../../../shared/models/movie";
 import { Component, OnInit, AfterViewInit } from "@angular/core";
+import { NgxSpinnerService } from "ngx-spinner";
 import { ThemeService } from "../../../shared/services/theme/theme.service";
 import { MovieService } from "../../../shared/services/movie/movie.service";
 import { AuthService } from "../../../shared/services/auth/auth.service";
@@ -29,11 +30,13 @@ export class MoviesListComponent implements OnInit, AfterViewInit {
   ];
   constructor(
     public authService: AuthService,
+    public themeService: ThemeService,
     private movieService: MovieService,
-    public themeService: ThemeService
-  ) {}
+    private spinner: NgxSpinnerService
+  ) { }
 
   ngOnInit() {
+    this.spinner.show();
     this.getMovies();
   }
 
@@ -77,6 +80,7 @@ export class MoviesListComponent implements OnInit, AfterViewInit {
   getMovies(): void {
     this.movieService.fetchMovies(this.sortingValue, this.sortingType).subscribe(movies => {
       this.movies = this.filterByAll(movies, this.searchValue.trim().toLowerCase());
+      this.spinner.hide();
     });
   }
 

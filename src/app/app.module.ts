@@ -3,6 +3,7 @@ import { NgModule } from "@angular/core";
 import { HttpClientModule } from "@angular/common/http";
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { ModalModule } from "ngx-bootstrap/modal";
+import { NgxSpinnerModule } from "ngx-spinner";
 import { RatingModule } from "ng-starrating";
 // MatSnackBar (замена window.alert)
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
@@ -84,9 +85,10 @@ import { RatedComponent } from './components/users/rated/rated.component';
     ReactiveFormsModule,
     MatSnackBarModule,
     RatingModule,
+    NgxSpinnerModule,
     ModalModule.forRoot()
   ],
   providers: [AuthService, AngularFireStorage, TMDBService, Title, ThemeService],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }
