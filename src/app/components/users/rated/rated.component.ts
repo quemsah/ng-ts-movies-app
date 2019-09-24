@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { ThemeService } from "../../../shared/services/theme/theme.service";
+import { NgxSpinnerService } from "ngx-spinner";
 import { ActivatedRoute } from "@angular/router";
 import { UserService } from "../../../shared/services/user/user.service";
 import { AuthService } from "../../../shared/services/auth/auth.service";
@@ -16,13 +17,15 @@ export class RatedComponent implements OnInit {
   rated: MovieListItem;
   constructor(
     public themeService: ThemeService,
+    public authService: AuthService,
     private route: ActivatedRoute,
     private userService: UserService,
-    public authService: AuthService,
-    private movieService: MovieService
+    private movieService: MovieService,
+    private spinner: NgxSpinnerService
   ) {}
 
   ngOnInit() {
+    this.spinner.show();
     this.getRatedList();
   }
   // добавляем к айдишкникам информацию о фильмах
@@ -35,6 +38,7 @@ export class RatedComponent implements OnInit {
         listData[key].IMDBRating = data.IMDBRating;
         listData[key].posterLink = data.posterLink;
         listData[key].director = data.director;
+        this.spinner.hide();
       });
     });
   }

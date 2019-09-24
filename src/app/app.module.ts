@@ -45,7 +45,8 @@ import { PaginationComponent } from "./components/movies/pagination/pagination.c
 import { SettingsComponent } from "./components/users/settings/settings.component";
 import { UserComponent } from "./components/users/user/user.component";
 import { StarComponent } from "./components/movies/star/star.component";
-import { RatedComponent } from './components/users/rated/rated.component';
+import { RatedComponent } from "./components/users/rated/rated.component";
+import { LoaderComponent } from "./components/loader/loader.component";
 
 @NgModule({
   declarations: [
@@ -71,7 +72,8 @@ import { RatedComponent } from './components/users/rated/rated.component';
     SafePipe,
     UserComponent,
     StarComponent,
-    RatedComponent
+    RatedComponent,
+    LoaderComponent
   ],
   imports: [
     HttpClientModule,
@@ -91,4 +93,4 @@ import { RatedComponent } from './components/users/rated/rated.component';
   providers: [AuthService, AngularFireStorage, TMDBService, Title, ThemeService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

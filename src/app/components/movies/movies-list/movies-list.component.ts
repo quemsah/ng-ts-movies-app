@@ -33,7 +33,7 @@ export class MoviesListComponent implements OnInit, AfterViewInit {
     public themeService: ThemeService,
     private movieService: MovieService,
     private spinner: NgxSpinnerService
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.spinner.show();
@@ -80,7 +80,7 @@ export class MoviesListComponent implements OnInit, AfterViewInit {
   getMovies(): void {
     this.movieService.fetchMovies(this.sortingValue, this.sortingType).subscribe(movies => {
       this.movies = this.filterByAll(movies, this.searchValue.trim().toLowerCase());
-      this.spinner.hide();
+      //this.spinner.hide();
     });
   }
 
