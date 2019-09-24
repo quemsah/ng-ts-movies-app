@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { User } from "../../../shared/models/user";
+import { NgxSpinnerService } from "ngx-spinner";
 import { MovieListItem } from "../../../shared/models/movie-list-item";
 import { UserService } from "../../../shared/services/user/user.service";
 import { AuthService } from "../../../shared/services/auth/auth.service";
@@ -18,14 +19,16 @@ export class UserComponent implements OnInit {
   favourites: MovieListItem;
 
   constructor(
+    public authService: AuthService,
     public themeService: ThemeService,
     private route: ActivatedRoute,
     private userService: UserService,
-    public authService: AuthService,
-    private movieService: MovieService
+    private movieService: MovieService,
+    private spinner: NgxSpinnerService
   ) {}
 
   ngOnInit() {
+    this.spinner.show();
     this.getUser();
     this.getMovieLists();
   }
@@ -49,6 +52,7 @@ export class UserComponent implements OnInit {
         listData[key].releaseDate = data.releaseDate;
         listData[key].director = data.director;
         listData[key].country = data.country;
+        this.spinner.hide();
       });
     });
   }

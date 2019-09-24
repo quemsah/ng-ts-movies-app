@@ -5,6 +5,7 @@ import { UserService } from "../../../shared/services/user/user.service";
 import { Friends } from "../../../shared/models/friends";
 import { ThemeService } from "../../../shared/services/theme/theme.service";
 import { MovieService } from "../../../shared/services/movie/movie.service";
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: "app-friends",
@@ -19,16 +20,20 @@ export class FriendsComponent implements OnInit, AfterViewInit {
   inRequests: Friends;
   constructor(
     public authService: AuthService,
+    public themeService: ThemeService,
     private userService: UserService,
     private movieService: MovieService,
-    public themeService: ThemeService
+    private spinner: NgxSpinnerService
   ) {}
 
   ngOnInit() {
-    // разобраться, почему все работает только когда
-    // getFriends вызываю два раза
+    this.spinner.show();
+    // todo: разобраться, почему не работает страничка
+    // когда её насильно перезагружаешь
     // мб https://javebratt.com/firebase-user-undefined/
-    this.getFriends();
+    // В некоторых случаях, если getFriends вызывается два раза
+    // все работает хорошо даже после перезагрузки
+    // this.getFriends();
   }
 
   ngAfterViewInit() {
@@ -55,6 +60,7 @@ export class FriendsComponent implements OnInit, AfterViewInit {
         friendsData[key].displayName = data.displayName;
         friendsData[key].email = data.email;
         friendsData[key].photoURL = data.photoURL;
+        this.spinner.hide();
       });
     });
   }

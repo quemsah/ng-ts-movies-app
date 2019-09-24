@@ -1,9 +1,9 @@
 import { Component, OnInit, AfterViewInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
-import { MovieService } from "../../../shared/services/movie/movie.service";
-import { Movie } from "../../../shared/models/movie";
 import { NgForm } from "@angular/forms";
+import { MovieService } from "../../../shared/services/movie/movie.service";
 import { ThemeService } from "../../../shared/services/theme/theme.service";
+import { Movie } from "../../../shared/models/movie";
 
 @Component({
   selector: "app-edit-movie",
@@ -16,9 +16,9 @@ export class EditMovieComponent implements OnInit, AfterViewInit {
   releaseDate: string;
   // {make: null};
   constructor(
+    public themeService: ThemeService,
     private route: ActivatedRoute,
-    private movieService: MovieService,
-    public themeService: ThemeService
+    private movieService: MovieService
   ) {}
 
   ngOnInit() {

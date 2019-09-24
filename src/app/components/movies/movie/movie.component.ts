@@ -1,13 +1,14 @@
 import { Component, OnInit, AfterViewInit, TemplateRef } from "@angular/core";
-import { ThemeService } from "../../../shared/services/theme/theme.service";
-import { ActivatedRoute } from "@angular/router";
-import { MovieService } from "../../../shared/services/movie/movie.service";
 import { Title, DomSanitizer } from "@angular/platform-browser";
-import { TMDBService } from "../../../shared/services/tmdb/TMDB.service";
+import { ActivatedRoute } from "@angular/router";
 import { NgForm } from "@angular/forms";
-import { AuthService } from "../../../shared/services/auth/auth.service";
 import { BsModalService, BsModalRef } from "ngx-bootstrap/modal";
 import { StarRatingComponent } from "ng-starrating";
+import { NgxSpinnerService } from "ngx-spinner";
+import { MovieService } from "../../../shared/services/movie/movie.service";
+import { ThemeService } from "../../../shared/services/theme/theme.service";
+import { TMDBService } from "../../../shared/services/tmdb/TMDB.service";
+import { AuthService } from "../../../shared/services/auth/auth.service";
 // Интерфейсы
 import { SimilarMovie } from "../../../shared/models/similar-movie";
 import { Crew } from "./../../../shared/models/crew";
@@ -34,15 +35,17 @@ export class MovieComponent implements OnInit, AfterViewInit {
   constructor(
     public authService: AuthService,
     public sanitizer: DomSanitizer,
+    public themeService: ThemeService,
     private route: ActivatedRoute,
     private movieService: MovieService,
     private tmdbService: TMDBService,
     private titleService: Title,
-    public themeService: ThemeService,
-    private modalService: BsModalService
+    private modalService: BsModalService,
+    private spinner: NgxSpinnerService
   ) {}
 
   ngOnInit() {
+    this.spinner.show();
     this.getMovie();
     this.getComments();
   }
@@ -72,6 +75,7 @@ export class MovieComponent implements OnInit, AfterViewInit {
     const id = this.route.snapshot.paramMap.get("id");
     this.movieService.fetchComments(id).subscribe(data => {
       this.movieComments = data;
+      this.spinner.hide();
       // console.log("Comments");
       // console.log(this.movieComments);
     });
@@ -90,6 +94,9 @@ export class MovieComponent implements OnInit, AfterViewInit {
   getMovieCrew(id: number): void {
     this.tmdbService.fetchMovieCrewbyTMDBID(id).subscribe(data => {
       this.movieCrew = this.movieService.sliceData(data.cast, 12);
+      // спиннер убираем тут, так как на данном этапе информация о фильме загружена
+      // и ниже находятся актеры, а трейлеры – в другой вкладке, комментарии еще ниже
+      this.spinner.hide();
       // console.log("Crew");
       // console.log(this.movieCrew);
     });

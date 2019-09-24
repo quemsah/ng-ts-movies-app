@@ -1,10 +1,10 @@
-import { Movie } from "./../../../shared/models/movie";
 import { Component, OnInit, AfterViewInit } from "@angular/core";
 import { NgForm } from "@angular/forms";
 import { TMDBService } from "../../../shared/services/tmdb/TMDB.service";
 import { AlertService } from "../../../shared/services/alert/alert.service";
 import { MovieService } from "../../../shared/services/movie/movie.service";
 import { ThemeService } from "../../../shared/services/theme/theme.service";
+import { Movie } from "./../../../shared/models/movie";
 
 @Component({
   selector: "app-add-movie",
@@ -52,10 +52,10 @@ export class AddMovieComponent implements OnInit, AfterViewInit {
   ];
 
   constructor(
+    public themeService: ThemeService,
     private tmdbService: TMDBService,
     private alertService: AlertService,
-    private movieService: MovieService,
-    public themeService: ThemeService
+    private movieService: MovieService
   ) {}
 
   ngOnInit() {}

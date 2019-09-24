@@ -1,7 +1,7 @@
 import { Component, OnInit, AfterViewInit } from "@angular/core";
+import { NgForm } from "@angular/forms";
 import { ThemeService } from "../../../shared/services/theme/theme.service";
 import { AuthService } from "../../../shared/services/auth/auth.service";
-import { NgForm } from "@angular/forms";
 
 @Component({
   selector: "app-profile",

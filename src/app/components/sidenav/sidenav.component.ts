@@ -10,7 +10,7 @@ declare var $: any;
   styleUrls: ["./sidenav.component.css"]
 })
 export class SidenavComponent implements OnInit {
-  constructor(public themeService: ThemeService, public authService: AuthService) {}
+  constructor(public authService: AuthService, public themeService: ThemeService) {}
 
   ngOnInit() {}
   // https://github.com/Dogfalo/materialize/issues/1676
