@@ -49,7 +49,7 @@ const routes: Routes = [
   {
     path: "rated",
     component: RatedComponent,
-    data: { title: "Rated" },
+    data: { title: "My Ratings" },
     canActivate: [AuthGuard]
   },
   {

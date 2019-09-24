@@ -1,8 +1,8 @@
 <!-- чтобы спиннер не был бесконечным в случае, если у пользователя нет оцененных фильмов -->
-<app-loader *ngIf="rated.length > 0"></app-loader>
+<app-loader *ngIf="(rated | json) != '[]'"></app-loader>
 <div class="container-fluid">
   <section class="mb-4 mt-0 mt-md-4">
-    <div *ngIf="rated.length > 0" class="row">
+    <div *ngIf="(rated | json) != '[]'" class="row">
       <h2 class="profile-title col-lg-12 font-weight-bold">
         <strong>My ratings</strong>
       </h2>
@@ -36,7 +36,7 @@
         </div>
       </div>
     </div>
-    <div *ngIf="rated.length === 0" class="row d-flex justify-content-start p-2">
+    <div *ngIf="(rated | json) == '[]'" class="row d-flex justify-content-start p-2">
       <div class="col-12">
         <h2 class="h2-responsive profile-title font-weight-bold mb-2">You don't have any rated movies yet</h2>
         <h5 class="">

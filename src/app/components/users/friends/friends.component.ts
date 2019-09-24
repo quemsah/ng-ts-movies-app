@@ -13,8 +13,6 @@ import { NgxSpinnerService } from "ngx-spinner";
   styleUrls: ["./friends.component.css"]
 })
 export class FriendsComponent implements OnInit, AfterViewInit {
-  userId1: string;
-  userId2: string;
   friends: Friends;
   outRequests: Friends;
   inRequests: Friends;

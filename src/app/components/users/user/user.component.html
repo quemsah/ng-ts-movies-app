@@ -1,8 +1,8 @@
 <!-- чтобы спиннер не был бесконечным в случае, если у пользователя нет списков фильмов -->
-<app-loader *ngIf="(watchlater.length !== 0 || favourites.length !== 0)"></app-loader>
+<app-loader *ngIf="(watchlater | json) != '[]' || (favourites | json) != '[]'"></app-loader>
 <div class="container-fluid">
-  <section class="mb-4 mt-0">
-    <div class="row" *ngIf="(watchlater.length !== 0 || favourites.length !== 0) && authService.userData as user">
+  <section class="mb-4 mt-0" *ngIf="authService.userData as user">
+    <div class="row" *ngIf="((watchlater | json) != '[]' || (favourites | json) != '[]')">
       <h2 *ngIf="userData.displayName === user.displayName" class="profile-title col-lg-12 font-weight-bold">
         <strong>My movies lists
         </strong></h2>
@@ -89,7 +89,8 @@
         </div>
       </div>
     </div>
-    <div *ngIf="watchlater.length === 0 && favourites.length === 0" class="row d-flex justify-content-start p-2">
+    <div *ngIf="((watchlater | json) === '[]' && (favourites | json) === '[]')"
+      class="row d-flex justify-content-start p-2">
       <div class="col-12 mt-4">
         <h2 class="h2-responsive profile-title font-weight-bold mb-2">You don't have any movie lists yet</h2>
         <h5 class="">
