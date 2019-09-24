@@ -36,6 +36,7 @@ export class RatedComponent implements OnInit {
         listData[key].IMDBRating = data.IMDBRating;
         listData[key].posterLink = data.posterLink;
         listData[key].director = data.director;
+        this.spinner.hide();
       });
     });
   }
@@ -43,7 +44,6 @@ export class RatedComponent implements OnInit {
   getRatedList(): void {
     this.userService.fetchRatedList().subscribe(data => {
       this.rated = data;
-      this.spinner.hide();
       this.getRatedListInfo(this.rated);
       // console.log(data);
     });

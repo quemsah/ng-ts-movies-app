@@ -21,7 +21,7 @@
           </a>
         </li>
         <li *ngIf="authService.isLoggedIn">
-          <a routerLink="/user/{{authService.userData.uid}}" (click)="sidenavClose()"
+          <a routerLink="/user/{{uid}}" (click)="sidenavClose()"
             class="collapsible-header waves-effect">
             <i class="far fa-heart"></i>My movies
           </a>

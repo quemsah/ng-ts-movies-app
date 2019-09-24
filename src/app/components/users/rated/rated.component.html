@@ -1,4 +1,5 @@
-<app-loader></app-loader>
+<!-- чтобы спиннер не был бесконечным в случае, если у пользователя нет оцененных фильмов -->
+<app-loader *ngIf="rated.length > 0"></app-loader>
 <div class="container-fluid">
   <section class="mb-4 mt-0 mt-md-4">
     <div *ngIf="rated.length > 0" class="row">

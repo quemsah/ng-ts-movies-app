@@ -1,7 +1,7 @@
-<app-loader></app-loader>
+<!-- чтобы спиннер не был бесконечным в случае, если у пользователя нет списков фильмов -->
+<app-loader *ngIf="(watchlater.length !== 0 || favourites.length !== 0)"></app-loader>
 <div class="container-fluid">
   <section class="mb-4 mt-0">
-    <!-- *ngIf="expression && prototype?.valueType === 'Integer' && 'String'" -->
     <div class="row" *ngIf="(watchlater.length !== 0 || favourites.length !== 0) && authService.userData as user">
       <h2 *ngIf="userData.displayName === user.displayName" class="profile-title col-lg-12 font-weight-bold">
         <strong>My movies lists
