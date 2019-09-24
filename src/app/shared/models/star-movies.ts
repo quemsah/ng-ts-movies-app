@@ -1,6 +1,9 @@
 import { StarMovie } from "./star-movie";
 export interface StarMovies {
-  cast: {
+  cast?: {
+    [key: string]: StarMovie[];
+  };
+  crew?: {
     [key: string]: StarMovie[];
   };
 }

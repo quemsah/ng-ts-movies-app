@@ -5,28 +5,28 @@
       <div class="col-md-3 mb-md-0 mb-5">
         <div class="card star-card">
           <div class="photo z-depth-1-half mb-2">
-            <img src="{{(starData.profile_path) 
-                    ? 'https://image.tmdb.org/t/p/w300_and_h450_bestv2'+starData.profile_path 
+            <img src="{{(starData?.profile_path) 
+                    ? 'https://image.tmdb.org/t/p/w300_and_h450_bestv2'+starData?.profile_path 
                     : '../../../assets/img/no_actor_img.jpg'}}" class="card-img-top" alt="Actor photo"></div>
           <div class="card-body pt-0 mt-0">
             <div class="text-center">
-              <h3 class="my-2 font-weight-bold"><strong>{{starData.name}}</strong></h3>
+              <h3 class="my-2 font-weight-bold"><strong>{{starData?.name}}</strong></h3>
               <h6 class="font-weight-bold my-2" [style.color]="themeService.themeColor | safe: 'style'">
-                {{(starData.gender===2) ? 'Male' : 'Female'}}</h6>
+                {{(starData?.gender===2) ? 'Male' : 'Female'}}</h6>
             </div>
             <ul class="striped list-unstyled">
-              <li><strong>Birthday:</strong> {{starData.birthday | date}}</li>
+              <li><strong>Birthday:</strong> {{starData?.birthday | date}}</li>
               <li *ngIf="starData?.deathday"><strong>Day of Death:</strong> {{starData?.deathday | date}}</li>
-              <li><strong>Place of Birth:</strong> {{(starData.place_of_birth)}}</li>
-              <li><strong>Known Credits:</strong> {{starMovies.cast.length+starMovies.crew.length}}</li>
+              <li><strong>Place of Birth:</strong> {{(starData?.place_of_birth)}}</li>
+              <li><strong>Known Credits:</strong> {{starMovies?.cast.length+starMovies?.crew.length}}</li>
               <li><strong>Also Known As:</strong>
-                {{((starData.also_known_as[0]) ? starData.also_known_as[0] : '')+
-                ((starData.also_known_as[1]) ? ', ' + starData.also_known_as[1] : '')+
-                ((starData.also_known_as[2]) ? ', ' + starData.also_known_as[2] : '')}}
+                {{((starData?.also_known_as[0]) ? starData?.also_known_as[0] : '')+
+                ((starData?.also_known_as[1]) ? ', ' + starData?.also_known_as[1] : '')+
+                ((starData?.also_known_as[2]) ? ', ' + starData?.also_known_as[2] : '')}}
               </li>
               <li *ngIf="starData?.homepage"><strong>Official Site:</strong> <a href="{{starData?.homepage}}">
                   {{starData?.homepage}}</a></li>
-              <li><strong>Popularity index:</strong> {{starData.popularity}}</li>
+              <li><strong>Popularity index:</strong> {{starData?.popularity}}</li>
             </ul>
           </div>
         </div>
@@ -52,7 +52,7 @@
 
 
                   <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-4"
-                    *ngFor="let movie of starMovies.cast; let i = index">
+                    *ngFor="let movie of starMovies?.cast; let i = index">
                     <div class="card movie-card h-100">
                       <div class="view overlay">
                         <img src="{{(movie.poster_path) 
@@ -74,7 +74,7 @@
               <div class="tab-pane fade" id="bio-just" role="tabpanel" aria-labelledby="bio-tab-just">
                 <div class="row">
                   <div class="col-12 mb-4">
-                    <p>{{starData.biography ? starData.biography : 'No information' }}</p>
+                    <p>{{starData?.biography ? starData?.biography : 'No information' }}</p>
                   </div>
                 </div>
               </div>

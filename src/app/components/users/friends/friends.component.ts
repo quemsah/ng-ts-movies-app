@@ -55,10 +55,11 @@ export class FriendsComponent implements OnInit, AfterViewInit {
     // console.log(friendsData);
     Object.keys(friendsData).filter(key => {
       this.userService.getUserInfo(friendsData[key].fid).subscribe(data => {
-        friendsData[key].displayName = data.displayName;
-        friendsData[key].email = data.email;
-        friendsData[key].photoURL = data.photoURL;
-        this.spinner.hide();
+        if (data) {
+          friendsData[key].displayName = data.displayName;
+          friendsData[key].email = data.email;
+          friendsData[key].photoURL = data.photoURL;
+        }
       });
     });
   }
@@ -79,6 +80,7 @@ export class FriendsComponent implements OnInit, AfterViewInit {
         // console.log(this.friends);
         // console.log(this.outRequests);
         // console.log(this.inRequests);
+        this.spinner.hide();
       });
   }
 

@@ -3,11 +3,11 @@
 <div class="container-fluid">
   <section class="mb-4 mt-0" *ngIf="authService.userData as user">
     <div class="row" *ngIf="((watchlater | json) != '[]' || (favourites | json) != '[]')">
-      <h2 *ngIf="userData.displayName === user.displayName" class="profile-title col-lg-12 font-weight-bold">
+      <h2 *ngIf="userData?.displayName === user.displayName" class="profile-title col-lg-12 font-weight-bold">
         <strong>My movies lists
         </strong></h2>
-      <h2 *ngIf="userData.displayName !== user.displayName" class="profile-title col-lg-12 font-weight-bold">
-        <strong>{{userData.displayName}}'s movies
+      <h2 *ngIf="userData?.displayName !== user.displayName" class="profile-title col-lg-12 font-weight-bold">
+        <strong>{{userData?.displayName}}'s movies
         </strong></h2>
       <div class="movie-tabs">
         <ul class="nav nav-tabs nav-justified md-tabs " [style.background]="themeService.themeGradient | safe: 'style'"

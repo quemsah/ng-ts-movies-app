@@ -85,7 +85,9 @@ export class MovieComponent implements OnInit, AfterViewInit {
     const mid = this.route.snapshot.paramMap.get("id");
     const uid = this.authService.userData.uid;
     this.movieService.fetchRating(uid, mid).subscribe(data => {
-      this.currentMovieRating = data.rated;
+      if (data) {
+        this.currentMovieRating = data.rated;
+      }
       // console.log("Your rating");
       // console.log(this.currentMovieRating);
     });
