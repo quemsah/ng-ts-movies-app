@@ -42,7 +42,7 @@ export class FriendsComponent implements OnInit, AfterViewInit {
   filterObject = (obj, predicate) =>
     Object.keys(obj)
       .filter(key => predicate(obj[key]))
-      .reduce((res, key) => ((res[key] = obj[key]), res), {});
+      .reduce((res, key) => ((res[key] = obj[key]), res), {})
 
   mapFriends = x => x.accepted === true;
 

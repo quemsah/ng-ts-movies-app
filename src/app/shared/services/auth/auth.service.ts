@@ -31,8 +31,13 @@ export class AuthService {
     this.afAuth.authState.subscribe(user => {
       if (user) {
         this.userData = user;
-        // имитация Firebase Authentication's JWT custom claims см. комментарии AuthLogin(provider)
-        this.userData.isAdmin = this.checkRole(user);
+        // Разделение функционала админа и клиента: информация о текущем юзере приходит после авторизации
+        // в веб-токене и в идеале должна содержать поле админ ли юзер, но Firebase так не умеет
+        // Точнее умеет, но дополнительные поля (custom claims) добавляются только
+        // через Admin SDK, для которого нужен бэк прям бэк, что-то на ноде или джаве.
+        // И здесь, к сожалению, на клиенте, приходится проверять админ ли он
+        // как бы имитируем, что это пришло с бэкенда:
+        this.userData.isAdmin = this.checkRole(user); // еще см. AuthLogin(provider)
         localStorage.setItem("user", JSON.stringify(this.userData));
         JSON.parse(localStorage.getItem("user"));
         console.log(this.userData.email + ": admin = " + this.userData.isAdmin);
@@ -108,20 +113,23 @@ export class AuthService {
     // старые данные юзера
     const credentials = auth.EmailAuthProvider.credential(this.currentUser.email, oldPassword);
     // для обновления пароля нужен ре-логин
-    return this.currentUser
-      .reauthenticateAndRetrieveDataWithCredential(credentials)
-      .then(() => {
-        this.currentUser
-          .updatePassword(password)
-          .then(result => {
-            this.ngZone.run(() => {
-              this.router.navigate(["login"]);
-            });
-            this.alertService.openSuccessAlert("Password successfully changed!", 1);
-          })
-          .catch(this.errCatching);
-      })
-      .catch(this.errCatching);
+    return (
+      this.currentUser
+        // tslint:disable-next-line: deprecation
+        .reauthenticateAndRetrieveDataWithCredential(credentials)
+        .then(() => {
+          this.currentUser
+            .updatePassword(password)
+            .then(result => {
+              this.ngZone.run(() => {
+                this.router.navigate(["login"]);
+              });
+              this.alertService.openSuccessAlert("Password successfully changed!", 1);
+            })
+            .catch(this.errCatching);
+        })
+        .catch(this.errCatching)
+    );
   }
 
   UpdateUserName(newName) {
@@ -214,7 +222,7 @@ export class AuthService {
         finalize(async () => {
           const photoURL = await ref.getDownloadURL().toPromise();
           // обновляем встроенный методом AngularFireAuth.auth
-          await this.currentUser.updateProfile({ photoURL: photoURL });
+          await this.currentUser.updateProfile({ photoURL });
           // обновляем в FireStore
           await this.profileRef.update({ photoURL });
           await this.alertService.openSuccessAlert(

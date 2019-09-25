@@ -25,34 +25,35 @@ export class MovieService {
       .trim()
       .replace(/[^a-zA-Z0-9А-Яа-я ]/g, "") // удаляем символы всякие
       .replace(/\s+/g, "-") // заменяем пробелы на тире
-      .toLowerCase();
+      .toLowerCase()
 
   generateCommentID = date =>
     date
       .replace(/[^a-zA-Z0-9 ]/g, "") // удаляем символы всякие
       .replace(/\s+/g, "") // заменяем пробелы на тире
-      .toLowerCase();
+      .toLowerCase()
 
   compareGenres = (genres, fetchedGenres) =>
-    genres.map(x => fetchedGenres.map(y => (x.id === y.id ? (x.selected = true) : null)));
+    genres.map(x => fetchedGenres.map(y => (x.id === y.id ? (x.selected = true) : null)))
 
   sliceData = (object, num) =>
     Object.keys(object)
       .slice(0, num)
       .map(key => ({
         [key]: object[key]
-      }));
+      }))
 
   genresToArray = genres => {
     const genresArray = [];
     // tslint:disable-next-line: forin
-    for (let propt in genres) {
+    for (const propt in genres) {
       genres[propt] === true && propt.startsWith("g") === true
         ? genresArray.push(propt.substring(1))
-        : null;
+        : // tslint:disable-next-line: no-unused-expression
+          null;
     }
     return genresArray;
-  };
+  }
 
   getElementId(event): string {
     const target = event.target || event.srcElement || event.currentTarget;
@@ -89,10 +90,10 @@ export class MovieService {
   }
 
   fetchMovie(id: string): Observable<any> {
-    //return this.afs.doc(`movies/${id}`).valueChanges();
-    let movie = this.afs.collection("movies").doc(`${id}`);
-    let that = this;
-    movie.ref.get().then(function(doc) {
+    // return this.afs.doc(`movies/${id}`).valueChanges();
+    const movie = this.afs.collection("movies").doc(`${id}`);
+    const that = this;
+    movie.ref.get().then(doc => {
       if (doc.exists) {
       } else {
         that.alertService.openWarningAlert("Wrong URL!", 2);

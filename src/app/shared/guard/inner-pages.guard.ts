@@ -21,7 +21,7 @@ export class InnerPagesGuard implements CanActivate {
     this.themeService.forceDisableDarkModeBeforeRoute();
     console.log("Inner guard!");
     if (this.authService.isLoggedIn) {
-      //console.log(this.authService.userData.emailVerified);
+      // console.log(this.authService.userData.emailVerified);
       console.log("this.authService.isLoggedIn = true");
       console.log("Welcome to movies page!");
       this.router.navigate(["movies"]);

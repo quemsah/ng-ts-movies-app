@@ -6,7 +6,7 @@ import { ThemeService } from "../../shared/services/theme/theme.service";
   templateUrl: "./loader.component.html"
 })
 export class LoaderComponent implements OnInit {
-  infinite: boolean = false;
+  infinite = false;
   constructor(public themeService: ThemeService) {}
 
   ngOnInit() {

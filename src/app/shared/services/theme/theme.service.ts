@@ -6,19 +6,18 @@ declare const enableDarkMode: any;
   providedIn: "root"
 })
 export class ThemeService {
-  isDarkMode: boolean = false;
-  wasRouted: boolean = false;
+  isDarkMode = false;
+  wasRouted = false;
   // начальные значения
-  red: number = 239;
-  green: number = 10;
-  blue: number = 157;
+  red = 239;
+  green = 10;
+  blue = 157;
   themeGradient: string = this.setGradient(this.red, this.green, this.blue);
   themeColor: string = this.setColor(this.red, this.green, this.blue);
-  constructor() //setGradient(32,199,107);
-  {}
+  constructor() {} // setGradient(32,199,107);{}
 
   rgbToHex(rgb: number): string {
-    var hex = Math.round(Math.min(Math.max(0, rgb), 255)).toString(16);
+    const hex = Math.round(Math.min(Math.max(0, rgb), 255)).toString(16);
     return hex.length < 2 ? "0" + hex : hex;
   }
 
@@ -47,14 +46,14 @@ export class ThemeService {
       ")";
     this.themeGradient = gr;
     return gr;
-    //console.log(this.themeGradient);
+    // console.log(this.themeGradient);
   }
 
   setColor(red: number, green: number, blue: number): string {
     const color = "#" + this.fullColorHex(red, green, blue);
     this.themeColor = color;
     return color;
-    //console.log(this.themeGradient);
+    // console.log(this.themeGradient);
   }
   // перед переходом выключаем дарк мод, если он был
   // и ставим wasRouted = true, чтобы потом включить

@@ -58,9 +58,11 @@ export class EditMovieComponent implements OnInit, AfterViewInit {
     // { merge: true }, а если менялись, то будет новый документ
     // с новым айдишником и новыми комментариями, так как это
     // уже будет другой фильм, требующий другого URL
-    this.title === form.value.MovieName && this.releaseDate === form.value.Date
-      ? null
-      : this.movieService.deleteMovie(this.currentMovieData.mid);
+    // tslint:disable-next-line: no-unused-expression
+    !(this.title === form.value.MovieName && this.releaseDate === form.value.Date)
+      ? this.movieService.deleteMovie(this.currentMovieData.mid)
+      // tslint:disable-next-line: no-unused-expression
+      : null;
     this.movieService.setMovieData(movieData);
   }
 }

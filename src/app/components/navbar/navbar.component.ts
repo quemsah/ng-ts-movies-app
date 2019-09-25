@@ -8,11 +8,11 @@ import { ThemeService } from "../../shared/services/theme/theme.service";
   styleUrls: ["./navbar.component.css"]
 })
 export class NavbarComponent implements OnInit {
-  login: boolean = false;
-  register: boolean = false;
-  friends: boolean = false;
-  profile: boolean = false;
-  logout: boolean = false;
+  login = false;
+  register = false;
+  friends = false;
+  profile = false;
+  logout = false;
   constructor(public authService: AuthService, public themeService: ThemeService) {}
 
   ngOnInit() {}

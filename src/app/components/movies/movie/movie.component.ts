@@ -65,9 +65,12 @@ export class MovieComponent implements OnInit, AfterViewInit {
       this.titleService.setTitle(this.movieData.title);
       const tmdb_id = this.movieData.tmdb_id;
       this.getRating();
-      tmdb_id ? this.getMovieCrew(parseInt(tmdb_id)) : null;
-      tmdb_id ? this.getMovieTrailers(parseInt(tmdb_id)) : null;
-      tmdb_id ? this.getSimilarMovies(parseInt(tmdb_id)) : null;
+      // tslint:disable-next-line: no-unused-expression
+      tmdb_id ? this.getMovieCrew(parseInt(tmdb_id, 10)) : null;
+      // tslint:disable-next-line: no-unused-expression
+      tmdb_id ? this.getMovieTrailers(parseInt(tmdb_id, 10)) : null;
+      // tslint:disable-next-line: no-unused-expression
+      tmdb_id ? this.getSimilarMovies(parseInt(tmdb_id, 10)) : null;
     });
   }
 

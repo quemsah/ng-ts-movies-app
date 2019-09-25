@@ -28,7 +28,8 @@ export class TMDBService {
       .pipe(
         mergeMap(data =>
           data.movie_results.length > 0
-            ? forkJoin(
+            ? // tslint:disable-next-line: deprecation
+              forkJoin(
                 this.fetchMovieDetailsByTMDBID(data.movie_results[0].id),
                 this.fetchMovieCrewbyTMDBID(data.movie_results[0].id)
               )
@@ -38,9 +39,7 @@ export class TMDBService {
   }
 
   fetchMovieDetailsByTMDBID(mid: number): Observable<any> {
-    return this.http.get<any>(
-      `${this.URL_MOVIE}/${mid}?api_key=${this.API_KEY}&language=en-US}`
-    );
+    return this.http.get<any>(`${this.URL_MOVIE}/${mid}?api_key=${this.API_KEY}&language=en-US}`);
   }
 
   fetchMovieCrewbyTMDBID(mid: number): Observable<any> {

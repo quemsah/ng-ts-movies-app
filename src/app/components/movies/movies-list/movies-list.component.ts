@@ -14,9 +14,9 @@ import { MovieListItem } from "../../../shared/models/movie-list-item";
 export class MoviesListComponent implements OnInit, AfterViewInit {
   movies: Movie[];
   pageOfItems: Array<Movie>;
-  sortingValue: string = "dateAdded";
-  sortingType: string = "desc";
-  searchValue: string = "";
+  sortingValue = "dateAdded";
+  sortingType = "desc";
+  searchValue = "";
   sortingValues = [
     { id: 0, value: "dateAdded", name: "Date Added" },
     { id: 1, value: "title", name: "Title" },
@@ -75,7 +75,7 @@ export class MoviesListComponent implements OnInit, AfterViewInit {
             .toLowerCase()
             .indexOf(key) !== -1
       )
-    );
+    )
 
   getMovies(): void {
     this.movieService.fetchMovies(this.sortingValue, this.sortingType).subscribe(movies => {

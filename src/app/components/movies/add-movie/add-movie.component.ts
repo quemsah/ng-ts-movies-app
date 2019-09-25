@@ -119,7 +119,7 @@ export class AddMovieComponent implements OnInit, AfterViewInit {
 
   onAddMovieSubmit(form: NgForm): void {
     // приводим к нужному виду
-    //console.log(form.value.Date);
+    // console.log(form.value.Date);
     const movieData: Movie = {
       mid: this.movieService.generateMovieID(form.value.Date, form.value.MovieName),
       imdb_id: form.value.ImdbId,

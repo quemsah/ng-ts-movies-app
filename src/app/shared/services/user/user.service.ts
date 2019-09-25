@@ -9,8 +9,6 @@ import { Friend } from "../../models/friend";
   providedIn: "root"
 })
 export class UserService {
-  // Мы с тобой решили, что в юзерах будут inRequests, OutRequests и friends,
-  // так вот я начал эти все реквесты делать и присел немношк и ко мне пришла идея
   // При добавлении в друзья у обоих пользователей ставить во user/friends
   // 1) айдишники друг друга
   // 2) айдишкник инициатора добавления
@@ -18,7 +16,6 @@ export class UserService {
   // Когда если второй примет запрос в друзья, обоим ставить true.
   // На этапе отображения если айдишник друга = айдишник инициатора и false, то это исходящий непринятый
   // На этапе отображения если айдишник друга != айдишник инициатора и false, то это входящий непринятый
-  // Есть шанс провала?
   constructor(
     private afs: AngularFirestore,
     private alertService: AlertService,
@@ -59,11 +56,11 @@ export class UserService {
         const uid = this.authService.userData.uid;
         const fid = data[0].uid;
         this.makeFriend({
-          uid: uid,
+          uid,
           initiator: uid,
           date: now,
           accepted: false,
-          fid: fid
+          fid
         }).catch(error => this.alertService.openWarningAlert(error.message, 2));
         this.makeFriend({
           uid: fid,
@@ -126,11 +123,11 @@ export class UserService {
     const uid = this.authService.userData.uid;
     console.log(fid);
     this.makeFriend({
-      uid: uid,
+      uid,
       initiator: fid,
       date: now,
       accepted: true,
-      fid: fid
+      fid
     }).catch(error => this.alertService.openWarningAlert(error.message, 2));
     this.makeFriend({
       uid: fid,

@@ -24,7 +24,7 @@ export class StarComponent implements OnInit {
 
   ngOnInit() {
     this.spinner.show();
-    const sid = parseInt(this.route.snapshot.paramMap.get("id"));
+    const sid = parseInt(this.route.snapshot.paramMap.get("id"), 10);
     this.getStarInfo(sid);
     this.getStarMovies(sid);
   }

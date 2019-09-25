@@ -5,12 +5,12 @@ import { Injectable } from "@angular/core";
   providedIn: "root"
 })
 export class AlertService {
-  constructor(private _snackBar: MatSnackBar) {}
+  constructor(private snackBar: MatSnackBar) {}
 
   openAlert(message, durationInSeconds, type): void {
     // styles.css
     const classType = type + "-alert-snackbar";
-    this._snackBar.open(message, null, {
+    this.snackBar.open(message, null, {
       duration: durationInSeconds * 1000,
       panelClass: classType
     });
