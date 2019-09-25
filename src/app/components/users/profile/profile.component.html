@@ -6,7 +6,12 @@ src="{{(user.photoURL) ? user.photoURL : '/src/assets/img/avatars/user.png'}}" a
       <div class="card card-cascade narrower">
         <div class="view view-cascade gradient-card-header"
           [style.background]="themeService.themeGradient | safe: 'style'">
-          <h5 class="mb-0 font-weight-bold">Edit Account</h5>
+          <h5 *ngIf="this.authService.userData?.isAdmin === true" 
+          class="mb-0 font-weight-bold">Edit Administrator Account
+          </h5>
+          <h5 *ngIf="this.authService.userData?.isAdmin === false" 
+          class="mb-0 font-weight-bold">Edit Account
+          </h5>
         </div>
         <div class="card-body card-body-cascade text-center update-profile-form">
           <form #f1="ngForm" (ngSubmit)="onProfileSubmit(f1)">
@@ -94,7 +99,8 @@ src="{{(user.photoURL) ? user.photoURL : '/src/assets/img/avatars/user.png'}}" a
               Photo
             </button>
             <input type="file" (change)="onClickPhoto($event)"><br>
-             <button class="btn btn-danger btn-rounded btn-sm waves-effect waves-light" (click)="onDeletePhoto()">Delete</button>
+            <button class="btn btn-danger btn-rounded btn-sm waves-effect waves-light"
+              (click)="onDeletePhoto()">Delete</button>
           </div>
         </div>
       </div>

@@ -11,7 +11,10 @@ import { AuthService } from "../../../shared/services/auth/auth.service";
 export class ProfileComponent implements OnInit, AfterViewInit {
   constructor(public authService: AuthService, public themeService: ThemeService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    // console.log(this.authService.userData.isAdmin);
+    console.log(this.authService.isAdmin);
+  }
 
   ngAfterViewInit() {
     // this.themeService.checkDarkMode();

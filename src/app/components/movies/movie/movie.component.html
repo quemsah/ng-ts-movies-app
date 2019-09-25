@@ -66,11 +66,12 @@
                 </a>
               </div>
             </ng-template>
-            <a routerLink="/edit-movie/{{movie.mid}}" id="{{movie.mid}}" type="button"
-              class="btn btn-md btn-blue-grey ml-0" (click)="handleMovieEdit()">
+            <a *ngIf="this.authService.userData?.isAdmin === true" routerLink="/edit-movie/{{movie.mid}}"
+              id="{{movie.mid}}" type="button" class="btn btn-md btn-blue-grey ml-0" (click)="handleMovieEdit()">
               <i class="far fa-edit pr-1"></i> Edit
             </a>
-            <a id="{{movie.mid}}" type="button" class="btn btn-md btn-danger ml-0" (click)="handleMovieDelete()">
+            <a *ngIf="this.authService.userData?.isAdmin === true" id="{{movie.mid}}" type="button"
+              class="btn btn-md btn-danger ml-0" (click)="handleMovieDelete()">
               <i class=" far fa-trash-alt pr-1"></i> Delete
             </a>
           </div>
@@ -87,7 +88,7 @@
   <section class="mb-4 mt-4" *ngIf="movieCrew">
     <!-- двойная проверка, так как если фильм добавлен вручную
       то массив будет пустой -->
-    <div class="row" *ngIf="movieCrew.length>0">
+    <div class="row" *ngIf="movieCrew.length > 0">
       <div class="movie-tabs">
         <ul class="nav nav-tabs nav-justified md-tabs " [style.background]="themeService.themeGradient | safe: 'style'"
           id="myTabJust" role="tablist">
@@ -141,7 +142,7 @@
   <section class="mb-4 mt-4" *ngIf="movieSimilars">
     <!-- двойная проверка, так как если фильм добавлен вручную
       то массив будет пустой -->
-    <div class="row" *ngIf="movieSimilars.length>0">
+    <div class="row" *ngIf="movieSimilars.length > 0">
       <h2 class="profile-title col-lg-12 font-weight-bold mb-3"><strong>Similar movies
         </strong></h2>
       <div class="col-lg-3 col-md-4 col-sm-6 mb-4" *ngFor="let smovie of movieSimilars; let i = index">
@@ -182,12 +183,14 @@
             <p class="pt-2 mb-0 text-white">
               <strong><a class="h5 text-white" href="profile.html" target="_blank">{{comment.user_name}} </a></strong>
               <i class="fas fa-angle-double-left"></i> {{comment.date}}</p>
-            <div class="comment-btns d-flex flex-row-reverse flex-wrap" *ngIf="user.uid === comment.user_id">
-              <a id="{{comment.cid}}" type="button" (click)="handleCommentDelete($event)"
-                class="btn btn-outline-danger btn-sm px-2 waves-effect">
+            <div class="comment-btns d-flex flex-row-reverse flex-wrap">
+              <!-- Кнопка удаления комментария -->
+              <a *ngIf="(user.uid === comment.user_id) || (this.authService.userData?.isAdmin === true) id="{{comment.cid}}" type="button"
+                (click)="handleCommentDelete($event)" class="btn btn-outline-danger btn-sm px-2 waves-effect">
                 <i id="{{comment.cid}}" class="far fa-trash-alt ml-1"></i>
               </a>
-              <a id="{{comment.cid}}" type="button" (click)="handleCommentEdit($event);scroll(cform);"
+              <!-- Кнопка изменения комментария -->
+              <a *ngIf="user.uid === comment.user_id" id="{{comment.cid}}" type="button" (click)="handleCommentEdit($event);scroll(cform);"
                 class="btn btn-outline-white btn-sm px-2 waves-effect">
                 <i id="{{comment.cid}}" class="far fa-edit ml-1"></i>
               </a>
