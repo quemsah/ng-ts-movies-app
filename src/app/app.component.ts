@@ -13,10 +13,10 @@ declare var $: any;
 })
 export class AppComponent implements OnInit, AfterViewInit {
   constructor(
+    public themeService: ThemeService,
     private titleService: Title,
     private router: Router,
-    private activatedRoute: ActivatedRoute,
-    public themeService: ThemeService
+    private activatedRoute: ActivatedRoute
   ) {}
 
   ngOnInit() {

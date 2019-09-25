@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from "@angular/router";
+import { AngularFireAuth } from "@angular/fire/auth";
 import { AuthService } from "../services/auth/auth.service";
 import { Observable } from "rxjs";
 // import { ThemeService } from "../services/theme/theme.service";
@@ -7,11 +8,12 @@ import { Observable } from "rxjs";
 @Injectable({
   providedIn: "root"
 })
-export class AuthGuard implements CanActivate {
+export class AdminGuard implements CanActivate {
   constructor(
     // public themeService: ThemeService,
     public authService: AuthService,
-    private router: Router
+    private router: Router,
+    private afAuth: AngularFireAuth
   ) {}
 
   canActivate(
@@ -19,11 +21,12 @@ export class AuthGuard implements CanActivate {
     state: RouterStateSnapshot
   ): Observable<boolean> | Promise<boolean> | boolean {
     // this.themeService.forceDisableDarkModeBeforeRoute();
-    if (this.authService.isLoggedIn !== true) {
-      console.log("Auth guard!");
-      console.log("authService = " + this.authService);
-      this.router.navigate(["login"]);
-    }
+    this.afAuth.authState.subscribe(user => {
+      if (!this.authService.checkRole(user)) {
+        console.log("Admin guard!");
+        this.router.navigate(["not-found"]);
+      }
+    });
     return true;
   }
 }

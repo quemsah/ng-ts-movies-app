@@ -17,9 +17,9 @@ export class UserService {
   // На этапе отображения если айдишник друга = айдишник инициатора и false, то это исходящий непринятый
   // На этапе отображения если айдишник друга != айдишник инициатора и false, то это входящий непринятый
   constructor(
+    public authService: AuthService,
     private afs: AngularFirestore,
-    private alertService: AlertService,
-    public authService: AuthService
+    private alertService: AlertService
   ) {}
   // fetchFriends(): Observable<any> {
   //   return this.afs.collection(`users/${this.uid}/friends`).valueChanges();

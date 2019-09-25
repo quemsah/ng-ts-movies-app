@@ -2,6 +2,7 @@ import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 // canActivate
 import { AuthGuard } from "../../shared/guard/auth.guard";
+import { AdminGuard } from "../guard/admin.guard";
 import { InnerPagesGuard } from "../../shared/guard/inner-pages.guard";
 import { OuterPagesGuard } from "../../shared/guard/outer-pages.guard";
 // Компоненты
@@ -86,13 +87,13 @@ const routes: Routes = [
     path: "add-movie",
     component: AddMovieComponent,
     data: { title: "New movie" },
-    canActivate: [AuthGuard]
+    canActivate: [AdminGuard]
   },
   {
     path: "edit-movie/:id",
     component: EditMovieComponent,
     data: { title: "Edit movie" },
-    canActivate: [AuthGuard]
+    canActivate: [AdminGuard]
   },
   {
     path: "movie/:id",
