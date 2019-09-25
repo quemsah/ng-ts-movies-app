@@ -12,13 +12,19 @@ declare var $: any;
 })
 export class SidenavComponent implements OnInit {
   uid: string;
+  isAdmin: boolean;
   constructor(
     private afAuth: AngularFireAuth,
     public authService: AuthService,
     public themeService: ThemeService
   ) {
     // https://javebratt.com/firebase-user-undefined/
-    this.afAuth.authState.subscribe(user => (user ? (this.uid = user.uid) : null));
+    this.afAuth.authState.subscribe(user => {
+      if (user) {
+        this.uid = user.uid;
+        this.isAdmin = this.authService.checkRole(user);
+      }
+    });
   }
 
   ngOnInit() {}

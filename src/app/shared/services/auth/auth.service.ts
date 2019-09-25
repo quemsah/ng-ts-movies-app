@@ -1,7 +1,7 @@
 import { Injectable, NgZone } from "@angular/core";
 import { User } from "../../models/user";
 import { auth } from "firebase/app";
-//import * as firebase from "firebase";
+// import * as firebase from "firebase";
 import { AngularFireAuth } from "@angular/fire/auth";
 import { AngularFirestore, AngularFirestoreDocument } from "@angular/fire/firestore";
 import { AngularFireStorage } from "@angular/fire/storage";
@@ -13,6 +13,7 @@ import { AlertService } from "../alert/alert.service";
   providedIn: "root"
 })
 export class AuthService {
+  private ADMIN_KEY = "cXVlbXNh";
   // Данные пользователя из authState
   userData: User;
 
@@ -24,14 +25,17 @@ export class AuthService {
     private router: Router,
     private ngZone: NgZone
   ) {
-    // Cохраняем данные пользователя в localstorage
+    // Cохраняем данные пользователя в localStorage
     // и удаляем, когда он выходит
-    // отсюда и берутся данные для всей странички (userData)
+    // отсюда и берутся данные пользователя во многих страничках (userData)
     this.afAuth.authState.subscribe(user => {
       if (user) {
         this.userData = user;
+        // имитация Firebase Authentication's JWT custom claims см. комментарии AuthLogin(provider)
+        this.userData.isAdmin = this.checkRole(user);
         localStorage.setItem("user", JSON.stringify(this.userData));
         JSON.parse(localStorage.getItem("user"));
+        console.log(this.userData.email + ": admin = " + this.userData.isAdmin);
       } else {
         localStorage.setItem("user", null);
         JSON.parse(localStorage.getItem("user"));
@@ -39,15 +43,17 @@ export class AuthService {
     });
   }
 
-  errCatching = error => this.alertService.openWarningAlert(error.message, 2);
+  checkRole = user => user.email.lastIndexOf(window.atob(this.ADMIN_KEY), 0) === 0;
 
-  // fetchFriends(): Observable<any> {
-  //   return this.afs.collection(`users/${this.userData.uid}/friends`).valueChanges();
-  // }
   // Залогинен ли юзер?
   get isLoggedIn(): boolean {
     const user = JSON.parse(localStorage.getItem("user"));
     return user !== null && user.emailVerified !== false ? true : false;
+  }
+  // Админ ли?
+  get isAdmin(): boolean {
+    const user = JSON.parse(localStorage.getItem("user"));
+    return user.isAdmin !== false ? true : false;
   }
   // Текущий пользователь
   get currentUser() {
@@ -61,8 +67,11 @@ export class AuthService {
   friendsRef() {
     // console.log(this.userData.uid);
     return this.afs.collection(`users/${this.userData.uid}/friends`);
-    //return this.afs.collection(`users/${uid}/friends`);
   }
+
+  // fetchFriends(): Observable<any> {
+  //   return this.afs.collection(`users/${this.userData.uid}/friends`).valueChanges();
+  // }
 
   // get watchLaterRef() {
   //   return this.afs.collection(`users/${this.currentUser.uid}/watchlater`);
@@ -97,10 +106,7 @@ export class AuthService {
 
   UpdateUserPassword(password, oldPassword) {
     // старые данные юзера
-    const credentials = auth.EmailAuthProvider.credential(
-      this.currentUser.email,
-      oldPassword
-    );
+    const credentials = auth.EmailAuthProvider.credential(this.currentUser.email, oldPassword);
     // для обновления пароля нужен ре-логин
     return this.currentUser
       .reauthenticateAndRetrieveDataWithCredential(credentials)
@@ -157,13 +163,13 @@ export class AuthService {
     return this.AuthLogin(new auth.GoogleAuthProvider());
   }
 
-  GithubAuth() {
-    return this.AuthLogin(new auth.GithubAuthProvider());
-  }
+  // GithubAuth() {
+  //   return this.AuthLogin(new auth.GithubAuthProvider());
+  // }
 
-  MicrosoftAuth() {
-    return this.AuthLogin(new auth.OAuthProvider("microsoft.com"));
-  }
+  // MicrosoftAuth() {
+  //   return this.AuthLogin(new auth.OAuthProvider("microsoft.com"));
+  // }
 
   AuthLogin(provider) {
     return this.afAuth.auth
@@ -173,7 +179,7 @@ export class AuthService {
           this.router.navigate(["movies"]);
         });
         // в случае логина через гитхаб или майкрософт emailVerified будет false
-        // так как Firebase ставит именно так это создает проблемы со входом, так как есть
+        // так как Firebase ставит именно так, и это создает проблемы со входом, так как есть
         // пользователи, которые зарегистрировались через почту и emailVerified которых надо проверять
         // (result.user.emailVerified == false)
         this.SetUserData(result.user, true);
@@ -184,6 +190,15 @@ export class AuthService {
         //   emailVerified: true,
         // });
         // UPD: Firebase Admin SDK на клиенте поставить нельзя
+        // https://stackoverflow.com/questions/42534283/include-the-firebase-admin-sdk-module-in-angularjs
+        return result.user.getIdToken();
+        // Именно из возвращаемого токена можно было бы понять, админ юзер или нет
+        // https://firebase.google.com/docs/auth/admin/custom-claims?hl=en-us#examples_and_use_cases
+        // Но для того чтобы установить собственные custom claims нужен Admin SDK на каком-нибудь сервере
+      })
+      .then(jwt => {
+        // JSON Web Token
+        // console.log(jwt);
       })
       .catch(this.errCatching);
   }
@@ -221,16 +236,18 @@ export class AuthService {
       })
       .catch(this.errCatching);
   }
+
   // Записываем данные пользователя документ
   SetUserData(user, verified?: boolean) {
-    console.log(verified ? verified : user.emailVerified);
+    // console.log(verified ? verified : user.emailVerified);
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
     const userData: User = {
       uid: user.uid,
       email: user.email,
       displayName: user.displayName,
       photoURL: user.photoURL,
-      emailVerified: verified ? verified : user.emailVerified
+      emailVerified: verified ? verified : user.emailVerified,
+      isAdmin: this.checkRole(user)
     };
     return userRef.set(userData, {
       merge: true
@@ -244,4 +261,6 @@ export class AuthService {
       this.router.navigate(["login"]);
     });
   }
+
+  errCatching = error => this.alertService.openWarningAlert(error.message, 2);
 }

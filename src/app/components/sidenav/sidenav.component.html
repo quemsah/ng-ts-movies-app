@@ -2,7 +2,8 @@
   <ul class="custom-scrollbar">
     <li class="logo-sn waves-effect py-3" [style.background]="themeService.themeGradient | safe: 'style'">
       <div class="text-center">
-        <a routerLink="/movies" class="pl-0 collapsible-header waves-effect"><img src="../../../assets/img/logo/logo150.png" alt="Logo"></a>
+        <a routerLink="/movies" class="pl-0 collapsible-header waves-effect"><img
+            src="../../../assets/img/logo/logo150.png" alt="Logo"></a>
       </div>
     </li>
     <!-- Search Form 
@@ -21,8 +22,7 @@
           </a>
         </li>
         <li *ngIf="authService.isLoggedIn">
-          <a routerLink="/user/{{uid}}" (click)="sidenavClose()"
-            class="collapsible-header waves-effect">
+          <a routerLink="/user/{{uid}}" (click)="sidenavClose()" class="collapsible-header waves-effect">
             <i class="far fa-heart"></i>My movies
           </a>
         </li>
