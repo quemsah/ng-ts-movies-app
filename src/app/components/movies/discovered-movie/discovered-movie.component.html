@@ -18,14 +18,16 @@
                 <div class="chip waves-effect waves-effect my-0">{{genre.name}}</div>
               </li>
             </ul>
-            <h5 class="h4 my-0 p-0">Homepage</h5>
+            <h5 *ngIf="movie.homepage" class="h4 my-0 p-0">Homepage</h5>
             <a href="{{movie.homepage}}">
               <p class="my-2">{{movie.homepage}}</p>
             </a>
             <h4 class="h4 my-0 p-0">Overview</h4>
             <p class="my-2">{{movie.overview}}</p>
-            <p *ngIf="movie.budget" class="m-0 p-0">Budget: {{movie.budget}}</p>
-            <p *ngIf="movie.revenue" class="mb-2 p-0">Revenue: {{movie.revenue}}</p>
+            <p *ngIf="movie.budget" class="m-0 p-0">Budget: $ {{movie.budget}}</p>
+            <p *ngIf="movie.revenue" class="m-0 p-0">Revenue: $ {{movie.revenue}}</p>
+            <p *ngIf="movie.production_companies" class="mb-2 p-0">Production company:
+              {{movie.production_companies[0]?.name}}</p>
             <button type="button" class="btn btn-md ml-0" (click)="handleAddToDatabase()"
               [style.background]="themeService.themeGradient | safe: 'style'">
               <i class="fas fa-plus pr-1"></i> Add this movie to database
@@ -33,7 +35,7 @@
           </div>
           <div class="">
             <img
-              src="{{(movie.poster_path) ? tmdbService.URL_POSTER + movie.poster_path : '../../../assets/img/no_poster_available.jpg'}}"
+              src="{{(movie.poster_path) ? tmdbService.URL_IMG_H450 + movie.poster_path : '../../../assets/img/no_poster_available.jpg'}}"
               class="movie-card-img" alt="Movie Poster">
           </div>
         </div>
@@ -65,7 +67,7 @@
                 <div class="actor-card card align-items-center">
                   <div class="view overlay">
                     <img routerLink="/star/{{actor[i].id}}" src="{{(actor[i].profile_path) 
-                        ? 'https://image.tmdb.org/t/p/w138_and_h175_face'+actor[i].profile_path 
+                        ? tmdbService.URL_IMG_H175 + actor[i].profile_path 
                         : '../../../../assets/img/no_actor_img.jpg'}}" class="card-img-top" alt="Actor Image">
                   </div>
                   <div class="card-body text-center">
@@ -87,7 +89,7 @@
                 <div class="actor-card card align-items-center">
                   <div class="view overlay">
                     <img routerLink="/star/{{actor[i].id}}" src="{{(actor[i].profile_path) 
-                        ? 'https://image.tmdb.org/t/p/w138_and_h175_face'+actor[i].profile_path 
+                        ? tmdbService.URL_IMG_H175 + actor[i].profile_path 
                         : '../../../../assets/img/no_actor_img.jpg'}}" class="card-img-top" alt="Actor Image">
                   </div>
                   <div class="card-body text-center">

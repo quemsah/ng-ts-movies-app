@@ -35,21 +35,7 @@ export class AddMovieComponent implements OnInit, AfterViewInit {
   foundRuntime = "";
   foundRevenue = "";
   foundBudget = "";
-  genres = [
-    { name: "Adventure", prefix: "g", selected: false, id: 12 },
-    { name: "Animation", prefix: "g", selected: false, id: 16 },
-    { name: "Comedy", prefix: "g", selected: false, id: 35 },
-    { name: "Crime", prefix: "g", selected: false, id: 80 },
-    { name: "Documentary", prefix: "g", selected: false, id: 99 },
-    { name: "Drama", prefix: "g", selected: false, id: 18 },
-    { name: "Fantasy", prefix: "g", selected: false, id: 14 },
-    { name: "History", prefix: "g", selected: false, id: 36 },
-    { name: "Horror", prefix: "g", selected: false, id: 27 },
-    { name: "Music", prefix: "g", selected: false, id: 10402 },
-    { name: "Romance", prefix: "g", selected: false, id: 10749 },
-    { name: "Sci-Fi", prefix: "g", selected: false, id: 878 },
-    { name: "Thriller", prefix: "g", selected: false, id: 53 }
-  ];
+  genres = this.movieService.genres;
 
   constructor(
     public themeService: ThemeService,
@@ -69,8 +55,7 @@ export class AddMovieComponent implements OnInit, AfterViewInit {
   // полученному TMDB идентификатору(число) возвращает полную информацию о фильме
 
   onImdbIDSubmit(form: NgForm): void {
-    console.log(form.value);
-
+    // console.log(form.value);
     // this.tmdbService.fetchMovieByIMDBID(form.value.ImdbId).subscribe(data => {
     //   if (data.movie_results.length > 0) {
     //     forkJoin(
@@ -101,10 +86,8 @@ export class AddMovieComponent implements OnInit, AfterViewInit {
     this.tmdbService.fetchMovieByIMDBID(form.value.ImdbId).subscribe(([detailData, crewData]) => {
       if (detailData) {
         this.foundMovieData = detailData;
-        this.foundPosterPath =
-          "https://image.tmdb.org/t/p/w300_and_h450_bestv2" + this.foundMovieData.poster_path;
-        this.foundBackdropPath =
-          "https://image.tmdb.org/t/p/w1400_and_h450_face" + this.foundMovieData.backdrop_path;
+        this.foundPosterPath = this.tmdbService.URL_IMG_H450 + this.foundMovieData.poster_path;
+        this.foundBackdropPath = this.tmdbService.URL_BACKDROP + this.foundMovieData.backdrop_path;
         this.foundRuntime = this.foundMovieData.runtime + " min";
         this.foundRevenue = "$ " + this.foundMovieData.revenue;
         this.foundBudget = "$ " + this.foundMovieData.budget;

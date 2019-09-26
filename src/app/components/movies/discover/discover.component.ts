@@ -37,10 +37,7 @@ export class DiscoverComponent implements OnInit {
 
   getDiscoveredMovies(fetcher) {
     // tslint:disable-next-line: deprecation
-    forkJoin(fetcher(1), fetcher(2), fetcher(3)).subscribe(data => {
-      this.movies = this.mergeItems(data);
-      console.log(this.movies[1]);
-    });
+    forkJoin(fetcher(1), fetcher(2), fetcher(3)).subscribe(data => (this.movies = this.mergeItems(data)));
   }
 
   onChangePage(pageOfItems: Array<any>): void {

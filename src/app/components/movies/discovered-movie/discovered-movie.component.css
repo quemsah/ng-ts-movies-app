@@ -1,0 +1,7 @@
+.actor-card .card-body {
+  white-space: initial;
+}
+
+.actor-card {
+  flex-direction: column;
+}

@@ -12,6 +12,21 @@ import { MovieListItem } from "../../models/movie-list-item";
   providedIn: "root"
 })
 export class MovieService {
+  genres = [
+    { name: "Adventure", prefix: "g", selected: false, id: 12 },
+    { name: "Animation", prefix: "g", selected: false, id: 16 },
+    { name: "Comedy", prefix: "g", selected: false, id: 35 },
+    { name: "Crime", prefix: "g", selected: false, id: 80 },
+    { name: "Documentary", prefix: "g", selected: false, id: 99 },
+    { name: "Drama", prefix: "g", selected: false, id: 18 },
+    { name: "Fantasy", prefix: "g", selected: false, id: 14 },
+    { name: "History", prefix: "g", selected: false, id: 36 },
+    { name: "Horror", prefix: "g", selected: false, id: 27 },
+    { name: "Music", prefix: "g", selected: false, id: 10402 },
+    { name: "Romance", prefix: "g", selected: false, id: 10749 },
+    { name: "Sci-Fi", prefix: "g", selected: false, id: 878 },
+    { name: "Thriller", prefix: "g", selected: false, id: 53 }
+  ];
   constructor(
     private afs: AngularFirestore,
     private alertService: AlertService,
@@ -25,23 +40,23 @@ export class MovieService {
       .trim()
       .replace(/[^a-zA-Z0-9А-Яа-я ]/g, "") // удаляем символы всякие
       .replace(/\s+/g, "-") // заменяем пробелы на тире
-      .toLowerCase()
+      .toLowerCase();
 
   generateCommentID = date =>
     date
       .replace(/[^a-zA-Z0-9 ]/g, "") // удаляем символы всякие
       .replace(/\s+/g, "") // заменяем пробелы на тире
-      .toLowerCase()
+      .toLowerCase();
 
   compareGenres = (genres, fetchedGenres) =>
-    genres.map(x => fetchedGenres.map(y => (x.id === y.id ? (x.selected = true) : null)))
+    genres.map(x => fetchedGenres.map(y => (x.id === y.id ? (x.selected = true) : null)));
 
   sliceData = (object, num) =>
     Object.keys(object)
       .slice(0, num)
       .map(key => ({
         [key]: object[key]
-      }))
+      }));
 
   genresToArray = genres => {
     const genresArray = [];
@@ -53,7 +68,7 @@ export class MovieService {
           null;
     }
     return genresArray;
-  }
+  };
 
   getElementId(event): string {
     const target = event.target || event.srcElement || event.currentTarget;

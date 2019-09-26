@@ -16,7 +16,7 @@
           </div> -->
           <div class="view overlay">
             <img
-              src="{{(movie.poster_path) ? tmdbService.URL_POSTER + movie.poster_path : '../../../assets/img/no_poster_available.jpg'}}"
+              src="{{(movie.poster_path) ? tmdbService.URL_IMG_H450 + movie.poster_path : '../../../assets/img/no_poster_available.jpg'}}"
               class="card-img-top" alt="Movie Poster">
             <a routerLink="/discovered-movie/{{movie.id}}">
               <div class="mask rgba-white-slight"></div>

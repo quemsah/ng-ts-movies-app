@@ -108,7 +108,7 @@
                 <div class="actor-card card align-items-center">
                   <div class="view overlay">
                     <img routerLink="/star/{{actor[i].id}}" src="{{(actor[i].profile_path) 
-                        ? 'https://image.tmdb.org/t/p/w138_and_h175_face'+actor[i].profile_path 
+                        ? tmdbService.URL_IMG_H175 + actor[i].profile_path 
                         : '../../../../assets/img/no_actor_img.jpg'}}" class="card-img-top" alt="Actor Image">
                   </div>
                   <div class="card-body text-center">
@@ -152,7 +152,7 @@
           </div>
           <div class="view overlay">
             <img src="{{(smovie[i].poster_path) 
-                  ? 'https://image.tmdb.org/t/p/w300_and_h450_bestv2'+smovie[i].poster_path 
+                  ? tmdbService.URL_IMG_H450 + smovie[i].poster_path 
                   : '../../../assets/img/no_poster_available.jpg'}}" class="card-img-top" alt="Poster image">
             <a>
               <div class="mask rgba-white-slight"></div>
@@ -185,12 +185,14 @@
               <i class="fas fa-angle-double-left"></i> {{comment.date}}</p>
             <div class="comment-btns d-flex flex-row-reverse flex-wrap">
               <!-- Кнопка удаления комментария -->
-              <a *ngIf="(user.uid === comment.user_id) || (this.authService.userData?.isAdmin === true)" id="{{comment.cid}}" type="button"
-                (click)="handleCommentDelete($event)" class="btn btn-outline-danger btn-sm px-2 waves-effect">
+              <a *ngIf="(user.uid === comment.user_id) || (this.authService.userData?.isAdmin === true)"
+                id="{{comment.cid}}" type="button" (click)="handleCommentDelete($event)"
+                class="btn btn-outline-danger btn-sm px-2 waves-effect">
                 <i id="{{comment.cid}}" class="far fa-trash-alt ml-1"></i>
               </a>
               <!-- Кнопка изменения комментария -->
-              <a *ngIf="user.uid === comment.user_id" id="{{comment.cid}}" type="button" (click)="handleCommentEdit($event);scroll(cform);"
+              <a *ngIf="user.uid === comment.user_id" id="{{comment.cid}}" type="button"
+                (click)="handleCommentEdit($event);scroll(cform);"
                 class="btn btn-outline-white btn-sm px-2 waves-effect">
                 <i id="{{comment.cid}}" class="far fa-edit ml-1"></i>
               </a>
