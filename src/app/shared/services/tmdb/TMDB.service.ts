@@ -9,6 +9,7 @@ export class TMDBService {
   private API_KEY = "546bffd504ec7e8b262023ec0ec6f0e3";
   private URL_FIND = "https://api.themoviedb.org/3/find";
   private URL_MOVIE = "https://api.themoviedb.org/3/movie";
+  private URL_DISCOVER = "https://api.themoviedb.org/3/discover/movie";
   private URL_STAR = "https://api.themoviedb.org/3/person";
 
   constructor(private http: HttpClient, private alertService: AlertService) {}
@@ -68,6 +69,12 @@ export class TMDBService {
   fetchStarMovies(sid: number): Observable<any> {
     return this.http.get<any>(
       `${this.URL_STAR}/${sid}/movie_credits?api_key=${this.API_KEY}&language=en-US&page=1`
+    );
+  }
+
+  fetchPopularMovies(page: number): Observable<any> {
+    return this.http.get<any>(
+      `${this.URL_DISCOVER}?api_key=${this.API_KEY}&language=en-US&sort_by=popularity.desc&page=${page}`
     );
   }
 }

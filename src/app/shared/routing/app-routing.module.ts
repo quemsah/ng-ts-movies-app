@@ -22,6 +22,7 @@ import { SettingsComponent } from "../../components/users/settings/settings.comp
 import { UserComponent } from "../../components/users/user/user.component";
 import { StarComponent } from "../../components/movies/star/star.component";
 import { RatedComponent } from "../../components/users/rated/rated.component";
+import { DiscoverComponent } from '../../components/movies/discover/discover.component';
 
 const routes: Routes = [
   {
@@ -93,6 +94,12 @@ const routes: Routes = [
     path: "edit-movie/:id",
     component: EditMovieComponent,
     data: { title: "Edit movie" },
+    canActivate: [AdminGuard]
+  },
+  {
+    path: "discover/:category",
+    component: DiscoverComponent,
+    data: { title: "Discover movies" },
     canActivate: [AdminGuard]
   },
   {

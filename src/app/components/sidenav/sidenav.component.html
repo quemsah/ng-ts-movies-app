@@ -17,8 +17,18 @@
     <li>
       <ul class="collapsible collapsible-accordion">
         <li>
+          <a routerLink="/discover/popular" (click)="sidenavClose()" class="collapsible-header waves-effect">
+            <i class="fas fa-film"></i>popular
+          </a>
+        </li>
+        <!-- <li>
+          <a routerLink="/discover/now-playing" (click)="sidenavClose()" class="collapsible-header waves-effect">
+            <i class="fas fa-film"></i>now-playing
+          </a>
+        </li> -->
+        <li>
           <a routerLink="/movies" (click)="sidenavClose()" class="collapsible-header waves-effect">
-            <i class="fas fa-film"></i>Explore movies
+            <i class="fas fa-film"></i>Movies
           </a>
         </li>
         <li *ngIf="authService.isLoggedIn">

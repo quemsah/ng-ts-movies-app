@@ -26,18 +26,21 @@
             (mouseover)="login = true" (mouseout)="login = false" routerLink="/login" class="dropdown-item">Log in</a>
           <a *ngIf="!authService.isLoggedIn"
             [style.background]="(register === true) ? (themeService.themeColor | safe: 'style') : 'transparent'"
-            (mouseover)="register = true" (mouseout)="register = false" routerLink="/register" class="dropdown-item">Sign
+            (mouseover)="register = true" (mouseout)="register = false" routerLink="/register"
+            class="dropdown-item">Sign
             up</a>
           <a *ngIf="authService.isLoggedIn"
             [style.background]="(friends === true) ? (themeService.themeColor | safe: 'style') : 'transparent'"
-            (mouseover)="friends = true" (mouseout)="friends = false" routerLink="/friends" class="dropdown-item">Friends</a>
+            (mouseover)="friends = true" (mouseout)="friends = false" routerLink="/friends"
+            class="dropdown-item">Friends</a>
           <a *ngIf="authService.isLoggedIn"
             [style.background]="(profile === true) ? (themeService.themeColor | safe: 'style') : 'transparent'"
             (mouseover)="profile = true" (mouseout)="profile = false" routerLink="/profile" class="dropdown-item">My
             account</a>
           <a *ngIf="authService.isLoggedIn"
             [style.background]="(logout === true) ? (themeService.themeColor | safe: 'style') : 'transparent'"
-            (mouseover)="logout = true" (mouseout)="logout = false" (click)="authService.SignOut()" class="dropdown-item">Log
+            (mouseover)="logout = true" (mouseout)="logout = false" (click)="authService.SignOut()"
+            class="dropdown-item">Log
             out</a>
         </div>
       </li>

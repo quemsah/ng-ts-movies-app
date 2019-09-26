@@ -1,0 +1,34 @@
+<span>{{category | json}} works!</span>
+<div class="container-fluid">
+  <section class="mb-4 mt-0 mt-md-4">
+    <div class="row">
+      <div *ngFor="let movie of pageOfItems" class="movie-item col-2 mb-4">
+        <div class="card movie-card h-100">
+          <div *ngIf="movie.IMDBRating" class="card-rating">
+            <a class="">{{movie.vote_average}} <i class="far fa-star"> </i></a>
+          </div>
+          <div class="view overlay">
+            <img src="{{(movie.posterLink) ? movie.posterLink : '../../../assets/img/no_poster_available.jpg'}}"
+              class="card-img-top" alt="Movie Poster">
+            <a routerLink="/movie/{{movie.mid}}">
+              <div class="mask rgba-white-slight"></div>
+            </a>
+          </div>
+          <div class="card-body">
+            <a routerLink="/movie/{{movie.mid}}">
+              <h4 class="card-title">{{movie.title}}</h4>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="mb-4 mt-4">
+    <div class="col">
+      <nav>
+        <app-pagination class="pagination pagination-lg justify-content-center" [items]="movies" [pageSize]=20
+          (changePage)="onChangePage($event)"></app-pagination>
+      </nav>
+    </div>
+  </section>
+</div>
