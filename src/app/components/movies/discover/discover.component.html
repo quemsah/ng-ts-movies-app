@@ -8,10 +8,10 @@
           <div *ngIf="movie.vote_average" class="card-rating">
             <a class="">{{movie.vote_average}} <i class="far fa-star"> </i></a>
           </div>
-          <div class="card-favourite" (click)="handleToFavourites($event)">
+          <div class="card-favourite">
             <a class=""><i id="{{movie.mid}}" class="far fa-heart"></i></a>
           </div>
-          <div class="card-watch-later" (click)="handleToWatchLater($event)">
+          <div class="card-watch-later">
             <a class=""><i id="{{movie.mid}}" class="far fa-clock"></i></a>
           </div>
           <div class="view overlay">

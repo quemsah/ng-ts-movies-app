@@ -17,18 +17,23 @@
     <li>
       <ul class="collapsible collapsible-accordion">
         <li *ngIf="isAdmin">
-          <a routerLink="/discover/popular" (click)="sidenavClose()" class="collapsible-header waves-effect">
-            <i class="fas fa-film"></i>popular
+          <a routerLink="/popular" (click)="sidenavClose()" class="collapsible-header waves-effect">
+            <i class="fas fa-fire-alt"></i>popular
           </a>
         </li>
         <li *ngIf="isAdmin">
-          <a routerLink="/discover/now-playing" (click)="sidenavClose()" class="collapsible-header waves-effect">
-            <i class="fas fa-film"></i>now-playing
+          <a routerLink="/now-playing" (click)="sidenavClose()" class="collapsible-header waves-effect">
+            <i class="far fa-caret-square-right"></i>now-playing
           </a>
         </li>
         <li *ngIf="isAdmin">
-          <a routerLink="/discover/highest-rated" (click)="sidenavClose()" class="collapsible-header waves-effect">
-            <i class="fas fa-film"></i>highest-rated
+          <a routerLink="/highest-rated" (click)="sidenavClose()" class="collapsible-header waves-effect">
+            <i class="fas fa-chart-line"></i>highest-rated
+          </a>
+        </li>
+        <li *ngIf="isAdmin">
+          <a routerLink="/add-movie" (click)="sidenavClose()" class="collapsible-header waves-effect">
+            <i class="fas fa-plus"></i>Add movie
           </a>
         </li>
         <li>
@@ -44,11 +49,6 @@
         <li *ngIf="authService.isLoggedIn">
           <a routerLink="/rated" (click)="sidenavClose()" class="collapsible-header waves-effect">
             <i class="fas fa-star-half-alt"></i>My Ratings
-          </a>
-        </li>
-        <li *ngIf="isAdmin">
-          <a routerLink="/add-movie" (click)="sidenavClose()" class="collapsible-header waves-effect">
-            <i class="fas fa-plus"></i>Add movie
           </a>
         </li>
         <li *ngIf="authService.isLoggedIn">

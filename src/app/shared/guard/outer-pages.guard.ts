@@ -7,8 +7,7 @@ import { Observable } from "rxjs";
   providedIn: "root"
 })
 export class OuterPagesGuard implements CanActivate {
-  constructor() // public themeService: ThemeService
-  {}
+  constructor() {} // public themeService: ThemeService
 
   canActivate(
     next: ActivatedRouteSnapshot,

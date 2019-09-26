@@ -22,7 +22,7 @@ import { SettingsComponent } from "../../components/users/settings/settings.comp
 import { UserComponent } from "../../components/users/user/user.component";
 import { StarComponent } from "../../components/movies/star/star.component";
 import { RatedComponent } from "../../components/users/rated/rated.component";
-import { DiscoverComponent } from '../../components/movies/discover/discover.component';
+import { DiscoverComponent } from "../../components/movies/discover/discover.component";
 
 const routes: Routes = [
   {
@@ -97,9 +97,21 @@ const routes: Routes = [
     canActivate: [AdminGuard]
   },
   {
-    path: "discover/:category",
+    path: "popular",
     component: DiscoverComponent,
-    data: { title: "Discover movies" },
+    data: { title: "Popular" },
+    canActivate: [AdminGuard]
+  },
+  {
+    path: "now-playing",
+    component: DiscoverComponent,
+    data: { title: "Now playing" },
+    canActivate: [AdminGuard]
+  },
+  {
+    path: "highest-rated",
+    component: DiscoverComponent,
+    data: { title: "Hightest rated" },
     canActivate: [AdminGuard]
   },
   {

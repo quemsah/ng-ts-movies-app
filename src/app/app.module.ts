@@ -47,7 +47,7 @@ import { UserComponent } from "./components/users/user/user.component";
 import { StarComponent } from "./components/movies/star/star.component";
 import { RatedComponent } from "./components/users/rated/rated.component";
 import { LoaderComponent } from "./components/loader/loader.component";
-import { DiscoverComponent } from './components/movies/discover/discover.component';
+import { DiscoverComponent } from "./components/movies/discover/discover.component";
 
 @NgModule({
   declarations: [

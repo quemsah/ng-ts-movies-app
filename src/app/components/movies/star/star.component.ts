@@ -5,7 +5,6 @@ import { TMDBService } from "../../../shared/services/tmdb/TMDB.service";
 import { ThemeService } from "../../../shared/services/theme/theme.service";
 import { Star } from "../../../shared/models/star";
 import { StarMovies } from "../../../shared/models/star-movies";
-import { StarMovie } from "../../../shared/models/star-movie";
 
 @Component({
   selector: "app-star",
@@ -13,7 +12,7 @@ import { StarMovie } from "../../../shared/models/star-movie";
   styleUrls: ["./star.component.css"]
 })
 export class StarComponent implements OnInit {
-  starData: any;
+  starData: Star;
   starMovies: StarMovies;
   constructor(
     public themeService: ThemeService,
