@@ -12,13 +12,14 @@ import { MovieService } from "../../../shared/services/movie/movie.service";
 })
 export class DiscoveredMovieComponent implements OnInit {
   discoveredMovieData: any;
-
+  discoveredMovieCrew: any;
+  discoveredMovieCast: any;
   constructor(
     public themeService: ThemeService,
     public tmdbService: TMDBService,
     private movieService: MovieService,
     private route: ActivatedRoute
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.getDiscoveredMovie();
@@ -28,34 +29,39 @@ export class DiscoveredMovieComponent implements OnInit {
     const id = parseInt(this.route.snapshot.paramMap.get("id"), 10);
     this.tmdbService.fetchMovieDetailsByTMDBID(id).subscribe(movie => {
       this.discoveredMovieData = movie;
-      console.log(this.discoveredMovieData);
+    });
+    this.tmdbService.fetchMovieCrewbyTMDBID(id).subscribe(data => {
+      this.discoveredMovieData.director = data.crew[0].name;
+      this.discoveredMovieCrew = this.movieService.sliceData(data.crew, 12);
+      this.discoveredMovieCast = this.movieService.sliceData(data.cast, 12);
     });
   }
   handleAddToDatabase(): void {
-    console.log(this.discoveredMovieData.id);
-    // const movieData: Movie = {
-    //   mid: this.movieService.generateMovieID(
-    //     this.discoveredMovieData.release_date,
-    //     this.discoveredMovieData.title
-    //   ),
-    //   imdb_id: form.value.ImdbId,
-    //   tmdb_id: form.value.TmdbId,
-    //   dateAdded: Math.round(+new Date() / 1000),
-    //   title: form.value.MovieName,
-    //   releaseDate: form.value.Date,
-    //   country:
-    //     form.value.Country.trim() === "United States of America" ? "USA" : form.value.Country,
-    //   IMDBRating: form.value.IMDBRating,
-    //   genres: this.movieService.genresToArray(form.value),
-    //   director: form.value.Director,
-    //   posterLink: form.value.Poster,
-    //   backdropLink: form.value.Backdrop,
-    //   runtime: form.value.Runtime,
-    //   budget: form.value.Budget,
-    //   revenue: form.value.Revenue,
-    //   overview: form.value.Overview
-    // };
-    // console.log(movieData);
-    // this.movieService.setMovieData(movieData);
+    const country = this.discoveredMovieData.production_countries[0].name;
+    console.log(this.discoveredMovieData);
+    const movieData: Movie = {
+      mid: this.movieService.generateMovieID(
+        this.discoveredMovieData.release_date,
+        this.discoveredMovieData.title
+      ),
+      imdb_id: this.discoveredMovieData.imdb_id,
+      tmdb_id: this.discoveredMovieData.id,
+      dateAdded: Math.round(+new Date() / 1000),
+      title: this.discoveredMovieData.title,
+      releaseDate: this.discoveredMovieData.release_date,
+      country: country === "United States of America" ? "USA" : country,
+      IMDBRating: this.discoveredMovieData.vote_average,
+      //genres: this.movieService.genresToArray(form.value),
+      genres: this.movieService.genresToArray(this.discoveredMovieData.genres),
+      director: this.discoveredMovieData.director,
+      posterLink: "https://image.tmdb.org/t/p/w300_and_h450_bestv2" + this.discoveredMovieData.poster_path,
+      backdropLink: "https://image.tmdb.org/t/p/w1400_and_h450_face" + this.discoveredMovieData.backdrop_path,
+      runtime: this.discoveredMovieData.runtime + " min",
+      budget: "$ " + this.discoveredMovieData.budget,
+      revenue: "$ " + this.discoveredMovieData.revenue,
+      overview: this.discoveredMovieData.overview
+    };
+    console.log(movieData);
+    this.movieService.setMovieData(movieData);
   }
 }
