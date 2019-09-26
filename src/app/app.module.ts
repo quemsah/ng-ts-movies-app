@@ -2,12 +2,12 @@ import { BrowserModule, Title } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { HttpClientModule } from "@angular/common/http";
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
+// Сторонние компоненты
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { ModalModule } from "ngx-bootstrap/modal";
 import { NgxSpinnerModule } from "ngx-spinner";
 import { RatingModule } from "ng-starrating";
-// MatSnackBar (замена window.alert)
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { MatSnackBarModule } from "@angular/material/snack-bar";
 // Роуты
 import { AppRoutingModule } from "./shared/routing/app-routing.module";
 // Firebase
@@ -26,29 +26,32 @@ import { NoInfoPipe } from "./shared/pipes/no-info.pipe";
 import { SafePipe } from "./shared/pipes/safe.pipe";
 // Компоненты
 import { AppComponent } from "./app.component";
+// Общие
+import { FooterComponent } from "./components/footer/footer.component";
+import { AboutComponent } from "./components/about/about.component";
+import { NotFoundComponent } from "./components/not-found/not-found.component";
+import { SidenavComponent } from "./components/sidenav/sidenav.component";
+import { NavbarComponent } from "./components/navbar/navbar.component";
+import { PaginationComponent } from "./components/movies/pagination/pagination.component";
+import { LoaderComponent } from "./components/loader/loader.component";
+// Пользователи
 import { LoginComponent } from "./components/users/login/login.component";
 import { RegisterComponent } from "./components/users/register/register.component";
 import { ProfileComponent } from "./components/users/profile/profile.component";
 import { FriendsComponent } from "./components/users/friends/friends.component";
 import { ForgotPasswordComponent } from "./components/users/forgot-password/forgot-password.component";
 import { VerifyEmailComponent } from "./components/users/verify-email/verify-email.component";
-import { FooterComponent } from "./components/footer/footer.component";
-import { AboutComponent } from "./components/about/about.component";
+import { SettingsComponent } from "./components/users/settings/settings.component";
+import { UserComponent } from "./components/users/user/user.component";
+// Фильмы
 import { AddMovieComponent } from "./components/movies/add-movie/add-movie.component";
-import { NotFoundComponent } from "./components/not-found/not-found.component";
-import { SidenavComponent } from "./components/sidenav/sidenav.component";
-import { NavbarComponent } from "./components/navbar/navbar.component";
 import { MovieComponent } from "./components/movies/movie/movie.component";
 import { MoviesListComponent } from "./components/movies/movies-list/movies-list.component";
 import { EditMovieComponent } from "./components/movies/edit-movie/edit-movie.component";
-import { PaginationComponent } from "./components/movies/pagination/pagination.component";
-import { SettingsComponent } from "./components/users/settings/settings.component";
-import { UserComponent } from "./components/users/user/user.component";
 import { StarComponent } from "./components/movies/star/star.component";
 import { RatedComponent } from "./components/users/rated/rated.component";
-import { LoaderComponent } from "./components/loader/loader.component";
 import { DiscoverComponent } from "./components/movies/discover/discover.component";
-import { DiscoveredMovieComponent } from './components/movies/discovered-movie/discovered-movie.component';
+import { DiscoveredMovieComponent } from "./components/movies/discovered-movie/discovered-movie.component";
 
 @NgModule({
   declarations: [
@@ -68,16 +71,16 @@ import { DiscoveredMovieComponent } from './components/movies/discovered-movie/d
     MoviesListComponent,
     FriendsComponent,
     EditMovieComponent,
-    NoInfoPipe,
     PaginationComponent,
     SettingsComponent,
-    SafePipe,
     UserComponent,
     StarComponent,
     RatedComponent,
     LoaderComponent,
     DiscoverComponent,
-    DiscoveredMovieComponent
+    DiscoveredMovieComponent,
+    SafePipe,
+    NoInfoPipe
   ],
   imports: [
     HttpClientModule,
