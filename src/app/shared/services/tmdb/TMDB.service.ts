@@ -11,6 +11,7 @@ export class TMDBService {
   private URL_MOVIE = "https://api.themoviedb.org/3/movie";
   private URL_DISCOVER = "https://api.themoviedb.org/3/discover/movie";
   private URL_STAR = "https://api.themoviedb.org/3/person";
+  public URL_POSTER = "https://image.tmdb.org/t/p/w300_and_h450_bestv2";
 
   constructor(private http: HttpClient, private alertService: AlertService) {}
 
@@ -71,10 +72,22 @@ export class TMDBService {
       `${this.URL_STAR}/${sid}/movie_credits?api_key=${this.API_KEY}&language=en-US&page=1`
     );
   }
-
+  // Most popular movies right now
   fetchPopularMovies(page: number): Observable<any> {
     return this.http.get<any>(
       `${this.URL_DISCOVER}?api_key=${this.API_KEY}&language=en-US&sort_by=popularity.desc&page=${page}`
+    );
+  }
+  // Movies are in theatres
+  fetchNowPlaying(page: number): Observable<any> {
+    return this.http.get<any>(
+      `${this.URL_MOVIE}/now_playing?api_key=${this.API_KEY}&language=en-US&page=${page}`
+    );
+  }
+  // Highest rated movies
+  fetchHighestRated(page: number): Observable<any> {
+    return this.http.get<any>(
+      `${this.URL_MOVIE}/top_rated?api_key=${this.API_KEY}&language=en-US&page=${page}`
     );
   }
 }

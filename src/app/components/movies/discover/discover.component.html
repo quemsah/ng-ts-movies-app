@@ -1,14 +1,22 @@
-<span>{{category | json}} works!</span>
 <div class="container-fluid">
   <section class="mb-4 mt-0 mt-md-4">
     <div class="row">
-      <div *ngFor="let movie of pageOfItems" class="movie-item col-2 mb-4">
+      <h2 class="profile-title col-lg-12 font-weight-bold mb-3"><strong>{{category | json}} works!
+        </strong></h2>
+      <div *ngFor="let movie of pageOfItems" class="movie-item col-lg-3 col-md-4 col-sm-6 mb-4">
         <div class="card movie-card h-100">
-          <div *ngIf="movie.IMDBRating" class="card-rating">
+          <div *ngIf="movie.vote_average" class="card-rating">
             <a class="">{{movie.vote_average}} <i class="far fa-star"> </i></a>
           </div>
+          <div class="card-favourite" (click)="handleToFavourites($event)">
+            <a class=""><i id="{{movie.mid}}" class="far fa-heart"></i></a>
+          </div>
+          <div class="card-watch-later" (click)="handleToWatchLater($event)">
+            <a class=""><i id="{{movie.mid}}" class="far fa-clock"></i></a>
+          </div>
           <div class="view overlay">
-            <img src="{{(movie.posterLink) ? movie.posterLink : '../../../assets/img/no_poster_available.jpg'}}"
+            <img
+              src="{{(movie.poster_path) ? tmdbService.URL_POSTER + movie.poster_path : '../../../assets/img/no_poster_available.jpg'}}"
               class="card-img-top" alt="Movie Poster">
             <a routerLink="/movie/{{movie.mid}}">
               <div class="mask rgba-white-slight"></div>
@@ -18,6 +26,8 @@
             <a routerLink="/movie/{{movie.mid}}">
               <h4 class="card-title">{{movie.title}}</h4>
             </a>
+            <hr>
+            <p class="card-text mb-0">{{movie.release_date | date }}</p>
           </div>
         </div>
       </div>
@@ -26,7 +36,7 @@
   <section class="mb-4 mt-4">
     <div class="col">
       <nav>
-        <app-pagination class="pagination pagination-lg justify-content-center" [items]="movies" [pageSize]=20
+        <app-pagination class="pagination pagination-lg justify-content-center" [items]="movies" [pageSize]=12
           (changePage)="onChangePage($event)"></app-pagination>
       </nav>
     </div>

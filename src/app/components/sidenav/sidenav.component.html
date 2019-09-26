@@ -16,16 +16,21 @@
       </li> -->
     <li>
       <ul class="collapsible collapsible-accordion">
-        <li>
+        <li *ngIf="isAdmin">
           <a routerLink="/discover/popular" (click)="sidenavClose()" class="collapsible-header waves-effect">
             <i class="fas fa-film"></i>popular
           </a>
         </li>
-        <!-- <li>
+        <li *ngIf="isAdmin">
           <a routerLink="/discover/now-playing" (click)="sidenavClose()" class="collapsible-header waves-effect">
             <i class="fas fa-film"></i>now-playing
           </a>
-        </li> -->
+        </li>
+        <li *ngIf="isAdmin">
+          <a routerLink="/discover/highest-rated" (click)="sidenavClose()" class="collapsible-header waves-effect">
+            <i class="fas fa-film"></i>highest-rated
+          </a>
+        </li>
         <li>
           <a routerLink="/movies" (click)="sidenavClose()" class="collapsible-header waves-effect">
             <i class="fas fa-film"></i>Movies
