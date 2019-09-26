@@ -23,6 +23,7 @@ import { UserComponent } from "../../components/users/user/user.component";
 import { StarComponent } from "../../components/movies/star/star.component";
 import { RatedComponent } from "../../components/users/rated/rated.component";
 import { DiscoverComponent } from "../../components/movies/discover/discover.component";
+import { DiscoveredMovieComponent } from "../../components/movies/discovered-movie/discovered-movie.component";
 
 const routes: Routes = [
   {
@@ -112,6 +113,11 @@ const routes: Routes = [
     path: "highest-rated",
     component: DiscoverComponent,
     data: { title: "Hightest rated" },
+    canActivate: [AdminGuard]
+  },
+  {
+    path: "discovered-movie/:id",
+    component: DiscoveredMovieComponent,
     canActivate: [AdminGuard]
   },
   {

@@ -12,6 +12,7 @@ export class TMDBService {
   private URL_DISCOVER = "https://api.themoviedb.org/3/discover/movie";
   private URL_STAR = "https://api.themoviedb.org/3/person";
   public URL_POSTER = "https://image.tmdb.org/t/p/w300_and_h450_bestv2";
+  public URL_BACKDROP = "https://image.tmdb.org/t/p/w1400_and_h450_face";
 
   constructor(private http: HttpClient, private alertService: AlertService) {}
 

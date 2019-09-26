@@ -48,6 +48,7 @@ import { StarComponent } from "./components/movies/star/star.component";
 import { RatedComponent } from "./components/users/rated/rated.component";
 import { LoaderComponent } from "./components/loader/loader.component";
 import { DiscoverComponent } from "./components/movies/discover/discover.component";
+import { DiscoveredMovieComponent } from './components/movies/discovered-movie/discovered-movie.component';
 
 @NgModule({
   declarations: [
@@ -75,7 +76,8 @@ import { DiscoverComponent } from "./components/movies/discover/discover.compone
     StarComponent,
     RatedComponent,
     LoaderComponent,
-    DiscoverComponent
+    DiscoverComponent,
+    DiscoveredMovieComponent
   ],
   imports: [
     HttpClientModule,

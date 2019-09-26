@@ -1,0 +1,85 @@
+<p>discovered-movie works!</p>
+<div class="container-fluid" *ngIf="discoveredMovieData as movie">
+  <!-- Movie card -->
+  <p>{{movie | json}}</p>
+  <section class="mb-4 mt-0 mt-md-4">
+    <div class="row movie-row">
+      <img *ngIf="movie.backdrop_path" class="hipstah-fix" src="{{tmdbService.URL_BACKDROP + movie.backdrop_path}}">
+      <!-- Jumbotron -->
+      <div class="movie-bg card card-image">
+        <div class="text-white stylish-card p-4 d-flex justify-content-between">
+          <div class="col-xl-8">
+            <h2 class="card-title h2 my-2">{{movie.title}}</h2>
+            <h5 class="h5 my-2" [style.color]="themeService.themeColor | safe: 'style'"> {{movie.release_date | date }},
+              {{movie.status}}</h5>
+            <h5 class="h5 my-2 p-0">{{movie.tagline}}</h5>
+            <p *ngIf="movie.runtime" class="my-2 p-0">Runtime: {{movie.runtime}} min</p>
+            <h6 *ngIf="movie.IMDBRating" class="h6 yellow-text my-2 p-0"><i class="far fa-star"> </i>
+              {{movie.IMDBRating}} IMDB</h6>
+            <ul *ngIf="movie.genres" class="list-unstyled d-flex justify-content-start mt-3 p-0">
+              <li *ngFor="let genre of movie.genres" class="">
+                <div class="chip waves-effect waves-effect my-0">{{genre.name}}</div>
+              </li>
+            </ul>
+            <h5 class="h4 my-0 p-0">Homepage</h5>
+            <a href="{{movie.homepage}}"><p class="my-2">{{movie.homepage}}</p></a>
+            <h4 class="h4 my-0 p-0">Overview</h4>
+            <p class="my-2">{{movie.overview}}</p>
+            <p *ngIf="movie.budget" class="m-0 p-0">Budget: {{movie.budget | noInfo}}</p>
+            <p *ngIf="movie.revenue" class="mb-2 p-0">Revenue: {{movie.revenue | noInfo}}</p>
+            <button type="button" class="btn btn-md ml-0" (click)="handleToWatchLater()"
+              [style.background]="themeService.themeGradient | safe: 'style'">
+              <i class="far fa-clock pr-1"></i> Watch later
+            </button>
+            <button type="button" class="btn btn-md ml-0" (click)="handleToFavourites()"
+              [style.background]="themeService.themeGradient | safe: 'style'">
+              <i class="far fa-heart pr-1"></i> Favourite
+            </button>
+            <button type="button" class="btn btn-md ml-0" (click)="openModal(template)"
+              [style.background]="themeService.themeGradient | safe: 'style'">
+              <i class="fas fa-share-alt pr-1"></i> Share
+            </button>
+            <ng-template #template>
+              <div class="modal-header">
+                <h4 class="modal-title pull-left"><i class="fas fa-share-alt pr-1"></i> Share {{movie.title}}</h4>
+                <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <h6>https://doesit.works/movie/{{movie.mid}}</h6>
+                <a [href]="'http://vkontakte.ru/share.php?url=https://doesit.works/movie/'+
+                  movie.mid + '&title=Movies App&description=Look what I have found! ' + movie.title">
+                  <button type="button" class="btn vk-color text-white">Via &nbsp;<i class="fab fa-vk left"></i>
+                  </button>
+                </a>
+                <a [href]="'http://twitter.com/share?url=https://doesit.works/movie/' +
+                    movie.mid + '&text=Look what I have found! ' + movie.title">
+                  <button type="button" class="btn tw-color text-white">Via &nbsp;<i class="fab fa-twitter left"></i>
+                  </button> </a>
+                <a [href]="sanitizer.bypassSecurityTrustResourceUrl('tg://msg_url?url=https://doesit.works/movie/'+
+                      movie.mid + '&text=Look what I have found! ' + movie.title)">
+                  <button type="button" class="btn tg-color text-white">Via &nbsp;<i class="fab fa-telegram left"></i>
+                  </button>
+                </a>
+              </div>
+            </ng-template>
+            <!-- <a *ngIf="this.authService.userData?.isAdmin === true" routerLink="/edit-movie/{{movie.mid}}"
+              id="{{movie.mid}}" type="button" class="btn btn-md btn-blue-grey ml-0" (click)="handleMovieEdit()">
+              <i class="far fa-edit pr-1"></i> Edit
+            </a>
+            <a *ngIf="this.authService.userData?.isAdmin === true" id="{{movie.mid}}" type="button"
+              class="btn btn-md btn-danger ml-0" (click)="handleMovieDelete()">
+              <i class=" far fa-trash-alt pr-1"></i> Delete
+            </a> -->
+          </div>
+          <div class="">
+            <img src="{{(movie.posterLink) ? movie.posterLink : '../../../assets/img/no_poster_available.jpg'}}"
+              class="movie-card-img" alt="Movie Poster">
+          </div>
+        </div>
+      </div>
+      <!-- Jumbotron -->
+    </div>
+  </section>
+</div>

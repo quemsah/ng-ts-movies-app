@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { TMDBService } from "../../../shared/services/tmdb/TMDB.service";
-import { forkJoin, Observable } from "rxjs";
+import { forkJoin } from "rxjs";
 
 @Component({
   selector: "app-discover",
@@ -37,9 +37,10 @@ export class DiscoverComponent implements OnInit {
 
   getDiscoveredMovies(fetcher) {
     // tslint:disable-next-line: deprecation
-    forkJoin(fetcher(1), fetcher(2), fetcher(3)).subscribe(
-      data => (this.movies = this.mergeItems(data))
-    );
+    forkJoin(fetcher(1), fetcher(2), fetcher(3)).subscribe(data => {
+      this.movies = this.mergeItems(data);
+      console.log(this.movies[1]);
+    });
   }
 
   onChangePage(pageOfItems: Array<any>): void {
