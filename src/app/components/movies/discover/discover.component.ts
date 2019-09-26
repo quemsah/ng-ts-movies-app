@@ -32,12 +32,13 @@ export class DiscoverComponent implements OnInit {
       ...Object.values(arr[1].results),
       ...Object.values(arr[2].results)
     ];
-    // tslint:disable-next-line: semicolon
   };
 
   getDiscoveredMovies(fetcher) {
     // tslint:disable-next-line: deprecation
-    forkJoin(fetcher(1), fetcher(2), fetcher(3)).subscribe(data => (this.movies = this.mergeItems(data)));
+    forkJoin(fetcher(1), fetcher(2), fetcher(3)).subscribe(
+      data => (this.movies = this.mergeItems(data))
+    );
   }
 
   onChangePage(pageOfItems: Array<any>): void {

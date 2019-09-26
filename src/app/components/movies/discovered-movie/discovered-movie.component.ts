@@ -12,6 +12,8 @@ import { forkJoin } from "rxjs";
   styleUrls: ["./discovered-movie.component.css"]
 })
 export class DiscoveredMovieComponent implements OnInit {
+  isInOurDatabase: boolean;
+  mid: string;
   discoveredMovieData: any;
   discoveredMovieCrew: any;
   discoveredMovieCast: any;
@@ -28,20 +30,38 @@ export class DiscoveredMovieComponent implements OnInit {
 
   getDiscoveredMovie(): void {
     const id = parseInt(this.route.snapshot.paramMap.get("id"), 10);
+    // tslint:disable-next-line: deprecation
     forkJoin(
       this.tmdbService.fetchMovieDetailsByTMDBID(id),
       this.tmdbService.fetchMovieCrewbyTMDBID(id)
     ).subscribe(([movie, data]) => {
       this.discoveredMovieData = movie;
+      // берем режиссера из другого запроса (актеры и команда)
       this.discoveredMovieData.director = data.crew[0].name;
       this.discoveredMovieCrew = this.movieService.sliceData(data.crew, 12);
       this.discoveredMovieCast = this.movieService.sliceData(data.cast, 12);
+      // проверям есть ли в нашей БД такой
+      this.mid = this.movieService.generateMovieID(
+        this.discoveredMovieData.release_date,
+        this.discoveredMovieData.title
+      );
+      this.searchInOurDatabase(this.mid);
+    });
+  }
+
+  searchInOurDatabase(id: string): void {
+    this.movieService.checkMovie(id).then(movie => {
+      if (movie.exists) {
+        this.isInOurDatabase = true;
+      } else {
+        this.isInOurDatabase = false;
+      }
     });
   }
 
   handleAddToDatabase(): void {
     const country = this.discoveredMovieData.production_countries[0].name;
-    let genres = [];
+    const genres = [];
     this.discoveredMovieData.genres.forEach(element => {
       genres.push(element.name);
     });

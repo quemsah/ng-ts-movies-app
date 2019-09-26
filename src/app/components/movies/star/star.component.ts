@@ -16,8 +16,8 @@ export class StarComponent implements OnInit {
   starMovies: StarMovies;
   constructor(
     public themeService: ThemeService,
+    public tmdbService: TMDBService,
     private route: ActivatedRoute,
-    private tmdbService: TMDBService,
     private spinner: NgxSpinnerService
   ) {}
 

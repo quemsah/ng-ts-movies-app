@@ -200,6 +200,11 @@ export class MovieService {
     return this.afs.doc(`users/${uid}/rated/${mid}/`).valueChanges();
   }
 
+  checkMovie(mid: string) {
+    const movie = this.afs.collection("movies").doc(`${mid}`);
+    return movie.ref.get();
+  }
+
   addComment(commentData: Comment, mid: string) {
     this.afs
       .collection(`movies/`)

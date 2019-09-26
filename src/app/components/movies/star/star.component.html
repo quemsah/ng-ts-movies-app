@@ -6,7 +6,7 @@
         <div class="card star-card">
           <div class="photo z-depth-1-half mb-2">
             <img src="{{(starData?.profile_path) 
-              ? tmdbService.URL_IMG_H450 + starData?.profile_path 
+                    ? tmdbService.URL_IMG_H450 + starData?.profile_path 
                     : '../../../assets/img/no_actor_img.jpg'}}" class="card-img-top" alt="Actor photo"></div>
           <div class="card-body pt-0 mt-0">
             <div class="text-center">
@@ -49,15 +49,13 @@
               <div class="tab-pane fade show active" id="known-for-just" role="tabpanel"
                 aria-labelledby="known-for-tab-just">
                 <div class="row">
-
-
                   <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-4"
                     *ngFor="let movie of starMovies?.cast; let i = index">
                     <div class="card movie-card h-100">
                       <div class="view overlay">
                         <img src="{{(movie.poster_path) 
                           ? tmdbService.URL_IMG_H450 + movie.poster_path 
-                      : '../../../assets/img/no_poster_available.jpg'}}" class="card-img-top" alt="Poster image">
+                          : '../../../assets/img/no_poster_available.jpg'}}" class="card-img-top" alt="Poster image">
                         <a>
                           <div class="mask rgba-white-slight"></div>
                         </a>

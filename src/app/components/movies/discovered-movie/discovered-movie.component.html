@@ -28,21 +28,30 @@
             <p *ngIf="movie.revenue" class="m-0 p-0">Revenue: $ {{movie.revenue}}</p>
             <p *ngIf="movie.production_companies" class="mb-2 p-0">Production company:
               {{movie.production_companies[0]?.name}}</p>
-            <button type="button" class="btn btn-md ml-0" (click)="handleAddToDatabase()"
+            <button *ngIf="!isInOurDatabase" type="button" class="btn btn-md ml-0" (click)="handleAddToDatabase()"
               [style.background]="themeService.themeGradient | safe: 'style'">
               <i class="fas fa-plus pr-1"></i> Add this movie to database
             </button>
+            <button *ngIf="isInOurDatabase" type="button" class="btn btn-md ml-0"
+              [style.background]="themeService.themeGradient | safe: 'style'" disabled>
+              <i class="fa fa-check pr-1"></i> Movie is already in our database!
+            </button>
+            <button *ngIf="isInOurDatabase" routerLink="/movie/{{mid}}" type="button" class="btn btn-md ml-0"
+            [style.background]="themeService.themeGradient | safe: 'style'">
+            <i class="fas fa-arrow-right"></i> Jump to movie page
+          </button>
           </div>
           <div class="">
-            <img
-              src="{{(movie.poster_path) ? tmdbService.URL_IMG_H450 + movie.poster_path : '../../../assets/img/no_poster_available.jpg'}}"
-              class="movie-card-img" alt="Movie Poster">
+            <img src="{{(movie.poster_path) 
+                ? tmdbService.URL_IMG_H450 + movie.poster_path 
+                : '../../../assets/img/no_poster_available.jpg'}}" class="movie-card-img" alt="Movie Poster">
           </div>
         </div>
       </div>
       <!-- Jumbotron -->
     </div>
   </section>
+  <!-- <span>{{isInOurDatabase | json}}</span> -->
   <section class="mb-4 mt-4">
     <!-- двойная проверка, так как если фильм добавлен вручную
       то массив будет пустой -->
