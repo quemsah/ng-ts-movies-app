@@ -154,17 +154,17 @@
             <img src="{{(smovie[i].poster_path) 
                   ? tmdbService.URL_IMG_H450 + smovie[i].poster_path 
                   : '../../../assets/img/no_poster_available.jpg'}}" class="card-img-top" alt="Poster image">
-            <a>
+            <a routerLink="/discovered-movie/{{movieService.generateMovieID(smovie[i].release_date,smovie[i].title)}}">
               <div class="mask rgba-white-slight"></div>
             </a>
           </div>
           <div class="card-body">
-            <a>
+            <a routerLink="/discovered-movie/{{movie.mid}}">
               <h4 class="card-title">{{smovie[i].title}}</h4>
             </a>
             <p></p>
             <hr>
-            <p class="card-text mb-0">{{smovie[i].release_date  | date }}</p>
+            <p class="card-text mb-0">{{smovie[i].release_date | date }}</p>
           </div>
         </div>
       </div>

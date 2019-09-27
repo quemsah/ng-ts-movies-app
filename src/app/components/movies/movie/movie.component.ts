@@ -37,8 +37,8 @@ export class MovieComponent implements OnInit, AfterViewInit {
     public sanitizer: DomSanitizer,
     public themeService: ThemeService,
     public tmdbService: TMDBService,
+    public movieService: MovieService,
     private route: ActivatedRoute,
-    private movieService: MovieService,
     private titleService: Title,
     private modalService: BsModalService,
     private spinner: NgxSpinnerService

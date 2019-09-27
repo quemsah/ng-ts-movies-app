@@ -34,7 +34,7 @@
       <div class="col-md-9">
         <div class="row mb-1">
           <div class="movie-tabs">
-            <ul class="nav nav-tabs nav-justified md-tabs "
+            <ul class="nav nav-tabs nav-justified md-tabs"
               [style.background]="themeService.themeGradient | safe: 'style'" id="myTabJust" role="tablist">
               <li class="nav-item">
                 <a class="nav-link active" id="known-for-tab-just" data-toggle="tab" href="#known-for-just" role="tab"
@@ -56,7 +56,7 @@
                         <img src="{{(movie.poster_path) 
                           ? tmdbService.URL_IMG_H450 + movie.poster_path 
                           : '../../../assets/img/no_poster_available.jpg'}}" class="card-img-top" alt="Poster image">
-                        <a>
+                          <a routerLink="/discovered-movie/{{movie.id}}">
                           <div class="mask rgba-white-slight"></div>
                         </a>
                       </div>
