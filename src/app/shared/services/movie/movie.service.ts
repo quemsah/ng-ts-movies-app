@@ -27,6 +27,17 @@ export class MovieService {
     { name: "Sci-Fi", prefix: "g", selected: false, id: 878 },
     { name: "Thriller", prefix: "g", selected: false, id: 53 }
   ];
+  sortingFields = [
+    { id: 0, value: "dateAdded", name: "Date Added" },
+    { id: 1, value: "title", name: "Title" },
+    { id: 2, value: "releaseDate", name: "Release Date" },
+    { id: 3, value: "country", name: "Country" },
+    { id: 4, value: "IMDBRating", name: "IMDB Rating" },
+    { id: 5, value: "genres", name: "Genre" },
+    { id: 6, value: "director", name: "Director" },
+    { id: 7, value: "budget", name: "Budget" },
+    { id: 8, value: "revenue", name: "Revenue" }
+  ];
   constructor(
     private afs: AngularFirestore,
     private alertService: AlertService,

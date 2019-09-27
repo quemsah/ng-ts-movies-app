@@ -17,17 +17,7 @@ export class MoviesListComponent implements OnInit, AfterViewInit {
   sortingValue = "dateAdded";
   sortingType = "desc";
   searchValue = "";
-  sortingValues = [
-    { id: 0, value: "dateAdded", name: "Date Added" },
-    { id: 1, value: "title", name: "Title" },
-    { id: 2, value: "releaseDate", name: "Release Date" },
-    { id: 3, value: "country", name: "Country" },
-    { id: 4, value: "IMDBRating", name: "IMDB Rating" },
-    { id: 5, value: "genres", name: "Genre" },
-    { id: 6, value: "director", name: "Director" },
-    { id: 7, value: "budget", name: "Budget" },
-    { id: 8, value: "revenue", name: "Revenue" }
-  ];
+  sortingValues = this.movieService.sortingFields;
   constructor(
     public authService: AuthService,
     public themeService: ThemeService,
@@ -75,7 +65,7 @@ export class MoviesListComponent implements OnInit, AfterViewInit {
             .toLowerCase()
             .indexOf(key) !== -1
       )
-    )
+    );
 
   getMovies(): void {
     this.movieService.fetchMovies(this.sortingValue, this.sortingType).subscribe(movies => {

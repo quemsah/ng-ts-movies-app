@@ -3,6 +3,7 @@ import { ActivatedRoute } from "@angular/router";
 import { Movie } from "../../../shared/models/movie";
 import { Crew } from "../../../shared/models/crew";
 import { NgxSpinnerService } from "ngx-spinner";
+import { AuthService } from "../../../shared/services/auth/auth.service";
 import { TMDBService } from "../../../shared/services/tmdb/TMDB.service";
 import { ThemeService } from "../../../shared/services/theme/theme.service";
 import { MovieService } from "../../../shared/services/movie/movie.service";
@@ -20,6 +21,7 @@ export class DiscoveredMovieComponent implements OnInit {
   discoveredMovieCrew: Crew[];
   discoveredMovieCast: Crew[];
   constructor(
+    public authService: AuthService,
     public themeService: ThemeService,
     public tmdbService: TMDBService,
     private movieService: MovieService,

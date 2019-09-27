@@ -92,4 +92,11 @@ export class TMDBService {
       `${this.URL_MOVIE}/top_rated?api_key=${this.API_KEY}&language=en-US&page=${page}`
     );
   }
+
+  fetchByGenre(page: number, genre: string): Observable<any> {
+    console.log(page);
+    return this.http.get<any>(
+      `${this.URL_DISCOVER}?api_key=${this.API_KEY}&language=en-US&sort_by=popularity.desc&with_genres=${genre}&page=${page}`
+    );
+  }
 }

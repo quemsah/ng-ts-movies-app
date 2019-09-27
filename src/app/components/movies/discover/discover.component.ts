@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { NgxSpinnerService } from "ngx-spinner";
 import { TMDBService } from "../../../shared/services/tmdb/TMDB.service";
+import { MovieService } from "../../../shared/services/movie/movie.service";
 import { forkJoin } from "rxjs";
 
 @Component({
@@ -11,12 +12,16 @@ import { forkJoin } from "rxjs";
 })
 export class DiscoverComponent implements OnInit {
   movies: any[];
+  genres = this.movieService.genres;
   category: string;
   title: string;
+  // default genreValue = "Adventrure"
+  genreValue = 12;
   pageOfItems: Array<any>;
   constructor(
-    private route: ActivatedRoute,
     public tmdbService: TMDBService,
+    public movieService: MovieService,
+    private route: ActivatedRoute,
     private spinner: NgxSpinnerService
   ) {}
 
@@ -33,6 +38,9 @@ export class DiscoverComponent implements OnInit {
       case "highest-rated":
         this.title = "Highest rated movies";
         return this.getDiscoveredMovies(this.tmdbService.fetchHighestRated.bind(this.tmdbService));
+      case "genres":
+        this.title = "Discover by genres";
+        return this.getDiscoveredMovies(this.tmdbService.fetchByGenre.bind(this.tmdbService), "12");
     }
   }
 
@@ -44,12 +52,23 @@ export class DiscoverComponent implements OnInit {
     ];
   };
 
-  getDiscoveredMovies(fetcher) {
+  getDiscoveredMovies(fetcher, genre?: string) {
     // tslint:disable-next-line: deprecation
-    forkJoin(fetcher(1), fetcher(2), fetcher(3)).subscribe(data => {
+    forkJoin(fetcher(1, genre), fetcher(2, genre), fetcher(3, genre)).subscribe(data => {
       this.movies = this.mergeItems(data);
+      // console.log(this.movies);
       this.spinner.hide();
     });
+  }
+
+  onGenreValueChange(genre: any): void {
+    this.spinner.show();
+    this.genreValue = genre;
+    // console.log('Genre id = ' + this.genreValue);
+    this.getDiscoveredMovies(
+      this.tmdbService.fetchByGenre.bind(this.tmdbService),
+      this.genreValue.toString()
+    );
   }
 
   onChangePage(pageOfItems: Array<any>): void {

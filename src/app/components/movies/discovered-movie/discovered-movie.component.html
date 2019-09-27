@@ -29,10 +29,15 @@
             <p *ngIf="movie.revenue" class="m-0 p-0">Revenue: $ {{movie.revenue}}</p>
             <p *ngIf="movie.production_companies" class="mb-2 p-0">Production company:
               {{movie.production_companies[0]?.name}}</p>
-            <button *ngIf="!isInOurDatabase" type="button" class="btn btn-md ml-0" (click)="handleAddToDatabase()"
+            <button *ngIf="!isInOurDatabase && authService.userData?.isAdmin === true" type="button"
+              class="btn btn-md ml-0" (click)="handleAddToDatabase()"
               [style.background]="themeService.themeGradient | safe: 'style'">
               <i class="fas fa-plus pr-1"></i> Add this movie to database
             </button>
+            <h5 *ngIf="!isInOurDatabase && authService.userData?.isAdmin === false" class="h5 my-2"
+              [style.color]="themeService.themeColor | safe: 'style'">
+              Unfortunately, film isn't in our database
+            </h5>
             <button *ngIf="isInOurDatabase" type="button" class="btn btn-md ml-0"
               [style.background]="themeService.themeGradient | safe: 'style'" disabled>
               <i class="fa fa-check pr-1"></i> Movie is already in our database!

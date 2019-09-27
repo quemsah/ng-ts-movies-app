@@ -101,24 +101,30 @@ const routes: Routes = [
     path: "popular",
     component: DiscoverComponent,
     data: { title: "Popular" },
-    canActivate: [AdminGuard]
+    canActivate: [AuthGuard]
   },
   {
     path: "now-playing",
     component: DiscoverComponent,
     data: { title: "Now playing" },
-    canActivate: [AdminGuard]
+    canActivate: [AuthGuard]
   },
   {
     path: "highest-rated",
     component: DiscoverComponent,
     data: { title: "Hightest rated" },
-    canActivate: [AdminGuard]
+    canActivate: [AuthGuard]
+  },
+  {
+    path: "genres",
+    component: DiscoverComponent,
+    data: { title: "Discover by genres" },
+    canActivate: [AuthGuard]
   },
   {
     path: "discovered-movie/:id",
     component: DiscoveredMovieComponent,
-    canActivate: [AdminGuard]
+    canActivate: [AuthGuard]
   },
   {
     path: "movie/:id",
