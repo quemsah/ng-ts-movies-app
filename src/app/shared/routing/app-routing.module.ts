@@ -98,6 +98,12 @@ const routes: Routes = [
     canActivate: [AdminGuard]
   },
   {
+    path: "search/:query",
+    component: DiscoverComponent,
+    data: { title: "Search" },
+    canActivate: [AuthGuard]
+  },
+  {
     path: "popular",
     component: DiscoverComponent,
     data: { title: "Popular" },

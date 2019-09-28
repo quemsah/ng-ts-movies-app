@@ -15,6 +15,7 @@ export class DiscoverComponent implements OnInit {
   genres = this.movieService.genres;
   category: string;
   title: string;
+  searchValue: "";
   // default genreValue = "Adventrure"
   genreValue = 12;
   pageOfItems: Array<any>;
@@ -41,6 +42,13 @@ export class DiscoverComponent implements OnInit {
       case "genres":
         this.title = "Discover by genres";
         return this.getDiscoveredMovies(this.tmdbService.fetchByGenre.bind(this.tmdbService), "12");
+      // case "search:/query"
+      default:
+        this.category = "search";
+        this.searchValue = this.route.snapshot.params.query;
+        console.log(this.category + ": query = " + this.searchValue);
+        this.title = "Search movies";
+        return this.getDiscoveredMovies(this.tmdbService.fetchPopularMovies.bind(this.tmdbService));
     }
   }
 

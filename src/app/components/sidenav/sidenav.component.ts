@@ -1,7 +1,8 @@
 import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
+import { AngularFireAuth } from "@angular/fire/auth";
 import { ThemeService } from "../../shared/services/theme/theme.service";
 import { AuthService } from "../../shared/services/auth/auth.service";
-import { AngularFireAuth } from "@angular/fire/auth";
 
 declare var $: any;
 
@@ -15,6 +16,7 @@ export class SidenavComponent implements OnInit {
   isAdmin: boolean;
   constructor(
     private afAuth: AngularFireAuth,
+    private router: Router,
     public authService: AuthService,
     public themeService: ThemeService
   ) {
@@ -28,6 +30,11 @@ export class SidenavComponent implements OnInit {
   }
 
   ngOnInit() {}
+
+  handleChangeSearchQuery(searchValue: string) {
+    // console.log(searchValue);
+    this.router.navigate(["search/" + searchValue]);
+  }
   // https://github.com/Dogfalo/materialize/issues/1676
   // https://stackoverflow.com/questions/32591402/materialize-sidenav-produces-multiple-sidenav-overlay
   sidenavClose(): void {

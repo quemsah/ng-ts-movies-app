@@ -10,6 +10,7 @@ export class TMDBService {
   private URL_FIND = "https://api.themoviedb.org/3/find";
   private URL_MOVIE = "https://api.themoviedb.org/3/movie";
   private URL_DISCOVER = "https://api.themoviedb.org/3/discover/movie";
+  // private URL_SEARCH = "https://api.themoviedb.org/3/search/movie";
   private URL_STAR = "https://api.themoviedb.org/3/person";
   public URL_BACKDROP = "https://image.tmdb.org/t/p/w1400_and_h450_face";
   public URL_IMG_H450 = "https://image.tmdb.org/t/p/w300_and_h450_bestv2";

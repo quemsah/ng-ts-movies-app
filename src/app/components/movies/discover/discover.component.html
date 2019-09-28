@@ -2,7 +2,8 @@
 <div class="container-fluid">
   <section class="mb-4 mt-0 mt-md-4">
     <div class="row">
-      <h2 *ngIf="category !== 'genres'" class="profile-title col-lg-12 font-weight-bold mb-3"><strong>{{title}}
+      <h2 *ngIf="category !== 'genres' && category !== 'search'" class="profile-title col-lg-12 font-weight-bold mb-3">
+        <strong>{{title}}
         </strong></h2>
       <div *ngIf="category === 'genres'" class="row select-by col-12">
         <div class="col-sm-6 col-md-6 d-flex justify-content-start align-items-center">
@@ -15,6 +16,16 @@
             <option *ngFor="let item of genres" [value]="item.id" class="select-option">{{item.name}}
             </option>
           </select>
+        </div>
+      </div>
+      <div *ngIf="category === 'search'" class="row select-by col-12">
+        <div class="col-sm-6 col-md-6 d-flex justify-content-start align-items-center">
+          <h2 class="profile-title col-lg-12 font-weight-bold mb-3"><strong>{{title}}</strong></h2>
+        </div>
+        <div class="col-sm-6 col-md-6 md-form mt-0 mb-3">
+            <!-- (keyup)="onSearchChange()" -->
+          <input type="text" class="form-control form-control-lg" [(ngModel)]="searchValue"
+            [ngModelOptions]="{standalone: true}" placeholder="Query...">
         </div>
       </div>
       <div *ngFor="let movie of pageOfItems" class="movie-item col-lg-3 col-md-4 col-sm-6 mb-4">
