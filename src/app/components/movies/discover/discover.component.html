@@ -23,9 +23,9 @@
           <h2 class="profile-title col-lg-12 font-weight-bold mb-3"><strong>{{title}}</strong></h2>
         </div>
         <div class="col-sm-6 col-md-6 md-form mt-0 mb-3">
-            <!-- (keyup)="onSearchChange()" -->
           <input type="text" class="form-control form-control-lg" [(ngModel)]="searchValue"
-            [ngModelOptions]="{standalone: true}" placeholder="Query...">
+            [ngModelOptions]="{standalone: true}" (ngModelChange)="this.searchValueUpdate.next($event)"
+            placeholder="Query...">
         </div>
       </div>
       <div *ngFor="let movie of pageOfItems" class="movie-item col-lg-3 col-md-4 col-sm-6 mb-4">

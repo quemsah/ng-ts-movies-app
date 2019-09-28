@@ -10,7 +10,7 @@ export class TMDBService {
   private URL_FIND = "https://api.themoviedb.org/3/find";
   private URL_MOVIE = "https://api.themoviedb.org/3/movie";
   private URL_DISCOVER = "https://api.themoviedb.org/3/discover/movie";
-  // private URL_SEARCH = "https://api.themoviedb.org/3/search/movie";
+  private URL_SEARCH = "https://api.themoviedb.org/3/search/movie";
   private URL_STAR = "https://api.themoviedb.org/3/person";
   public URL_BACKDROP = "https://image.tmdb.org/t/p/w1400_and_h450_face";
   public URL_IMG_H450 = "https://image.tmdb.org/t/p/w300_and_h450_bestv2";
@@ -77,6 +77,12 @@ export class TMDBService {
       `${this.URL_STAR}/${sid}/movie_credits?api_key=${this.API_KEY}&language=en-US&page=1`
     );
   }
+
+  fetchFoundMovies(page: number, query: string): Observable<any> {
+    return this.http.get<any>(
+      `${this.URL_SEARCH}?api_key=${this.API_KEY}&language=en-US&query=${query}&page=${page}`
+    );
+  }
   // Most popular movies right now
   fetchPopularMovies(page: number): Observable<any> {
     return this.http.get<any>(
@@ -97,7 +103,6 @@ export class TMDBService {
   }
 
   fetchByGenre(page: number, genre: string): Observable<any> {
-    console.log(page);
     return this.http.get<any>(
       `${this.URL_DISCOVER}?api_key=${this.API_KEY}&language=en-US&sort_by=popularity.desc&with_genres=${genre}&page=${page}`
     );

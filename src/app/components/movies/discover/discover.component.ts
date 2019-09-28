@@ -3,7 +3,8 @@ import { ActivatedRoute } from "@angular/router";
 import { NgxSpinnerService } from "ngx-spinner";
 import { TMDBService } from "../../../shared/services/tmdb/TMDB.service";
 import { MovieService } from "../../../shared/services/movie/movie.service";
-import { forkJoin } from "rxjs";
+import { forkJoin, Subject } from "rxjs";
+import { debounceTime, distinctUntilChanged } from "rxjs/operators";
 
 @Component({
   selector: "app-discover",
@@ -15,7 +16,8 @@ export class DiscoverComponent implements OnInit {
   genres = this.movieService.genres;
   category: string;
   title: string;
-  searchValue: "";
+  searchValue: string;
+  searchValueUpdate = new Subject<string>();
   // default genreValue = "Adventrure"
   genreValue = 12;
   pageOfItems: Array<any>;
@@ -24,7 +26,24 @@ export class DiscoverComponent implements OnInit {
     public movieService: MovieService,
     private route: ActivatedRoute,
     private spinner: NgxSpinnerService
-  ) {}
+  ) {
+    // Debounce search
+    const interval = Math.floor(Math.random() * (700 - 500 + 1) + 500);
+    this.searchValueUpdate
+      .pipe(
+        debounceTime(interval),
+        distinctUntilChanged()
+      )
+      .subscribe(value => {
+        this.searchValue = value.toString();
+        console.log("debounceTime(" + interval + "), query = " + this.searchValue);
+        this.spinner.show();
+        this.getDiscoveredMovies(
+          this.tmdbService.fetchFoundMovies.bind(this.tmdbService),
+          this.searchValue.toString()
+        );
+      });
+  }
 
   ngOnInit() {
     this.spinner.show();
@@ -48,7 +67,10 @@ export class DiscoverComponent implements OnInit {
         this.searchValue = this.route.snapshot.params.query;
         console.log(this.category + ": query = " + this.searchValue);
         this.title = "Search movies";
-        return this.getDiscoveredMovies(this.tmdbService.fetchPopularMovies.bind(this.tmdbService));
+        return this.getDiscoveredMovies(
+          this.tmdbService.fetchFoundMovies.bind(this.tmdbService),
+          this.searchValue.toString()
+        );
     }
   }
 
@@ -72,7 +94,6 @@ export class DiscoverComponent implements OnInit {
   onGenreValueChange(genre: any): void {
     this.spinner.show();
     this.genreValue = genre;
-    // console.log('Genre id = ' + this.genreValue);
     this.getDiscoveredMovies(
       this.tmdbService.fetchByGenre.bind(this.tmdbService),
       this.genreValue.toString()
