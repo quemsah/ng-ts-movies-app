@@ -53,6 +53,7 @@ export class TMDBService {
   }
 
   fetchMovieTrailersByTMDBID(mid: number): Observable<any> {
+    console.log("TMDB fetching");
     return this.http.get<any>(
       `${this.URL_MOVIE}/${mid}/videos?api_key=${this.API_KEY}&language=en-US}`
     );
@@ -69,6 +70,7 @@ export class TMDBService {
       `${this.URL_STAR}/${sid}?api_key=${this.API_KEY}&language=&language=en-US`
     );
   }
+
   fetchStarMovies(sid: number): Observable<any> {
     return this.http.get<any>(
       `${this.URL_STAR}/${sid}/movie_credits?api_key=${this.API_KEY}&language=en-US&page=1`

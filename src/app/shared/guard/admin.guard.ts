@@ -21,12 +21,16 @@ export class AdminGuard implements CanActivate {
     state: RouterStateSnapshot
   ): Observable<boolean> | Promise<boolean> | boolean {
     // this.themeService.forceDisableDarkModeBeforeRoute();
-    this.afAuth.authState.subscribe(user => {
-      if (!this.authService.checkRole(user)) {
-        console.log("Admin guard!");
-        this.router.navigate(["not-found"]);
-      }
-    });
+    if (this.authService.isLoggedIn !== true) {
+      console.log("Auth guard!");
+      this.afAuth.authState.subscribe(user => {
+        if (!this.authService.checkRole(user)) {
+          console.log("Admin guard!");
+          this.router.navigate(["not-found"]);
+        }
+      });
+      this.router.navigate(["login"]);
+    }
     return true;
   }
 }
