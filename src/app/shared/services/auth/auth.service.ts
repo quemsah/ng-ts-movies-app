@@ -14,7 +14,8 @@ import { finalize } from "rxjs/operators";
   providedIn: "root"
 })
 export class AuthService {
-  private ADMIN_KEY = "cXVlbXNh";
+  // private ADMIN_KEY = "cXVlbXNh";
+  private ADMIN_KEY = "cXVlbXNhdXJvc2VAbWFpbC5ydQ==";
   // Данные пользователя из authState
   userData: User;
 

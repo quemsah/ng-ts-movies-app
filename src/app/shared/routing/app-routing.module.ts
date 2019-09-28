@@ -59,7 +59,7 @@ const routes: Routes = [
     path: "settings",
     component: SettingsComponent,
     data: { title: "Settings" },
-    canActivate: [AuthGuard]
+    canActivate: [OuterPagesGuard]
   },
   {
     path: "friends",

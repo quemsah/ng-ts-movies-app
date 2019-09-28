@@ -2,7 +2,8 @@
   <div class="row">
     <div class="col-lg-4 mb-4">
       <div class="card card-cascade narrower">
-        <div class="view view-cascade gradient-card-header" [style.background]="themeService.themeGradient | safe: 'style'">
+        <div class="view view-cascade gradient-card-header"
+          [style.background]="themeService.themeGradient | safe: 'style'">
           <h5 class="mb-0 font-weight-bold">Get info via TMDB</h5>
         </div>
         <div class="card-body card-body-cascade text-center">
@@ -11,7 +12,8 @@
             <div class="md-form mb-0">
               <input class="form-control" type="text" ngModel name="ImdbId">
               <label>IMDB ID</label>
-              <button class="btn btn-info btn-rounded btn-sm waves-effect waves-light " [style.background]="themeService.themeGradient | safe: 'style'">Submit</button><br>
+              <button class="btn btn-info btn-rounded btn-sm waves-effect waves-light "
+                [style.background]="themeService.themeGradient | safe: 'style'">Submit</button><br>
             </div>
           </form>
         </div>
@@ -21,7 +23,8 @@
     <span>{{this.foundMovieCrew | json}}</span> -->
     <div class="col-lg-8 mb-4">
       <div class="card card-cascade narrower">
-        <div class="view view-cascade gradient-card-header" [style.background]="themeService.themeGradient | safe: 'style'">
+        <div class="view view-cascade gradient-card-header"
+          [style.background]="themeService.themeGradient | safe: 'style'">
           <h5 class="mb-0 font-weight-bold">Add Movie</h5>
         </div>
         <div class="card-body card-body-cascade text-center">
@@ -30,14 +33,14 @@
               <div class="col-md-4 ">
                 <div class="md-form form-sm mb-0">
                   <input placeholder="–" type="text" class="form-control form-control-sm"
-                    [(ngModel)]=foundMovieData.imdb_id name="ImdbId">
+                    [(ngModel)]=foundMovieData.imdb_id name="ImdbId" readonly="true">
                   <label class="">IMDB ID</label>
                 </div>
               </div>
               <div class="col-md-4">
                 <div class="md-form form-sm mb-0">
                   <input placeholder="–" type="text" class="form-control form-control-sm" [(ngModel)]=foundMovieData.id
-                    name="TmdbId">
+                    name="TmdbId" readonly="true">
                   <label class="">TMDB ID</label>
                 </div>
               </div>
@@ -138,7 +141,8 @@
             <div class="row">
               <div class="col-md-12 text-center my-1">
                 <span class="waves-input-wrapper waves-effect waves-light"><input type="submit" value="Add Movie"
-                    class="btn btn-info btn-rounded " [style.background]="themeService.themeGradient | safe: 'style'" [disabled]="addNewMovie.invalid"></span>
+                    class="btn btn-info btn-rounded " [style.background]="themeService.themeGradient | safe: 'style'"
+                    [disabled]="addNewMovie.invalid"></span>
               </div>
             </div>
           </form>

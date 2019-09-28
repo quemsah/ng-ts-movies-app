@@ -41,7 +41,7 @@
             <i class="far fa-clone"></i>Discover by genres
           </a>
         </li>
-        <li *ngIf="isAdmin">
+        <li *ngIf="isAdmin && authService.isLoggedIn">
           <a routerLink="/add-movie" (click)="sidenavClose()" class="collapsible-header waves-effect">
             <i class="fas fa-plus"></i>Add movie
           </a>

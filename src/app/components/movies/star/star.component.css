@@ -16,5 +16,9 @@
 }
 
 .card-title {
-  font-size: x-small !important;
+  font-size: small !important;
+}
+
+p.biography {
+  text-indent: 30px;
 }

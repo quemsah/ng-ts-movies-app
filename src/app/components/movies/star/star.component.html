@@ -56,7 +56,7 @@
                         <img src="{{(movie.poster_path) 
                           ? tmdbService.URL_IMG_H450 + movie.poster_path 
                           : '../../../assets/img/no_poster_available.jpg'}}" class="card-img-top" alt="Poster image">
-                          <a routerLink="/discovered-movie/{{movie.id}}">
+                        <a routerLink="/discovered-movie/{{movie.id}}">
                           <div class="mask rgba-white-slight"></div>
                         </a>
                       </div>
@@ -71,8 +71,8 @@
               </div>
               <div class="tab-pane fade" id="bio-just" role="tabpanel" aria-labelledby="bio-tab-just">
                 <div class="row">
-                  <div class="col-12 mb-4">
-                    <p>{{starData?.biography ? starData?.biography : 'No information' }}</p>
+                  <div class="col-12">
+                    <p class="biography m-2">{{starData?.biography ? starData?.biography : 'No information' }}</p>
                   </div>
                 </div>
               </div>
