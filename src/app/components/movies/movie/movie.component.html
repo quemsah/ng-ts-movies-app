@@ -210,8 +210,10 @@
           <div class="card-header d-flex justify-content-between"
             [style.background]="themeService.themeGradient | safe: 'style'">
             <p class="pt-2 mb-0 text-white">
-              <strong><a class="h5 text-white" target="_blank">Leave a comment as
-                  {{user.displayName}}</a></strong>
+              <strong>
+                <p class="h5 text-white">Leave a comment as
+                  {{user.displayName}}</p>
+              </strong>
           </div>
           <div #cform class="card-body">
             <form #fAddComment="ngForm" (ngSubmit)="handleAddComment(fAddComment)">

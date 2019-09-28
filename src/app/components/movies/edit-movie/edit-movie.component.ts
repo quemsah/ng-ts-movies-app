@@ -35,6 +35,7 @@ export class EditMovieComponent implements OnInit, AfterViewInit {
   }
 
   onEditMovieSubmit(form: NgForm): void {
+    // console.log(this.currentMovieData);
     // приводим к нужному виду
     const movieData: Movie = {
       mid: this.movieService.generateMovieID(form.value.Date, form.value.MovieName),
@@ -61,8 +62,8 @@ export class EditMovieComponent implements OnInit, AfterViewInit {
     // tslint:disable-next-line: no-unused-expression
     !(this.title === form.value.MovieName && this.releaseDate === form.value.Date)
       ? this.movieService.deleteMovie(this.currentMovieData.mid)
-      // tslint:disable-next-line: no-unused-expression
-      : null;
+      : // tslint:disable-next-line: no-unused-expression
+        null;
     this.movieService.setMovieData(movieData);
   }
 }

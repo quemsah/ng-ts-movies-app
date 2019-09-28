@@ -36,7 +36,7 @@
             </button>
             <h5 *ngIf="!isInOurDatabase && authService.userData?.isAdmin === false" class="h5 my-2"
               [style.color]="themeService.themeColor | safe: 'style'">
-              Unfortunately, film isn't in our database
+              Unfortunately, movie isn't in our database
             </h5>
             <button *ngIf="isInOurDatabase" type="button" class="btn btn-md ml-0"
               [style.background]="themeService.themeGradient | safe: 'style'" disabled>

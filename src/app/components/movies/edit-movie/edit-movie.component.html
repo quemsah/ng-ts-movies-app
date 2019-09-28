@@ -2,7 +2,8 @@
   <div class="row">
     <div class="col-lg-12 mb-4">
       <div class="card card-cascade narrower">
-        <div class="view view-cascade gradient-card-header " [style.background]="themeService.themeGradient | safe: 'style'">
+        <div class="view view-cascade gradient-card-header "
+          [style.background]="themeService.themeGradient | safe: 'style'">
           <h5 class="mb-0 font-weight-bold">Edit Movie</h5>
         </div>
         <div class="card-body card-body-cascade text-center">
@@ -10,14 +11,14 @@
             <div class="row">
               <div class="col-md-4 ">
                 <div class="md-form form-sm mb-0">
-                  <input placeholder="–" type="text" class="form-control form-control-sm"
-                    [(ngModel)]=currentMovieData.imdb_id name="ImdbId" disabled>
+                  <input *ngIf="currentMovieData?.imdb_id" placeholder="–" type="text" class="form-control form-control-sm"
+                    [(ngModel)]="currentMovieData.imdb_id" name="ImdbId" disabled>
                   <label class="">IMDB ID</label>
                 </div>
               </div>
               <div class="col-md-4">
                 <div class="md-form form-sm mb-0">
-                  <input placeholder="–" type="text" class="form-control form-control-sm"
+                  <input *ngIf="currentMovieData?.tmdb_id" placeholder="–" type="text" class="form-control form-control-sm"
                     [(ngModel)]=currentMovieData.tmdb_id name="TmdbId" disabled>
                   <label class="">TMDB ID</label>
                 </div>
@@ -113,7 +114,8 @@
             <div class="row">
               <div class="col-md-12 text-center my-1">
                 <span class="waves-input-wrapper waves-effect waves-light"><input type="submit" value="Edit Movie"
-                    class="btn btn-info btn-rounded " [style.background]="themeService.themeGradient | safe: 'style'" [disabled]="editMovie.invalid"></span>
+                    class="btn btn-info btn-rounded " [style.background]="themeService.themeGradient | safe: 'style'"
+                    [disabled]="editMovie.invalid"></span>
               </div>
             </div>
           </form>

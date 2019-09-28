@@ -18,7 +18,8 @@
           </div>
           <div class="text-center">
             <button class="btn btn-lg text-white" [style.background]="themeService.themeGradient | safe: 'style'"
-              (click)="authService.SignIn(userName.value, userPassword.value)">Log in</button>
+              (click)="authService.SignIn(userName.value, userPassword.value)"
+              (keyup.enter)="authService.SignIn(userName.value, userPassword.value)">Log in</button>
             <button class="btn btn-lg text-white" [style.background]="themeService.themeGradient | safe: 'style'"
               (click)="authService.GoogleAuth()">
               Continue with &nbsp;<i class="fab fa-google"></i></button>
