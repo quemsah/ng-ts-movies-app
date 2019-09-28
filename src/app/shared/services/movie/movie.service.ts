@@ -207,6 +207,14 @@ export class MovieService {
       );
   }
 
+  fetchFavourites(uid: string, mid: string): Observable<any> {
+    return this.afs.doc(`users/${uid}/favourites/${mid}/`).valueChanges();
+  }
+
+  fetchWatchLater(uid: string, mid: string): Observable<any> {
+    return this.afs.doc(`users/${uid}/watchlater/${mid}/`).valueChanges();
+  }
+
   fetchRating(uid: string, mid: string): Observable<any> {
     return this.afs.doc(`users/${uid}/rated/${mid}/`).valueChanges();
   }

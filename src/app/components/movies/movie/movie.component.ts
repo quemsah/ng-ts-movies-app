@@ -29,6 +29,8 @@ export class MovieComponent implements OnInit, AfterViewInit {
   movieTrailers: Trailer[];
   movieSimilars: SimilarMovie[];
   currentMovieRating: number;
+  currentMovieWatchLater: boolean;
+  currentMovieFavourites: boolean;
   currentCommentText: string;
   modalRef: BsModalRef;
 
@@ -64,7 +66,7 @@ export class MovieComponent implements OnInit, AfterViewInit {
       this.movieData = movie;
       this.titleService.setTitle(this.movieData.title);
       const tmdb_id = this.movieData.tmdb_id;
-      this.getRating();
+      this.getUsersMovieInfo();
       // tslint:disable-next-line: no-unused-expression
       tmdb_id ? this.getMovieCrew(parseInt(tmdb_id, 10)) : null;
       // tslint:disable-next-line: no-unused-expression
@@ -84,16 +86,18 @@ export class MovieComponent implements OnInit, AfterViewInit {
     });
   }
 
-  getRating(): void {
+  getUsersMovieInfo(): void {
     const mid = this.route.snapshot.paramMap.get("id");
     const uid = this.authService.userData.uid;
-    this.movieService.fetchRating(uid, mid).subscribe(data => {
-      if (data) {
-        this.currentMovieRating = data.rated;
-      }
-      // console.log("Your rating");
-      // console.log(this.currentMovieRating);
-    });
+    this.movieService
+      .fetchRating(uid, mid)
+      .subscribe(data => (this.currentMovieRating = data ? data.rated : null));
+    this.movieService
+      .fetchFavourites(uid, mid)
+      .subscribe(data => (this.currentMovieFavourites = data ? true : false));
+    this.movieService
+      .fetchWatchLater(uid, mid)
+      .subscribe(data => (this.currentMovieWatchLater = data ? true : false));
   }
 
   getMovieCrew(id: number): void {
@@ -174,15 +178,17 @@ export class MovieComponent implements OnInit, AfterViewInit {
 
   handleAddComment(form: NgForm): void {
     const now = new Date().toLocaleString();
-    const commentData: Comment = {
-      cid: this.movieService.generateCommentID(now),
-      date: now,
-      user_id: this.authService.userData.uid,
-      user_name: this.authService.userData.displayName,
-      text: form.value.CommentText
-    };
-    this.movieService.addComment(commentData, this.movieData.mid);
-    form.reset();
+    if (form.value.CommentText.trim() !== "") {
+      const commentData: Comment = {
+        cid: this.movieService.generateCommentID(now),
+        date: now,
+        user_id: this.authService.userData.uid,
+        user_name: this.authService.userData.displayName,
+        text: form.value.CommentText.trim()
+      };
+      this.movieService.addComment(commentData, this.movieData.mid);
+      form.reset();
+    }
   }
 
   handleCommentEdit(event): void {

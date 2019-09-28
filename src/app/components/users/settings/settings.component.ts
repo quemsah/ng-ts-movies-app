@@ -25,6 +25,13 @@ export class SettingsComponent implements OnInit, AfterViewInit {
     this.themeService.setColor(this.red, this.green, this.blue);
     // this.updateColor();
   }
+
+  handleResetScheme(): void {
+    this.red = this.themeService.red;
+    this.green = this.themeService.green;
+    this.blue = this.themeService.blue;
+    this.handleColorChange();
+  }
   // updateColor() {
   //   this.themeService.setGradient(this.red, this.green, this.blue);
   //   this.themeService.setColor(this.red, this.green, this.blue);

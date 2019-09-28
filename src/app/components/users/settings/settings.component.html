@@ -32,6 +32,11 @@
             (change)="handleColorChange()">
         </div>
       </div>
+      <div class="text-center mt-3">
+        <button class="text-center btn btn-info btn-rounded waves-effect waves-light"
+          [style.background]="themeService.themeGradient | safe: 'style'" (click)="handleResetScheme()">Reset
+          Scheme</button>
+      </div>
     </div>
   </div>
 </div>

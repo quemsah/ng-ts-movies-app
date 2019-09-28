@@ -39,6 +39,10 @@
             (mouseover)="profile = true" (mouseout)="profile = false" routerLink="/profile" class="dropdown-item">My
             account</a>
           <a *ngIf="authService.isLoggedIn"
+            [style.background]="(settings === true) ? (themeService.themeColor | safe: 'style') : 'transparent'"
+            (mouseover)="settings = true" (mouseout)="settings = false" routerLink="/settings"
+            class="dropdown-item">Settings</a>
+          <a *ngIf="authService.isLoggedIn"
             [style.background]="(logout === true) ? (themeService.themeColor | safe: 'style') : 'transparent'"
             (mouseover)="logout = true" (mouseout)="logout = false" (click)="authService.SignOut()"
             class="dropdown-item">Log

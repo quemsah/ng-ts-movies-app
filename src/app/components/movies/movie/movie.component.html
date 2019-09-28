@@ -30,12 +30,18 @@
             <p *ngIf="movie.budget" class="m-0 p-0">Budget: {{movie.budget | noInfo}}</p>
             <p *ngIf="movie.revenue" class="mb-2 p-0">Revenue: {{movie.revenue | noInfo}}</p>
             <button type="button" class="btn btn-md ml-0" (click)="handleToWatchLater()"
-              [style.background]="themeService.themeGradient | safe: 'style'">
-              <i class="far fa-clock pr-1"></i> Watch later
+              [style.background]="themeService.themeGradient | safe: 'style'"
+              [style.box-shadow]="currentMovieWatchLater ? '0 0 0.1em 0.1em white inset' : '0 0 0.1em 0.1em transparent inset'">
+              <i *ngIf="!currentMovieWatchLater" class="far fa-clock pr-1"></i>
+              <i *ngIf="currentMovieWatchLater" class="fas fa-check pr-1"></i>
+              Watch later
             </button>
             <button type="button" class="btn btn-md ml-0" (click)="handleToFavourites()"
-              [style.background]="themeService.themeGradient | safe: 'style'">
-              <i class="far fa-heart pr-1"></i> Favourite
+              [style.background]="themeService.themeGradient | safe: 'style'"
+              [style.box-shadow]="currentMovieFavourites ? '0 0 0.1em 0.1em white inset' : '0 0 0.1em 0.1em transparent inset'">
+              <i *ngIf="!currentMovieFavourites" class="far fa-heart pr-1"></i>
+              <i *ngIf="currentMovieFavourites" class="fas fa-check pr-1"></i>
+              Favourite
             </button>
             <button type="button" class="btn btn-md ml-0" (click)="openModal(template)"
               [style.background]="themeService.themeGradient | safe: 'style'">
@@ -219,8 +225,8 @@
             <form #fAddComment="ngForm" (ngSubmit)="handleAddComment(fAddComment)">
               <div class="form-group">
                 <label for="replyFormComment">Your comment</label>
-                <textarea type="text" class="form-control" [(ngModel)]=currentCommentText name="CommentText"
-                  rows="3"></textarea>
+                <textarea type="text" class="form-control" [(ngModel)]=currentCommentText name="CommentText" rows="3"
+                  maxlength="300"></textarea>
               </div>
               <div class="text-center mt-2">
                 <button class="btn btn-info btn-md " [style.background]="themeService.themeGradient | safe: 'style'"
