@@ -184,7 +184,7 @@ export class MovieComponent implements OnInit, AfterViewInit {
         date: now,
         user_id: this.authService.userData.uid,
         user_name: this.authService.userData.displayName,
-        text: form.value.CommentText.trim()
+        text: form.value.CommentText.trim().substring(0, 300)
       };
       this.movieService.addComment(commentData, this.movieData.mid);
       form.reset();
