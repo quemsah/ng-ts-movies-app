@@ -13,7 +13,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     // console.log(this.authService.userData.isAdmin);
-    console.log(this.authService.isAdmin);
+    // console.log(this.authService.isAdmin);
   }
 
   ngAfterViewInit() {

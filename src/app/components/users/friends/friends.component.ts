@@ -42,7 +42,7 @@ export class FriendsComponent implements OnInit, AfterViewInit {
   filterObject = (obj, predicate) =>
     Object.keys(obj)
       .filter(key => predicate(obj[key]))
-      .reduce((res, key) => ((res[key] = obj[key]), res), {})
+      .reduce((res, key) => ((res[key] = obj[key]), res), {});
 
   mapFriends = x => x.accepted === true;
 
@@ -85,7 +85,9 @@ export class FriendsComponent implements OnInit, AfterViewInit {
   }
 
   handleAddFriend(form: NgForm): void {
-    this.userService.addFriend(form.value.friendsEmail);
+    if (form.value.friendsEmail.trim() !== this.authService.userData.email) {
+      this.userService.addFriend(form.value.friendsEmail);
+    }
     form.reset();
   }
   // удаляет и запросы в друзья и друзей в целом

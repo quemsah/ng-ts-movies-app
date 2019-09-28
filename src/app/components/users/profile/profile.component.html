@@ -98,7 +98,7 @@ src="{{(user.photoURL) ? user.photoURL : '/src/assets/img/avatars/user.png'}}" a
               [style.background]="themeService.themeGradient | safe: 'style'">Upload New
               Photo
             </button>
-            <input type="file" (change)="onClickPhoto($event)"><br>
+            <input type="file" (change)="onClickPhoto($event)" accept="image/x-png,image/gif,image/jpeg"><br>
             <button class="btn btn-danger btn-rounded btn-sm waves-effect waves-light"
               (click)="onDeletePhoto()">Delete</button>
           </div>

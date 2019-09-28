@@ -215,26 +215,31 @@ export class AuthService {
 
   UploadNewAvatar(event: any): void {
     const file = event.target.files[0];
-    const path = "users/" + this.currentUser.uid + "/" + file.name;
-    const ref = this.storage.ref(path);
-    const sub = ref
-      .put(file)
-      .snapshotChanges()
-      .pipe(
-        finalize(async () => {
-          const photoURL = await ref.getDownloadURL().toPromise();
-          // обновляем встроенный методом AngularFireAuth.auth
-          await this.currentUser.updateProfile({ photoURL });
-          // обновляем в FireStore
-          await this.profileRef.update({ photoURL });
-          await this.alertService.openSuccessAlert(
-            "You have successfully changed your profile picture",
-            2
-          );
-          sub.unsubscribe();
-        })
-      )
-      .subscribe();
+    // image/jpeg image/png image/tiff image/gif
+    if (file.type.slice(0, 5) === "image") {
+      const path = "users/" + this.currentUser.uid + "/" + file.name;
+      const ref = this.storage.ref(path);
+      const sub = ref
+        .put(file)
+        .snapshotChanges()
+        .pipe(
+          finalize(async () => {
+            const photoURL = await ref.getDownloadURL().toPromise();
+            // обновляем встроенный методом AngularFireAuth.auth
+            await this.currentUser.updateProfile({ photoURL });
+            // обновляем в FireStore
+            await this.profileRef.update({ photoURL });
+            await this.alertService.openSuccessAlert(
+              "You have successfully changed your profile picture",
+              2
+            );
+            sub.unsubscribe();
+          })
+        )
+        .subscribe();
+    } else {
+      this.alertService.openWarningAlert("Picture format not supported", 2);
+    }
   }
 
   DeleteAvatar() {

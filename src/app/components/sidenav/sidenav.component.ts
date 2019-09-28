@@ -15,10 +15,10 @@ export class SidenavComponent implements OnInit {
   uid: string;
   isAdmin: boolean;
   constructor(
-    private afAuth: AngularFireAuth,
-    private router: Router,
     public authService: AuthService,
-    public themeService: ThemeService
+    public themeService: ThemeService,
+    private afAuth: AngularFireAuth,
+    private router: Router
   ) {
     // https://javebratt.com/firebase-user-undefined/
     this.afAuth.authState.subscribe(user => {
