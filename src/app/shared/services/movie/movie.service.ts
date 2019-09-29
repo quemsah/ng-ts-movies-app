@@ -65,7 +65,7 @@ export class MovieService {
   sliceData = (object, num) =>
     Object.keys(object)
       .slice(0, num)
-      .map(key => ({[key]: object[key]}));
+      .map(key => ({ [key]: object[key] }));
 
   genresToArray = genres => {
     const genresArray = [];

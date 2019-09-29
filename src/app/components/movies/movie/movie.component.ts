@@ -136,7 +136,7 @@ export class MovieComponent implements OnInit, AfterViewInit {
   }
 
   handleMovieDelete(): void {
-    this.movieService.deleteMovie(this.movieData.mid);
+     this.movieService.deleteMovie(this.movieData.mid);
   }
 
   handleToWatchLater(): void {
@@ -203,7 +203,11 @@ export class MovieComponent implements OnInit, AfterViewInit {
     this.movieService.deleteComment(cid, this.movieData.mid);
   }
 
-  openModal(template: TemplateRef<any>): void {
-    this.modalRef = this.modalService.show(template);
+  openModalShare(shareTemplate: TemplateRef<any>): void {
+    this.modalRef = this.modalService.show(shareTemplate);
+  }
+
+  openModalDelete(deleteMovieTemplate: TemplateRef<any>): void {
+    this.modalRef = this.modalService.show(deleteMovieTemplate);
   }
 }
