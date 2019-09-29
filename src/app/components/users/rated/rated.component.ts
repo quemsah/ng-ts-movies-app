@@ -79,12 +79,11 @@ export class RatedComponent implements OnInit {
     starRating: StarRatingComponent;
   }): void {
     // получаем id фильма (родительский элемент star-rating)
-    // без any будет ругаться на ошибку типов но все равно работать
     // tslint:disable-next-line: deprecation
     const el = event.currentTarget as HTMLInputElement;
-    const attr: any = el.parentElement.parentElement.attributes;
+    const attr = el.parentElement.parentElement;
     const ratedMovieData: MovieListItem = {
-      mid: attr.id.nodeValue,
+      mid: attr.id,
       date: new Date().toLocaleString(),
       rated: $event.newValue
     };

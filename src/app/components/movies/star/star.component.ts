@@ -3,8 +3,8 @@ import { ActivatedRoute } from "@angular/router";
 import { NgxSpinnerService } from "ngx-spinner";
 import { TMDBService } from "../../../shared/services/tmdb/TMDB.service";
 import { ThemeService } from "../../../shared/services/theme/theme.service";
-import { Star } from "../../../shared/models/star";
-import { StarMovies } from "../../../shared/models/star-movies";
+import { MovieCredits } from "../../../shared/models/api-movie-credits";
+import { Star } from "../../../shared/models/api-star";
 
 @Component({
   selector: "app-star",
@@ -13,7 +13,7 @@ import { StarMovies } from "../../../shared/models/star-movies";
 })
 export class StarComponent implements OnInit {
   starData: Star;
-  starMovies: StarMovies;
+  starMovies: MovieCredits;
   constructor(
     public themeService: ThemeService,
     public tmdbService: TMDBService,

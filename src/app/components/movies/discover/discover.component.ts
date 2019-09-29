@@ -91,9 +91,9 @@ export class DiscoverComponent implements OnInit {
     });
   }
 
-  onGenreValueChange(genre: any): void {
+  onGenreValueChange(genreID: number): void {
     this.spinner.show();
-    this.genreValue = genre;
+    this.genreValue = genreID;
     this.getDiscoveredMovies(
       this.tmdbService.fetchByGenre.bind(this.tmdbService),
       this.genreValue.toString()

@@ -19,7 +19,7 @@
               <li *ngIf="starData?.deathday"><strong>Day of Death:</strong> {{starData?.deathday | date}}</li>
               <li><strong>Place of Birth:</strong> {{(starData?.place_of_birth)}}</li>
               <li><strong>Known Credits:</strong> {{starMovies?.cast.length+starMovies?.crew.length}}</li>
-              <li><strong>Also Known As:</strong>
+              <li *ngIf="starData?.also_known_as[0]"><strong>Also Known As:</strong>
                 {{((starData?.also_known_as[0]) ? starData?.also_known_as[0] : '')+
                 ((starData?.also_known_as[1]) ? ', ' + starData?.also_known_as[1] : '')+
                 ((starData?.also_known_as[2]) ? ', ' + starData?.also_known_as[2] : '')}}

@@ -9,6 +9,7 @@ import { TMDBService } from "../../../shared/services/tmdb/TMDB.service";
 import { ThemeService } from "../../../shared/services/theme/theme.service";
 import { MovieService } from "../../../shared/services/movie/movie.service";
 import { forkJoin } from "rxjs";
+import { MovieDetails } from "../../../shared/models/api-movie-details";
 
 @Component({
   selector: "app-discovered-movie",
@@ -18,7 +19,7 @@ import { forkJoin } from "rxjs";
 export class DiscoveredMovieComponent implements OnInit {
   isInOurDatabase: boolean;
   mid: string;
-  discoveredMovieData: any;
+  discoveredMovieData: MovieDetails;
   discoveredMovieCrew: Crew[];
   discoveredMovieCast: Cast[];
   constructor(
@@ -42,10 +43,9 @@ export class DiscoveredMovieComponent implements OnInit {
       this.tmdbService.fetchMovieDetailsByTMDBID(id),
       this.tmdbService.fetchMovieCreditsbyTMDBID(id)
     ).subscribe(([movie, data]) => {
-      // console.log(movie);
       this.discoveredMovieData = movie;
       // берем режиссера из другого запроса (актеры и команда)
-      this.discoveredMovieData.director = data.crew[0].name;
+      this.discoveredMovieData.director = data.crew[0].name.toString();
       this.discoveredMovieCrew = this.movieService.sliceData(data.crew, 12);
       // console.log(this.discoveredMovieCrew);
       this.discoveredMovieCast = this.movieService.sliceData(data.cast, 12);
@@ -83,12 +83,12 @@ export class DiscoveredMovieComponent implements OnInit {
         this.discoveredMovieData.title
       ),
       imdb_id: this.discoveredMovieData.imdb_id,
-      tmdb_id: this.discoveredMovieData.id,
+      tmdb_id: this.discoveredMovieData.id.toString(10),
       dateAdded: Math.round(+new Date() / 1000),
       title: this.discoveredMovieData.title,
       releaseDate: this.discoveredMovieData.release_date,
       country: country === "United States of America" ? "USA" : country,
-      IMDBRating: this.discoveredMovieData.vote_average,
+      IMDBRating: this.discoveredMovieData.vote_average.toString(10),
       genres,
       director: this.discoveredMovieData.director,
       posterLink: this.tmdbService.URL_IMG_H450 + this.discoveredMovieData.poster_path,

@@ -1,6 +1,8 @@
 export interface Star {
   adult: boolean;
-  also_known_as: string[];
+  also_known_as: {
+    name: string;
+  };
   biography: string;
   birthday: string;
   deathday?: string;

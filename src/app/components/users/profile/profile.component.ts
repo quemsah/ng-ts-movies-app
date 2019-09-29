@@ -30,7 +30,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     this.authService.UpdateUserPassword(form.value.password, form.value.oldPassword);
   }
 
-  onClickPhoto(file: File): void {
+  onClickPhoto(file: Event): void {
     this.authService.UploadNewAvatar(file);
   }
 

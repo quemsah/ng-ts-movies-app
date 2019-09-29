@@ -76,10 +76,6 @@ export class AuthService {
     return this.afs.collection(`users/${this.userData.uid}/friends`);
   }
 
-  // fetchFriends(): Observable<any> {
-  //   return this.afs.collection(`users/${this.userData.uid}/friends`).valueChanges();
-  // }
-
   // get watchLaterRef() {
   //   return this.afs.collection(`users/${this.currentUser.uid}/watchlater`);
   // }
@@ -212,8 +208,9 @@ export class AuthService {
       .catch(this.errCatching);
   }
 
-  UploadNewAvatar(event: any): void {
-    const file = event.target.files[0];
+  UploadNewAvatar(event: Event): void {
+    const target = event.target as HTMLInputElement;
+    const file = target.files[0] as File;
     // image/jpeg image/png image/tiff image/gif
     if (file.type.slice(0, 5) === "image") {
       const path = "users/" + this.currentUser.uid + "/" + file.name;

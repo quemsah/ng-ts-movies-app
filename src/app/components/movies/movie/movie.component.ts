@@ -10,12 +10,12 @@ import { ThemeService } from "../../../shared/services/theme/theme.service";
 import { TMDBService } from "../../../shared/services/tmdb/TMDB.service";
 import { AuthService } from "../../../shared/services/auth/auth.service";
 // Интерфейсы
-import { SimilarMovie } from "../../../shared/models/similar-movie";
 import { Cast } from "../../../shared/models/api-cast";
 import { Comment } from "./../../../shared/models/comment";
 import { Movie } from "../../../shared/models/movie";
 import { Trailers } from "../../../shared/models/api-trailers";
 import { MovieListItem } from "../../../shared/models/movie-list-item";
+import { TmdbMovie } from "../../../shared/models/api-movie";
 
 @Component({
   selector: "app-movie",
@@ -27,7 +27,7 @@ export class MovieComponent implements OnInit, AfterViewInit {
   movieComments: Comment[];
   movieCast: Cast[];
   movieTrailers: Trailers[];
-  movieSimilars: SimilarMovie[];
+  movieSimilars: TmdbMovie[];
   currentMovieRating: number;
   currentMovieWatchLater: boolean;
   currentMovieFavourites: boolean;

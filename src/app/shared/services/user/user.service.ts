@@ -21,9 +21,11 @@ export class UserService {
     private afs: AngularFirestore,
     private alertService: AlertService
   ) {}
+
   // fetchFriends(): Observable<any> {
   //   return this.afs.collection(`users/${this.uid}/friends`).valueChanges();
   // }
+  
   getUserInfo(uid: string): Observable<any> {
     return this.afs.doc(`users/${uid}/`).valueChanges();
   }
