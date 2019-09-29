@@ -11,10 +11,10 @@ import { TMDBService } from "../../../shared/services/tmdb/TMDB.service";
 import { AuthService } from "../../../shared/services/auth/auth.service";
 // Интерфейсы
 import { SimilarMovie } from "../../../shared/models/similar-movie";
-import { Crew } from "./../../../shared/models/crew";
+import { Cast } from "../../../shared/models/api-cast";
 import { Comment } from "./../../../shared/models/comment";
 import { Movie } from "../../../shared/models/movie";
-import { Trailer } from "../../../shared/models/trailer";
+import { Trailers } from "../../../shared/models/api-trailers";
 import { MovieListItem } from "../../../shared/models/movie-list-item";
 
 @Component({
@@ -25,8 +25,8 @@ import { MovieListItem } from "../../../shared/models/movie-list-item";
 export class MovieComponent implements OnInit, AfterViewInit {
   movieData: Movie;
   movieComments: Comment[];
-  movieCrew: Crew[];
-  movieTrailers: Trailer[];
+  movieCast: Cast[];
+  movieTrailers: Trailers[];
   movieSimilars: SimilarMovie[];
   currentMovieRating: number;
   currentMovieWatchLater: boolean;
@@ -68,7 +68,7 @@ export class MovieComponent implements OnInit, AfterViewInit {
       const tmdb_id = this.movieData.tmdb_id;
       this.getUsersMovieInfo();
       // tslint:disable-next-line: no-unused-expression
-      tmdb_id ? this.getMovieCrew(parseInt(tmdb_id, 10)) : null;
+      tmdb_id ? this.getMovieCast(parseInt(tmdb_id, 10)) : null;
       // tslint:disable-next-line: no-unused-expression
       tmdb_id ? this.getMovieTrailers(parseInt(tmdb_id, 10)) : null;
       // tslint:disable-next-line: no-unused-expression
@@ -100,14 +100,14 @@ export class MovieComponent implements OnInit, AfterViewInit {
       .subscribe(data => (this.currentMovieWatchLater = data ? true : false));
   }
 
-  getMovieCrew(id: number): void {
-    this.tmdbService.fetchMovieCrewbyTMDBID(id).subscribe(data => {
-      this.movieCrew = this.movieService.sliceData(data.cast, 12);
+  getMovieCast(id: number): void {
+    this.tmdbService.fetchMovieCreditsbyTMDBID(id).subscribe(data => {
+      this.movieCast = this.movieService.sliceData(data.cast, 12);
       // спиннер убираем тут, так как на данном этапе информация о фильме загружена
       // и ниже находятся актеры, а трейлеры – в другой вкладке, комментарии еще ниже
       this.spinner.hide();
-      // console.log("Crew");
-      // console.log(this.movieCrew);
+      console.log("Cast");
+      console.log(this.movieCast);
     });
   }
 

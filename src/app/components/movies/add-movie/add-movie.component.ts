@@ -27,7 +27,7 @@ export class AddMovieComponent implements OnInit, AfterViewInit {
     overview: "",
     production_countries: [{ name: "" }]
   };
-  foundMovieCrew = {
+  foundMovieCredits = {
     crew: [{ name: "" }]
   };
   foundPosterPath = "";
@@ -60,15 +60,15 @@ export class AddMovieComponent implements OnInit, AfterViewInit {
     //   if (data.movie_results.length > 0) {
     //     forkJoin(
     //       this.tmdbService.fetchMovieDetailsByTMDBID(data.movie_results[0].id),
-    //       this.tmdbService.fetchMovieCrewbyTMDBID(data.movie_results[0].id)
-    //     ).subscribe(([detailData, crewData]) => {
+    //       this.tmdbService.fetchMovieCreditsbyTMDBID(data.movie_results[0].id)
+    //     ).subscribe(([detailData, creditsData]) => {
     //       this.foundMovieData = detailData;
     //       this.foundPosterPath =
     //         "https://image.tmdb.org/t/p/w300_and_h450_bestv2" +
     //         this.foundMovieData.poster_path;
     //       console.log(this.genres);
     //       this.movieService.compareGenres(this.genres, detailData.genres);
-    //       this.foundMovieCrew = crewData;
+    //       this.foundMovieCredits = creditsData;
     //     });
     //     console.log(data);
     //   } else {
@@ -83,7 +83,7 @@ export class AddMovieComponent implements OnInit, AfterViewInit {
     // администратор может это делать в любом виде
     // (иначе он будет переводить часы в минуты, $ в рубли и т.д.)
 
-    this.tmdbService.fetchMovieByIMDBID(form.value.ImdbId).subscribe(([detailData, crewData]) => {
+    this.tmdbService.fetchMovieByIMDBID(form.value.ImdbId).subscribe(([detailData, creditsData]) => {
       if (detailData) {
         this.foundMovieData = detailData;
         this.foundPosterPath = this.tmdbService.URL_IMG_H450 + this.foundMovieData.poster_path;
@@ -93,7 +93,7 @@ export class AddMovieComponent implements OnInit, AfterViewInit {
         this.foundBudget = "$ " + this.foundMovieData.budget;
         console.log(detailData);
         this.movieService.compareGenres(this.genres, detailData.genres);
-        this.foundMovieCrew = crewData;
+        this.foundMovieCredits = creditsData;
       } else {
         this.alertService.openWarningAlert("Wrong ID!", 2);
       }

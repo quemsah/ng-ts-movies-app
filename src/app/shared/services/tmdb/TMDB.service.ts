@@ -3,6 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { Observable, forkJoin, of } from "rxjs";
 import { map, mergeMap } from "rxjs/operators";
 import { AlertService } from "../alert/alert.service";
+import { Trailers } from '../../models/api-trailers';
 
 @Injectable()
 export class TMDBService {
@@ -36,7 +37,7 @@ export class TMDBService {
             ? // tslint:disable-next-line: deprecation
               forkJoin(
                 this.fetchMovieDetailsByTMDBID(data.movie_results[0].id),
-                this.fetchMovieCrewbyTMDBID(data.movie_results[0].id)
+                this.fetchMovieCreditsbyTMDBID(data.movie_results[0].id)
               )
             : of(null)
         )
@@ -47,14 +48,14 @@ export class TMDBService {
     return this.http.get<any>(`${this.URL_MOVIE}/${mid}?api_key=${this.API_KEY}&language=en-US}`);
   }
 
-  fetchMovieCrewbyTMDBID(mid: number): Observable<any> {
+  fetchMovieCreditsbyTMDBID(mid: number): Observable<any> {
     return this.http.get<any>(
       `${this.URL_MOVIE}/${mid}/credits?api_key=${this.API_KEY}&language=en-US}`
     );
   }
 
-  fetchMovieTrailersByTMDBID(mid: number): Observable<any> {
-    return this.http.get<any>(
+  fetchMovieTrailersByTMDBID(mid: number): Observable<Trailers> {
+    return this.http.get<Trailers>(
       `${this.URL_MOVIE}/${mid}/videos?api_key=${this.API_KEY}&language=en-US}`
     );
   }

@@ -20,7 +20,7 @@
       </div>
     </div>
     <!-- <span>{{this.foundMovieData | json}}</span>
-    <span>{{this.foundMovieCrew | json}}</span> -->
+    <span>{{this.foundMovieCredits | json}}</span> -->
     <div class="col-lg-8 mb-4">
       <div class="card card-cascade narrower">
         <div class="view view-cascade gradient-card-header"
@@ -82,7 +82,7 @@
             <div class="row">
               <div class="col-md-4">
                 <div class="md-form form-sm mb-0">
-                  <input type="text" class="form-control form-control-sm" [(ngModel)]=foundMovieCrew.crew[0].name
+                  <input type="text" class="form-control form-control-sm" [(ngModel)]=foundMovieCredits.crew[0].name
                     name="Director" required #directorInput="ngModel">
                   <span class="valid-error" *ngIf="directorInput.hasError('required')">Field must not be empty</span>
                   <label class="">Director</label>

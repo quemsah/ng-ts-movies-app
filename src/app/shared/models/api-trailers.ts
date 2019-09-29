@@ -1,4 +1,4 @@
-export interface Trailer {
+export interface Trailers {
   [key: string]: {
     id: string;
     iso_639_1: string;

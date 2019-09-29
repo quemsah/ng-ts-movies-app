@@ -7,4 +7,5 @@ export interface StarMovies {
     [key: string]: StarMovie[];
   };
 }
-// ?
+// фильмы в которых человек либо снимался
+// либо работал
