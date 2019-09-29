@@ -35,7 +35,7 @@ export class EditMovieComponent implements OnInit, AfterViewInit {
   }
 
   onEditMovieSubmit(form: NgForm): void {
-    // console.log(this.currentMovieData);
+    console.log("this.currentMovieData: ", this.currentMovieData);
     // приводим к нужному виду
     const movieData: Movie = {
       mid: this.movieService.generateMovieID(form.value.Date, form.value.MovieName),

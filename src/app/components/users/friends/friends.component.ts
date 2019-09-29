@@ -52,7 +52,7 @@ export class FriendsComponent implements OnInit, AfterViewInit {
 
   // добавляем к сухим айдишниками информацию о друзьях/запросах
   getFriendsInfo(friendsData: Friends): void {
-    // console.log(friendsData);
+    console.log("friendsData: ", friendsData);
     Object.keys(friendsData).filter(key => {
       this.userService.getUserInfo(friendsData[key].fid).subscribe(data => {
         if (data) {
@@ -72,14 +72,14 @@ export class FriendsComponent implements OnInit, AfterViewInit {
         // разносим друзей и входящие/исходящие запросы
         // см. user.service.ts
         this.friends = this.filterObject(data, this.mapFriends);
-        this.outRequests = this.filterObject(data, this.mapOutRequests);
-        this.inRequests = this.filterObject(data, this.mapInRequests);
         this.getFriendsInfo(this.friends);
+        console.log("this.friends: ", this.friends);
+        this.outRequests = this.filterObject(data, this.mapOutRequests);
         this.getFriendsInfo(this.outRequests);
+        console.log("this.outRequests: ", this.outRequests);
+        this.inRequests = this.filterObject(data, this.mapInRequests);
         this.getFriendsInfo(this.inRequests);
-        // console.log(this.friends);
-        // console.log(this.outRequests);
-        // console.log(this.inRequests);
+        console.log("this.inRequests: ", this.inRequests);
         this.spinner.hide();
       });
   }

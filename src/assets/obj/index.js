@@ -1,9 +1,10 @@
-// filterFriendsData = (obj, predicate) =>
-//   Object.keys(obj)
-//   .filter(key => predicate(obj[key]))
-//   .reduce((res, key) => ((res[key] = obj[key]), res), {});
+// это нигде не используется
 
-// Example use:
+filterFriendsData = (obj, predicate) =>
+  Object.keys(obj)
+  .filter(key => predicate(obj[key]))
+  .reduce((res, key) => ((res[key] = obj[key]), res), {});
+
 var fdata = [{
     accepted: false,
     date: "14.09.2019, 16:52:19",
@@ -35,24 +36,22 @@ var udata = {
   "uid": "FOd0LBh9dlPqLYbjCPZy2vLov2O2"
 }
 
-
 Object.keys(fdata).filter(key => {
   console.log(fdata[key].fid)
   fdata[key].displayName = udata.displayName;
 });
 console.log(udata);
 
-
-// var friends = filterFriendsData(data, x => x.accepted == true);
-// console.log(friends);
-// var outReq = filterFriendsData(
-//   data,
-//   x => x.accepted == false && x.uid == x.initiator
-// );
-// console.log(outReq);
-// var inReq = filterFriendsData(
-//   data,
-//   x => x.accepted == false && x.uid !== x.initiator
-// );
-// console.log(inReq);
-// console.log(data);
+var friends = filterFriendsData(data, x => x.accepted == true);
+console.log(friends);
+var outReq = filterFriendsData(
+  data,
+  x => x.accepted == false && x.uid == x.initiator
+);
+console.log(outReq);
+var inReq = filterFriendsData(
+  data,
+  x => x.accepted == false && x.uid !== x.initiator
+);
+console.log(inReq);
+console.log(data);

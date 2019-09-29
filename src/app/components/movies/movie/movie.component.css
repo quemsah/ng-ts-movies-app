@@ -11,11 +11,16 @@
 }
 
 .modal-header {
-  background-color: #eeeeee;
+  color: #eeeeee;
+  background-color: #fff;
+}
+
+.close {
+  color: #eeeeee;
 }
 
 .modal-body {
-  background-color: #fff;
+  background-color: #eeeeee;
 }
 
 /* уменьшим чуть-чуть....... */
@@ -32,4 +37,8 @@
 .tg-color {
   background-color: #0088cc;
   padding: 0.64rem 1.84rem;
+}
+
+.cursor-none {
+  cursor: auto;
 }

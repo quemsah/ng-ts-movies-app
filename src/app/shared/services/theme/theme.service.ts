@@ -14,7 +14,7 @@ export class ThemeService {
   blue = 157;
   themeGradient: string = this.setGradient(this.red, this.green, this.blue);
   themeColor: string = this.setColor(this.red, this.green, this.blue);
-  constructor() {} // setGradient(32,199,107);{}
+  constructor() {}
 
   rgbToHex(rgb: number): string {
     const hex = Math.round(Math.min(Math.max(0, rgb), 255)).toString(16);
@@ -45,15 +45,15 @@ export class ThemeService {
       this.fullColorHex(eRed, eGreen, eBlue) +
       ")";
     this.themeGradient = gr;
+    console.log("Theme gradient: ", this.themeGradient);
     return gr;
-    // console.log(this.themeGradient);
   }
 
   setColor(red: number, green: number, blue: number): string {
     const color = "#" + this.fullColorHex(red, green, blue);
     this.themeColor = color;
+    console.log("Theme color: ", this.themeColor);
     return color;
-    // console.log(this.themeGradient);
   }
   // перед переходом выключаем дарк мод, если он был
   // и ставим wasRouted = true, чтобы потом включить

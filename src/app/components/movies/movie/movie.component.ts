@@ -32,6 +32,7 @@ export class MovieComponent implements OnInit, AfterViewInit {
   currentMovieWatchLater: boolean;
   currentMovieFavourites: boolean;
   currentCommentText: string;
+  currentCommentID: string;
   modalRef: BsModalRef;
 
   constructor(
@@ -64,6 +65,7 @@ export class MovieComponent implements OnInit, AfterViewInit {
     const id = this.route.snapshot.paramMap.get("id");
     this.movieService.fetchMovie(id).subscribe(movie => {
       this.movieData = movie;
+      console.log("Movie data: ", this.movieData);
       this.titleService.setTitle(this.movieData.title);
       const tmdb_id = this.movieData.tmdb_id;
       this.getUsersMovieInfo();
@@ -81,8 +83,7 @@ export class MovieComponent implements OnInit, AfterViewInit {
     this.movieService.fetchComments(id).subscribe(data => {
       this.movieComments = data;
       this.spinner.hide();
-      // console.log("Comments");
-      // console.log(this.movieComments);
+      console.log("Comments: ", this.movieComments);
     });
   }
 
@@ -106,8 +107,7 @@ export class MovieComponent implements OnInit, AfterViewInit {
       // спиннер убираем тут, так как на данном этапе информация о фильме загружена
       // и ниже находятся актеры, а трейлеры – в другой вкладке, комментарии еще ниже
       this.spinner.hide();
-      console.log("Cast");
-      console.log(this.movieCast);
+      console.log("Cast: ", this.movieCast);
     });
   }
 
@@ -117,26 +117,24 @@ export class MovieComponent implements OnInit, AfterViewInit {
       this.movieTrailers.forEach((value, i) => {
         value[i].key = "https://www.youtube.com/embed/" + value[i].key + "?rel=0";
       });
-      // console.log("Trailers");
-      // console.log(this.movieTrailers);
+      console.log("Trailers: ", this.movieTrailers);
     });
   }
 
   getSimilarMovies(id: number): void {
     this.tmdbService.fetchSimilarMoviesByTMDBID(id).subscribe(data => {
       this.movieSimilars = this.movieService.sliceData(data.results, 8);
-      // console.log("Similar movies");
-      // console.log(this.movieSimilars);
+      console.log("Similar movies: ", this.movieSimilars);
     });
   }
 
   handleMovieEdit(): void {
     // роутит на соответствующую страничку
-    console.log(this.movieData.mid);
+    console.log("Edit movie => mid = " + this.movieData.mid);
   }
 
   handleMovieDelete(): void {
-     this.movieService.deleteMovie(this.movieData.mid);
+    this.movieService.deleteMovie(this.movieData.mid);
   }
 
   handleToWatchLater(): void {
@@ -198,8 +196,7 @@ export class MovieComponent implements OnInit, AfterViewInit {
     this.movieService.deleteComment(cid, this.movieData.mid);
   }
 
-  handleCommentDelete(event): void {
-    const cid = this.movieService.getElementId(event);
+  handleCommentDelete(cid: string): void {
     this.movieService.deleteComment(cid, this.movieData.mid);
   }
 
@@ -209,5 +206,11 @@ export class MovieComponent implements OnInit, AfterViewInit {
 
   openModalDelete(deleteMovieTemplate: TemplateRef<any>): void {
     this.modalRef = this.modalService.show(deleteMovieTemplate);
+  }
+
+  openDeleteComment(deleteCommentTemplate: TemplateRef<any>, event): void {
+    this.currentCommentID = this.movieService.getElementId(event);
+    console.log("currentCommentID: ", this.currentCommentID);
+    this.modalRef = this.modalService.show(deleteCommentTemplate);
   }
 }

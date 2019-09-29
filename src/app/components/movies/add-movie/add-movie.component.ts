@@ -55,7 +55,7 @@ export class AddMovieComponent implements OnInit, AfterViewInit {
   // полученному TMDB идентификатору(число) возвращает полную информацию о фильме
 
   onImdbIDSubmit(form: NgForm): void {
-    // console.log(form.value);
+    console.log("form.value: ", form.value);
     // this.tmdbService.fetchMovieByIMDBID(form.value.ImdbId).subscribe(data => {
     //   if (data.movie_results.length > 0) {
     //     forkJoin(
@@ -72,7 +72,7 @@ export class AddMovieComponent implements OnInit, AfterViewInit {
     //     });
     //     console.log(data);
     //   } else {
-    //     this.alertService.openWarningAlert("Wrong ID!", 1);
+    //     this.alertService.openWarningAlert("Wrong ID!", 2);
     //   }
     // });
 
@@ -83,26 +83,29 @@ export class AddMovieComponent implements OnInit, AfterViewInit {
     // администратор может это делать в любом виде
     // (иначе он будет переводить часы в минуты, $ в рубли и т.д.)
 
-    this.tmdbService.fetchMovieByIMDBID(form.value.ImdbId).subscribe(([detailData, creditsData]) => {
-      if (detailData) {
-        this.foundMovieData = detailData;
-        this.foundPosterPath = this.tmdbService.URL_IMG_H450 + this.foundMovieData.poster_path;
-        this.foundBackdropPath = this.tmdbService.URL_BACKDROP + this.foundMovieData.backdrop_path;
-        this.foundRuntime = this.foundMovieData.runtime + " min";
-        this.foundRevenue = "$ " + this.foundMovieData.revenue;
-        this.foundBudget = "$ " + this.foundMovieData.budget;
-        console.log(detailData);
-        this.movieService.compareGenres(this.genres, detailData.genres);
-        this.foundMovieCredits = creditsData;
-      } else {
-        this.alertService.openWarningAlert("Wrong ID!", 2);
-      }
-    });
+    this.tmdbService
+      .fetchMovieByIMDBID(form.value.ImdbId)
+      .subscribe(([detailData, creditsData]) => {
+        if (detailData) {
+          this.foundMovieData = detailData;
+          this.foundPosterPath = this.tmdbService.URL_IMG_H450 + this.foundMovieData.poster_path;
+          this.foundBackdropPath =
+            this.tmdbService.URL_BACKDROP + this.foundMovieData.backdrop_path;
+          this.foundRuntime = this.foundMovieData.runtime + " min";
+          this.foundRevenue = "$ " + this.foundMovieData.revenue;
+          this.foundBudget = "$ " + this.foundMovieData.budget;
+          console.log(detailData);
+          this.movieService.compareGenres(this.genres, detailData.genres);
+          this.foundMovieCredits = creditsData;
+        } else {
+          this.alertService.openWarningAlert("Wrong ID!", 3);
+        }
+      });
   }
 
   onAddMovieSubmit(form: NgForm): void {
     // приводим к нужному виду
-    // console.log(form.value.Date);
+    console.log("form.value: ", form.value);
     const movieData: Movie = {
       mid: this.movieService.generateMovieID(form.value.Date, form.value.MovieName),
       imdb_id: form.value.ImdbId,

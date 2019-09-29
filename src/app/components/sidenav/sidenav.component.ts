@@ -32,7 +32,7 @@ export class SidenavComponent implements OnInit {
   ngOnInit() {}
 
   handleChangeSearchQuery(searchValue: string) {
-    // console.log(searchValue);
+    console.log("searchValue: ", searchValue);
     this.router.navigate(["search/" + searchValue]);
   }
   // https://github.com/Dogfalo/materialize/issues/1676

@@ -47,9 +47,11 @@ export class DiscoveredMovieComponent implements OnInit {
       // берем режиссера из другого запроса (актеры и команда)
       this.discoveredMovieData.director = data.crew[0].name.toString();
       this.discoveredMovieCrew = this.movieService.sliceData(data.crew, 12);
-      // console.log(this.discoveredMovieCrew);
+      console.log("this.discoveredMovieCrew: ", this.discoveredMovieCrew);
+
       this.discoveredMovieCast = this.movieService.sliceData(data.cast, 12);
-      // console.log(this.discoveredMovieCast);
+      console.log("this.discoveredMovieCast: ", this.discoveredMovieCast);
+
       // проверям есть ли в нашей БД такой
       this.mid = this.movieService.generateMovieID(
         this.discoveredMovieData.release_date,
@@ -76,7 +78,7 @@ export class DiscoveredMovieComponent implements OnInit {
     this.discoveredMovieData.genres.forEach(element => {
       genres.push(element.name);
     });
-    // console.log(genres);
+    console.log("genres: ", genres);
     const movieData: Movie = {
       mid: this.movieService.generateMovieID(
         this.discoveredMovieData.release_date,
@@ -98,7 +100,7 @@ export class DiscoveredMovieComponent implements OnInit {
       revenue: "$ " + this.discoveredMovieData.revenue,
       overview: this.discoveredMovieData.overview
     };
-    // console.log(movieData);
+    console.log("movieData: ", movieData);
     this.movieService.setMovieData(movieData);
   }
 }

@@ -121,7 +121,7 @@ export class AuthService {
               this.ngZone.run(() => {
                 this.router.navigate(["login"]);
               });
-              this.alertService.openSuccessAlert("Password successfully changed!", 1);
+              this.alertService.openSuccessAlert("Password successfully changed!", 3);
             })
             .catch(this.errCatching);
         })
@@ -141,7 +141,7 @@ export class AuthService {
           // });
           // и обновляем в AngularFirestore
           this.profileRef.set({ displayName: newName }, { merge: true });
-          this.alertService.openSuccessAlert("Name successfully changed!", 2);
+          this.alertService.openSuccessAlert("Name successfully changed!", 3);
         })
         .catch(this.errCatching)
     );
@@ -157,7 +157,7 @@ export class AuthService {
     return this.afAuth.auth
       .sendPasswordResetEmail(passwordResetEmail)
       .then(() => {
-        this.alertService.openInfoAlert("Password reset email sent, check your inbox.", 2);
+        this.alertService.openInfoAlert("Password reset email sent, check your inbox.", 3);
       })
       .catch(error => {
         window.alert(error);
@@ -211,6 +211,7 @@ export class AuthService {
   UploadNewAvatar(event: Event): void {
     const target = event.target as HTMLInputElement;
     const file = target.files[0] as File;
+    console.log("file.type: ", file.type);
     // image/jpeg image/png image/tiff image/gif
     if (file.type.slice(0, 5) === "image") {
       const path = "users/" + this.currentUser.uid + "/" + file.name;
@@ -227,7 +228,7 @@ export class AuthService {
             await this.profileRef.update({ photoURL });
             await this.alertService.openSuccessAlert(
               "You have successfully changed your profile picture",
-              2
+              3
             );
             sub.unsubscribe();
           })
@@ -243,7 +244,7 @@ export class AuthService {
       .updateProfile({ photoURL: "" })
       .then(result => {
         this.profileRef.set({ photoURL: "" }, { merge: true });
-        this.alertService.openSuccessAlert("Image successfully deleted!", 2);
+        this.alertService.openSuccessAlert("Image successfully deleted!", 3);
       })
       .catch(this.errCatching);
   }
@@ -273,5 +274,5 @@ export class AuthService {
     });
   }
 
-  errCatching = error => this.alertService.openWarningAlert(error.message, 2);
+  errCatching = error => this.alertService.openWarningAlert(error.message, 3);
 }

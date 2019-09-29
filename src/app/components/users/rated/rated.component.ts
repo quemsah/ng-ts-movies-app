@@ -44,8 +44,8 @@ export class RatedComponent implements OnInit {
   getRatedList(): void {
     this.userService.fetchRatedList().subscribe(data => {
       this.rated = data;
+      console.log('this.rated: ', this.rated);
       this.getRatedListInfo(this.rated);
-      // console.log(data);
     });
   }
 

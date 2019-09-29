@@ -18,7 +18,6 @@ export class DiscoverComponent implements OnInit {
   title: string;
   searchValue: string;
   searchValueUpdate = new Subject<string>();
-  // default genreValue = "Adventrure"
   genreValue = 12;
   pageOfItems: Array<any>;
   constructor(
@@ -35,13 +34,16 @@ export class DiscoverComponent implements OnInit {
         distinctUntilChanged()
       )
       .subscribe(value => {
-        this.searchValue = value.toString();
-        console.log("debounceTime(" + interval + "), query = " + this.searchValue);
-        this.spinner.show();
-        this.getDiscoveredMovies(
-          this.tmdbService.fetchFoundMovies.bind(this.tmdbService),
-          this.searchValue.toString()
-        );
+        // чтобы при пустой строке не грузил постоянно
+        if (value !== "") {
+          this.searchValue = value.toString();
+          console.log("debounceTime(" + interval + "), query = " + this.searchValue);
+          this.spinner.show();
+          this.getDiscoveredMovies(
+            this.tmdbService.fetchFoundMovies.bind(this.tmdbService),
+            this.searchValue.toString()
+          );
+        }
       });
   }
 
@@ -86,7 +88,7 @@ export class DiscoverComponent implements OnInit {
     // tslint:disable-next-line: deprecation
     forkJoin(fetcher(1, genre), fetcher(2, genre), fetcher(3, genre)).subscribe(data => {
       this.movies = this.mergeItems(data);
-      // console.log(this.movies);
+      console.log("this.movies: ", this.movies);
       this.spinner.hide();
     });
   }

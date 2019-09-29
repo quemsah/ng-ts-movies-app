@@ -63,7 +63,7 @@ export class UserService {
           date: now,
           accepted: false,
           fid
-        }).catch(error => this.alertService.openWarningAlert(error.message, 2));
+        }).catch(error => this.alertService.openWarningAlert(error.message, 3));
         this.makeFriend({
           uid: fid,
           initiator: uid,
@@ -71,12 +71,12 @@ export class UserService {
           accepted: false,
           fid: uid
         })
-          .then(smth => this.alertService.openSuccessAlert("Request was successfully sent", 1))
-          .catch(error => this.alertService.openWarningAlert(error.message, 2));
+          .then(smth => this.alertService.openSuccessAlert("Request was successfully sent", 2))
+          .catch(error => this.alertService.openWarningAlert(error.message, 3));
       } else {
         this.alertService.openWarningAlert(
           "There is no user registered with that email address!",
-          2
+          3
         );
       }
     });
@@ -104,11 +104,11 @@ export class UserService {
   deleteRequests(fid: string): void {
     const uid = this.authService.userData.uid;
     this.deleteRequest(uid, fid).catch(error =>
-      this.alertService.openWarningAlert(error.message, 2)
+      this.alertService.openWarningAlert(error.message, 3)
     );
     this.deleteRequest(fid, uid)
       .then(smth => this.alertService.openSuccessAlert("Successfully deleted!", 2))
-      .catch(error => this.alertService.openWarningAlert(error.message, 2));
+      .catch(error => this.alertService.openWarningAlert(error.message, 3));
   }
 
   deleteRequest(uid: string, fid: string) {
@@ -130,7 +130,7 @@ export class UserService {
       date: now,
       accepted: true,
       fid
-    }).catch(error => this.alertService.openWarningAlert(error.message, 2));
+    }).catch(error => this.alertService.openWarningAlert(error.message, 3));
     this.makeFriend({
       uid: fid,
       initiator: fid,
@@ -139,6 +139,6 @@ export class UserService {
       fid: uid
     })
       .then(smth => this.alertService.openSuccessAlert("Friend was successfully added", 2))
-      .catch(error => this.alertService.openWarningAlert(error.message, 2));
+      .catch(error => this.alertService.openWarningAlert(error.message, 3));
   }
 }

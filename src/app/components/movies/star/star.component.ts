@@ -33,7 +33,7 @@ export class StarComponent implements OnInit {
       this.starData = data;
       // todo: почему тут лоадер не работает
       this.spinner.hide();
-      // console.log("Star info:");
+      console.log("Star info:");
       console.log(this.starData);
     });
   }
@@ -41,7 +41,7 @@ export class StarComponent implements OnInit {
   getStarMovies(id: number): void {
     this.tmdbService.fetchStarMovies(id).subscribe(data => {
       this.starMovies = data;
-      // console.log("Known in movies");
+      console.log("Known in movies:");
       console.log(this.starMovies);
     });
   }

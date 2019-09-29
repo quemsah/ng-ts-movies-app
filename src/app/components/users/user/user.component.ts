@@ -36,8 +36,8 @@ export class UserComponent implements OnInit {
   getUser(): void {
     const id = this.route.snapshot.paramMap.get("id");
     this.userService.getUserInfo(id).subscribe(user => {
-      // console.log(user);
       this.userData = user;
+      console.log('this.userData: ', this.userData);
     });
   }
   // добавляем к айдишниками фильмов информацию о них
