@@ -130,7 +130,7 @@ const routes: Routes = [
   {
     path: "discovered-movie/:id",
     component: DiscoveredMovieComponent,
-    canActivate: [AuthGuard]
+    canActivate: [OuterPagesGuard]
   },
   {
     path: "movie/:id",
@@ -146,7 +146,7 @@ const routes: Routes = [
     path: "movies",
     component: MoviesListComponent,
     data: { title: "Movies" },
-    canActivate: [AuthGuard]
+    canActivate: [OuterPagesGuard]
   },
   {
     path: "",

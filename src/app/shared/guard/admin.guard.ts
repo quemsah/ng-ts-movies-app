@@ -21,7 +21,6 @@ export class AdminGuard implements CanActivate {
     state: RouterStateSnapshot
   ): Observable<boolean> | Promise<boolean> | boolean {
     // this.themeService.forceDisableDarkModeBeforeRoute();
-    console.log(1);
     if (this.authService.isLoggedIn !== true) {
       console.log("Auth guard!");
       this.router.navigate(["login"]);

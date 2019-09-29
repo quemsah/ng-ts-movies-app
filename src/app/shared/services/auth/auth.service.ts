@@ -95,7 +95,6 @@ export class AuthService {
         this.ngZone.run(() => {
           this.router.navigate(["movies"]);
         });
-        // console.log(result.user);
         this.SetUserData(result.user);
       })
       .catch(this.errCatching);

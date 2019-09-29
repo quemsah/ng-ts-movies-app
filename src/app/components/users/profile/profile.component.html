@@ -2,7 +2,7 @@
 src="{{(user.photoURL) ? user.photoURL : '/src/assets/img/avatars/user.png'}}" alt="{{user.displayName}}">  -->
 <div class="container-fluid">
   <div class="row" *ngIf="authService.userData as user">
-    <div class="col-lg-6 mb-4 mt-0 mt-md-4">
+    <div class="col-lg-6 mb-4 mt-1 mt-md-4">
       <div class="card card-cascade narrower">
         <div class="view view-cascade gradient-card-header"
           [style.background]="themeService.themeGradient | safe: 'style'">

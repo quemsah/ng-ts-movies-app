@@ -1,7 +1,7 @@
 <!-- чтобы спиннер не был бесконечным в случае, если у пользователя нет оцененных фильмов -->
 <app-loader *ngIf="(rated | json) != '[]'"></app-loader>
 <div class="container-fluid">
-  <section class="mb-4 mt-0 mt-md-4">
+  <section class="mb-4 mt-1 mt-md-4">
     <div *ngIf="(rated | json) != '[]'" class="row">
       <h2 class="profile-title col-lg-12 font-weight-bold">
         <strong>My ratings</strong>

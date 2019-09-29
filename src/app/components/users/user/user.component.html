@@ -7,7 +7,7 @@
         <strong>My movies lists
         </strong></h2>
       <h2 *ngIf="userData?.displayName !== user.displayName" class="profile-title col-lg-12 font-weight-bold">
-        <strong>{{userData?.displayName}}'s movies
+        <strong>{{userData?.displayName ? userData?.displayName : userData?.email}}'s movies
         </strong></h2>
       <div class="movie-tabs">
         <ul class="nav nav-tabs nav-justified md-tabs " [style.background]="themeService.themeGradient | safe: 'style'"
@@ -94,7 +94,7 @@
     <div *ngIf="((watchlater | json) === '[]' && (favourites | json) === '[]')"
       class="row d-flex justify-content-start p-2">
       <div class="col-12 mt-4">
-        <h2 class="h2-responsive profile-title font-weight-bold mb-2">You don't have any movie lists yet</h2>
+        <h2 class="h2-responsive profile-title font-weight-bold mb-2">There is no any movie lists yet</h2>
         <h5 class="">
           <a routerLink="/movies" [style.color]="themeService.themeColor | safe: 'style'">Go to the movies page!</a>
         </h5>
