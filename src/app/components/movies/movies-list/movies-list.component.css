@@ -6,8 +6,6 @@
   transform: translateY(-13px) scale(0.8);
 }
 
-
-
 .custom-select:focus {
   box-shadow: none;
 }

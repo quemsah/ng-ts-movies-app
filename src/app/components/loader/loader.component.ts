@@ -10,6 +10,8 @@ export class LoaderComponent implements OnInit {
   constructor(public themeService: ThemeService) {}
 
   ngOnInit() {
-    setTimeout(() => (this.infinite = true), 3000);
+    // по истечении 3.5 секунд таймер поймет, что завис и
+    // предложит редирект на главную страницу
+    setTimeout(() => (this.infinite = true), 3500);
   }
 }

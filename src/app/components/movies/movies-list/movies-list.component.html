@@ -31,7 +31,6 @@
           <div class="md-form form-sm mb-0 mt-3 mr-2">
             <select id="form4" [(ngModel)]="sortingValue" class="browser-default custom-select select-rating"
               (change)="onSortingValueChange($event.target.value)">
-              <!-- <option class="select-option" selected>Sort by</option> -->
               <option *ngFor="let item of sortingValues" [ngValue]="item.value" class="select-option">{{item.name}}
               </option>
             </select>

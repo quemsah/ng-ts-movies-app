@@ -53,6 +53,7 @@ export class DiscoverComponent implements OnInit {
     switch (this.category) {
       case "popular":
         this.title = "Most popular movies";
+        // байндим контекст, чтобы не сломался http запрос в tmdbservice
         return this.getDiscoveredMovies(this.tmdbService.fetchPopularMovies.bind(this.tmdbService));
       case "now-playing":
         this.title = "Movies now playing in theaters";
@@ -63,7 +64,7 @@ export class DiscoverComponent implements OnInit {
       case "genres":
         this.title = "Discover by genres";
         return this.getDiscoveredMovies(this.tmdbService.fetchByGenre.bind(this.tmdbService), "12");
-      // case "search:/query"
+      // default "search:/query"
       default:
         this.category = "search";
         this.searchValue = this.route.snapshot.params.query;
@@ -75,7 +76,7 @@ export class DiscoverComponent implements OnInit {
         );
     }
   }
-
+  // объединение трех пришедших массивов типа MovieCategory
   mergeItems = arr => {
     return [
       ...Object.values(arr[0].results),

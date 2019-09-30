@@ -53,36 +53,14 @@ export class AddMovieComponent implements OnInit, AfterViewInit {
   // Делается запрос к TMDB методом fetchMovieByIMDBID, который по индентификатору IMDB(строка) вовзращает
   // информацию о фильме. Далее запрос fetchMovieDetailsByTMDBID по только что
   // полученному TMDB идентификатору(число) возвращает полную информацию о фильме
-
   onImdbIDSubmit(form: NgForm): void {
-    console.log("form.value: ", form.value);
-    // this.tmdbService.fetchMovieByIMDBID(form.value.ImdbId).subscribe(data => {
-    //   if (data.movie_results.length > 0) {
-    //     forkJoin(
-    //       this.tmdbService.fetchMovieDetailsByTMDBID(data.movie_results[0].id),
-    //       this.tmdbService.fetchMovieCreditsbyTMDBID(data.movie_results[0].id)
-    //     ).subscribe(([detailData, creditsData]) => {
-    //       this.foundMovieData = detailData;
-    //       this.foundPosterPath =
-    //         "https://image.tmdb.org/t/p/w300_and_h450_bestv2" +
-    //         this.foundMovieData.poster_path;
-    //       console.log(this.genres);
-    //       this.movieService.compareGenres(this.genres, detailData.genres);
-    //       this.foundMovieCredits = creditsData;
-    //     });
-    //     console.log(data);
-    //   } else {
-    //     this.alertService.openWarningAlert("Wrong ID!", 2);
-    //   }
-    // });
-
+    console.log("onImdbIDSubmit.form: ", form.value);
     // Переписан без подписки внутри подписки
     // Часть до подписки перенесена в TMDB.service
     // и добавлено изменение полей к удобночитаемому виду (min,$)
     // Это вынужденная мера, так как в случае ручного добавления
     // администратор может это делать в любом виде
     // (иначе он будет переводить часы в минуты, $ в рубли и т.д.)
-
     this.tmdbService
       .fetchMovieByIMDBID(form.value.ImdbId)
       .subscribe(([detailData, creditsData]) => {
@@ -105,7 +83,7 @@ export class AddMovieComponent implements OnInit, AfterViewInit {
 
   onAddMovieSubmit(form: NgForm): void {
     // приводим к нужному виду
-    console.log("form.value: ", form.value);
+    console.log("onAddMovieSubmit.form: ", form.value);
     const movieData: Movie = {
       mid: this.movieService.generateMovieID(form.value.Date, form.value.MovieName),
       imdb_id: form.value.ImdbId,

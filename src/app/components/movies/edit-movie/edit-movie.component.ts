@@ -14,7 +14,6 @@ export class EditMovieComponent implements OnInit, AfterViewInit {
   currentMovieData: Movie;
   title: string;
   releaseDate: string;
-  // {make: null};
   constructor(
     public themeService: ThemeService,
     private route: ActivatedRoute,

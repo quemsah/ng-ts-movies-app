@@ -1,15 +1,15 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
-import { Movie } from "../../../shared/models/movie";
-import { Cast } from "../../../shared/models/api-cast";
-import { Crew } from "../../../shared/models/api-crew";
 import { NgxSpinnerService } from "ngx-spinner";
 import { AuthService } from "../../../shared/services/auth/auth.service";
 import { TMDBService } from "../../../shared/services/tmdb/TMDB.service";
 import { ThemeService } from "../../../shared/services/theme/theme.service";
 import { MovieService } from "../../../shared/services/movie/movie.service";
-import { forkJoin } from "rxjs";
 import { MovieDetails } from "../../../shared/models/api-movie-details";
+import { Movie } from "../../../shared/models/movie";
+import { Cast } from "../../../shared/models/api-cast";
+import { Crew } from "../../../shared/models/api-crew";
+import { forkJoin } from "rxjs";
 
 @Component({
   selector: "app-discovered-movie",
@@ -44,14 +44,13 @@ export class DiscoveredMovieComponent implements OnInit {
       this.tmdbService.fetchMovieCreditsbyTMDBID(id)
     ).subscribe(([movie, data]) => {
       this.discoveredMovieData = movie;
+      console.log("this.discoveredMovieData: ", this.discoveredMovieData);
       // берем режиссера из другого запроса (актеры и команда)
       this.discoveredMovieData.director = data.crew[0].name.toString();
       this.discoveredMovieCrew = this.movieService.sliceData(data.crew, 12);
       console.log("this.discoveredMovieCrew: ", this.discoveredMovieCrew);
-
       this.discoveredMovieCast = this.movieService.sliceData(data.cast, 12);
       console.log("this.discoveredMovieCast: ", this.discoveredMovieCast);
-
       // проверям есть ли в нашей БД такой
       this.mid = this.movieService.generateMovieID(
         this.discoveredMovieData.release_date,

@@ -55,7 +55,7 @@ export class MoviesListComponent implements OnInit, AfterViewInit {
   onSearchChange(): void {
     this.getMovies();
   }
-  // Filter array over multiple properties
+  // Фильтрация по всем полям
   filterByAll = (movies, key): Movie[] =>
     movies.filter(obj =>
       Object.keys(movies[0]).some(

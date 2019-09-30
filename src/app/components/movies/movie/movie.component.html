@@ -176,12 +176,12 @@
             <img src="{{(smovie[i].poster_path) 
                   ? tmdbService.URL_IMG_H450 + smovie[i].poster_path 
                   : '../../../assets/img/no_poster_available.jpg'}}" class="card-img-top" alt="Poster image">
-            <a routerLink="/discovered-movie/{{movieService.generateMovieID(smovie[i].release_date,smovie[i].title)}}">
+            <a routerLink="/discovered-movie/{{smovie[i].id}}">
               <div class="mask rgba-white-slight"></div>
             </a>
           </div>
           <div class="card-body">
-            <a routerLink="/discovered-movie/{{movie.mid}}">
+            <a routerLink="/discovered-movie/{{smovie[i].id}}">
               <h4 class="card-title">{{smovie[i].title}}</h4>
             </a>
             <p></p>
@@ -212,7 +212,6 @@
                 class="btn btn-outline-danger btn-sm px-2 waves-effect">
                 <i id="{{comment.cid}}" class="far fa-trash-alt ml-1"></i>
               </a>
-              <!-- (click)="handleCommentDelete($event)" -->
               <ng-template #deleteCommentTemplate>
                 <div class="modal-header" [style.background]="themeService.themeGradient | safe: 'style'">
                   <h5 class="modal-title pull-left"><i class="far fa-trash-alt"></i> Delete comment?</h5>

@@ -9,9 +9,9 @@ export class ThemeService {
   isDarkMode = false;
   wasRouted = false;
   // начальные значения
-  red = 239;
-  green = 10;
-  blue = 157;
+  red = 12;
+  green = 133;
+  blue = 226;
   themeGradient: string = this.setGradient(this.red, this.green, this.blue);
   themeColor: string = this.setColor(this.red, this.green, this.blue);
   constructor() {}
@@ -32,12 +32,18 @@ export class ThemeService {
   setGradient(red: number, green: number, blue: number): string {
     const alpha = 0.3;
     const beta = -0.5;
-    const sRed = this.mix(red, alpha);
-    const sGreen = this.mix(green, alpha);
-    const sBlue = this.mix(blue, alpha);
-    const eRed = this.mix(red, beta);
-    const eGreen = this.mix(green, beta);
-    const eBlue = this.mix(blue, beta);
+    // коэффициент рандома
+    const random = 0.2;
+    // массив из рандомных чисел
+    const randomArray = Array.apply(null, { length: 6 }).map(() =>
+      parseFloat((Math.random() * (random + random) - random).toFixed(2))
+    );
+    const sRed = this.mix(red, alpha + randomArray[0]);
+    const sGreen = this.mix(green, alpha + randomArray[1]);
+    const sBlue = this.mix(blue, alpha + randomArray[2]);
+    const eRed = this.mix(red, beta + randomArray[3]);
+    const eGreen = this.mix(green, beta + randomArray[4]);
+    const eBlue = this.mix(blue, beta + randomArray[5]);
     const gr =
       "linear-gradient(40deg, #" +
       this.fullColorHex(sRed, sGreen, sBlue) +
