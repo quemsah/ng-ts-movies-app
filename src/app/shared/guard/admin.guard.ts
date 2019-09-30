@@ -3,14 +3,12 @@ import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from
 import { AngularFireAuth } from "@angular/fire/auth";
 import { AuthService } from "../services/auth/auth.service";
 import { Observable } from "rxjs";
-// import { ThemeService } from "../services/theme/theme.service";
 
 @Injectable({
   providedIn: "root"
 })
 export class AdminGuard implements CanActivate {
   constructor(
-    // public themeService: ThemeService,
     public authService: AuthService,
     private router: Router,
     private afAuth: AngularFireAuth

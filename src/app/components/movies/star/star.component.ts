@@ -5,6 +5,7 @@ import { TMDBService } from "../../../shared/services/tmdb/TMDB.service";
 import { ThemeService } from "../../../shared/services/theme/theme.service";
 import { MovieCredits } from "../../../shared/models/api-movie-credits";
 import { Star } from "../../../shared/models/api-star";
+import { forkJoin } from "rxjs";
 
 @Component({
   selector: "app-star",
@@ -24,25 +25,21 @@ export class StarComponent implements OnInit {
   ngOnInit() {
     this.spinner.show();
     const sid = parseInt(this.route.snapshot.paramMap.get("id"), 10);
-    this.getStarInfo(sid);
-    this.getStarMovies(sid);
+    this.getStarInfoAndMovies(sid);
   }
 
-  getStarInfo(id: number): void {
-    this.tmdbService.fetchStar(id).subscribe(data => {
-      this.starData = data;
-      // todo: почему тут лоадер не работает
-      this.spinner.hide();
-      console.log("Star info:");
-      console.log(this.starData);
-    });
-  }
-
-  getStarMovies(id: number): void {
-    this.tmdbService.fetchStarMovies(id).subscribe(data => {
-      this.starMovies = data;
-      console.log("Known in movies:");
-      console.log(this.starMovies);
-    });
+  getStarInfoAndMovies(id: number): void {
+    // tslint:disable-next-line: deprecation
+    forkJoin(this.tmdbService.fetchStar(id), this.tmdbService.fetchStarMovies(id)).subscribe(
+      ([starData, starMoviesData]) => {
+        this.starData = starData;
+        console.log("Star info:");
+        console.log(this.starData);
+        this.starMovies = starMoviesData;
+        console.log("Known in movies:");
+        console.log(this.starMovies);
+        this.spinner.hide();
+      }
+    );
   }
 }

@@ -12,9 +12,7 @@ export class SettingsComponent implements OnInit, AfterViewInit {
   blue = this.themeService.blue;
   constructor(public themeService: ThemeService) {}
 
-  ngOnInit() {
-    // this.updateColor();
-  }
+  ngOnInit() {}
 
   ngAfterViewInit() {
     // this.themeService.checkDarkMode();
@@ -23,7 +21,6 @@ export class SettingsComponent implements OnInit, AfterViewInit {
   handleColorChange(): void {
     this.themeService.setGradient(this.red, this.green, this.blue);
     this.themeService.setColor(this.red, this.green, this.blue);
-    // this.updateColor();
   }
 
   handleResetScheme(): void {
@@ -32,8 +29,4 @@ export class SettingsComponent implements OnInit, AfterViewInit {
     this.blue = this.themeService.blue;
     this.handleColorChange();
   }
-  // updateColor() {
-  //   this.themeService.setGradient(this.red, this.green, this.blue);
-  //   this.themeService.setColor(this.red, this.green, this.blue);
-  // }
 }

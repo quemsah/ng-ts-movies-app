@@ -1,12 +1,12 @@
-import { Comment } from "./../../models/comment";
-import { Movie } from "../../models/movie";
 import { Injectable } from "@angular/core";
 import { AngularFirestore } from "@angular/fire/firestore";
-import { AlertService } from "../alert/alert.service";
-import { Observable } from "rxjs";
-import { OrderByDirection } from "../../order-by-direction";
 import { Router } from "@angular/router";
+import { AlertService } from "../alert/alert.service";
+import { OrderByDirection } from "../../order-by-direction";
 import { MovieListItem } from "../../models/movie-list-item";
+import { Comment } from "./../../models/comment";
+import { Movie } from "../../models/movie";
+import { Observable } from "rxjs";
 
 @Injectable({
   providedIn: "root"
@@ -114,7 +114,6 @@ export class MovieService {
   }
 
   fetchMovie(id: string): Observable<any> {
-    // return this.afs.doc(`movies/${id}`).valueChanges();
     const movie = this.afs.collection("movies").doc(`${id}`);
     const that = this;
     movie.ref.get().then(doc => {
@@ -137,28 +136,6 @@ export class MovieService {
   // можно только по нескольким полям без ухищрений нельзя
   // https://stackoverflow.com/questions/26700924/query-based-on-multiple-where-clauses-in-firebase
   // И совсем невозможно добавить к этому сортировку
-
-  // fetchMovies(filterValue: string): Observable<any> {
-  //   let val = filterValue.toLowerCase();
-  //   return this.afs
-  //     .collection("movies", ref =>
-  //       ref
-  //         .where("releaseDate", ">=", filterValue)
-  //         .where("releaseDate", "<=", filterValue + "\uf8ff")
-  //     )
-  //     .valueChanges();
-  // }
-
-  // fetchMovies(filterValue: string): Observable<any> {
-  //   return this.afs
-  //     .collection("movies", ref =>
-  //       ref
-  //         .orderBy("dateAdded")
-  //         .startAt(filterValue)
-  //         .endAt(filterValue + "\uf8ff")
-  //     )
-  //     .valueChanges();
-  // }
 
   toggleMovieToList(type: string, listMovieData: MovieListItem, uid: string): void {
     const movieDoc = this.afs

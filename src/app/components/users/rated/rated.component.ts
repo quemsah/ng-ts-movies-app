@@ -1,11 +1,11 @@
 import { Component, OnInit } from "@angular/core";
-import { ThemeService } from "../../../shared/services/theme/theme.service";
+import { StarRatingComponent } from "ng-starrating";
 import { NgxSpinnerService } from "ngx-spinner";
-import { UserService } from "../../../shared/services/user/user.service";
 import { AuthService } from "../../../shared/services/auth/auth.service";
+import { UserService } from "../../../shared/services/user/user.service";
+import { ThemeService } from "../../../shared/services/theme/theme.service";
 import { MovieService } from "../../../shared/services/movie/movie.service";
 import { MovieListItem } from "../../../shared/models/movie-list-item";
-import { StarRatingComponent } from "ng-starrating";
 
 @Component({
   selector: "app-rated",
@@ -44,7 +44,7 @@ export class RatedComponent implements OnInit {
   getRatedList(): void {
     this.userService.fetchRatedList().subscribe(data => {
       this.rated = data;
-      console.log('this.rated: ', this.rated);
+      console.log("this.rated: ", this.rated);
       this.getRatedListInfo(this.rated);
     });
   }

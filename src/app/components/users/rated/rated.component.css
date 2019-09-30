@@ -31,13 +31,3 @@
     display: none;
   }
 }
-
-/* <div class="card-rating" *ngIf="movie.IMDBRating">
-<a class="">{{movie.IMDBRating}} <i class="far fa-star"> </i></a>
-</div>
-<div class="card-favourite" (click)="handleToFavourites($event)">
-<a class=""><i id="{{movie.mid}}" class="far fa-heart"></i></a>
-</div>
-<div class="card-watch-later" (click)="handleToWatchLater($event)">
-<a class=""><i id="{{movie.mid}}" class="far fa-clock"></i></a>
-</div> */

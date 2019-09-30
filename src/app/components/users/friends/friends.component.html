@@ -1,8 +1,5 @@
 <app-loader></app-loader>
 <div class="container-fluid">
-  <!-- <div class="row" *ngIf="authService.userData as user">
-    <span>{{user | json}}</span>  
-  </div> -->
   <div class="row">
     <h2 class="profile-title col-lg-12 mt-lg-12 font-weight-bold mt-0 mt-md-4"><strong>Find a friend</strong>
     </h2>
@@ -24,9 +21,6 @@
       </form>
     </div>
   </div>
-  <!-- <span>{{friends | json}}</span>
-  <span>{{inRequests | json}}</span> -->
-  <!-- <span>(friends | json) != ({} | json)</span> -->
   <div class="row mt-1">
     <h2 class="profile-title col-lg-12 mt-lg-12 font-weight-bold" *ngIf="(friends | json) != '{}'">
       <strong>Friends</strong></h2>

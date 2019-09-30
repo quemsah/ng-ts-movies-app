@@ -8,7 +8,6 @@ export class AlertService {
   constructor(private snackBar: MatSnackBar) {}
 
   openAlert(message, durationInSeconds, type): void {
-    // styles.css
     const classType = type + "-alert-snackbar";
     this.snackBar.open(message, null, {
       duration: durationInSeconds * 1000,

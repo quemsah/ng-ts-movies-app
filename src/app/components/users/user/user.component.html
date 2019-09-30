@@ -56,8 +56,6 @@
           </div>
           <div class="tab-pane fade" id="fav-just" role="tabpanel" aria-labelledby="fav-tab-just">
             <div class="row">
-              <!-- <span>{{favourites | json}}</span> -->
-              <!-- *ngIf="movie.title" -->
               <div *ngFor="let movie of favourites" class="movie-item col-lg-3 col-md-4 col-sm-6 mb-4">
                 <div class="card movie-card h-100">
                   <div *ngIf="movie.IMDBRating" class="card-rating">

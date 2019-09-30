@@ -1,12 +1,12 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
-import { User } from "../../../shared/models/user";
 import { NgxSpinnerService } from "ngx-spinner";
-import { MovieListItem } from "../../../shared/models/movie-list-item";
 import { UserService } from "../../../shared/services/user/user.service";
 import { AuthService } from "../../../shared/services/auth/auth.service";
 import { MovieService } from "../../../shared/services/movie/movie.service";
 import { ThemeService } from "../../../shared/services/theme/theme.service";
+import { MovieListItem } from "../../../shared/models/movie-list-item";
+import { User } from "../../../shared/models/user";
 
 @Component({
   selector: "app-user",
@@ -37,7 +37,7 @@ export class UserComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get("id");
     this.userService.getUserInfo(id).subscribe(user => {
       this.userData = user;
-      console.log('this.userData: ', this.userData);
+      console.log("this.userData: ", this.userData);
     });
   }
   // добавляем к айдишниками фильмов информацию о них
@@ -59,7 +59,6 @@ export class UserComponent implements OnInit {
 
   getMovieLists(): void {
     const id = this.route.snapshot.paramMap.get("id");
-    // const id = "me" ? this.authService.userData.uid : this.route.snapshot.paramMap.get("id");
     this.userService.fetchWatchLaterList(id).subscribe(data => {
       this.watchlater = data;
       this.getListInfo(this.watchlater);

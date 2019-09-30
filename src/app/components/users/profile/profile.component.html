@@ -1,16 +1,13 @@
-<!-- <img class="align-self-start mr-5 img-thumbnail rounded-circle"
-src="{{(user.photoURL) ? user.photoURL : '/src/assets/img/avatars/user.png'}}" alt="{{user.displayName}}">  -->
 <div class="container-fluid">
   <div class="row" *ngIf="authService.userData as user">
     <div class="col-lg-6 mb-4 mt-1 mt-md-4">
       <div class="card card-cascade narrower">
         <div class="view view-cascade gradient-card-header"
           [style.background]="themeService.themeGradient | safe: 'style'">
-          <h5 *ngIf="this.authService.userData?.isAdmin === true" 
-          class="mb-0 font-weight-bold">Edit Administrator Account
+          <h5 *ngIf="this.authService.userData?.isAdmin === true" class="mb-0 font-weight-bold">Edit Administrator
+            Account
           </h5>
-          <h5 *ngIf="this.authService.userData?.isAdmin === false" 
-          class="mb-0 font-weight-bold">Edit Account
+          <h5 *ngIf="this.authService.userData?.isAdmin === false" class="mb-0 font-weight-bold">Edit Account
           </h5>
         </div>
         <div class="card-body card-body-cascade text-center update-profile-form">
@@ -38,14 +35,6 @@ src="{{(user.photoURL) ? user.photoURL : '/src/assets/img/avatars/user.png'}}" a
             </div>
             <div class="row">
               <div class="col-md-6">
-                <!-- <div class="md-form mb-0">
-                      <input class="form-control" type="text" ngModel [(ngModel)]="user.displayName" name="userName"
-                        required minlength="5" #userNameInput="ngModel">
-                      <span class="valid-error" *ngIf="userNameInput.hasError('required')">Field must not be empty</span>
-                      <span class="valid-error" *ngIf="userNameInput.hasError('minlength')">The name must be of minimum
-                        length 4 characters</span>
-                      <label>Name</label>
-                    </div> -->
                 <div class="md-form mb-0">
                   <input class="form-control" type="text" ngModel [(ngModel)]="user.uid" name="uid" disabled>
                   <label>User ID</label>
@@ -63,20 +52,12 @@ src="{{(user.photoURL) ? user.photoURL : '/src/assets/img/avatars/user.png'}}" a
               </div>
             </div>
             <div class="row">
-              <!-- <div class="col-md-12">
-                    <div class="md-form mb-0">
-                      <textarea class="md-textarea form-control" rows="3" type="text" ngModel name="aboutMe"
-                        #aboutMeInput="ngModel"></textarea>
-                      <label class="">About me</label>
-                    </div>
-                  </div> -->
             </div>
             <div class="row">
               <div class="col-md-12 text-center my-4">
                 <span class="waves-input-wrapper waves-effect waves-light"><input type="submit" value="Update Account"
                     class="btn btn-info btn-rounded btn-sm"
                     [style.background]="themeService.themeGradient | safe: 'style'" [disabled]="f1.invalid"></span>
-                <!-- [disabled]="f.invalid" -->
               </div>
             </div>
           </form>
@@ -130,7 +111,6 @@ src="{{(user.photoURL) ? user.photoURL : '/src/assets/img/avatars/user.png'}}" a
                 <span class="waves-input-wrapper waves-effect waves-light"><input type="submit" value="Update"
                     class="btn btn-info btn-rounded btn-sm"
                     [style.background]="themeService.themeGradient | safe: 'style'" [disabled]="f2.invalid"></span>
-                <!-- [disabled]="f.invalid" -->
               </div>
             </div>
           </form>

@@ -9,12 +9,10 @@
           <div class="md-form">
             <i class="fas fa-envelope prefix"></i>
             <input type="text" class="formControl" placeholder="E-mail" #userName required>
-            <!-- <label>Your email</label> -->
           </div>
           <div class="md-form">
             <i class="fas fa-lock prefix"></i>
             <input type="password" class="formControl" placeholder="Password" #userPassword required>
-            <!-- <label>Your password</label> -->
           </div>
           <div class="text-center">
             <button class="btn btn-lg text-white" [style.background]="themeService.themeGradient | safe: 'style'"
@@ -23,10 +21,6 @@
             <button class="btn btn-lg text-white" [style.background]="themeService.themeGradient | safe: 'style'"
               (click)="authService.GoogleAuth()">
               Continue with &nbsp;<i class="fab fa-google"></i></button>
-            <!-- <button class="btn btn-lg" [style.background]="themeService.themeGradient | safe: 'style'" (click)="authService.GithubAuth()"><i
-                class="fab fa-github"></i></button>
-            <button class="btn btn-lg" [style.background]="themeService.themeGradient | safe: 'style'" (click)="authService.MicrosoftAuth()"><i
-                class="fab fa-windows"></i></button> -->
             <hr class="mt-4">
             <h5><a routerLink="/forgot-password">Forgot password?</a></h5>
             <h5>Not registered yet? <a routerLink="/register">Create an account</a></h5>

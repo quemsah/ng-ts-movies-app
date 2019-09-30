@@ -1,11 +1,11 @@
 import { Component, OnInit, AfterViewInit } from "@angular/core";
 import { NgForm } from "@angular/forms";
+import { NgxSpinnerService } from "ngx-spinner";
 import { AuthService } from "../../../shared/services/auth/auth.service";
 import { UserService } from "../../../shared/services/user/user.service";
-import { Friends } from "../../../shared/models/friends";
 import { ThemeService } from "../../../shared/services/theme/theme.service";
 import { MovieService } from "../../../shared/services/movie/movie.service";
-import { NgxSpinnerService } from "ngx-spinner";
+import { Friends } from "../../../shared/models/friends";
 
 @Component({
   selector: "app-friends",
@@ -29,13 +29,10 @@ export class FriendsComponent implements OnInit, AfterViewInit {
     // todo: разобраться, почему не работает страничка
     // когда её насильно перезагружаешь
     // мб https://javebratt.com/firebase-user-undefined/
-    // В некоторых случаях, если getFriends вызывается два раза
-    // все работает хорошо даже после перезагрузки
-    // this.getFriends();
+    this.getFriends();
   }
 
   ngAfterViewInit() {
-    this.getFriends();
     // this.themeService.checkDarkMode();
   }
 
@@ -49,7 +46,6 @@ export class FriendsComponent implements OnInit, AfterViewInit {
   mapOutRequests = x => x.accepted === false && x.uid === x.initiator;
 
   mapInRequests = x => x.accepted === false && x.uid !== x.initiator;
-
   // добавляем к сухим айдишниками информацию о друзьях/запросах
   getFriendsInfo(friendsData: Friends): void {
     console.log("friendsData: ", friendsData);

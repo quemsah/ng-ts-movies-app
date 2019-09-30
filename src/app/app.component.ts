@@ -1,8 +1,8 @@
 import { Component, OnInit, AfterViewInit, ElementRef } from "@angular/core";
 import { Title } from "@angular/platform-browser";
 import { Router, NavigationEnd, ActivatedRoute } from "@angular/router";
-import { filter, map } from "rxjs/operators";
 import { ThemeService } from "./shared/services/theme/theme.service";
+import { filter, map } from "rxjs/operators";
 
 declare var $: any;
 
@@ -46,6 +46,5 @@ export class AppComponent implements OnInit, AfterViewInit {
 
     // инициализация боковое меню
     $(".button-collapse").sideNav({ closeOnClick: true });
-    // и кнопок смены вида
   }
 }

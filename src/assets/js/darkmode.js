@@ -42,14 +42,6 @@ const enableDarkMode = () => {
 //  });
 
 //  сразу
-//  (function ($) {
-//    $('#dark-mode').ready(function (event) {
-//      enableDarkMode(event);
-//      console.log('Dark mode!');
-//    });
-//  })(jQuery);
-
-//  сразу
 //  (function (event) {
 //    enableDarkMode(event);
 //    console.log('Dark mode is on!');

@@ -30,6 +30,7 @@ export class ThemeService {
   }
 
   setGradient(red: number, green: number, blue: number): string {
+    // параметры сдвига цвета
     const alpha = 0.3;
     const beta = -0.5;
     // коэффициент рандома

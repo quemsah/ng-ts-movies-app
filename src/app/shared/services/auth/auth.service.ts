@@ -1,24 +1,22 @@
 import { Injectable, NgZone } from "@angular/core";
 import { Router } from "@angular/router";
-// import * as firebase from "firebase";
+// удали следующую строчку чтобы сломать деплой
 import "firebase/storage";
 import { auth } from "firebase/app";
 import { AngularFireAuth } from "@angular/fire/auth";
 import { AngularFirestore, AngularFirestoreDocument } from "@angular/fire/firestore";
 import { AngularFireStorage } from "@angular/fire/storage";
-import { User } from "../../models/user";
 import { AlertService } from "../alert/alert.service";
+import { User } from "../../models/user";
 import { finalize } from "rxjs/operators";
 
 @Injectable({
   providedIn: "root"
 })
 export class AuthService {
-  // private ADMIN_KEY = "cXVlbXNh";
-  private ADMIN_KEY = "cXVlbXNhdXJvc2VAbWFpbC5ydQ==";
+  private ADMIN_KEY = "cXVlbXNhdXJvc2U=";
   // Данные пользователя из authState
   userData: User;
-
   constructor(
     private alertService: AlertService,
     private storage: AngularFireStorage,
@@ -72,17 +70,8 @@ export class AuthService {
   }
 
   friendsRef() {
-    // console.log(this.userData.uid);
     return this.afs.collection(`users/${this.userData.uid}/friends`);
   }
-
-  // get watchLaterRef() {
-  //   return this.afs.collection(`users/${this.currentUser.uid}/watchlater`);
-  // }
-
-  // get favouritesRef() {
-  //   return this.afs.collection(`users/${this.currentUser.uid}/favourites`);
-  // }
 
   SignIn(email, password) {
     return this.afAuth.auth
@@ -135,10 +124,7 @@ export class AuthService {
         // обновляем встроенный методом AngularFireAuth.auth
         .updateProfile({ displayName: newName })
         .then(result => {
-          // юзер и так в профиле
-          // this.ngZone.run(() => {
-          //   this.router.navigate(["profile"]);
-          // });
+          // юзер и так в профиле, не редиректим
           // и обновляем в AngularFirestore
           this.profileRef.set({ displayName: newName }, { merge: true });
           this.alertService.openSuccessAlert("Name successfully changed!", 3);
@@ -168,14 +154,6 @@ export class AuthService {
     return this.AuthLogin(new auth.GoogleAuthProvider());
   }
 
-  // GithubAuth() {
-  //   return this.AuthLogin(new auth.GithubAuthProvider());
-  // }
-
-  // MicrosoftAuth() {
-  //   return this.AuthLogin(new auth.OAuthProvider("microsoft.com"));
-  // }
-
   AuthLogin(provider) {
     return this.afAuth.auth
       .signInWithPopup(provider)
@@ -191,9 +169,7 @@ export class AuthService {
         this.profileRef.set({ emailVerified: true }, { merge: true });
         // попытки тщетны, так как править поле emailVerified Firebase позволяет только
         // админам, а мне нет смысла тянуть весь админский пакет фич только для этого
-        // admin.auth().updateUser(kUserUid, {
-        //   emailVerified: true,
-        // });
+        // admin.auth().updateUser(uid, {emailVerified: true});
         // UPD: Firebase Admin SDK на клиенте поставить нельзя
         // https://stackoverflow.com/questions/42534283/include-the-firebase-admin-sdk-module-in-angularjs
         return result.user.getIdToken();
@@ -251,7 +227,7 @@ export class AuthService {
 
   // Записываем данные пользователя документ
   SetUserData(user, verified?: boolean) {
-    // console.log(verified ? verified : user.emailVerified);
+    console.log("e-mail verified ?: ", verified ? verified : user.emailVerified);
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
     const userData: User = {
       uid: user.uid,

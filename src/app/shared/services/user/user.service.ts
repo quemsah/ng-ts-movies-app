@@ -1,9 +1,9 @@
 import { Injectable } from "@angular/core";
 import { AngularFirestore } from "@angular/fire/firestore";
 import { AlertService } from "../alert/alert.service";
-import { Observable } from "rxjs";
 import { AuthService } from "../auth/auth.service";
 import { Friend } from "../../models/friend";
+import { Observable } from "rxjs";
 
 @Injectable({
   providedIn: "root"
@@ -22,10 +22,6 @@ export class UserService {
     private alertService: AlertService
   ) {}
 
-  // fetchFriends(): Observable<any> {
-  //   return this.afs.collection(`users/${this.uid}/friends`).valueChanges();
-  // }
-  
   getUserInfo(uid: string): Observable<any> {
     return this.afs.doc(`users/${uid}/`).valueChanges();
   }
@@ -41,14 +37,11 @@ export class UserService {
   fetchFavouritesList(uid: string): Observable<any> {
     return this.afs.collection(`users/${uid}/favourites`).valueChanges();
   }
+
   fetchRatedList(): Observable<any> {
     return this.afs.collection(`users/${this.authService.userData.uid}/rated`).valueChanges();
-    // сортировка по дате добавления
-    // return this.afs
-    //   .collection(`users/${this.authService.userData.uid}/rated`, ref => ref.orderBy("date", "desc"))
-    //   .valueChanges();
+    // сортировка по дате добавления collection(`users/${this.authService.userData.uid}/rated`, ref => ref.orderBy("date", "desc"))
   }
-
   // создание исходящего запроса у одного
   // и входящего у второго
   addFriend(email: string): void {
@@ -96,10 +89,6 @@ export class UserService {
         fid: friend.fid
       });
   }
-
-  // isFriends(uid: string, fid: string): Observable<any> {
-  //   //return this.afs.collection("users", ref => ref.where("email", "==", email)).valueChanges();
-  // }
 
   deleteRequests(fid: string): void {
     const uid = this.authService.userData.uid;
