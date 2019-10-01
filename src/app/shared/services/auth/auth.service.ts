@@ -78,6 +78,7 @@ export class AuthService {
       .signInWithEmailAndPassword(email, password)
       .then(result => {
         this.ngZone.run(() => {
+          console.log("Navigating to 'movies'!");
           this.router.navigate(["movies"]);
         });
         this.SetUserData(result.user);
