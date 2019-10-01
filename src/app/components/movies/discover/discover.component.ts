@@ -38,7 +38,6 @@ export class DiscoverComponent implements OnInit {
         if (value !== "") {
           this.searchValue = value.toString();
           console.log("debounceTime(" + interval + "), query = " + this.searchValue);
-          this.spinner.show();
           this.getDiscoveredMovies(
             this.tmdbService.fetchFoundMovies.bind(this.tmdbService),
             this.searchValue.toString()

@@ -1,7 +1,7 @@
 <!-- чтобы спиннер не был бесконечным в случае, если у пользователя нет списков фильмов -->
 <app-loader *ngIf="(watchlater | json) != '[]' || (favourites | json) != '[]'"></app-loader>
 <div class="container-fluid">
-  <section class="mb-4 mt-0" *ngIf="authService.userData as user">
+  <section class="mb-4 mt-1" *ngIf="authService.userData as user">
     <div class="row" *ngIf="((watchlater | json) != '[]' || (favourites | json) != '[]')">
       <h2 *ngIf="userData?.displayName === user.displayName" class="profile-title col-lg-12 font-weight-bold">
         <strong>My movies lists

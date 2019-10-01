@@ -1,7 +1,8 @@
 <ngx-spinner bdColor="#eeeeee" size="medium" [color]="themeService.themeColor" type="ball-clip-rotate"
   [fullScreen]="true">
-  <h4 *ngIf="!infinite" class="font-weight-bold text-center" [style.color]="themeService.themeColor"> Loading... </h4>
-  <h5 *ngIf="infinite" class="text-center" [style.color]="themeService.themeColor">Looks like I'm stuck!</h5>
+  <h4 *ngIf="!infinite" class="font-weight-bold text-center mt-5" [style.color]="themeService.themeColor"> Loading...
+  </h4>
+  <h5 *ngIf="infinite" class="text-center mt-5" [style.color]="themeService.themeColor">Looks like I'm stuck!</h5>
   <h4 *ngIf="infinite" class="text-center">
     <a routerLink="/movies" color="blue">Return to the main page</a>
   </h4>

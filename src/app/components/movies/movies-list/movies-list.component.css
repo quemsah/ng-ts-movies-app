@@ -1,15 +1,46 @@
 .filter-label {
-  transform: translateY(-22px) scale(0.8);
+  transform: translateY(-14px) scale(0.8);
 }
 
 .sort-label {
-  transform: translateY(-13px) scale(0.8);
+  transform: translateY(-14px) scale(0.8);
+}
+
+.form-control {
+  font-weight: 300;
+}
+
+select {
+  border-radius: 0;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
 }
 
 .custom-select:focus {
   box-shadow: none;
 }
 
+.custom-select {
+  padding-left: 2px;
+  width: 100%;
+}
+
 .select-option {
   background: #eeeeee;
+  font-size: inherit;
+}
+
+@media (min-width: 600px) {
+  .md-form .form-control {
+    padding: 0.6rem 0.1rem 0.4rem 0.1rem;
+  }
+
+  .custom-select {
+    padding-left: 2px;
+    width: 164px;
+  }
+
+  .sort-by {
+    flex-direction: row-reverse !important;
+  }
 }
