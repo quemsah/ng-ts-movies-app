@@ -9,10 +9,11 @@ export class ThemeService {
   isDarkMode = false;
   wasRouted = false;
   // начальные значения
-  red = 12;
+  red = 59;
   green = 133;
-  blue = 226;
-  themeGradient: string = this.setGradient(this.red, this.green, this.blue);
+  blue = 206;
+  random = 0;
+  themeGradient: string = this.setGradient(this.red, this.green, this.blue, this.random);
   themeColor: string = this.setColor(this.red, this.green, this.blue);
   constructor() {}
 
@@ -29,22 +30,22 @@ export class ThemeService {
     return Math.round((1 + param) * color);
   }
 
-  setGradient(red: number, green: number, blue: number): string {
-    // параметры сдвига цвета
+  getNum(random: number): number {
+    return parseFloat((Math.random() * (random + random) - random).toFixed(2));
+  }
+
+  setGradient(red: number, green: number, blue: number, random: number): string {
     const alpha = 0.3;
     const beta = -0.5;
-    // коэффициент рандома
-    const random = 0.2;
-    // массив из рандомных чисел
-    const randomArray = Array.apply(null, { length: 6 }).map(() =>
-      parseFloat((Math.random() * (random + random) - random).toFixed(2))
-    );
-    const sRed = this.mix(red, alpha + randomArray[0]);
-    const sGreen = this.mix(green, alpha + randomArray[1]);
-    const sBlue = this.mix(blue, alpha + randomArray[2]);
-    const eRed = this.mix(red, beta + randomArray[3]);
-    const eGreen = this.mix(green, beta + randomArray[4]);
-    const eBlue = this.mix(blue, beta + randomArray[5]);
+    // параметры сдвига цвета
+    const gamma = Array.apply(null, { length: 6 }).map(() => this.getNum(random));
+    // еще немного случайные параметры зависящие от коэф. рандома
+    const sRed = this.mix(red, alpha - 0.13 + gamma[0]);
+    const sGreen = this.mix(green, alpha + 0.21 + gamma[1]);
+    const sBlue = this.mix(blue, alpha - 0.08 + gamma[2]);
+    const eRed = this.mix(red, beta + 0.32 + gamma[3]);
+    const eGreen = this.mix(green, beta - 0.02 + gamma[4]);
+    const eBlue = this.mix(blue, beta + 0.27 + gamma[5]);
     const gr =
       "linear-gradient(40deg, #" +
       this.fullColorHex(sRed, sGreen, sBlue) +

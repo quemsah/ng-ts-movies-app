@@ -1,5 +1,12 @@
 ## A movie app made for T-Systems FrontEnd School
 
+| Role              | login                  | password |
+| ----------------- | ---------------------- | -------- |
+| **Administrator** | `quemsaurose@mail.ru`  | `111111` |
+| **User**          | `babaeva.anny@mail.ru` | `222222` |
+
+**Statement of work -> https://sun9-53.userapi.com/c855224/v855224301/b1942/EJItLBHj4_U.jpg**
+
 Frontend is build by Angular 8 and backend informations come from Firebase and external API service [TheMovieDB](https://developers.themoviedb.org/3)
 
 **Deployed version -> https://www.doesit.works**
@@ -13,18 +20,6 @@ The user can log in using Google, register (with confirmation by e-mail) as well
 The user can also change the color scheme in settings and share movies via VK, Twitter or Telegram.
 
 Administrator can add and change movie information manually or using IMDB identifier. He can also delete movies and comments.
-
-<!-- ## Statement of work
-
-<p align="left">
-  <a href="https://sun9-53.userapi.com/c855224/v855224301/b1942/EJItLBHj4_U.jpg">
-    <img
-      alt="Картинка ТЗ"
-      src="https://sun9-53.userapi.com/c855224/v855224301/b1942/EJItLBHj4_U.jpg"
-      width="600"
-    />
-  </a>
-</p> -->
 
 ## How to Load the App
 

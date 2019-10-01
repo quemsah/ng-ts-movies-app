@@ -26,9 +26,6 @@ export class FriendsComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.spinner.show();
-    // todo: разобраться, почему не работает страничка
-    // когда её насильно перезагружаешь
-    // мб https://javebratt.com/firebase-user-undefined/
     this.getFriends();
   }
 

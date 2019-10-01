@@ -16,7 +16,7 @@ export class AuthGuard implements CanActivate {
     // this.themeService.forceDisableDarkModeBeforeRoute();
     if (this.authService.isLoggedIn !== true) {
       console.log("Auth guard!");
-      console.log("authService = " + this.authService);
+      console.log("this.authService.isLoggedIn !== true");
       this.router.navigate(["login"]);
     }
     return true;

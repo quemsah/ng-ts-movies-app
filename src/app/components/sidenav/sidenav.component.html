@@ -10,9 +10,9 @@
     <li>
       <form class="search-form" role="search">
         <div class="md-form mt-0 waves-light">
-          <input (keyup.enter)="handleChangeSearchQuery($event.target.value);sidenavClose()" type="text"
-            (change)="handleChangeSearchQuery($event.target.value)" class="form-control py-2"
-            placeholder="Find movies..." maxlength="20">
+          <input #myInput type="text" (change)="handleChangeSearchQuery($event.target.value)"
+            (keyup.enter)="handleChangeSearchQuery($event.target.value);sidenavClose();myInput.value = ''"
+            class="form-control py-2" placeholder="Find movies..." maxlength="20">
         </div>
       </form>
     </li>

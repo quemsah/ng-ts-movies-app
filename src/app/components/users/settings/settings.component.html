@@ -30,6 +30,14 @@
           </div>
           <input type="range" class="custom-range" min="0" max="255" step="1" value="255" [(ngModel)]="blue" name="blue"
             (change)="handleColorChange()">
+          <br>
+          <div class="d-flex justify-content-between md-form my-0">
+            <h4>Random gradient factor </h4>
+            <input value="1" type="number" min="0" max="1" step="0.1" [(ngModel)]="random" name="random"
+              (change)="handleColorChange()">
+          </div>
+          <input type="range" class="custom-range" min="0" max="1" step="0.1" value="1" [(ngModel)]="random"
+            name="random" (change)="handleColorChange()">
         </div>
       </div>
       <div class="text-center mt-3">
