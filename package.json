@@ -8,7 +8,7 @@
     "report": "ng build --prod --stats-json && webpack-bundle-analyzer dist/ng-ts-movies-app/stats-es2015.json",
     "test": "ng test",
     "lint": "ng lint --typeCheck=true",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e --port 4343"
   },
   "private": true,
   "dependencies": {

@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
 import { VerifyEmailComponent } from "./verify-email.component";
+import { MatSnackBar, MatSnackBarModule } from "@angular/material";
+import { ReactiveFormsModule } from "@angular/forms";
 import { SafePipe } from "../../../shared/pipes/safe.pipe";
 
 describe("VerifyEmailMessageComponent", () => {
@@ -9,7 +11,9 @@ describe("VerifyEmailMessageComponent", () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [VerifyEmailComponent, SafePipe]
+      declarations: [VerifyEmailComponent, SafePipe],
+      imports: [ReactiveFormsModule,
+        MatSnackBarModule]
     }).compileComponents();
   }));
 
