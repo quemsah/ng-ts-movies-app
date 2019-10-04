@@ -1,5 +1,5 @@
-import { MatSnackBar } from "@angular/material/snack-bar";
 import { Injectable } from "@angular/core";
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 @Injectable({
   providedIn: "root"
@@ -7,7 +7,7 @@ import { Injectable } from "@angular/core";
 export class AlertService {
   constructor(private snackBar: MatSnackBar) {}
 
-  openAlert(message, durationInSeconds, type): void {
+  public openAlert(message, durationInSeconds, type): void {
     const classType = type + "-alert-snackbar";
     this.snackBar.open(message, null, {
       duration: durationInSeconds * 1000,
@@ -15,15 +15,15 @@ export class AlertService {
     });
   }
 
-  openInfoAlert(msg, dur): void {
+  public openInfoAlert(msg, dur): void {
     return this.openAlert(msg, dur, "info");
   }
 
-  openSuccessAlert(msg, dur): void {
+  public openSuccessAlert(msg, dur): void {
     return this.openAlert(msg, dur, "success");
   }
 
-  openWarningAlert(msg, dur): void {
+  public openWarningAlert(msg, dur): void {
     return this.openAlert(msg, dur, "warning");
   }
 }

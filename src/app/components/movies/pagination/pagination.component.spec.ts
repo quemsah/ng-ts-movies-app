@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { PaginationComponent } from "./pagination.component";
 import { SafePipe } from "../../../shared/pipes/safe.pipe";
+import { PaginationComponent } from "./pagination.component";
 
 describe("PaginationComponent", () => {
   let component: PaginationComponent;

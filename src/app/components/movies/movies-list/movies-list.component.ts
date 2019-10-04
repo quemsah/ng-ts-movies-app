@@ -1,10 +1,10 @@
-import { Movie } from "../../../shared/models/movie";
-import { Component, OnInit, AfterViewInit } from "@angular/core";
+import { AfterViewInit, Component, OnInit } from "@angular/core";
 import { NgxSpinnerService } from "ngx-spinner";
-import { ThemeService } from "../../../shared/services/theme/theme.service";
-import { MovieService } from "../../../shared/services/movie/movie.service";
-import { AuthService } from "../../../shared/services/auth/auth.service";
+import { Movie } from "../../../shared/models/movie";
 import { MovieListItem } from "../../../shared/models/movie-list-item";
+import { AuthService } from "../../../shared/services/auth/auth.service";
+import { MovieService } from "../../../shared/services/movie/movie.service";
+import { ThemeService } from "../../../shared/services/theme/theme.service";
 
 @Component({
   selector: "app-movies-list",
@@ -12,12 +12,12 @@ import { MovieListItem } from "../../../shared/models/movie-list-item";
   styleUrls: ["./movies-list.component.css"]
 })
 export class MoviesListComponent implements OnInit, AfterViewInit {
-  movies: Movie[];
-  pageOfItems: Array<Movie>;
-  sortingValue = "dateAdded";
-  sortingType = "desc";
-  searchValue = "";
-  sortingValues = this.movieService.sortingFields;
+  public movies: Movie[];
+  public pageOfItems: Movie[];
+  public sortingValue = "dateAdded";
+  public sortingType = "desc";
+  public searchValue = "";
+  public sortingValues = this.movieService.sortingFields;
   constructor(
     public authService: AuthService,
     public themeService: ThemeService,
@@ -25,56 +25,56 @@ export class MoviesListComponent implements OnInit, AfterViewInit {
     private spinner: NgxSpinnerService
   ) {}
 
-  ngOnInit() {
+  public ngOnInit() {
     this.spinner.show();
     this.getMovies();
   }
 
-  ngAfterViewInit() {
+  public ngAfterViewInit() {
     // this.themeService.checkDarkMode();
   }
 
-  handleListClick(): void {
-    document.querySelectorAll(".movie-item").forEach(x => x.classList.add("list-item"));
+  public handleListClick(): void {
+    document.querySelectorAll(".movie-item").forEach((x) => x.classList.add("list-item"));
   }
 
-  handleGridClick(): void {
-    document.querySelectorAll(".movie-item").forEach(x => x.classList.remove("list-item"));
+  public handleGridClick(): void {
+    document.querySelectorAll(".movie-item").forEach((x) => x.classList.remove("list-item"));
   }
 
-  onSortingValueChange(sValue: string): void {
+  public onSortingValueChange(sValue: string): void {
     this.sortingValue = sValue.substr(3);
     this.getMovies();
   }
 
-  onSortingTypeChange(sType: string): void {
+  public onSortingTypeChange(sType: string): void {
     this.sortingType = sType;
     this.getMovies();
   }
 
-  onSearchChange(): void {
+  public onSearchChange(): void {
     this.getMovies();
   }
   // Фильтрация по всем полям
-  filterByAll = (movies, key): Movie[] =>
-    movies.filter(obj =>
+  public filterByAll = (movies, key): Movie[] =>
+    movies.filter((obj) =>
       Object.keys(movies[0]).some(
-        k =>
+        (k) =>
           obj[k]
             .toString()
             .toLowerCase()
             .indexOf(key) !== -1
       )
-    );
+    )
 
-  getMovies(): void {
-    this.movieService.fetchMovies(this.sortingValue, this.sortingType).subscribe(movies => {
+  public getMovies(): void {
+    this.movieService.fetchMovies(this.sortingValue, this.sortingType).subscribe((movies) => {
       this.movies = this.filterByAll(movies, this.searchValue.trim().toLowerCase());
       this.spinner.hide();
     });
   }
 
-  handleToWatchLater(event): void {
+  public handleToWatchLater(event): void {
     const watchLaterMovieData: MovieListItem = {
       mid: this.movieService.getElementId(event),
       date: new Date().toLocaleString()
@@ -86,7 +86,7 @@ export class MoviesListComponent implements OnInit, AfterViewInit {
     );
   }
 
-  handleToFavourites(event): void {
+  public handleToFavourites(event): void {
     const favouriteMovieData: MovieListItem = {
       mid: this.movieService.getElementId(event),
       date: new Date().toLocaleString()
@@ -98,7 +98,7 @@ export class MoviesListComponent implements OnInit, AfterViewInit {
     );
   }
 
-  onChangePage(pageOfItems: Array<Movie>): void {
+  public onChangePage(pageOfItems: Movie[]): void {
     this.pageOfItems = pageOfItems;
   }
 }

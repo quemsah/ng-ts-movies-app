@@ -1,22 +1,40 @@
 import { Injectable, NgZone } from "@angular/core";
-import { Router } from "@angular/router";
-// удали следующую строчку чтобы сломать деплой
-import "firebase/storage";
-import { auth } from "firebase/app";
 import { AngularFireAuth } from "@angular/fire/auth";
 import { AngularFirestore, AngularFirestoreDocument } from "@angular/fire/firestore";
 import { AngularFireStorage } from "@angular/fire/storage";
-import { AlertService } from "../alert/alert.service";
-import { User } from "../../models/user";
+import { Router } from "@angular/router";
+import { auth } from "firebase/app";
+// удали следующую строчку чтобы сломать деплой
+import "firebase/storage";
 import { finalize } from "rxjs/operators";
+import { User } from "../../models/user";
+import { AlertService } from "../alert/alert.service";
 
 @Injectable({
   providedIn: "root"
 })
 export class AuthService {
-  private ADMIN_KEY = "cXVlbXNhdXJvc2U=";
+  // Залогинен ли юзер?
+  get isLoggedIn(): boolean {
+    const user = JSON.parse(localStorage.getItem("user"));
+    return user !== null && user.emailVerified !== false ? true : false;
+  }
+  // Админ ли?
+  get isAdmin(): boolean {
+    const user = JSON.parse(localStorage.getItem("user"));
+    return user.isAdmin !== false ? true : false;
+  }
+  // Текущий пользователь
+  get currentUser() {
+    return this.afAuth.auth.currentUser;
+  }
+  // Ссылка на документ
+  get profileRef() {
+    return this.afs.doc(`users/${this.currentUser.uid}`);
+  }
   // Данные пользователя из authState
-  userData: User;
+  public userData: User;
+  private ADMIN_KEY = "cXVlbXNhdXJvc2U=";
   constructor(
     private alertService: AlertService,
     private storage: AngularFireStorage,
@@ -28,7 +46,7 @@ export class AuthService {
     // Cохраняем данные пользователя в localStorage
     // и удаляем, когда он выходит
     // отсюда и берутся данные пользователя во многих страничках (userData)
-    this.afAuth.authState.subscribe(user => {
+    this.afAuth.authState.subscribe((user) => {
       if (user) {
         this.userData = user;
         // Разделение функционала админа и клиента: информация о текущем юзере приходит после авторизации
@@ -48,35 +66,16 @@ export class AuthService {
     });
   }
 
-  checkRole = user => user.email.lastIndexOf(window.atob(this.ADMIN_KEY), 0) === 0;
+  public checkRole = (user) => user.email.lastIndexOf(window.atob(this.ADMIN_KEY), 0) === 0;
 
-  // Залогинен ли юзер?
-  get isLoggedIn(): boolean {
-    const user = JSON.parse(localStorage.getItem("user"));
-    return user !== null && user.emailVerified !== false ? true : false;
-  }
-  // Админ ли?
-  get isAdmin(): boolean {
-    const user = JSON.parse(localStorage.getItem("user"));
-    return user.isAdmin !== false ? true : false;
-  }
-  // Текущий пользователь
-  get currentUser() {
-    return this.afAuth.auth.currentUser;
-  }
-  // Ссылка на документ
-  get profileRef() {
-    return this.afs.doc(`users/${this.currentUser.uid}`);
-  }
-
-  friendsRef() {
+  public friendsRef() {
     return this.afs.collection(`users/${this.userData.uid}/friends`);
   }
 
-  SignIn(email, password) {
+  public SignIn(email, password) {
     return this.afAuth.auth
       .signInWithEmailAndPassword(email, password)
-      .then(result => {
+      .then((result) => {
         this.ngZone.run(() => {
           console.log("Navigating to 'movies'!");
           this.router.navigate(["movies"]);
@@ -86,17 +85,17 @@ export class AuthService {
       .catch(this.errCatching);
   }
 
-  SignUp(email, password) {
+  public SignUp(email, password) {
     return this.afAuth.auth
       .createUserWithEmailAndPassword(email, password)
-      .then(result => {
+      .then((result) => {
         this.SendVerificationMail();
         this.SetUserData(result.user);
       })
       .catch(this.errCatching);
   }
 
-  UpdateUserPassword(password, oldPassword) {
+  public UpdateUserPassword(password, oldPassword) {
     // старые данные юзера
     const credentials = auth.EmailAuthProvider.credential(this.currentUser.email, oldPassword);
     // для обновления пароля нужен ре-логин
@@ -107,7 +106,7 @@ export class AuthService {
         .then(() => {
           this.currentUser
             .updatePassword(password)
-            .then(result => {
+            .then((result) => {
               this.ngZone.run(() => {
                 this.router.navigate(["login"]);
               });
@@ -119,12 +118,12 @@ export class AuthService {
     );
   }
 
-  UpdateUserName(newName) {
+  public UpdateUserName(newName) {
     return (
       this.currentUser
         // обновляем встроенный методом AngularFireAuth.auth
         .updateProfile({ displayName: newName })
-        .then(result => {
+        .then((result) => {
           // юзер и так в профиле, не редиректим
           // и обновляем в AngularFirestore
           this.profileRef.set({ displayName: newName }, { merge: true });
@@ -134,31 +133,31 @@ export class AuthService {
     );
   }
 
-  SendVerificationMail() {
+  public SendVerificationMail() {
     return this.currentUser.sendEmailVerification().then(() => {
       this.router.navigate(["verify-email"]);
     });
   }
 
-  ForgotPassword(passwordResetEmail) {
+  public ForgotPassword(passwordResetEmail) {
     return this.afAuth.auth
       .sendPasswordResetEmail(passwordResetEmail)
       .then(() => {
         this.alertService.openInfoAlert("Password reset email sent, check your inbox.", 3);
       })
-      .catch(error => {
+      .catch((error) => {
         window.alert(error);
       });
   }
 
-  GoogleAuth() {
+  public GoogleAuth() {
     return this.AuthLogin(new auth.GoogleAuthProvider());
   }
 
-  AuthLogin(provider) {
+  public AuthLogin(provider) {
     return this.afAuth.auth
       .signInWithPopup(provider)
-      .then(result => {
+      .then((result) => {
         this.ngZone.run(() => {
           this.router.navigate(["movies"]);
         });
@@ -178,14 +177,14 @@ export class AuthService {
         // https://firebase.google.com/docs/auth/admin/custom-claims?hl=en-us#examples_and_use_cases
         // Но для того чтобы установить собственные custom claims нужен Admin SDK на каком-нибудь сервере
       })
-      .then(jwt => {
+      .then((jwt) => {
         // JSON Web Token
         // console.log(jwt);
       })
       .catch(this.errCatching);
   }
 
-  UploadNewAvatar(event: Event): void {
+  public UploadNewAvatar(event: Event): void {
     const target = event.target as HTMLInputElement;
     const file = target.files[0] as File;
     console.log("file.type: ", file.type);
@@ -216,10 +215,10 @@ export class AuthService {
     }
   }
 
-  DeleteAvatar() {
+  public DeleteAvatar() {
     return this.currentUser
       .updateProfile({ photoURL: "" })
-      .then(result => {
+      .then((result) => {
         this.profileRef.set({ photoURL: "" }, { merge: true });
         this.alertService.openSuccessAlert("Image successfully deleted!", 3);
       })
@@ -227,7 +226,7 @@ export class AuthService {
   }
 
   // Записываем данные пользователя документ
-  SetUserData(user, verified?: boolean) {
+  public SetUserData(user, verified?: boolean) {
     console.log("e-mail verified ?: ", verified ? verified : user.emailVerified);
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
     const userData: User = {
@@ -244,12 +243,12 @@ export class AuthService {
   }
 
   // Sign out
-  SignOut() {
+  public SignOut() {
     return this.afAuth.auth.signOut().then(() => {
       localStorage.removeItem("user");
       this.router.navigate(["login"]);
     });
   }
 
-  errCatching = error => this.alertService.openWarningAlert(error.message, 3);
+  public errCatching = (error) => this.alertService.openWarningAlert(error.message, 3);
 }

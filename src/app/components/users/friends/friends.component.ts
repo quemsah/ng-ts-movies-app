@@ -1,11 +1,11 @@
-import { Component, OnInit, AfterViewInit } from "@angular/core";
+import { AfterViewInit, Component, OnInit } from "@angular/core";
 import { NgForm } from "@angular/forms";
 import { NgxSpinnerService } from "ngx-spinner";
-import { AuthService } from "../../../shared/services/auth/auth.service";
-import { UserService } from "../../../shared/services/user/user.service";
-import { ThemeService } from "../../../shared/services/theme/theme.service";
-import { MovieService } from "../../../shared/services/movie/movie.service";
 import { Friends } from "../../../shared/models/friends";
+import { AuthService } from "../../../shared/services/auth/auth.service";
+import { MovieService } from "../../../shared/services/movie/movie.service";
+import { ThemeService } from "../../../shared/services/theme/theme.service";
+import { UserService } from "../../../shared/services/user/user.service";
 
 @Component({
   selector: "app-friends",
@@ -13,9 +13,9 @@ import { Friends } from "../../../shared/models/friends";
   styleUrls: ["./friends.component.css"]
 })
 export class FriendsComponent implements OnInit, AfterViewInit {
-  friends: Friends;
-  outRequests: Friends;
-  inRequests: Friends;
+  public friends: Friends;
+  public outRequests: Friends;
+  public inRequests: Friends;
   constructor(
     public authService: AuthService,
     public themeService: ThemeService,
@@ -24,30 +24,30 @@ export class FriendsComponent implements OnInit, AfterViewInit {
     private spinner: NgxSpinnerService
   ) {}
 
-  ngOnInit() {
+  public ngOnInit() {
     this.spinner.show();
     this.getFriends();
   }
 
-  ngAfterViewInit() {
+  public ngAfterViewInit() {
     // this.themeService.checkDarkMode();
   }
 
-  filterObject = (obj, predicate) =>
+  public filterObject = (obj, predicate) =>
     Object.keys(obj)
-      .filter(key => predicate(obj[key]))
-      .reduce((res, key) => ((res[key] = obj[key]), res), {});
+      .filter((key) => predicate(obj[key]))
+      .reduce((res, key) => ((res[key] = obj[key]), res), {})
 
-  mapFriends = x => x.accepted === true;
+  public mapFriends = (x) => x.accepted === true;
 
-  mapOutRequests = x => x.accepted === false && x.uid === x.initiator;
+  public mapOutRequests = (x) => x.accepted === false && x.uid === x.initiator;
 
-  mapInRequests = x => x.accepted === false && x.uid !== x.initiator;
+  public mapInRequests = (x) => x.accepted === false && x.uid !== x.initiator;
   // добавляем к сухим айдишниками информацию о друзьях/запросах
-  getFriendsInfo(friendsData: Friends): void {
+  public getFriendsInfo(friendsData: Friends): void {
     console.log("friendsData: ", friendsData);
-    Object.keys(friendsData).filter(key => {
-      this.userService.getUserInfo(friendsData[key].fid).subscribe(data => {
+    Object.keys(friendsData).filter((key) => {
+      this.userService.getUserInfo(friendsData[key].fid).subscribe((data) => {
         if (data) {
           friendsData[key].displayName = data.displayName;
           friendsData[key].email = data.email;
@@ -57,11 +57,11 @@ export class FriendsComponent implements OnInit, AfterViewInit {
     });
   }
 
-  getFriends(): void {
+  public getFriends(): void {
     this.authService
       .friendsRef()
       .valueChanges()
-      .subscribe(data => {
+      .subscribe((data) => {
         // разносим друзей и входящие/исходящие запросы
         // см. user.service.ts
         this.friends = this.filterObject(data, this.mapFriends);
@@ -77,19 +77,19 @@ export class FriendsComponent implements OnInit, AfterViewInit {
       });
   }
 
-  handleAddFriend(form: NgForm): void {
+  public handleAddFriend(form: NgForm): void {
     if (form.value.friendsEmail.trim() !== this.authService.userData.email) {
       this.userService.addFriend(form.value.friendsEmail);
     }
     form.reset();
   }
   // удаляет и запросы в друзья и друзей в целом
-  handleRequestDelete(event): void {
+  public handleRequestDelete(event): void {
     const fid = this.movieService.getElementId(event);
     this.userService.deleteRequests(fid);
   }
 
-  handleRequestAccept(event): void {
+  public handleRequestAccept(event): void {
     const fid = this.movieService.getElementId(event);
     this.userService.acceptRequests(fid);
   }

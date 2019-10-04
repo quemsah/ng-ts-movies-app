@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from "@angular/router";
+import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot } from "@angular/router";
 import { Observable } from "rxjs";
 
 @Injectable({
@@ -8,7 +8,7 @@ import { Observable } from "rxjs";
 export class OuterPagesGuard implements CanActivate {
   constructor() {}
 
-  canActivate(
+  public canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean> | Promise<boolean> | boolean {

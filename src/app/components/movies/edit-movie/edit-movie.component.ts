@@ -1,9 +1,9 @@
-import { Component, OnInit, AfterViewInit } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { AfterViewInit, Component, OnInit } from "@angular/core";
 import { NgForm } from "@angular/forms";
+import { ActivatedRoute } from "@angular/router";
+import { Movie } from "../../../shared/models/movie";
 import { MovieService } from "../../../shared/services/movie/movie.service";
 import { ThemeService } from "../../../shared/services/theme/theme.service";
-import { Movie } from "../../../shared/models/movie";
 
 @Component({
   selector: "app-edit-movie",
@@ -11,29 +11,29 @@ import { Movie } from "../../../shared/models/movie";
   styleUrls: ["./edit-movie.component.css"]
 })
 export class EditMovieComponent implements OnInit, AfterViewInit {
-  currentMovieData: Movie;
-  title: string;
-  releaseDate: string;
+  public currentMovieData: Movie;
+  public title: string;
+  public releaseDate: string;
   constructor(
     public themeService: ThemeService,
     private route: ActivatedRoute,
     private movieService: MovieService
   ) {}
 
-  ngOnInit() {
+  public ngOnInit() {
     const id = this.route.snapshot.paramMap.get("id");
-    this.movieService.fetchMovie(id).subscribe(movie => {
+    this.movieService.fetchMovie(id).subscribe((movie) => {
       this.currentMovieData = movie;
       this.title = movie.title;
       this.releaseDate = movie.releaseDate;
     });
   }
 
-  ngAfterViewInit() {
+  public ngAfterViewInit() {
     // this.themeService.checkDarkMode();
   }
 
-  onEditMovieSubmit(form: NgForm): void {
+  public onEditMovieSubmit(form: NgForm): void {
     console.log("this.currentMovieData: ", this.currentMovieData);
     // приводим к нужному виду
     const movieData: Movie = {

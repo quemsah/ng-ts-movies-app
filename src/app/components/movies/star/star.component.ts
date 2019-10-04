@@ -1,11 +1,11 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { NgxSpinnerService } from "ngx-spinner";
-import { TMDBService } from "../../../shared/services/tmdb/TMDB.service";
-import { ThemeService } from "../../../shared/services/theme/theme.service";
+import { forkJoin } from "rxjs";
 import { MovieCredits } from "../../../shared/models/api-movie-credits";
 import { Star } from "../../../shared/models/api-star";
-import { forkJoin } from "rxjs";
+import { ThemeService } from "../../../shared/services/theme/theme.service";
+import { TMDBService } from "../../../shared/services/tmdb/TMDB.service";
 
 @Component({
   selector: "app-star",
@@ -13,8 +13,8 @@ import { forkJoin } from "rxjs";
   styleUrls: ["./star.component.css"]
 })
 export class StarComponent implements OnInit {
-  starData: Star;
-  starMovies: MovieCredits;
+  public starData: Star;
+  public starMovies: MovieCredits;
   constructor(
     public themeService: ThemeService,
     public tmdbService: TMDBService,
@@ -22,13 +22,13 @@ export class StarComponent implements OnInit {
     private spinner: NgxSpinnerService
   ) {}
 
-  ngOnInit() {
+  public ngOnInit() {
     this.spinner.show();
     const sid = parseInt(this.route.snapshot.paramMap.get("id"), 10);
     this.getStarInfoAndMovies(sid);
   }
 
-  getStarInfoAndMovies(id: number): void {
+  public getStarInfoAndMovies(id: number): void {
     // tslint:disable-next-line: deprecation
     forkJoin(this.tmdbService.fetchStar(id), this.tmdbService.fetchStarMovies(id)).subscribe(
       ([starData, starMoviesData]) => {

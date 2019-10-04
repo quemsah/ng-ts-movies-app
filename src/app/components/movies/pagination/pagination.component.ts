@@ -1,10 +1,10 @@
 import {
   Component,
-  Input,
-  Output,
   EventEmitter,
-  OnInit,
+  Input,
   OnChanges,
+  OnInit,
+  Output,
   SimpleChanges
 } from "@angular/core";
 import { ThemeService } from "../../../shared/services/theme/theme.service";
@@ -15,34 +15,34 @@ import { ThemeService } from "../../../shared/services/theme/theme.service";
   styleUrls: ["./pagination.component.css"]
 })
 export class PaginationComponent implements OnInit, OnChanges {
-  @Input() items: Array<any>;
-  @Output() changePage = new EventEmitter<any>(true);
-  @Input() initialPage = 1;
-  @Input() pageSize = 10;
-  @Input() maxPages = 10;
+  @Input() public items: any[];
+  @Output() public changePage = new EventEmitter<any>(true);
+  @Input() public initialPage = 1;
+  @Input() public pageSize = 10;
+  @Input() public maxPages = 10;
 
-  pager: any = {};
+  public pager: any = {};
   constructor(public themeService: ThemeService) {}
 
-  ngOnInit() {
+  public ngOnInit() {
     if (this.items && this.items.length) {
       this.setPage(this.initialPage);
     }
   }
 
-  ngOnChanges(changes: SimpleChanges) {
+  public ngOnChanges(changes: SimpleChanges) {
     if (changes.items.currentValue !== changes.items.previousValue) {
       this.setPage(this.initialPage);
     }
   }
 
-  setPage(page: number): void {
+  public setPage(page: number): void {
     this.pager = this.paginate(this.items.length, page, this.pageSize, this.maxPages);
     const pageOfItems = this.items.slice(this.pager.startIndex, this.pager.endIndex + 1);
     this.changePage.emit(pageOfItems);
   }
 
-  paginate(
+  public paginate(
     totalItems: number,
     currentPage: number = 1,
     pageSize: number = 10,
@@ -75,7 +75,7 @@ export class PaginationComponent implements OnInit, OnChanges {
     }
     const startIndex = (currentPage - 1) * pageSize;
     const endIndex = Math.min(startIndex + pageSize - 1, totalItems - 1);
-    const pages = Array.from(Array(endPage + 1 - startPage).keys()).map(i => startPage + i);
+    const pages = Array.from(Array(endPage + 1 - startPage).keys()).map((i) => startPage + i);
     return {
       totalItems,
       currentPage,

@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { SettingsComponent } from "./settings.component";
 import { SafePipe } from "../../../shared/pipes/safe.pipe";
+import { SettingsComponent } from "./settings.component";
 
 describe("SettingsComponent", () => {
   let component: SettingsComponent;

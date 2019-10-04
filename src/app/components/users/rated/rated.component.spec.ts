@@ -1,8 +1,8 @@
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { RatedComponent } from "./rated.component";
 import { SafePipe } from "../../../shared/pipes/safe.pipe";
 import { LoaderComponent } from "../../loader/loader.component";
+import { RatedComponent } from "./rated.component";
 
 describe("RatedComponent", () => {
   let component: RatedComponent;

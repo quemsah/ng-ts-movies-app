@@ -1,5 +1,5 @@
-import { Crew } from "./api-crew";
 import { Cast } from "./api-cast";
+import { Crew } from "./api-crew";
 
 export interface MovieCredits {
   id: number;

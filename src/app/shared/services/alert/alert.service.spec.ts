@@ -1,9 +1,9 @@
 import { TestBed } from "@angular/core/testing";
 
-import { AlertService } from "./alert.service";
-import { MatSnackBar, MatSnackBarModule } from "@angular/material";
-import { ReactiveFormsModule } from "@angular/forms";
 import { NO_ERRORS_SCHEMA } from "@angular/core";
+import { ReactiveFormsModule } from "@angular/forms";
+import { MatSnackBar, MatSnackBarModule } from "@angular/material";
+import { AlertService } from "./alert.service";
 
 describe("AlertService", () => {
   beforeEach(() =>

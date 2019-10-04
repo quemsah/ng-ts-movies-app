@@ -1,9 +1,9 @@
 import { Injectable } from "@angular/core";
 import { AngularFirestore } from "@angular/fire/firestore";
+import { Observable } from "rxjs";
+import { Friend } from "../../models/friend";
 import { AlertService } from "../alert/alert.service";
 import { AuthService } from "../auth/auth.service";
-import { Friend } from "../../models/friend";
-import { Observable } from "rxjs";
 
 @Injectable({
   providedIn: "root"
@@ -22,30 +22,31 @@ export class UserService {
     private alertService: AlertService
   ) {}
 
-  getUserInfo(uid: string): Observable<any> {
+  public getUserInfo(uid: string): Observable<any> {
     return this.afs.doc(`users/${uid}/`).valueChanges();
   }
 
-  getUserIdByEmail(email: string): Observable<any> {
-    return this.afs.collection("users", ref => ref.where("email", "==", email)).valueChanges();
+  public getUserIdByEmail(email: string): Observable<any> {
+    return this.afs.collection("users", (ref) => ref.where("email", "==", email)).valueChanges();
   }
 
-  fetchWatchLaterList(uid: string): Observable<any> {
+  public fetchWatchLaterList(uid: string): Observable<any> {
     return this.afs.collection(`users/${uid}/watchlater`).valueChanges();
   }
 
-  fetchFavouritesList(uid: string): Observable<any> {
+  public fetchFavouritesList(uid: string): Observable<any> {
     return this.afs.collection(`users/${uid}/favourites`).valueChanges();
   }
 
-  fetchRatedList(): Observable<any> {
+  public fetchRatedList(): Observable<any> {
     return this.afs.collection(`users/${this.authService.userData.uid}/rated`).valueChanges();
-    // сортировка по дате добавления collection(`users/${this.authService.userData.uid}/rated`, ref => ref.orderBy("date", "desc"))
+    // сортировка по дате добавления
+    // collection(`users/${this.authService.userData.uid}/rated`, ref => ref.orderBy("date", "desc"))
   }
   // создание исходящего запроса у одного
   // и входящего у второго
-  addFriend(email: string): void {
-    this.getUserIdByEmail(email).subscribe(data => {
+  public addFriend(email: string): void {
+    this.getUserIdByEmail(email).subscribe((data) => {
       if (data.length !== 0) {
         const now = new Date().toLocaleString();
         const uid = this.authService.userData.uid;
@@ -56,7 +57,7 @@ export class UserService {
           date: now,
           accepted: false,
           fid
-        }).catch(error => this.alertService.openWarningAlert(error.message, 3));
+        }).catch((error) => this.alertService.openWarningAlert(error.message, 3));
         this.makeFriend({
           uid: fid,
           initiator: uid,
@@ -64,8 +65,8 @@ export class UserService {
           accepted: false,
           fid: uid
         })
-          .then(smth => this.alertService.openSuccessAlert("Request was successfully sent", 2))
-          .catch(error => this.alertService.openWarningAlert(error.message, 3));
+          .then((smth) => this.alertService.openSuccessAlert("Request was successfully sent", 2))
+          .catch((error) => this.alertService.openWarningAlert(error.message, 3));
       } else {
         this.alertService.openWarningAlert(
           "There is no user registered with that email address!",
@@ -75,7 +76,7 @@ export class UserService {
     });
   }
 
-  makeFriend(friend: Friend) {
+  public makeFriend(friend: Friend) {
     return this.afs
       .collection(`users/`)
       .doc(friend.uid)
@@ -90,17 +91,17 @@ export class UserService {
       });
   }
 
-  deleteRequests(fid: string): void {
+  public deleteRequests(fid: string): void {
     const uid = this.authService.userData.uid;
-    this.deleteRequest(uid, fid).catch(error =>
+    this.deleteRequest(uid, fid).catch((error) =>
       this.alertService.openWarningAlert(error.message, 3)
     );
     this.deleteRequest(fid, uid)
-      .then(smth => this.alertService.openSuccessAlert("Successfully deleted!", 2))
-      .catch(error => this.alertService.openWarningAlert(error.message, 3));
+      .then((smth) => this.alertService.openSuccessAlert("Successfully deleted!", 2))
+      .catch((error) => this.alertService.openWarningAlert(error.message, 3));
   }
 
-  deleteRequest(uid: string, fid: string) {
+  public deleteRequest(uid: string, fid: string) {
     return this.afs
       .collection(`users/`)
       .doc(uid)
@@ -109,7 +110,7 @@ export class UserService {
       .delete();
   }
 
-  acceptRequests(fid: string): void {
+  public acceptRequests(fid: string): void {
     const now = new Date().toLocaleString();
     const uid = this.authService.userData.uid;
     console.log(fid);
@@ -119,7 +120,7 @@ export class UserService {
       date: now,
       accepted: true,
       fid
-    }).catch(error => this.alertService.openWarningAlert(error.message, 3));
+    }).catch((error) => this.alertService.openWarningAlert(error.message, 3));
     this.makeFriend({
       uid: fid,
       initiator: fid,
@@ -127,7 +128,7 @@ export class UserService {
       accepted: true,
       fid: uid
     })
-      .then(smth => this.alertService.openSuccessAlert("Friend was successfully added", 2))
-      .catch(error => this.alertService.openWarningAlert(error.message, 3));
+      .then((smth) => this.alertService.openSuccessAlert("Friend was successfully added", 2))
+      .catch((error) => this.alertService.openWarningAlert(error.message, 3));
   }
 }

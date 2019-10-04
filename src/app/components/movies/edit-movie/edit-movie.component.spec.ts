@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { EditMovieComponent } from "./edit-movie.component";
 import { SafePipe } from "src/app/shared/pipes/safe.pipe";
+import { EditMovieComponent } from "./edit-movie.component";
 
 describe("EditMovieComponent", () => {
   let component: EditMovieComponent;

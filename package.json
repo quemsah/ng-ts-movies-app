@@ -8,6 +8,7 @@
     "report": "ng build --prod --stats-json && webpack-bundle-analyzer dist/ng-ts-movies-app/stats-es2015.json",
     "test": "ng test",
     "lint": "ng lint --typeCheck=true",
+    "lint-fix": "tslint --fix src/**/*.ts -t verbose",
     "e2e": "ng e2e --port 4343",
     "sonar": "sonar-scanner"
   },

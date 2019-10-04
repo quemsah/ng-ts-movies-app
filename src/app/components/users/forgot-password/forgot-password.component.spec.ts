@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { ForgotPasswordComponent } from "./forgot-password.component";
 import { SafePipe } from "src/app/shared/pipes/safe.pipe";
+import { ForgotPasswordComponent } from "./forgot-password.component";
 
 describe("ForgotPasswordComponent", () => {
   let component: ForgotPasswordComponent;

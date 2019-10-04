@@ -1,10 +1,10 @@
 import { TestBed } from "@angular/core/testing";
 
-import { TMDBService } from "../tmdb/TMDB.service";
 import { HttpClientTestingModule } from "@angular/common/http/testing";
-import { MatSnackBar, MatSnackBarModule } from "@angular/material";
-import { ReactiveFormsModule } from "@angular/forms";
 import { NO_ERRORS_SCHEMA } from "@angular/core";
+import { ReactiveFormsModule } from "@angular/forms";
+import { MatSnackBar, MatSnackBarModule } from "@angular/material";
+import { TMDBService } from "../tmdb/TMDB.service";
 
 describe("TMDBService", () => {
   beforeEach(() =>

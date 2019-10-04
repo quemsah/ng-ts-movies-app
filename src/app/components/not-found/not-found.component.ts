@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit } from "@angular/core";
+import { AfterViewInit, Component, OnInit } from "@angular/core";
 import { ThemeService } from "../../shared/services/theme/theme.service";
 
 @Component({
@@ -9,9 +9,9 @@ import { ThemeService } from "../../shared/services/theme/theme.service";
 export class NotFoundComponent implements OnInit, AfterViewInit {
   constructor(public themeService: ThemeService) {}
 
-  ngOnInit() {}
+  public ngOnInit() {}
 
-  ngAfterViewInit() {
+  public ngAfterViewInit() {
     // this.themeService.checkDarkMode();
   }
 }

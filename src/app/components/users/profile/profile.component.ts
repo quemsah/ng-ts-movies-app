@@ -1,7 +1,7 @@
-import { Component, OnInit, AfterViewInit } from "@angular/core";
+import { AfterViewInit, Component, OnInit } from "@angular/core";
 import { NgForm } from "@angular/forms";
-import { ThemeService } from "../../../shared/services/theme/theme.service";
 import { AuthService } from "../../../shared/services/auth/auth.service";
+import { ThemeService } from "../../../shared/services/theme/theme.service";
 
 @Component({
   selector: "app-profile",
@@ -11,27 +11,27 @@ import { AuthService } from "../../../shared/services/auth/auth.service";
 export class ProfileComponent implements OnInit, AfterViewInit {
   constructor(public authService: AuthService, public themeService: ThemeService) {}
 
-  ngOnInit() {}
+  public ngOnInit() {}
 
-  ngAfterViewInit() {
+  public ngAfterViewInit() {
     // this.themeService.checkDarkMode();
   }
 
-  onNameSubmit(form: NgForm): void {
+  public onNameSubmit(form: NgForm): void {
     console.log("form.value.userName: ", form.value.userName);
     this.authService.UpdateUserName(form.value.userName.trim());
   }
 
-  onProfileSubmit(form: NgForm): void {
+  public onProfileSubmit(form: NgForm): void {
     console.log("form.value: ", form.value);
     this.authService.UpdateUserPassword(form.value.password, form.value.oldPassword);
   }
 
-  onClickPhoto(file: Event): void {
+  public onClickPhoto(file: Event): void {
     this.authService.UploadNewAvatar(file);
   }
 
-  onDeletePhoto(): void {
+  public onDeletePhoto(): void {
     this.authService.DeleteAvatar();
   }
 }

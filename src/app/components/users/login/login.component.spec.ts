@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { LoginComponent } from "./login.component";
 import { SafePipe } from "../../../shared/pipes/safe.pipe";
+import { LoginComponent } from "./login.component";
 
 describe("LoginComponent", () => {
   let component: LoginComponent;

@@ -1,29 +1,29 @@
 import { NgModule } from "@angular/core";
-import { Routes, RouterModule } from "@angular/router";
-// canActivate
-import { AuthGuard } from "../../shared/guard/auth.guard";
-import { AdminGuard } from "../guard/admin.guard";
-import { InnerPagesGuard } from "../../shared/guard/inner-pages.guard";
-import { OuterPagesGuard } from "../../shared/guard/outer-pages.guard";
-// Компоненты
-import { LoginComponent } from "../../components/users/login/login.component";
-import { RegisterComponent } from "../../components/users/register/register.component";
-import { ProfileComponent } from "../../components/users/profile/profile.component";
-import { FriendsComponent } from "../../components/users/friends/friends.component";
-import { ForgotPasswordComponent } from "../../components/users/forgot-password/forgot-password.component";
-import { VerifyEmailComponent } from "../../components/users/verify-email/verify-email.component";
+import { RouterModule, Routes } from "@angular/router";
 import { AboutComponent } from "../../components/about/about.component";
-import { NotFoundComponent } from "../../components/not-found/not-found.component";
 import { AddMovieComponent } from "../../components/movies/add-movie/add-movie.component";
-import { MovieComponent } from "../../components/movies/movie/movie.component";
-import { MoviesListComponent } from "../../components/movies/movies-list/movies-list.component";
-import { EditMovieComponent } from "../../components/movies/edit-movie/edit-movie.component";
-import { SettingsComponent } from "../../components/users/settings/settings.component";
-import { UserComponent } from "../../components/users/user/user.component";
-import { StarComponent } from "../../components/movies/star/star.component";
-import { RatedComponent } from "../../components/users/rated/rated.component";
 import { DiscoverComponent } from "../../components/movies/discover/discover.component";
 import { DiscoveredMovieComponent } from "../../components/movies/discovered-movie/discovered-movie.component";
+import { EditMovieComponent } from "../../components/movies/edit-movie/edit-movie.component";
+import { MovieComponent } from "../../components/movies/movie/movie.component";
+import { MoviesListComponent } from "../../components/movies/movies-list/movies-list.component";
+import { StarComponent } from "../../components/movies/star/star.component";
+import { NotFoundComponent } from "../../components/not-found/not-found.component";
+import { ForgotPasswordComponent } from "../../components/users/forgot-password/forgot-password.component";
+import { FriendsComponent } from "../../components/users/friends/friends.component";
+// Компоненты
+import { LoginComponent } from "../../components/users/login/login.component";
+import { ProfileComponent } from "../../components/users/profile/profile.component";
+import { RatedComponent } from "../../components/users/rated/rated.component";
+import { RegisterComponent } from "../../components/users/register/register.component";
+import { SettingsComponent } from "../../components/users/settings/settings.component";
+import { UserComponent } from "../../components/users/user/user.component";
+import { VerifyEmailComponent } from "../../components/users/verify-email/verify-email.component";
+// canActivate
+import { AuthGuard } from "../../shared/guard/auth.guard";
+import { InnerPagesGuard } from "../../shared/guard/inner-pages.guard";
+import { OuterPagesGuard } from "../../shared/guard/outer-pages.guard";
+import { AdminGuard } from "../guard/admin.guard";
 
 const routes: Routes = [
   {

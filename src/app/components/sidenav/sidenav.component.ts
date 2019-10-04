@@ -1,8 +1,8 @@
 import { Component, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
 import { AngularFireAuth } from "@angular/fire/auth";
-import { ThemeService } from "../../shared/services/theme/theme.service";
+import { Router } from "@angular/router";
 import { AuthService } from "../../shared/services/auth/auth.service";
+import { ThemeService } from "../../shared/services/theme/theme.service";
 
 declare var $: any;
 
@@ -12,8 +12,8 @@ declare var $: any;
   styleUrls: ["./sidenav.component.css"]
 })
 export class SidenavComponent implements OnInit {
-  uid: string;
-  isAdmin: boolean;
+  public uid: string;
+  public isAdmin: boolean;
   constructor(
     public authService: AuthService,
     public themeService: ThemeService,
@@ -21,7 +21,7 @@ export class SidenavComponent implements OnInit {
     private router: Router
   ) {
     // https://javebratt.com/firebase-user-undefined/
-    this.afAuth.authState.subscribe(user => {
+    this.afAuth.authState.subscribe((user) => {
       if (user) {
         this.uid = user.uid;
         this.isAdmin = this.authService.checkRole(user);
@@ -29,15 +29,15 @@ export class SidenavComponent implements OnInit {
     });
   }
 
-  ngOnInit() {}
+  public ngOnInit() {}
 
-  handleChangeSearchQuery(searchValue: string) {
+  public handleChangeSearchQuery(searchValue: string) {
     console.log("searchValue: ", searchValue);
     this.router.navigate(["search/" + searchValue]);
   }
   // https://github.com/Dogfalo/materialize/issues/1676
   // https://stackoverflow.com/questions/32591402/materialize-sidenav-produces-multiple-sidenav-overlay
-  sidenavClose(): void {
+  public sidenavClose(): void {
     $(".button-collapse").sideNav("hide");
     $(".button-collapse")
       .off("click")

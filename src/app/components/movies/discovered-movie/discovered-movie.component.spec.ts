@@ -1,8 +1,8 @@
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { DiscoveredMovieComponent } from "./discovered-movie.component";
 import { SafePipe } from "src/app/shared/pipes/safe.pipe";
 import { LoaderComponent } from "../../loader/loader.component";
+import { DiscoveredMovieComponent } from "./discovered-movie.component";
 
 describe("DiscoveredMovieComponent", () => {
   let component: DiscoveredMovieComponent;

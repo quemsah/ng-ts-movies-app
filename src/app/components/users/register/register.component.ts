@@ -1,6 +1,6 @@
-import { Component, OnInit, AfterViewInit } from "@angular/core";
-import { ThemeService } from "../../../shared/services/theme/theme.service";
+import { AfterViewInit, Component, OnInit } from "@angular/core";
 import { AuthService } from "../../../shared/services/auth/auth.service";
+import { ThemeService } from "../../../shared/services/theme/theme.service";
 
 @Component({
   selector: "app-register",
@@ -10,9 +10,9 @@ import { AuthService } from "../../../shared/services/auth/auth.service";
 export class RegisterComponent implements OnInit, AfterViewInit {
   constructor(public authService: AuthService, public themeService: ThemeService) {}
 
-  ngOnInit() {}
+  public ngOnInit() {}
 
-  ngAfterViewInit() {
+  public ngAfterViewInit() {
     // this.themeService.checkDarkMode();
   }
 }

@@ -1,18 +1,18 @@
 import { Injectable } from "@angular/core";
 import { AngularFirestore } from "@angular/fire/firestore";
 import { Router } from "@angular/router";
-import { AlertService } from "../alert/alert.service";
-import { OrderByDirection } from "../../order-by-direction";
-import { MovieListItem } from "../../models/movie-list-item";
-import { Comment } from "./../../models/comment";
-import { Movie } from "../../models/movie";
 import { Observable } from "rxjs";
+import { Movie } from "../../models/movie";
+import { MovieListItem } from "../../models/movie-list-item";
+import { OrderByDirection } from "../../order-by-direction";
+import { AlertService } from "../alert/alert.service";
+import { Comment } from "./../../models/comment";
 
 @Injectable({
   providedIn: "root"
 })
 export class MovieService {
-  genres = [
+  public genres = [
     { name: "Adventure", prefix: "g", selected: false, id: 12 },
     { name: "Animation", prefix: "g", selected: false, id: 16 },
     { name: "Comedy", prefix: "g", selected: false, id: 35 },
@@ -27,7 +27,7 @@ export class MovieService {
     { name: "Sci-Fi", prefix: "g", selected: false, id: 878 },
     { name: "Thriller", prefix: "g", selected: false, id: 53 }
   ];
-  sortingFields = [
+  public sortingFields = [
     { id: 0, value: "dateAdded", name: "Date Added" },
     { id: 1, value: "title", name: "Title" },
     { id: 2, value: "releaseDate", name: "Release Date" },
@@ -44,30 +44,30 @@ export class MovieService {
     private router: Router
   ) {}
 
-  generateMovieID = (date, moviename) =>
+  public generateMovieID = (date, moviename) =>
     date.substring(0, 4) +
     "-" +
     moviename
       .trim()
       .replace(/[^a-zA-Z0-9А-Яа-я ]/g, "") // удаляем символы всякие
       .replace(/\s+/g, "-") // заменяем пробелы на тире
-      .toLowerCase();
+      .toLowerCase()
 
-  generateCommentID = date =>
+  public generateCommentID = (date) =>
     date
       .replace(/[^a-zA-Z0-9 ]/g, "") // удаляем символы всякие
       .replace(/\s+/g, "") // заменяем пробелы на тире
-      .toLowerCase();
+      .toLowerCase()
 
-  compareGenres = (genres, fetchedGenres) =>
-    genres.map(x => fetchedGenres.map(y => (x.id === y.id ? (x.selected = true) : null)));
+  public compareGenres = (genres, fetchedGenres) =>
+    genres.map((x) => fetchedGenres.map((y) => (x.id === y.id ? (x.selected = true) : null)))
 
-  sliceData = (object, num) =>
+  public sliceData = (object, num) =>
     Object.keys(object)
       .slice(0, num)
-      .map(key => ({ [key]: object[key] }));
+      .map((key) => ({ [key]: object[key] }))
 
-  genresToArray = genres => {
+  public genresToArray = (genres) => {
     const genresArray = [];
     // tslint:disable-next-line: forin
     for (const propt in genres) {
@@ -77,14 +77,14 @@ export class MovieService {
           null;
     }
     return genresArray;
-  };
+  }
 
-  getElementId(event): string {
+  public getElementId(event): string {
     const target = event.target || event.srcElement || event.currentTarget;
     return target.attributes.id.nodeValue;
   }
 
-  setMovieData(movieData: Movie): void {
+  public setMovieData(movieData: Movie): void {
     console.log(movieData);
     this.afs
       .collection(`movies/`)
@@ -92,31 +92,31 @@ export class MovieService {
       .set(movieData, {
         merge: true
       })
-      .then(smth => this.alertService.openSuccessAlert("Movie info successfully added", 3))
-      .catch(error => this.alertService.openWarningAlert(error.message, 3));
+      .then((smth) => this.alertService.openSuccessAlert("Movie info successfully added", 3))
+      .catch((error) => this.alertService.openWarningAlert(error.message, 3));
   }
 
-  deleteMovie(mid: string): void {
+  public deleteMovie(mid: string): void {
     this.afs
       .collection(`movies/`)
       .doc(mid)
       .delete()
-      .then(smth => {
+      .then((smth) => {
         this.alertService.openSuccessAlert("Movie successfully deleted", 3);
         this.router.navigate(["movies"]);
       })
-      .catch(error => this.alertService.openWarningAlert(error.message, 3));
+      .catch((error) => this.alertService.openWarningAlert(error.message, 3));
   }
 
   // для информации для списков watch later и favourites
-  getMovieInfo(mid: string): Observable<any> {
+  public getMovieInfo(mid: string): Observable<any> {
     return this.afs.doc(`movies/${mid}/`).valueChanges();
   }
 
-  fetchMovie(id: string): Observable<any> {
+  public fetchMovie(id: string): Observable<any> {
     const movie = this.afs.collection("movies").doc(`${id}`);
     const that = this;
-    movie.ref.get().then(doc => {
+    movie.ref.get().then((doc) => {
       if (doc.exists) {
       } else {
         that.alertService.openWarningAlert("Wrong URL!", 3);
@@ -126,9 +126,9 @@ export class MovieService {
     return movie.valueChanges();
   }
   // Сортируем на сервере, остальное – на клиенте
-  fetchMovies(orderField: string, sortType: string): Observable<any> {
+  public fetchMovies(orderField: string, sortType: string): Observable<any> {
     const type: OrderByDirection = sortType as OrderByDirection;
-    return this.afs.collection("movies", ref => ref.orderBy(orderField, type)).valueChanges();
+    return this.afs.collection("movies", (ref) => ref.orderBy(orderField, type)).valueChanges();
   }
 
   // server-side data filter
@@ -137,7 +137,7 @@ export class MovieService {
   // https://stackoverflow.com/questions/26700924/query-based-on-multiple-where-clauses-in-firebase
   // И совсем невозможно добавить к этому сортировку
 
-  toggleMovieToList(type: string, listMovieData: MovieListItem, uid: string): void {
+  public toggleMovieToList(type: string, listMovieData: MovieListItem, uid: string): void {
     const movieDoc = this.afs
       .collection(`users/`)
       .doc(uid)
@@ -146,13 +146,13 @@ export class MovieService {
     movieDoc
       .get()
       .toPromise()
-      .then(doc => {
+      .then((doc) => {
         // если это оценка фильма, то мы её записываем в любом случае
         if (type === "rated") {
           movieDoc
             .set(listMovieData)
-            .then(smth => this.alertService.openSuccessAlert("Rated successfully", 2))
-            .catch(error => this.alertService.openWarningAlert(error.message, 3));
+            .then((smth) => this.alertService.openSuccessAlert("Rated successfully", 2))
+            .catch((error) => this.alertService.openWarningAlert(error.message, 3));
         } else {
           // а если это посмотреть позже/любимые, проверяем
           // есть такой фильм уже есть списке
@@ -161,66 +161,66 @@ export class MovieService {
             // если есть то удаляем
             movieDoc
               .delete()
-              .then(smth =>
+              .then((smth) =>
                 this.alertService.openInfoAlert("Movie successfully deleted from list", 2)
               )
-              .catch(error => this.alertService.openWarningAlert(error.message, 3));
+              .catch((error) => this.alertService.openWarningAlert(error.message, 3));
           } else {
             // если нету – добавляем в список
             movieDoc
               .set(listMovieData)
-              .then(smth =>
+              .then((smth) =>
                 this.alertService.openSuccessAlert("Movie successfully added to list", 2)
               )
-              .catch(error => this.alertService.openWarningAlert(error.message, 3));
+              .catch((error) => this.alertService.openWarningAlert(error.message, 3));
           }
         }
       })
-      .catch(error =>
+      .catch((error) =>
         this.alertService.openWarningAlert("Error getting movie data!: " + error.message, 3)
       );
   }
 
-  fetchFavourites(uid: string, mid: string): Observable<any> {
+  public fetchFavourites(uid: string, mid: string): Observable<any> {
     return this.afs.doc(`users/${uid}/favourites/${mid}/`).valueChanges();
   }
 
-  fetchWatchLater(uid: string, mid: string): Observable<any> {
+  public fetchWatchLater(uid: string, mid: string): Observable<any> {
     return this.afs.doc(`users/${uid}/watchlater/${mid}/`).valueChanges();
   }
 
-  fetchRating(uid: string, mid: string): Observable<any> {
+  public fetchRating(uid: string, mid: string): Observable<any> {
     return this.afs.doc(`users/${uid}/rated/${mid}/`).valueChanges();
   }
 
-  checkMovie(mid: string) {
+  public checkMovie(mid: string) {
     const movie = this.afs.collection("movies").doc(`${mid}`);
     return movie.ref.get();
   }
 
-  addComment(commentData: Comment, mid: string) {
+  public addComment(commentData: Comment, mid: string) {
     this.afs
       .collection(`movies/`)
       .doc(mid)
       .collection(`comments/`)
       .doc(commentData.cid)
       .set(commentData)
-      .then(smth => this.alertService.openSuccessAlert("Comment successfully added", 3))
-      .catch(error => this.alertService.openWarningAlert(error.message, 3));
+      .then((smth) => this.alertService.openSuccessAlert("Comment successfully added", 3))
+      .catch((error) => this.alertService.openWarningAlert(error.message, 3));
   }
 
-  deleteComment(cid: string, mid: string) {
+  public deleteComment(cid: string, mid: string) {
     this.afs
       .collection(`movies/`)
       .doc(mid)
       .collection(`comments/`)
       .doc(cid)
       .delete()
-      .then(smth => this.alertService.openSuccessAlert("Comment successfully deleted", 3))
-      .catch(error => this.alertService.openWarningAlert(error.message, 3));
+      .then((smth) => this.alertService.openSuccessAlert("Comment successfully deleted", 3))
+      .catch((error) => this.alertService.openWarningAlert(error.message, 3));
   }
 
-  fetchComments(mid: string): Observable<any> {
+  public fetchComments(mid: string): Observable<any> {
     return this.afs.collection(`movies/${mid}/comments`).valueChanges();
   }
 }

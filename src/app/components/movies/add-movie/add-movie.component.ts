@@ -1,9 +1,9 @@
-import { Component, OnInit, AfterViewInit } from "@angular/core";
+import { AfterViewInit, Component, OnInit } from "@angular/core";
 import { NgForm } from "@angular/forms";
-import { TMDBService } from "../../../shared/services/tmdb/TMDB.service";
 import { AlertService } from "../../../shared/services/alert/alert.service";
 import { MovieService } from "../../../shared/services/movie/movie.service";
 import { ThemeService } from "../../../shared/services/theme/theme.service";
+import { TMDBService } from "../../../shared/services/tmdb/TMDB.service";
 import { Movie } from "./../../../shared/models/movie";
 
 @Component({
@@ -12,7 +12,7 @@ import { Movie } from "./../../../shared/models/movie";
   styleUrls: ["./add-movie.component.css"]
 })
 export class AddMovieComponent implements OnInit, AfterViewInit {
-  foundMovieData = {
+  public foundMovieData = {
     id: "",
     tmdb_id: "",
     imdb_id: "",
@@ -27,15 +27,15 @@ export class AddMovieComponent implements OnInit, AfterViewInit {
     overview: "",
     production_countries: [{ name: "" }]
   };
-  foundMovieCredits = {
+  public foundMovieCredits = {
     crew: [{ name: "" }]
   };
-  foundPosterPath = "";
-  foundBackdropPath = "";
-  foundRuntime = "";
-  foundRevenue = "";
-  foundBudget = "";
-  genres = this.movieService.genres;
+  public foundPosterPath = "";
+  public foundBackdropPath = "";
+  public foundRuntime = "";
+  public foundRevenue = "";
+  public foundBudget = "";
+  public genres = this.movieService.genres;
 
   constructor(
     public themeService: ThemeService,
@@ -44,16 +44,16 @@ export class AddMovieComponent implements OnInit, AfterViewInit {
     private movieService: MovieService
   ) {}
 
-  ngOnInit() {}
+  public ngOnInit() {}
 
-  ngAfterViewInit() {
+  public ngAfterViewInit() {
     // this.themeService.checkDarkMode();
   }
 
   // Делается запрос к TMDB методом fetchMovieByIMDBID, который по индентификатору IMDB(строка) вовзращает
   // информацию о фильме. Далее запрос fetchMovieDetailsByTMDBID по только что
   // полученному TMDB идентификатору(число) возвращает полную информацию о фильме
-  onImdbIDSubmit(form: NgForm): void {
+  public onImdbIDSubmit(form: NgForm): void {
     console.log("onImdbIDSubmit.form: ", form.value);
     // Переписан без подписки внутри подписки
     // Часть до подписки перенесена в TMDB.service
@@ -81,7 +81,7 @@ export class AddMovieComponent implements OnInit, AfterViewInit {
       });
   }
 
-  onAddMovieSubmit(form: NgForm): void {
+  public onAddMovieSubmit(form: NgForm): void {
     // приводим к нужному виду
     console.log("onAddMovieSubmit.form: ", form.value);
     const movieData: Movie = {

@@ -1,21 +1,21 @@
-import { Component, OnInit, AfterViewInit, TemplateRef } from "@angular/core";
-import { Title, DomSanitizer } from "@angular/platform-browser";
-import { ActivatedRoute } from "@angular/router";
+import { AfterViewInit, Component, OnInit, TemplateRef } from "@angular/core";
 import { NgForm } from "@angular/forms";
-import { BsModalService, BsModalRef } from "ngx-bootstrap/modal";
+import { DomSanitizer, Title } from "@angular/platform-browser";
+import { ActivatedRoute } from "@angular/router";
 import { StarRatingComponent } from "ng-starrating";
+import { BsModalRef, BsModalService } from "ngx-bootstrap/modal";
 import { NgxSpinnerService } from "ngx-spinner";
+// Интерфейсы
+import { Cast } from "../../../shared/models/api-cast";
+import { TmdbMovie } from "../../../shared/models/api-movie";
+import { Trailers } from "../../../shared/models/api-trailers";
+import { Movie } from "../../../shared/models/movie";
+import { MovieListItem } from "../../../shared/models/movie-list-item";
+import { AuthService } from "../../../shared/services/auth/auth.service";
 import { MovieService } from "../../../shared/services/movie/movie.service";
 import { ThemeService } from "../../../shared/services/theme/theme.service";
 import { TMDBService } from "../../../shared/services/tmdb/TMDB.service";
-import { AuthService } from "../../../shared/services/auth/auth.service";
-// Интерфейсы
-import { Cast } from "../../../shared/models/api-cast";
 import { Comment } from "./../../../shared/models/comment";
-import { Movie } from "../../../shared/models/movie";
-import { Trailers } from "../../../shared/models/api-trailers";
-import { MovieListItem } from "../../../shared/models/movie-list-item";
-import { TmdbMovie } from "../../../shared/models/api-movie";
 
 @Component({
   selector: "app-movie",
@@ -23,17 +23,17 @@ import { TmdbMovie } from "../../../shared/models/api-movie";
   styleUrls: ["./movie.component.css"]
 })
 export class MovieComponent implements OnInit, AfterViewInit {
-  movieData: Movie;
-  movieComments: Comment[];
-  movieCast: Cast[];
-  movieTrailers: Trailers[];
-  movieSimilars: TmdbMovie[];
-  currentMovieRating: number;
-  currentMovieWatchLater: boolean;
-  currentMovieFavourites: boolean;
-  currentCommentText: string;
-  currentCommentID: string;
-  modalRef: BsModalRef;
+  public movieData: Movie;
+  public movieComments: Comment[];
+  public movieCast: Cast[];
+  public movieTrailers: Trailers[];
+  public movieSimilars: TmdbMovie[];
+  public currentMovieRating: number;
+  public currentMovieWatchLater: boolean;
+  public currentMovieFavourites: boolean;
+  public currentCommentText: string;
+  public currentCommentID: string;
+  public modalRef: BsModalRef;
 
   constructor(
     public authService: AuthService,
@@ -47,23 +47,23 @@ export class MovieComponent implements OnInit, AfterViewInit {
     private spinner: NgxSpinnerService
   ) {}
 
-  ngOnInit() {
+  public ngOnInit() {
     this.spinner.show();
     this.getMovie();
     this.getComments();
   }
 
-  ngAfterViewInit() {
+  public ngAfterViewInit() {
     // this.themeService.checkDarkMode();
   }
   // прыгнуть к изменению своего комментария
-  scroll(el: HTMLElement): void {
+  public scroll(el: HTMLElement): void {
     el.scrollIntoView();
   }
 
-  getMovie(): void {
+  public getMovie(): void {
     const id = this.route.snapshot.paramMap.get("id");
-    this.movieService.fetchMovie(id).subscribe(movie => {
+    this.movieService.fetchMovie(id).subscribe((movie) => {
       this.movieData = movie;
       console.log("Movie data: ", this.movieData);
       this.titleService.setTitle(this.movieData.title);
@@ -78,31 +78,31 @@ export class MovieComponent implements OnInit, AfterViewInit {
     });
   }
 
-  getComments(): void {
+  public getComments(): void {
     const id = this.route.snapshot.paramMap.get("id");
-    this.movieService.fetchComments(id).subscribe(data => {
+    this.movieService.fetchComments(id).subscribe((data) => {
       this.movieComments = data;
       this.spinner.hide();
       console.log("Comments: ", this.movieComments);
     });
   }
 
-  getUsersMovieInfo(): void {
+  public getUsersMovieInfo(): void {
     const mid = this.route.snapshot.paramMap.get("id");
     const uid = this.authService.userData.uid;
     this.movieService
       .fetchRating(uid, mid)
-      .subscribe(data => (this.currentMovieRating = data ? data.rated : null));
+      .subscribe((data) => (this.currentMovieRating = data ? data.rated : null));
     this.movieService
       .fetchFavourites(uid, mid)
-      .subscribe(data => (this.currentMovieFavourites = data ? true : false));
+      .subscribe((data) => (this.currentMovieFavourites = data ? true : false));
     this.movieService
       .fetchWatchLater(uid, mid)
-      .subscribe(data => (this.currentMovieWatchLater = data ? true : false));
+      .subscribe((data) => (this.currentMovieWatchLater = data ? true : false));
   }
 
-  getMovieCast(id: number): void {
-    this.tmdbService.fetchMovieCreditsbyTMDBID(id).subscribe(data => {
+  public getMovieCast(id: number): void {
+    this.tmdbService.fetchMovieCreditsbyTMDBID(id).subscribe((data) => {
       this.movieCast = this.movieService.sliceData(data.cast, 12);
       // спиннер убираем тут, так как на данном этапе информация о фильме загружена
       // и ниже находятся актеры, а трейлеры – в другой вкладке, комментарии еще ниже
@@ -111,8 +111,8 @@ export class MovieComponent implements OnInit, AfterViewInit {
     });
   }
 
-  getMovieTrailers(id: number): void {
-    this.tmdbService.fetchMovieTrailersByTMDBID(id).subscribe(data => {
+  public getMovieTrailers(id: number): void {
+    this.tmdbService.fetchMovieTrailersByTMDBID(id).subscribe((data) => {
       this.movieTrailers = this.movieService.sliceData(data.results, 6);
       this.movieTrailers.forEach((value, i) => {
         value[i].key = "https://www.youtube.com/embed/" + value[i].key + "?rel=0";
@@ -121,23 +121,23 @@ export class MovieComponent implements OnInit, AfterViewInit {
     });
   }
 
-  getSimilarMovies(id: number): void {
-    this.tmdbService.fetchSimilarMoviesByTMDBID(id).subscribe(data => {
+  public getSimilarMovies(id: number): void {
+    this.tmdbService.fetchSimilarMoviesByTMDBID(id).subscribe((data) => {
       this.movieSimilars = this.movieService.sliceData(data.results, 8);
       console.log("Similar movies: ", this.movieSimilars);
     });
   }
 
-  handleMovieEdit(): void {
+  public handleMovieEdit(): void {
     // роутит на соответствующую страничку
     console.log("Edit movie => mid = " + this.movieData.mid);
   }
 
-  handleMovieDelete(): void {
+  public handleMovieDelete(): void {
     this.movieService.deleteMovie(this.movieData.mid);
   }
 
-  handleToWatchLater(): void {
+  public handleToWatchLater(): void {
     const watchLaterMovieData: MovieListItem = {
       mid: this.movieData.mid,
       date: new Date().toLocaleString()
@@ -149,7 +149,7 @@ export class MovieComponent implements OnInit, AfterViewInit {
     );
   }
 
-  handleToFavourites(): void {
+  public handleToFavourites(): void {
     const favouritesMovieData: MovieListItem = {
       mid: this.movieData.mid,
       date: new Date().toLocaleString()
@@ -161,7 +161,7 @@ export class MovieComponent implements OnInit, AfterViewInit {
     );
   }
 
-  handleRate($event: {
+  public handleRate($event: {
     oldValue: number;
     newValue: number;
     starRating: StarRatingComponent;
@@ -174,7 +174,7 @@ export class MovieComponent implements OnInit, AfterViewInit {
     this.movieService.toggleMovieToList("rated", ratedMovieData, this.authService.userData.uid);
   }
 
-  handleAddComment(form: NgForm): void {
+  public handleAddComment(form: NgForm): void {
     const now = new Date().toLocaleString();
     if (form.value.CommentText.trim() !== "") {
       const commentData: Comment = {
@@ -189,26 +189,26 @@ export class MovieComponent implements OnInit, AfterViewInit {
     }
   }
 
-  handleCommentEdit(event): void {
+  public handleCommentEdit(event): void {
     const cid = this.movieService.getElementId(event);
     const text = document.getElementById("t" + cid).innerText;
     this.currentCommentText = text;
     this.movieService.deleteComment(cid, this.movieData.mid);
   }
 
-  handleCommentDelete(cid: string): void {
+  public handleCommentDelete(cid: string): void {
     this.movieService.deleteComment(cid, this.movieData.mid);
   }
 
-  openModalShare(shareTemplate: TemplateRef<any>): void {
+  public openModalShare(shareTemplate: TemplateRef<any>): void {
     this.modalRef = this.modalService.show(shareTemplate);
   }
 
-  openModalDelete(deleteMovieTemplate: TemplateRef<any>): void {
+  public openModalDelete(deleteMovieTemplate: TemplateRef<any>): void {
     this.modalRef = this.modalService.show(deleteMovieTemplate);
   }
 
-  openDeleteComment(deleteCommentTemplate: TemplateRef<any>, event): void {
+  public openDeleteComment(deleteCommentTemplate: TemplateRef<any>, event): void {
     this.currentCommentID = this.movieService.getElementId(event);
     console.log("currentCommentID: ", this.currentCommentID);
     this.modalRef = this.modalService.show(deleteCommentTemplate);

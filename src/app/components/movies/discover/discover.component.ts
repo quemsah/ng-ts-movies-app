@@ -1,10 +1,10 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { NgxSpinnerService } from "ngx-spinner";
-import { TMDBService } from "../../../shared/services/tmdb/TMDB.service";
-import { MovieService } from "../../../shared/services/movie/movie.service";
 import { forkJoin, Subject } from "rxjs";
 import { debounceTime, distinctUntilChanged } from "rxjs/operators";
+import { MovieService } from "../../../shared/services/movie/movie.service";
+import { TMDBService } from "../../../shared/services/tmdb/TMDB.service";
 
 @Component({
   selector: "app-discover",
@@ -12,14 +12,14 @@ import { debounceTime, distinctUntilChanged } from "rxjs/operators";
   styleUrls: ["./discover.component.css"]
 })
 export class DiscoverComponent implements OnInit {
-  movies: any[];
-  genres = this.movieService.genres;
-  category: string;
-  title: string;
-  searchValue: string;
-  searchValueUpdate = new Subject<string>();
-  genreValue = 12;
-  pageOfItems: Array<any>;
+  public movies: any[];
+  public genres = this.movieService.genres;
+  public category: string;
+  public title: string;
+  public searchValue: string;
+  public searchValueUpdate = new Subject<string>();
+  public genreValue = 12;
+  public pageOfItems: any[];
   constructor(
     public tmdbService: TMDBService,
     public movieService: MovieService,
@@ -33,7 +33,7 @@ export class DiscoverComponent implements OnInit {
         debounceTime(interval),
         distinctUntilChanged()
       )
-      .subscribe(value => {
+      .subscribe((value) => {
         // чтобы при пустой строке не грузил постоянно
         if (value !== "") {
           this.searchValue = value.toString();
@@ -46,7 +46,7 @@ export class DiscoverComponent implements OnInit {
       });
   }
 
-  ngOnInit() {
+  public ngOnInit() {
     this.spinner.show();
     this.category = this.route.snapshot.routeConfig.path;
     switch (this.category) {
@@ -76,24 +76,24 @@ export class DiscoverComponent implements OnInit {
     }
   }
   // объединение трех пришедших массивов типа MovieCategory
-  mergeItems = arr => {
+  public mergeItems = (arr) => {
     return [
       ...Object.values(arr[0].results),
       ...Object.values(arr[1].results),
       ...Object.values(arr[2].results)
     ];
-  };
+  }
 
-  getDiscoveredMovies(fetcher, genre?: string) {
+  public getDiscoveredMovies(fetcher, genre?: string) {
     // tslint:disable-next-line: deprecation
-    forkJoin(fetcher(1, genre), fetcher(2, genre), fetcher(3, genre)).subscribe(data => {
+    forkJoin(fetcher(1, genre), fetcher(2, genre), fetcher(3, genre)).subscribe((data) => {
       this.movies = this.mergeItems(data);
       console.log("this.movies: ", this.movies);
       this.spinner.hide();
     });
   }
 
-  onGenreValueChange(genreID: number): void {
+  public onGenreValueChange(genreID: number): void {
     this.spinner.show();
     this.genreValue = genreID;
     this.getDiscoveredMovies(
@@ -102,7 +102,7 @@ export class DiscoverComponent implements OnInit {
     );
   }
 
-  onChangePage(pageOfItems: Array<any>): void {
+  public onChangePage(pageOfItems: any[]): void {
     this.pageOfItems = pageOfItems;
   }
 }

@@ -1,8 +1,8 @@
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { ProfileComponent } from "./profile.component";
+import { MatSnackBar, MatSnackBarModule } from "@angular/material/snack-bar";
 import { SafePipe } from "../../../shared/pipes/safe.pipe";
-import { MatSnackBarModule, MatSnackBar } from "@angular/material/snack-bar";
+import { ProfileComponent } from "./profile.component";
 
 describe("ProfileComponent", () => {
   let component: ProfileComponent;

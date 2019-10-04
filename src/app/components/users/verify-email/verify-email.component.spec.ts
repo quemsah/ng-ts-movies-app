@@ -1,9 +1,9 @@
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { VerifyEmailComponent } from "./verify-email.component";
-import { MatSnackBar, MatSnackBarModule } from "@angular/material";
 import { ReactiveFormsModule } from "@angular/forms";
+import { MatSnackBar, MatSnackBarModule } from "@angular/material";
 import { SafePipe } from "../../../shared/pipes/safe.pipe";
+import { VerifyEmailComponent } from "./verify-email.component";
 
 describe("VerifyEmailMessageComponent", () => {
   let component: VerifyEmailComponent;

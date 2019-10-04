@@ -1,16 +1,16 @@
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { NavbarComponent } from "./navbar.component";
-import { SafePipe } from "../../shared/pipes/safe.pipe";
-import { MatSnackBar, MatSnackBarModule } from "@angular/material";
-import { ReactiveFormsModule } from "@angular/forms";
 import { NO_ERRORS_SCHEMA } from "@angular/core";
-import { AngularFireStorage } from "@angular/fire/storage";
 import { AngularFireModule } from "@angular/fire";
 import { AngularFireAuthModule } from "@angular/fire/auth";
-import { environment } from "src/environments/environment.prod";
 import { AngularFirestore } from "@angular/fire/firestore";
+import { AngularFireStorage } from "@angular/fire/storage";
+import { ReactiveFormsModule } from "@angular/forms";
+import { MatSnackBar, MatSnackBarModule } from "@angular/material";
 import { RouterTestingModule } from "@angular/router/testing";
+import { environment } from "src/environments/environment.prod";
+import { SafePipe } from "../../shared/pipes/safe.pipe";
+import { NavbarComponent } from "./navbar.component";
 
 describe("NavbarComponent", () => {
   let component: NavbarComponent;

@@ -1,12 +1,12 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { NgxSpinnerService } from "ngx-spinner";
-import { UserService } from "../../../shared/services/user/user.service";
+import { MovieListItem } from "../../../shared/models/movie-list-item";
+import { User } from "../../../shared/models/user";
 import { AuthService } from "../../../shared/services/auth/auth.service";
 import { MovieService } from "../../../shared/services/movie/movie.service";
 import { ThemeService } from "../../../shared/services/theme/theme.service";
-import { MovieListItem } from "../../../shared/models/movie-list-item";
-import { User } from "../../../shared/models/user";
+import { UserService } from "../../../shared/services/user/user.service";
 
 @Component({
   selector: "app-user",
@@ -14,9 +14,9 @@ import { User } from "../../../shared/models/user";
   styleUrls: ["./user.component.css"]
 })
 export class UserComponent implements OnInit {
-  userData: User;
-  watchlater: MovieListItem;
-  favourites: MovieListItem;
+  public userData: User;
+  public watchlater: MovieListItem;
+  public favourites: MovieListItem;
 
   constructor(
     public authService: AuthService,
@@ -27,23 +27,23 @@ export class UserComponent implements OnInit {
     private spinner: NgxSpinnerService
   ) {}
 
-  ngOnInit() {
+  public ngOnInit() {
     this.spinner.show();
     this.getUser();
     this.getMovieLists();
   }
 
-  getUser(): void {
+  public getUser(): void {
     const id = this.route.snapshot.paramMap.get("id");
-    this.userService.getUserInfo(id).subscribe(user => {
+    this.userService.getUserInfo(id).subscribe((user) => {
       this.userData = user;
       console.log("this.userData: ", this.userData);
     });
   }
   // добавляем к айдишниками фильмов информацию о них
-  getListInfo(listData: MovieListItem): void {
-    Object.keys(listData).filter(key => {
-      this.movieService.getMovieInfo(listData[key].mid).subscribe(data => {
+  public getListInfo(listData: MovieListItem): void {
+    Object.keys(listData).filter((key) => {
+      this.movieService.getMovieInfo(listData[key].mid).subscribe((data) => {
         // берем только нужные поля
         listData[key].title = data.title;
         listData[key].director = data.director;
@@ -57,19 +57,19 @@ export class UserComponent implements OnInit {
     });
   }
 
-  getMovieLists(): void {
+  public getMovieLists(): void {
     const id = this.route.snapshot.paramMap.get("id");
-    this.userService.fetchWatchLaterList(id).subscribe(data => {
+    this.userService.fetchWatchLaterList(id).subscribe((data) => {
       this.watchlater = data;
       this.getListInfo(this.watchlater);
     });
-    this.userService.fetchFavouritesList(id).subscribe(data => {
+    this.userService.fetchFavouritesList(id).subscribe((data) => {
       this.favourites = data;
       this.getListInfo(this.favourites);
     });
   }
 
-  handleToWatchLater(event): void {
+  public handleToWatchLater(event): void {
     const watchLaterMovieData: MovieListItem = {
       mid: this.movieService.getElementId(event),
       date: new Date().toLocaleString()
@@ -81,7 +81,7 @@ export class UserComponent implements OnInit {
     );
   }
 
-  handleToFavourites(event): void {
+  public handleToFavourites(event): void {
     const favouriteMovieData: MovieListItem = {
       mid: this.movieService.getElementId(event),
       date: new Date().toLocaleString()

@@ -1,8 +1,8 @@
-import { Component, OnInit, AfterViewInit, ElementRef } from "@angular/core";
+import { AfterViewInit, Component, ElementRef, OnInit } from "@angular/core";
 import { Title } from "@angular/platform-browser";
-import { Router, NavigationEnd, ActivatedRoute } from "@angular/router";
-import { ThemeService } from "./shared/services/theme/theme.service";
+import { ActivatedRoute, NavigationEnd, Router } from "@angular/router";
 import { filter, map } from "rxjs/operators";
+import { ThemeService } from "./shared/services/theme/theme.service";
 
 declare var $: any;
 
@@ -19,12 +19,12 @@ export class AppComponent implements OnInit, AfterViewInit {
     private activatedRoute: ActivatedRoute
   ) {}
 
-  ngOnInit() {
+  public ngOnInit() {
     // Смена заголовка в зависимости от роута
     // https://blog.bitsrc.io/dynamic-page-titles-in-angular-98ce20b5c334
     this.router.events
       .pipe(
-        filter(event => event instanceof NavigationEnd),
+        filter((event) => event instanceof NavigationEnd),
         map(() => {
           const child = this.activatedRoute.firstChild;
           return child.snapshot.data.title
@@ -35,7 +35,7 @@ export class AppComponent implements OnInit, AfterViewInit {
       .subscribe((ttl: string) => this.titleService.setTitle(ttl));
   }
 
-  ngAfterViewInit() {
+  public ngAfterViewInit() {
     // Dark mode включен по умолчанию
     // this.themeService.toggleDarkMode();
     // $("#dark-mode").click(() => this.themeService.toggleDarkMode());

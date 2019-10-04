@@ -1,15 +1,15 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { NgxSpinnerService } from "ngx-spinner";
-import { AuthService } from "../../../shared/services/auth/auth.service";
-import { TMDBService } from "../../../shared/services/tmdb/TMDB.service";
-import { ThemeService } from "../../../shared/services/theme/theme.service";
-import { MovieService } from "../../../shared/services/movie/movie.service";
-import { MovieDetails } from "../../../shared/models/api-movie-details";
-import { Movie } from "../../../shared/models/movie";
+import { forkJoin } from "rxjs";
 import { Cast } from "../../../shared/models/api-cast";
 import { Crew } from "../../../shared/models/api-crew";
-import { forkJoin } from "rxjs";
+import { MovieDetails } from "../../../shared/models/api-movie-details";
+import { Movie } from "../../../shared/models/movie";
+import { AuthService } from "../../../shared/services/auth/auth.service";
+import { MovieService } from "../../../shared/services/movie/movie.service";
+import { ThemeService } from "../../../shared/services/theme/theme.service";
+import { TMDBService } from "../../../shared/services/tmdb/TMDB.service";
 
 @Component({
   selector: "app-discovered-movie",
@@ -17,11 +17,11 @@ import { forkJoin } from "rxjs";
   styleUrls: ["./discovered-movie.component.css"]
 })
 export class DiscoveredMovieComponent implements OnInit {
-  isInOurDatabase: boolean;
-  mid: string;
-  discoveredMovieData: MovieDetails;
-  discoveredMovieCrew: Crew[];
-  discoveredMovieCast: Cast[];
+  public isInOurDatabase: boolean;
+  public mid: string;
+  public discoveredMovieData: MovieDetails;
+  public discoveredMovieCrew: Crew[];
+  public discoveredMovieCast: Cast[];
   constructor(
     public authService: AuthService,
     public themeService: ThemeService,
@@ -31,12 +31,12 @@ export class DiscoveredMovieComponent implements OnInit {
     private spinner: NgxSpinnerService
   ) {}
 
-  ngOnInit() {
+  public ngOnInit() {
     this.spinner.show();
     this.getDiscoveredMovie();
   }
 
-  getDiscoveredMovie(): void {
+  public getDiscoveredMovie(): void {
     const id = parseInt(this.route.snapshot.paramMap.get("id"), 10);
     // tslint:disable-next-line: deprecation
     forkJoin(
@@ -60,8 +60,8 @@ export class DiscoveredMovieComponent implements OnInit {
     });
   }
 
-  searchInOurDatabase(id: string): void {
-    this.movieService.checkMovie(id).then(movie => {
+  public searchInOurDatabase(id: string): void {
+    this.movieService.checkMovie(id).then((movie) => {
       if (movie.exists) {
         this.isInOurDatabase = true;
       } else {
@@ -71,10 +71,10 @@ export class DiscoveredMovieComponent implements OnInit {
     });
   }
 
-  handleAddToDatabase(): void {
+  public handleAddToDatabase(): void {
     const country = this.discoveredMovieData.production_countries[0].name;
     const genres = [];
-    this.discoveredMovieData.genres.forEach(element => {
+    this.discoveredMovieData.genres.forEach((element) => {
       genres.push(element.name);
     });
     console.log("genres: ", genres);

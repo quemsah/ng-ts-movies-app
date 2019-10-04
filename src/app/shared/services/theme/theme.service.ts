@@ -6,35 +6,35 @@ declare const enableDarkMode: any;
   providedIn: "root"
 })
 export class ThemeService {
-  isDarkMode = false;
-  wasRouted = false;
+  public isDarkMode = false;
+  public wasRouted = false;
   // начальные значения
-  red = 59;
-  green = 133;
-  blue = 206;
-  random = 0;
-  themeGradient: string = this.setGradient(this.red, this.green, this.blue, this.random);
-  themeColor: string = this.setColor(this.red, this.green, this.blue);
+  public red = 59;
+  public green = 133;
+  public blue = 206;
+  public random = 0;
+  public themeGradient: string = this.setGradient(this.red, this.green, this.blue, this.random);
+  public themeColor: string = this.setColor(this.red, this.green, this.blue);
   constructor() {}
 
-  rgbToHex(rgb: number): string {
+  public rgbToHex(rgb: number): string {
     const hex = Math.round(Math.min(Math.max(0, rgb), 255)).toString(16);
     return hex.length < 2 ? "0" + hex : hex;
   }
 
-  fullColorHex(red: number, green: number, blue: number): string {
+  public fullColorHex(red: number, green: number, blue: number): string {
     return this.rgbToHex(red) + this.rgbToHex(green) + this.rgbToHex(blue);
   }
 
-  mix(color: number, param: number): number {
+  public mix(color: number, param: number): number {
     return Math.round((1 + param) * color);
   }
 
-  getNum(random: number): number {
+  public getNum(random: number): number {
     return parseFloat((Math.random() * (random + random) - random).toFixed(2));
   }
 
-  setGradient(red: number, green: number, blue: number, random: number): string {
+  public setGradient(red: number, green: number, blue: number, random: number): string {
     const alpha = 0.3;
     const beta = -0.5;
     // параметры сдвига цвета
@@ -57,7 +57,7 @@ export class ThemeService {
     return gr;
   }
 
-  setColor(red: number, green: number, blue: number): string {
+  public setColor(red: number, green: number, blue: number): string {
     const color = "#" + this.fullColorHex(red, green, blue);
     this.themeColor = color;
     console.log("Theme color: ", this.themeColor);
@@ -65,7 +65,7 @@ export class ThemeService {
   }
   // перед переходом выключаем дарк мод, если он был
   // и ставим wasRouted = true, чтобы потом включить
-  forceDisableDarkModeBeforeRoute(): void {
+  public forceDisableDarkModeBeforeRoute(): void {
     if (this.isDarkMode === true) {
       this.toggleDarkMode();
       this.wasRouted = true;
@@ -75,7 +75,7 @@ export class ThemeService {
   }
   // если был переход (wasRouted = true), то включаем даркмод обратно
   // и не забываем обнулить wasRouted
-  checkDarkMode(): void {
+  public checkDarkMode(): void {
     if (this.wasRouted === true) {
       this.toggleDarkMode();
       this.wasRouted = false;
@@ -84,7 +84,7 @@ export class ThemeService {
     }
   }
   // вкл/выкл
-  toggleDarkMode(): void {
+  public toggleDarkMode(): void {
     if (this.isDarkMode === false) {
       this.isDarkMode = true;
       enableDarkMode();
