@@ -10,11 +10,16 @@
 /src/assets/scss/_admin-style.scss
 /src/assets/scss/_custom-skin.scss
 /src/assets/scss/main.scss
+
 # compiled output
 /dist
 /tmp
 /out-tsc
+
+# Other
 .firebase
+.scannerwork
+
 # Only exists if Bazel was run
 /bazel-out
 

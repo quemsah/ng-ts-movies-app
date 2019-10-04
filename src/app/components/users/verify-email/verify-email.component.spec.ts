@@ -12,8 +12,7 @@ describe("VerifyEmailMessageComponent", () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [VerifyEmailComponent, SafePipe],
-      imports: [ReactiveFormsModule,
-        MatSnackBarModule]
+      imports: [ReactiveFormsModule, MatSnackBarModule]
     }).compileComponents();
   }));
 
