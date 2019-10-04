@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
 import { VerifyEmailComponent } from "./verify-email.component";
+import { SafePipe } from "../../../shared/pipes/safe.pipe";
 
 describe("VerifyEmailMessageComponent", () => {
   let component: VerifyEmailComponent;
@@ -8,7 +9,7 @@ describe("VerifyEmailMessageComponent", () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [VerifyEmailComponent]
+      declarations: [VerifyEmailComponent, SafePipe]
     }).compileComponents();
   }));
 

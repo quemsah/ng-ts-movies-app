@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
 import { LoginComponent } from "./login.component";
+import { SafePipe } from "../../../shared/pipes/safe.pipe";
 
 describe("LoginComponent", () => {
   let component: LoginComponent;
@@ -8,7 +9,7 @@ describe("LoginComponent", () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [LoginComponent]
+      declarations: [LoginComponent, SafePipe]
     }).compileComponents();
   }));
 

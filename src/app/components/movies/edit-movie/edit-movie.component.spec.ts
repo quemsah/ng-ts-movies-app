@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
 import { EditMovieComponent } from "./edit-movie.component";
+import { SafePipe } from "src/app/shared/pipes/safe.pipe";
 
 describe("EditMovieComponent", () => {
   let component: EditMovieComponent;
@@ -8,7 +9,7 @@ describe("EditMovieComponent", () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [EditMovieComponent]
+      declarations: [EditMovieComponent, SafePipe]
     }).compileComponents();
   }));
 

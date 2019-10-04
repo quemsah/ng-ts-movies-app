@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
 import { PaginationComponent } from "./pagination.component";
+import { SafePipe } from "../../../shared/pipes/safe.pipe";
 
 describe("PaginationComponent", () => {
   let component: PaginationComponent;
@@ -8,7 +9,7 @@ describe("PaginationComponent", () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [PaginationComponent]
+      declarations: [PaginationComponent, SafePipe]
     }).compileComponents();
   }));
 

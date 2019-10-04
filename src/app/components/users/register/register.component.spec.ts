@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
 import { RegisterComponent } from "./register.component";
+import { SafePipe } from "../../../shared/pipes/safe.pipe";
 
 describe("RegisterComponent", () => {
   let component: RegisterComponent;
@@ -8,7 +9,7 @@ describe("RegisterComponent", () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [RegisterComponent]
+      declarations: [RegisterComponent, SafePipe]
     }).compileComponents();
   }));
 

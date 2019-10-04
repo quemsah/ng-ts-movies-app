@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
 import { MovieComponent } from "./movie.component";
+import { SafePipe } from "../../../shared/pipes/safe.pipe";
+import { LoaderComponent } from "../../loader/loader.component";
 
 describe("MovieComponent", () => {
   let component: MovieComponent;
@@ -8,7 +10,7 @@ describe("MovieComponent", () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [MovieComponent]
+      declarations: [MovieComponent, LoaderComponent, SafePipe]
     }).compileComponents();
   }));
 

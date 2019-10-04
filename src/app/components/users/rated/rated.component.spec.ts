@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
 import { RatedComponent } from "./rated.component";
+import { SafePipe } from "../../../shared/pipes/safe.pipe";
+import { LoaderComponent } from "../../loader/loader.component";
 
 describe("RatedComponent", () => {
   let component: RatedComponent;
@@ -8,7 +10,7 @@ describe("RatedComponent", () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [RatedComponent]
+      declarations: [RatedComponent, LoaderComponent, SafePipe]
     }).compileComponents();
   }));
 

@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
 import { NotFoundComponent } from "./not-found.component";
+import { SafePipe } from "../../shared/pipes/safe.pipe";
 
 describe("NotFoundComponent", () => {
   let component: NotFoundComponent;
@@ -8,7 +9,7 @@ describe("NotFoundComponent", () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [NotFoundComponent]
+      declarations: [NotFoundComponent, SafePipe]
     }).compileComponents();
   }));
 
