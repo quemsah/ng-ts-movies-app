@@ -27,7 +27,7 @@ export class DiscoverComponent implements OnInit {
     private spinner: NgxSpinnerService
   ) {
     // Debounce поиск
-    const interval = Math.floor(Math.random() * (800 - 600 + 1) + 600);
+    const interval = Math.floor(Math.random() * (650 - 500 + 1) + 500);
     this.searchValueUpdate
       .pipe(
         debounceTime(interval),
