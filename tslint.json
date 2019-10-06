@@ -6,6 +6,7 @@
   "jsRules": {},
   "rules": {
     "object-literal-sort-keys": false,
+    "ordered-imports": true,
     "interface-name": false,
     "no-empty": false,
     "trailing-comma": false,

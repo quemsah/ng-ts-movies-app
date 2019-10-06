@@ -29,14 +29,14 @@ export class TMDBService {
         `${this.URL_FIND}/${ImdbId}?api_key=${this.API_KEY}&language=en-US&external_source=imdb_id`
       )
       .pipe(
-        map(answer =>
+        map((answer) =>
           answer.movie_results.length > 0
             ? answer
             : this.alertService.openWarningAlert("Wrong ID!", 3)
         )
       )
       .pipe(
-        mergeMap(data =>
+        mergeMap((data) =>
           data.movie_results.length > 0
             ? // tslint:disable-next-line: deprecation
               forkJoin(

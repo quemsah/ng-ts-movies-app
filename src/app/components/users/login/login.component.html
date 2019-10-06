@@ -8,14 +8,14 @@
           </div>
           <div class="md-form">
             <i class="fas fa-envelope prefix"></i>
-            <input type="text" class="formControl" placeholder="E-mail" #userName required>
+            <input id="email" type="text" class="formControl" placeholder="E-mail" #userName required>
           </div>
           <div class="md-form">
             <i class="fas fa-lock prefix"></i>
-            <input type="password" class="formControl" placeholder="Password" #userPassword required>
+            <input id="password" type="password" class="formControl" placeholder="Password" #userPassword required>
           </div>
           <div class="text-center">
-            <button class="btn btn-lg text-white" [style.background]="themeService.themeGradient | safe: 'style'"
+            <button id="login-button" class="btn btn-lg text-white" [style.background]="themeService.themeGradient | safe: 'style'"
               (click)="authService.SignIn(userName.value, userPassword.value)"
               (keyup.enter)="authService.SignIn(userName.value, userPassword.value)">Log in</button>
             <button class="btn btn-lg text-white" [style.background]="themeService.themeGradient | safe: 'style'"

@@ -34,7 +34,7 @@ export class AuthService {
   }
   // Данные пользователя из authState
   public userData: User;
-  private ADMIN_KEY = "cXVlbXNhdXJvc2U=";
+  private ADMIN_KEY = "cXVlbXNhdXJvc2VAbWFpbC5ydQ==";
   constructor(
     private alertService: AlertService,
     private storage: AngularFireStorage,

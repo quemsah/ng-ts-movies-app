@@ -5,7 +5,7 @@
 | **Administrator** | `quemsaurose@mail.ru`  | `111111` |
 | **User**          | `babaeva.anny@mail.ru` | `222222` |
 
-### **[Statement of work](https://psv4.userapi.com/c856232/u234351551/docs/d16/df6455437e1e/IMG_5972.jpg)**
+### **[Statement of work](https://i.imgur.com/vpS4Frs.jpg)**
 
 Frontend is build by Angular 8 and backend informations come from Firebase and external API service [TheMovieDB](https://developers.themoviedb.org/3)
 
